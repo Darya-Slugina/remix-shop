@@ -1,0 +1,96 @@
+body {
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    font-feature-settings: "ss01";
+    color: #303030;
+    line-height: 1.2;
+    background-color: #fff;
+}
+
+.headerTopContainer {
+    width: 100%;
+    max-width: 1280px;
+    height: 20px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.headerMessage {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    border-bottom: 1px solid #dedee3;
+    padding: 8px 12px;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.freeDelivery {
+    position: relative;
+    display: flex;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    font-size: 13px;
+}
+
+.free-delivery-text {
+    margin-top: 5px;
+}
+
+.delivery-top-icon {
+    display: inline-block;
+    background: url(./../images/delivery-top-icon.png) no-repeat center;
+    width: 27px;
+    height: 20px;
+    min-width: 27px;
+    margin-right: 10px;
+}
+
+.addedToday {
+    display: flex;
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%;
+    align-items: center;
+    padding-left: 150px;
+}
+
+.addedToday a {
+    color: #303030;
+}
+
+.product-top-icon {
+    display: inline-block;
+    background: url(./../images/product-top-icon.png) no-repeat center;
+    width: 27px;
+    height: 25px;
+    min-width: 27px;
+    margin-right: 10px;
+}
+
+.rating {
+    position: relative;
+    display: flex;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    font-size: 13px;
+}
+
+.rating-text {
+    margin-top: 5px;
+}
+
+.trustpilot-logo {
+    display: inline-block;
+    background: url(./../images/trustpilot-icon-2.png) no-repeat center;
+    width: 80px;
+    height: 22px;
+    margin-left: 8px;
+    padding-left: 5px;
+    padding-top: 5px;
+}
