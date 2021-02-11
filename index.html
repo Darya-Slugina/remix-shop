@@ -11,8 +11,9 @@
 </head>
 
 <body>
-    <header>
-        <div class="headerTopContainer">
+    <div class="mainContainer">
+        <header>
+            <!-- <div class="headerTopContainer"> -->
             <div class="headerMessage">
                 <div class="freeDelivery">
                     <span class="delivery-top-icon"></span>
@@ -26,30 +27,72 @@
                 </div>
                 <div class="rating">
                     <span class="rating-text">ТОП РЕЙТИНГ в</span>
-                    <a href="https://www.trustpilot.com/review/remixshop.com" class="trustpilot-logo"
-                        target="_blank" rel="noopener"></a>
+                    <a href="https://www.trustpilot.com/review/remixshop.com" class="trustpilot-logo" target="_blank"
+                        rel="noopener"></a>
                 </div>
             </div>
-        </div>
-        <nav class="navigation">
-            <ul>
-                <li>
-                    <a href="#home"><img src="" alt="remixShopLogo"></a>
-                </li>
-                <li>
-                    <a href="#allProducts">Всичко</a>
-                </li>
-                <li>
-                    <a href="#secondHand">Second Hand</a>
-                </li>
-                <li>
-                    <a href="#outlet">Outlet</a>
-                </li>
-                <li>
-                    <a href="#newSeason">Следващ сезон</a>
-                </li>
-            </ul>
-        </nav>
+            <div class="main-navigation">
+                <a href="#home"><img src="assets/images/Logo-1.png" alt="remixShopLogo" class="main-logo"></a>
+                <div class="navigation-container">
+                <nav class="navigation">
+                    <ul class="navigation-list">
+                        <li class="all">
+                            <a href="#allProducts">Всичко</a>
+                        </li>
+                        <li class="secondHand">
+                            <a href="#secondHand">Second Hand</a>
+                        </li>
+                        <li class="outlet">
+                            <a href="#outlet">Outlet</a>
+                        </li>
+                        <li class="newSeason">
+                            <a href="#newSeason">Следващ сезон</a>
+                        </li>
+                    </ul>
+                    <ul class="registration">
+                        <li>
+                            <a href="#">Продайте на Remix</a>
+                        </li>
+                        <li>
+                            <a href="#">Вход</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="main-filters">
+                    <ul class="filter-item">
+                        <li class="main-category">
+                            <a href="#" title="Жени">Жени</a>
+                        </li>
+                        <li class="main-category">
+                            <a href="#" title="Мъже">Мъже</a>
+                        </li>
+                        <li class="main-category">
+                            <a href="#" title="Чанти">Чанти</a>
+                        </li>
+                        <li class="main-category">
+                            <a href="#" title="Аксесоари">Аксесоари</a>
+                        </li>
+                        <li class="main-category">
+                            <a href="#" title="Обувки">Обувки</a>
+                        </li>
+                        <li class="main-category">
+                            <a href="#" title="Деца">Деца</a>
+                        </li>
+                    </ul>
+                    <div class="search-box">
+                        <span class="search-container-input">
+                            <input type="text" id="srch-term" name="search"
+                                placeholder="Търсете блуза XS, рокля коприна, яке Nike..." class="search-input">
+                        </span>
+                        <span class="icon" id="search-button"></span>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+
     </header>
     <div id="advertisment"></div>
     <main>
@@ -62,6 +105,7 @@
     </main>
     <footer></footer>
     <script src="assets/js/index.js"></script>
+    </div>
 </body>
 
 </html>
