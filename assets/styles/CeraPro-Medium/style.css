@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Cera Pro';
+    src: local('Cera Pro Medium'), local('Cera-Pro-Medium'),
+        url('CeraPro-Medium.woff2') format('woff2'),
+        url('CeraPro-Medium.woff') format('woff'),
+        url('CeraPro-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }
