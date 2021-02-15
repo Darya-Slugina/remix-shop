@@ -405,7 +405,7 @@ body {
     display: flex;
 }
 
-.section-title {
+.section-title, #aboutUsInformation {
     padding-top: 40px;
 }
 
@@ -547,7 +547,7 @@ body {
     color: #0a5c22;
 }
 
-.container-title, .container-articles {
+.container-title, .container-articles, .container-information {
     width: 100%;
     max-width: 1280px;
     padding-right: 15px;
@@ -610,23 +610,48 @@ body {
 }
 
 .box-article-title {
-    font-family: "Cera Pro",sans-serif;
+    font-family: "Cera Pro", sans-serif;
     font-size: 20px;
     margin: 20px;
     text-align: center;
 }
 
 .box-article-title:hover {
-    color:#0a5c22;
+    color: #0a5c22;
 }
 
 .box-article-text {
     margin: 0 auto;
     max-width: 360px;
     color: #5f5f5f;
-    font-family: "Cera Pro",sans-serif;
+    font-family: "Cera Pro", sans-serif;
     font-size: 14px;
     line-height: 21px;
     text-align: center;
     margin-bottom: 0;
+}
+
+.hidden-text-button {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #303030;
+    border-radius: 50%;
+    background: url(./../images/arrow-icon-hidde-inform.png) no-repeat center 16px;
+    background-size: 20px 20px;
+    cursor: pointer;
+}
+
+.reverse {
+    transform: rotate(180deg);
+}
+
+.hidden-text {
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.5s ease max-height;
+}
+
+.hidden-text-show {
+    max-height: 500px;
 }
