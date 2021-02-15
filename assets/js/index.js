@@ -9,8 +9,12 @@
     let outlet = document.getElementById("pageOutlet");
     let newSeason = document.getElementById("pageNewSeason");
     let overView = document.getElementById("pageOverView");
-
-
+    let showBrands = document.getElementById("show-more");
+    let header = document.getElementById('main-header');
+    let bannerTop = document.getElementById('banner-container');
+    
+    window.addEventListener('scroll', onScroll);
+    showBrands.addEventListener("click", showMoreBrands);
 
     //   Router
     function onHashChange() {
@@ -73,5 +77,28 @@
                 newSeason.style.display = "none";
                 overView.style.display = "none";
         }
+    }
+
+     // OnScroll event handler
+     function onScroll() {
+        const scroll = document.documentElement.scrollTop;
+
+        if (scroll > 25) {
+            header.classList.add("main-header-new");
+            bannerTop.classList.add("goDown");
+        } else {
+            header.classList.remove("main-header-new");
+            bannerTop.classList.remove("goDown");
+        }
+    }
+
+    // Show more brands on click
+    function showMoreBrands() {
+
+        let moreBrands = Array.from(document.getElementsByClassName("brands-list hidden"));
+        moreBrands.forEach(element => {
+            element.style.display = "block";
+        });
+        showBrands.style.display = "none";
     }
 })();

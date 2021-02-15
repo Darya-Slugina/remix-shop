@@ -103,6 +103,19 @@ body {
     padding-top: 5px;
 }
 
+.main-header-new {    
+    position: fixed;
+    top: 0;
+    left: 310px;
+    right: 329px;
+    background-color: #fff;
+    z-index: 997;
+}
+
+.goDown {
+    margin-top: 80px !important;
+}
+
 .main-logo {
     margin-top: 10px;
 }
@@ -382,7 +395,7 @@ body {
     margin-left: auto;
 }
 
-.brands > ul {
+.brands>ul {
     display: flex;
     flex-wrap: wrap;
     padding-left: 0;
@@ -392,7 +405,7 @@ body {
     display: flex;
 }
 
-.section-title{
+.section-title {
     padding-top: 40px;
 }
 
@@ -441,6 +454,7 @@ body {
     width: 10px;
     height: 10px;
 }
+
 .brand-container .favorite-icon:hover {
     background: url(./../images/favorite-icon-hover.png) top center no-repeat;
 }
@@ -475,7 +489,7 @@ body {
 .brand-description .see-brand-button {
     padding: 9px 15px;
     font-size: 13px;
-    font-family: "Cera Pro",sans-serif;
+    font-family: "Cera Pro", sans-serif;
     font-weight: 400;
     color: #303030;
     line-height: normal;
@@ -497,7 +511,7 @@ body {
     text-transform: uppercase;
     cursor: pointer;
     font-size: 14px;
-    font-family: "Cera Pro",sans-serif;
+    font-family: "Cera Pro", sans-serif;
     font-weight: 400;
     margin-top: 20px;
     padding-right: 25px;
@@ -518,7 +532,6 @@ body {
     text-align: center;
     margin-top: 1.5rem;
 }
-
 
 .text-container .brand-link {
     display: inline-block;

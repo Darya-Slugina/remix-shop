@@ -34,61 +34,63 @@
                         rel="noopener"></a>
                 </div>
             </div>
-            <div class="main-navigation">
-                <a href="#home"><img src="assets/images/Logo-1.png" alt="remixShopLogo" class="main-logo"></a>
-                <div class="navigation-container">
-                    <nav class="navigation">
-                        <ul class="navigation-list">
-                            <li class="all">
-                                <a href="#allProducts">Всичко</a>
-                            </li>
-                            <li class="secondHand">
-                                <a href="#secondHand">Second Hand</a>
-                            </li>
-                            <li class="outlet">
-                                <a href="#outlet">Outlet</a>
-                            </li>
-                            <li class="newSeason">
-                                <a href="#newSeason">Следващ сезон</a>
-                            </li>
-                        </ul>
-                        <ul class="registration">
-                            <li>
-                                <a href="#">Продайте на Remix</a>
-                            </li>
-                            <li>
-                                <a href="#">Вход</a>
-                            </li>
-                        </ul>
-                    </nav>
+            <div id="main-header" class="main-header">
+                <div class="main-navigation">
+                    <a href="#home"><img src="assets/images/Logo-1.png" alt="remixShopLogo" class="main-logo"></a>
+                    <div class="navigation-container">
+                        <nav class="navigation">
+                            <ul class="navigation-list">
+                                <li class="all">
+                                    <a href="#allProducts">Всичко</a>
+                                </li>
+                                <li class="secondHand">
+                                    <a href="#secondHand">Second Hand</a>
+                                </li>
+                                <li class="outlet">
+                                    <a href="#outlet">Outlet</a>
+                                </li>
+                                <li class="newSeason">
+                                    <a href="#newSeason">Следващ сезон</a>
+                                </li>
+                            </ul>
+                            <ul class="registration">
+                                <li>
+                                    <a href="#">Продайте на Remix</a>
+                                </li>
+                                <li>
+                                    <a href="#">Вход</a>
+                                </li>
+                            </ul>
+                        </nav>
 
-                    <div class="main-filters">
-                        <ul class="filter-item">
-                            <li class="main-category">
-                                <a href="#" title="Жени">Жени</a>
-                            </li>
-                            <li class="main-category">
-                                <a href="#" title="Мъже">Мъже</a>
-                            </li>
-                            <li class="main-category">
-                                <a href="#" title="Чанти">Чанти</a>
-                            </li>
-                            <li class="main-category">
-                                <a href="#" title="Аксесоари">Аксесоари</a>
-                            </li>
-                            <li class="main-category">
-                                <a href="#" title="Обувки">Обувки</a>
-                            </li>
-                            <li class="main-category">
-                                <a href="#" title="Деца">Деца</a>
-                            </li>
-                        </ul>
-                        <div class="search-box">
-                            <span class="search-container-input">
-                                <input type="text" id="srch-term" name="search"
-                                    placeholder="Търсете блуза XS, рокля коприна, яке Nike..." class="search-input">
-                            </span>
-                            <span class="icon" id="search-button"></span>
+                        <div class="main-filters">
+                            <ul class="filter-item">
+                                <li class="main-category">
+                                    <a href="#" title="Жени">Жени</a>
+                                </li>
+                                <li class="main-category">
+                                    <a href="#" title="Мъже">Мъже</a>
+                                </li>
+                                <li class="main-category">
+                                    <a href="#" title="Чанти">Чанти</a>
+                                </li>
+                                <li class="main-category">
+                                    <a href="#" title="Аксесоари">Аксесоари</a>
+                                </li>
+                                <li class="main-category">
+                                    <a href="#" title="Обувки">Обувки</a>
+                                </li>
+                                <li class="main-category">
+                                    <a href="#" title="Деца">Деца</a>
+                                </li>
+                            </ul>
+                            <div class="search-box">
+                                <span class="search-container-input">
+                                    <input type="text" id="srch-term" name="search"
+                                        placeholder="Търсете блуза XS, рокля коприна, яке Nike..." class="search-input">
+                                </span>
+                                <span class="icon" id="search-button"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -99,7 +101,7 @@
         <div class="mainContainer">
             <div id="pageHome">
                 <div id="banners">
-                    <div class="banner-container">
+                    <div id="banner-container" class="banner-container">
                         <div class="banner-categories">
                             <a href="#">
                                 <img src="assets/images/woman.png" class="img-category">
@@ -141,12 +143,13 @@
         <div id="brandsSection">
             <div class="all-brands-container">
                 <h3 class="section-title">Най-търсени марки</h3>
-                <div class="brands">
+                <div id="brands"  class="brands">
                     <ul>
                         <li class="brands-list">
                             <div class="brand-container">
                                 <div class="box-img">
-                                    <a href="#"><img src="assets/images/brand-catalogue-h&m.jpg" alt="H&M" class="brand-img"></a>
+                                    <a href="#"><img src="assets/images/brand-catalogue-h&m.jpg" alt="H&M"
+                                            class="brand-img"></a>
                                 </div>
                                 <div class="box-info">
                                     <span class="like-container">
@@ -165,7 +168,8 @@
                         <li class="brands-list">
                             <div class="brand-container">
                                 <div class="box-img">
-                                    <a href="#"><img src="assets/images/brand-catalogue-s.oliver.jpg" alt="S.Oliver" class="brand-img"></a>
+                                    <a href="#"><img src="assets/images/brand-catalogue-s.oliver.jpg" alt="S.Oliver"
+                                            class="brand-img"></a>
                                 </div>
                                 <div class="box-info">
                                     <span class="like-container">
@@ -183,7 +187,8 @@
                         <li class="brands-list">
                             <div class="brand-container">
                                 <div class="box-img">
-                                    <a href="#"><img src="assets/images/brand-catalogue-zara.jpg" alt="Zara" class="brand-img"></a>
+                                    <a href="#"><img src="assets/images/brand-catalogue-zara.jpg" alt="Zara"
+                                            class="brand-img"></a>
                                 </div>
                                 <div class="box-info">
                                     <span class="like-container">
@@ -201,7 +206,8 @@
                         <li class="brands-list">
                             <div class="brand-container">
                                 <div class="box-img">
-                                    <a href="#"><img src="assets/images/brand-catalogue-esprit.jpg" alt="Esprit" class="brand-img"></a>
+                                    <a href="#"><img src="assets/images/brand-catalogue-esprit.jpg" alt="Esprit"
+                                            class="brand-img"></a>
                                 </div>
                                 <div class="box-info">
                                     <span class="like-container">
@@ -219,7 +225,8 @@
                         <li class="brands-list">
                             <div class="brand-container">
                                 <div class="box-img">
-                                    <a href="#"><img src="assets/images/brand-catalogue-h&m divided.jpg" alt="H&M Divided" class="brand-img"></a>
+                                    <a href="#"><img src="assets/images/brand-catalogue-h&m divided.jpg"
+                                            alt="H&M Divided" class="brand-img"></a>
                                 </div>
                                 <div class="box-info">
                                     <span class="like-container">
@@ -237,7 +244,8 @@
                         <li class="brands-list">
                             <div class="brand-container">
                                 <div class="box-img">
-                                    <a href="#"><img src="assets/images/brand-catalogue-vero moda.jpg" alt="Vero Moda" class="brand-img"></a>
+                                    <a href="#"><img src="assets/images/brand-catalogue-vero moda.jpg" alt="Vero Moda"
+                                            class="brand-img"></a>
                                 </div>
                                 <div class="box-info">
                                     <span class="like-container">
@@ -246,6 +254,126 @@
                                     <div class="brand-description">
                                         <h5 class="title">Vero Moda</h5>
                                         <span class="available-products"> 5&nbsp;216 налични продукта</span>
+                                        <a href="#" class="see-brand-button">
+                                            Разгледайте </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="brands-list hidden" style="display: none;">
+                            <div class="brand-container">
+                                <div class="box-img">
+                                    <a href="#"><img src="assets/images/brand-catalogue-only.jpg" alt="ONLY"
+                                            class="brand-img"></a>
+                                </div>
+                                <div class="box-info">
+                                    <span class="like-container">
+                                        <a href="javascript:;" class="favorite-icon"></a>
+                                    </span>
+                                    <div class="brand-description">
+                                        <h5 class="title">ONLY</h5>
+                                        <span class="available-products">
+                                            5&nbsp;638 налични продукта </span>
+                                        <a href="#" class="see-brand-button">
+                                            Разгледайте </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="brands-list hidden" style="display: none;">
+                            <div class="brand-container">
+                                <div class="box-img">
+                                    <a href="#"><img src="assets/images/brand-catalogue-yessica.jpg" alt="Yessica"
+                                            class="brand-img"></a>
+                                </div>
+                                <div class="box-info">
+                                    <span class="like-container">
+                                        <a href="javascript:;" class="favorite-icon"></a>
+                                    </span>
+                                    <div class="brand-description">
+                                        <h5 class="title">Yessica</h5>
+                                        <span class="available-products">
+                                            1&nbsp;665 налични продукта </span>
+                                        <a href="#" class="see-brand-button">
+                                            Разгледайте </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="brands-list hidden" style="display: none;">
+                            <div class="brand-container">
+                                <div class="box-img">
+                                    <a href="#"><img src="assets/images/brand-catalogue-street one.jpg" alt="Street One"
+                                            class="brand-img"></a>
+                                </div>
+                                <div class="box-info">
+                                    <span class="like-container">
+                                        <a href="javascript:;" class="favorite-icon"></a>
+                                    </span>
+                                    <div class="brand-description">
+                                        <h5 class="title">Street One</h5>
+                                        <span class="available-products">
+                                            1&nbsp;312 налични продукта </span>
+                                        <a href="#" class="see-brand-button">
+                                            Разгледайте </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="brands-list hidden" style="display: none;">
+                            <div class="brand-container">
+                                <div class="box-img">
+                                    <a href="#"><img src="assets/images/brand-catalogue-atmosphere.jpg" alt="Atmosphere"
+                                            class="brand-img"></a>
+                                </div>
+                                <div class="box-info">
+                                    <span class="like-container">
+                                        <a href="javascript:;" class="favorite-icon"></a>
+                                    </span>
+                                    <div class="brand-description">
+                                        <h5 class="title">Atmosphere</h5>
+                                        <span class="available-products">
+                                            1&nbsp;273 налични продукта </span>
+                                        <a href="#" class="see-brand-button">
+                                            Разгледайте </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="brands-list hidden" style="display: none;">
+                            <div class="brand-container">
+                                <div class="box-img">
+                                    <a href="#"><img src="assets/images/brand-catalogue-tom tailor.jpg" alt="Tom Tailor"
+                                            class="brand-img"></a>
+                                </div>
+                                <div class="box-info">
+                                    <span class="like-container">
+                                        <a href="javascript:;" class="favorite-icon"></a>
+                                    </span>
+                                    <div class="brand-description">
+                                        <h5 class="title">Tom Tailor</h5>
+                                        <span class="available-products">
+                                            1&nbsp;849 налични продукта </span>
+                                        <a href="#" class="see-brand-button">
+                                            Разгледайте </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="brands-list hidden" style="display: none;">
+                            <div class="brand-container">
+                                <div class="box-img">
+                                    <a href="#"><img src="assets/images/brand-catalogue-mango.jpg" alt="Mango"
+                                            class="brand-img"></a>
+                                </div>
+                                <div class="box-info">
+                                    <span class="like-container">
+                                        <a href="javascript:;" class="favorite-icon"></a>
+                                    </span>
+                                    <div class="brand-description">
+                                        <h5 class="title">Mango</h5>
+                                        <span class="available-products">
+                                            3&nbsp;270 налични продукта </span>
                                         <a href="#" class="see-brand-button">
                                             Разгледайте </a>
                                     </div>
@@ -268,6 +396,9 @@
         <div id="pageOutlet">pageOutlet</div>
         <div id="pageNewSeason">pageNewSeason</div>
         <div id="pageOverView">pageOverView</div>
+
+
+        
     </main>
     <footer></footer>
     <script src="assets/js/index.js"></script>
