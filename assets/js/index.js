@@ -10,11 +10,13 @@
     let newSeason = document.getElementById("pageNewSeason");
     let overView = document.getElementById("pageOverView");
     let showBrands = document.getElementById("show-more");
-    let header = document.getElementById('main-header');
-    let bannerTop = document.getElementById('banner-container');
+    let header = document.getElementById("main-header");
+    let bannerTop = document.getElementById("banner-container");
+    let hiddenButton = document.getElementById("hidden-text-button");
     
     window.addEventListener('scroll', onScroll);
     showBrands.addEventListener("click", showMoreBrands);
+    hiddenButton.addEventListener("click", showMoreInfo);
 
     //   Router
     function onHashChange() {
@@ -101,4 +103,13 @@
         });
         showBrands.style.display = "none";
     }
+
+    // Show more information about us section on click
+    function showMoreInfo(e){
+        e.preventDefault();
+        let hiddenText = document.getElementById("hiddenText");
+        hiddenText.classList.toggle("hidden-text-show");
+        hiddenButton.classList.toggle("reverse");
+    }
+
 })();
