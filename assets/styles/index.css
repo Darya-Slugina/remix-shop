@@ -655,3 +655,237 @@ body {
 .hidden-text-show {
     max-height: 500px;
 }
+footer {
+    color: #707070;
+}
+
+
+#footer-top{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 60px 0 40px;
+    background-color: #f1f1f3;
+    font-size: 13px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#footer-top > div{
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%;
+    margin-bottom: 50px;
+}
+
+h3 {
+    text-transform: uppercase;
+    font-family: "Cera Pro", sans-serif;
+    font-size: 21px;
+    color: #303030;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+footer ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer ul>li {
+    margin-top: 15px;
+}
+
+footer a {
+    text-decoration: none;
+    color: #303030;
+    text-transform: uppercase;
+    font-size: 11px;
+    opacity: 0.8;
+}
+
+#footer-top p{
+    font-family: "Cera Pro Regular",sans-serif;
+    font-size: 13px;
+    color: #303030;
+    line-height: 21px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.sos-donate{
+    background-image: url(../images/sos_logo_bg.png);
+    background-size: 89px 27px;
+    display: inline-block;
+    margin-left: 3px;
+    width: 89px;
+    height: 27px;
+    vertical-align: top;
+}
+
+.tel, .email {
+    color: #676768;
+    text-transform: none;
+    opacity: 1;
+    font-size: 13px;
+}
+
+.email{
+    padding-left: 25px;
+}
+
+.tel::before{
+    background-image: url(../images/tel-icon.PNG);
+    background-size: 25px 20px;
+    width: 25px;
+    height: 20px;
+    content: '';
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.email::before{
+    background-image: url(../images/email.PNG);
+    background-size: 30px 20px;
+    width: 30px;
+    height: 20px;
+    content: '';
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.clock::before{
+    background-image: url(../images/clock.PNG);
+    background-size: 25px 20px;
+    width: 25px;
+    height: 20px;
+    content: '';
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+#app img{
+    height: 42px;
+    vertical-align: middle;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+#newsletter_input{
+    font-size: 14px;
+    font-weight: 400;
+    color: #303030;
+    line-height: normal;
+    padding: 10px 15px;
+    display: inline block;
+    border: 1px solid #b7b7b7;
+    border-radius: 4px;
+    background-color: #fff;
+    outline: none;
+    opacity: 0.7;
+    margin-right: 16px;
+}
+
+#newsletter_submit{
+    color: #fff;
+    border-color: #000;
+    background-color: #000;
+    padding: 11px 30px;
+    font-family: "Cera Pro Medium",sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    border: 1px solid #303030;
+    border-radius: 4px;
+}
+
+#social_wrapper{
+    display: flex;
+}
+
+#social_wrapper a{
+    opacity: 1;
+}
+
+#social_wrapper img{
+    width: 50px;
+}
+
+#instagram_icon, #blog_icon{
+    margin-left: 30px;
+}
+
+#blog_icon {
+    border-left: 1px solid #dedee3;
+    padding-left: 30px;
+    color: #447130;
+    font-weight: 400;
+    opacity: 1;
+}
+
+#payment img{
+    max-width: 347px;
+}
+
+#security a{
+    font-size: 8px;
+    text-transform: none;
+    opacity: 1;
+    text-align: center;
+}
+
+#security > div{
+    display: inline-block;
+    vertical-align: top;
+}
+
+#ssl_certificate{
+    display: flex;
+    flex-direction: column;
+}
+
+#ssl_certificate img{
+    max-width: 76px;
+}
+
+#trustPilot_widget img {
+    height: 100%;
+    width: 120px;
+}
+
+#copyrights_wrapper a{
+    opacity: 1;
+}
+
+#copyrights::before{
+    content: "\00a9    ";
+}
+
+#remixGlobal_link, #sitemap_link{
+    text-decoration: underline;
+}
+
+#sitemap_link{
+    margin-left: 6px;
+    border-left: 1px solid #909090;
+    padding-left: 6px;
+}
+
+#footer-bottom{
+    padding: 25px 0;
+    font-size: 21px;
+    color: #303030;
+    text-align: center;
+}
+
+#footer-bottom a{
+    opacity: 1;
+    text-transform: none;
+}
+
+#footer-bottom img{
+    width: 60px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
