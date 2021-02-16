@@ -1,0 +1,22 @@
+{
+  "name": "remix-shop",
+  "version": "1.0.0",
+  "description": "IT Talents S12 interim project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Darya-Slugina/remix-shop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Darya-Slugina/remix-shop/issues"
+  },
+  "homepage": "https://github.com/Darya-Slugina/remix-shop#readme",
+  "dependencies": {
+    "handlebars": "^4.7.7"
+  }
+}

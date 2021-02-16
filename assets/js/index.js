@@ -3,16 +3,16 @@
     window.addEventListener("DOMContentLoaded", onHashChange);
 
     // Initial DOM elements selectors
-    let homePage = document.getElementById("pageHome");
-    let allProducts = document.getElementById("pageAllProducts");
-    let secondHand = document.getElementById("pageSecondHand");
-    let outlet = document.getElementById("pageOutlet");
-    let newSeason = document.getElementById("pageNewSeason");
-    let overView = document.getElementById("pageOverView");
-    let showBrands = document.getElementById("show-more");
-    let header = document.getElementById("main-header");
-    let bannerTop = document.getElementById("banner-container");
-    let hiddenButton = document.getElementById("hidden-text-button");
+    let homePage = getById("pageHome");
+    let allProducts = getById("pageAllProducts");
+    let secondHand = getById("pageSecondHand");
+    let outlet = getById("pageOutlet");
+    let newSeason = getById("pageNewSeason");
+    let overView = getById("pageOverView");
+    let showBrands = getById("show-more");
+    let header = getById("main-header");
+    let bannerTop = getById("banner-container");
+    let hiddenButton = getById("hidden-text-button");
     
     window.addEventListener('scroll', onScroll);
     showBrands.addEventListener("click", showMoreBrands);
@@ -97,7 +97,7 @@
     // Show more brands on click
     function showMoreBrands(e) {
         e.preventDefault();
-        let hiddenBrands = document.getElementById("brands-hidden");
+        let hiddenBrands = getById("brands-hidden");
         hiddenBrands.classList.add("hidden-brands-show");
         showBrands.style.display = "none";
     }
@@ -105,7 +105,7 @@
     // Show more information about us section on click
     function showMoreInfo(e){
         e.preventDefault();
-        let hiddenText = document.getElementById("hiddenText");
+        let hiddenText = getById("hiddenText");
         hiddenText.classList.toggle("hidden-text-show");
         hiddenButton.classList.toggle("reverse");
     }
