@@ -670,27 +670,42 @@ body {
 .hidden-text-show {
     max-height: 500px;
 }
+
 footer {
     color: #707070;
 }
 
-
-#footer-top{
-    display: flex;
-    flex-wrap: wrap;
+#footer-top {
     padding: 60px 0 40px;
     background-color: #f1f1f3;
     font-size: 13px;
+}
+
+.footer-container {
+    max-width: 1280px;
+    width: 100%;
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
 }
 
-#footer-top > div{
-    flex: 0 0 33.33333%;
-    max-width: 33.33333%;
+.footer-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.footer-row>div {
+    flex: 0 0 30.5%;
+    max-width: 31%;
     margin-bottom: 50px;
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
 }
 
 h3 {
@@ -702,7 +717,7 @@ h3 {
     line-height: 1.2;
 }
 
-footer ul{
+footer ul {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -720,8 +735,8 @@ footer a {
     opacity: 0.8;
 }
 
-#footer-top p{
-    font-family: "Cera Pro Regular",sans-serif;
+#footer-top p {
+    font-family: "Cera Pro", sans-serif;
     font-size: 13px;
     color: #303030;
     line-height: 21px;
@@ -729,7 +744,7 @@ footer a {
     margin-bottom: 20px;
 }
 
-.sos-donate{
+.sos-donate {
     background-image: url(../images/sos_logo_bg.png);
     background-size: 89px 27px;
     display: inline-block;
@@ -746,11 +761,11 @@ footer a {
     font-size: 13px;
 }
 
-.email{
+.email {
     padding-left: 25px;
 }
 
-.tel::before{
+.tel::before {
     background-image: url(../images/tel-icon.PNG);
     background-size: 25px 20px;
     width: 25px;
@@ -760,7 +775,7 @@ footer a {
     vertical-align: bottom;
 }
 
-.email::before{
+.email::before {
     background-image: url(../images/email.PNG);
     background-size: 30px 20px;
     width: 30px;
@@ -770,7 +785,7 @@ footer a {
     vertical-align: bottom;
 }
 
-.clock::before{
+.clock::before {
     background-image: url(../images/clock.PNG);
     background-size: 25px 20px;
     width: 25px;
@@ -780,14 +795,14 @@ footer a {
     vertical-align: bottom;
 }
 
-#app img{
+#app img {
     height: 42px;
     vertical-align: middle;
     margin-top: 10px;
     margin-right: 10px;
 }
 
-#newsletter_input{
+#newsletter_input {
     font-size: 14px;
     font-weight: 400;
     color: #303030;
@@ -802,12 +817,12 @@ footer a {
     margin-right: 16px;
 }
 
-#newsletter_submit{
+#newsletter_submit {
     color: #fff;
     border-color: #000;
     background-color: #000;
     padding: 11px 30px;
-    font-family: "Cera Pro Medium",sans-serif;
+    font-family: "Cera Pro", sans-serif;
     font-size: 14px;
     font-weight: 400;
     text-align: center;
@@ -815,19 +830,19 @@ footer a {
     border-radius: 4px;
 }
 
-#social_wrapper{
+#social_wrapper {
     display: flex;
 }
 
-#social_wrapper a{
+#social_wrapper a {
     opacity: 1;
 }
 
-#social_wrapper img{
+#social_wrapper img {
     width: 50px;
 }
 
-#instagram_icon, #blog_icon{
+#instagram_icon, #blog_icon {
     margin-left: 30px;
 }
 
@@ -839,28 +854,28 @@ footer a {
     opacity: 1;
 }
 
-#payment img{
+#payment img {
     max-width: 347px;
 }
 
-#security a{
+#security a {
     font-size: 8px;
     text-transform: none;
     opacity: 1;
     text-align: center;
 }
 
-#security > div{
+#security>div {
     display: inline-block;
     vertical-align: top;
 }
 
-#ssl_certificate{
+#ssl_certificate {
     display: flex;
     flex-direction: column;
 }
 
-#ssl_certificate img{
+#ssl_certificate img {
     max-width: 76px;
 }
 
@@ -869,37 +884,38 @@ footer a {
     width: 120px;
 }
 
-#copyrights_wrapper a{
+#copyrights_wrapper a {
     opacity: 1;
 }
 
-#copyrights::before{
+#copyrights::before {
     content: "\00a9    ";
 }
 
-#remixGlobal_link, #sitemap_link{
+#remixGlobal_link, #sitemap_link {
     text-decoration: underline;
 }
 
-#sitemap_link{
+#sitemap_link {
     margin-left: 6px;
     border-left: 1px solid #909090;
     padding-left: 6px;
 }
 
-#footer-bottom{
+#footer-bottom {
     padding: 25px 0;
     font-size: 21px;
     color: #303030;
     text-align: center;
 }
 
-#footer-bottom a{
+#footer-bottom a {
     opacity: 1;
     text-transform: none;
+    font-size: 21px;
 }
 
-#footer-bottom img{
+#footer-bottom img {
     width: 60px;
     vertical-align: middle;
     margin-right: 10px;
