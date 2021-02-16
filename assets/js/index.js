@@ -95,12 +95,10 @@
     }
 
     // Show more brands on click
-    function showMoreBrands() {
-
-        let moreBrands = Array.from(document.getElementsByClassName("brands-list hidden"));
-        moreBrands.forEach(element => {
-            element.style.display = "block";
-        });
+    function showMoreBrands(e) {
+        e.preventDefault();
+        let hiddenBrands = document.getElementById("brands-hidden");
+        hiddenBrands.classList.add("hidden-brands-show");
         showBrands.style.display = "none";
     }
 

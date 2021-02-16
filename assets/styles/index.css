@@ -395,17 +395,32 @@ body {
     margin-left: auto;
 }
 
-.brands>ul {
+.brands>ul, .hidden-brands>ul {
     display: flex;
     flex-wrap: wrap;
     padding-left: 0;
+    margin-bottom: 0;
+}
+
+.hidden-brands>ul {
+    margin-top: 0;
+}
+
+.hidden-brands {
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.5s ease max-height;
+}
+
+.hidden-brands-show {
+    max-height: 500px;
 }
 
 .brand-container {
     display: flex;
 }
 
-.section-title, #aboutUsInformation {
+.section-title {
     padding-top: 40px;
 }
 
