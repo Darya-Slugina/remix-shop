@@ -13,8 +13,10 @@ class Manager {
         this.femaleClothes.push(item);
     }
 
-    createAllProducts(){
+    createAllProducts() {
         this.allProducts = [...this.maleClothes, ...this.femaleClothes];
         console.log(this.allProducts);
     }
 }
+
+

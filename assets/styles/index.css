@@ -359,10 +359,10 @@ body {
     justify-content: flex-start;
 }
 
-.banner-section .main-banners-right {
+/* .banner-section .main-banners-right {
     display: flex;
     justify-content: flex-end;
-}
+} */
 
 .banner-section img, .banner-container img {
     border-radius: 4px;
