@@ -1,0 +1,36 @@
+.container-breadcrumbs {
+    background-color: #f1f1f3;
+    border-radius: 4px;
+    display: flex;
+}
+
+.breadcrumbs {
+    padding: 20px;
+    flex: 1;
+}
+
+.breadcrumbs > * {
+    font-family: "Cera Pro Medium",sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.breadcrumbs > ul{
+    display: flex;
+}
+
+.breadcrumbs > ul > li{
+    list-style: none;
+}
+
+.breadcrumbs > ul > li > *{
+    text-decoration: none;
+}
+
+.breadcrumbs ul li span::after{
+    content: '';
+    background: url(../images/arrow-icon.png) no-repeat;
+    width: 13px;
+    height: 10px;
+    display: inline-block;
+}
