@@ -7,17 +7,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RemixShop - ClothesDisplay</title>
     <style>
+        .container-breadcrumbs {
+            background-color: #f1f1f3;
+            border-radius: 4px;
+            display: flex;
+        }
 
+        .breadcrumbs {
+            padding: 20px;
+            flex: 1;
+        }
     </style>
 </head>
 
 <body>
     <div class="container-breadcrumbs">
-        <ul class="">
-            <li><a href="./index.html">Начало</a></li>
-            <li><a href="">Всичко</a></li>
-            <li><span>Дамски дрехи</span></li>
-        </ul>
+        <div class="breadcrumbs">
+            <ul class="">
+                <li><a href="./index.html">Начало</a></li>
+                <li><a href="">Всичко</a></li>
+                <li><span>Дамски дрехи</span></li>
+            </ul>
+        </div>
+        <div class="container-personalFilters">
+            <a href="">запазени филтри</a>
+        </div>
     </div>
     <div class="container-filters">
         <ul>
@@ -26,9 +40,6 @@
             <li><a href="#">Състояние</a></li>
             <li><a href="#">Цена</a></li>
         </ul>
-        <div class="container-personalFilters">
-            <a href="">запазени филтри</a>
-        </div>
     </div>
 
     <div class="container-clothesDisplay">
