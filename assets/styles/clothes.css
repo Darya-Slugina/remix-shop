@@ -21,18 +21,23 @@
 
 .breadcrumbs > ul > li{
     list-style: none;
+    padding: 3px 10px;
 }
 
 .breadcrumbs > ul > li > *{
     text-decoration: none;
+    color: #303030;
 }
 
-.breadcrumbs ul li span::after{
+.breadcrumbs ul li a::after{
     content: '';
-    background: url(../images/arrow-icon.png) no-repeat;
-    width: 13px;
-    height: 10px;
+    background: url(../images/arrow-icon-2.PNG) no-repeat;
+    background-size: contain;
+    width: 28px;
+    height: 40px;
     display: inline-block;
+    vertical-align: top;
+    margin-left: 5px;
 }
 
 .container-personalFilters > a::after{
@@ -46,6 +51,7 @@
 .filters{
     display: flex;
     padding-bottom: 5px;
+    padding-inline-start: 0;
 }
 
 .filters > *{
@@ -58,15 +64,24 @@
     text-decoration: none;
     font-weight: 400;
     font-size: 14px;
+    line-height: 24px;
     background: #f3f3f5;
     border-radius: 4px;
+    color: #303030;
 }
 
-
-.filters > *::after{
+.filters > li>a:after{
     content: '';
-    background: url(../images/arrow-icon.png) no-repeat;
-    width: 13px;
-    height: 10px;
+    background: url(../images/arrow-icon-2.PNG) no-repeat;
+    background-size: contain;
+    height: 17.5px;
+    width: 25px;
     display: inline-block;
+    margin-left: 2px;
+    vertical-align: middle;
 }
+
+.sorter *{
+    text-decoration: none;
+}
+
