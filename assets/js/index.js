@@ -19,7 +19,8 @@
     let hiddenButton = getById("hidden-text-button");
     let list = Array.from(document.getElementsByClassName("slide-box"));
 
-
+    bannersController();
+    
     //   Adds the initial male products
     maleClothes.forEach(function (item) {
         let product = createProduct(item);

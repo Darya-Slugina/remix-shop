@@ -359,11 +359,6 @@ body {
     justify-content: flex-start;
 }
 
-.banner-section .main-banners-right {
-    display: flex;
-    justify-content: flex-end;
-}
-
 .banner-section img, .banner-container img {
     border-radius: 4px;
 }
@@ -389,6 +384,7 @@ body {
     font-weight: 400;
     line-height: 1.2;
     color: #303030;
+    padding-top: 40px;
 }
 
 #homePageSuggestions {
@@ -722,10 +718,6 @@ body {
 
 .brand-container {
     display: flex;
-}
-
-.section-title {
-    padding-top: 40px;
 }
 
 .brands-list {
@@ -1224,6 +1216,3 @@ footer a {
     vertical-align: middle;
     margin-right: 10px;
 }
-
-/* transition-duration: 0.6s;
-    transform: translate3d(-1179px, 0px, 0px); */
