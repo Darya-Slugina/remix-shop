@@ -1,10 +1,11 @@
 let slides = Array.from(Array(3), () => new Array(6));
 
 function createCarouselList(products) {
+  let counter = 0;
   for (let j = 0; j < 3; j++) {
     for (let k = 0; k < 6; k++) {
-        let index = Math.floor(Math.random() * products.length);
-        slides[j][k] = products[index];
+      slides[j][k] = products[counter];
+      counter++;
     }
   }
 }
@@ -24,6 +25,6 @@ const carouselController = function () {
 };
 
 // custom method for incrising the array key
-Handlebars.registerHelper("inc", function(value, options) {
+Handlebars.registerHelper("inc", function (value, options) {
   return parseInt(value) + 1;
 });

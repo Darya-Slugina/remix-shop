@@ -19,7 +19,7 @@
     let hiddenButton = getById("hidden-text-button");
 
     bannersController();
-   
+
 
     //   Adds the initial male products
     maleClothes.forEach(function (item) {
@@ -57,9 +57,12 @@
     //created the array with all products
     siteManager.createAllProducts();
 
+    // Prepare the list for carousel 
+    const shuffledArr = array => array.sort(() => 0.5 - Math.random());
+    let listForCarousel = shuffledArr(siteManager.allProducts);
 
     // Create Carousel products    
-    createCarouselList(siteManager.allProducts);
+    createCarouselList(listForCarousel);
     carouselController();
 
     // Carousel
@@ -185,7 +188,7 @@
         }
     }
 
-     // Show more brands on click
+    // Show more brands on click
     function showMoreBrands(e) {
         e.preventDefault();
         let hiddenBrands = getById("brands-hidden");
@@ -199,5 +202,23 @@
         let hiddenText = getById("hiddenText");
         hiddenText.classList.toggle("hidden-text-show");
         hiddenButton.classList.toggle("reverse");
+    }
+    // Change img on hover
+    let productImages = Array.from(document.getElementsByClassName("product-img"));
+    productImages.forEach(function (img) {
+        img.addEventListener("mouseover", onMouseOver);
+        img.addEventListener("mouseout", onMouseOut);
+    })
+
+    function onMouseOver(e) {
+        let picture = e.target.src;
+        let newImg = siteManager.allProducts.find(el => el.image_front === picture);
+        e.target.src = newImg.image_back;
+    }
+
+    function onMouseOut(e) {
+        let picture = e.target.src;
+        let newImg = siteManager.allProducts.find(el => el.image_back === picture);
+        e.target.src = newImg.image_front;
     }
 })();
