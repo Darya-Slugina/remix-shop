@@ -817,7 +817,7 @@ body {
     background-color: rgb(245, 244, 244);
 }
 
-.brands .show-more {
+.all-brands-container .show-more {
     text-align: right;
     text-transform: uppercase;
     cursor: pointer;
@@ -828,7 +828,7 @@ body {
     padding-right: 25px;
 }
 
-.brands .show-more::after {
+.all-brands-container .show-more::after {
     content: '';
     margin-left: 10px;
     display: inline-block;
@@ -1215,4 +1215,73 @@ footer a {
     width: 60px;
     vertical-align: middle;
     margin-right: 10px;
+}
+
+
+/* ====Page OverView =============================================================== */
+.wayLinksContainer {
+    max-width: 1280px;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.custom-way {
+    margin: 30px 0;
+    padding: 0;
+}
+
+.custom-way > li {
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: capitalize;
+    display: inline-block;
+}
+
+.custom-way>li.back-link::before {
+    content: "";
+    width: 8px;
+    height: 10px;
+    display: inline-block;
+    background: url(./../images/arrow-left-icon.png) no-repeat left top;
+    position: relative;
+    top: 1px;
+}
+
+.custom-way>li.back-link a {
+    padding-left: 5px;
+}
+
+.custom-way>li a {
+    color: #303030;
+    font-size: 13px;
+    text-transform: capitalize;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.custom-way>li.back-link::after {
+    background: none;
+    content: "|";
+    transform: none;
+}
+
+.custom-way>li::after {
+    content: "";
+    width: 8px;
+    height: 10px;
+    display: inline-block;
+    margin: 0 9px 0 11px;
+    background: url(./../images/arrow-right-icon.png) no-repeat left top;
+    position: relative;
+    top: 1px;
+}
+
+.custom-way>li.active {
+    color: #909090;
+    background-color: white;
 }
