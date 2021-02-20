@@ -15,8 +15,5 @@ class Manager {
 
     createAllProducts() {
         this.allProducts = [...this.maleClothes, ...this.femaleClothes];
-        console.log(this.allProducts);
     }
 }
-
-

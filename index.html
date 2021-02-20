@@ -96,7 +96,6 @@
         </div>
     </header>
     <main>
-
         <div id="pageHome">
             <div class="mainContainer">
                 <section id="banners">
@@ -123,42 +122,8 @@
                 <section id="suggestionsCarousel">
                     <h3 id="homePageSuggestions" class="section-title">Нашите предложения</h3>
                     <div id="recomend-wrapper">
-                        <div class="slideshow-container">
-                            <div class="slideshow fade">
-                                <div id="slideshowContainer1" class="page1">
-                                    <ul class="product-list">
-                                        <li class="slide-box"></li>
-                                        <li class="slide-box"></li>
-                                        <li class="slide-box"></li>
-                                        <li class="slide-box"></li>
-                                        <li class="slide-box"></li>
-                                        <li class="slide-box"></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="slideshow fade">
-                                <div id="slideshowContainer2" class="page2">
-                                    <ul class="product-list">
-                                        <li class="slide-box"></li>
-                                        <li class="slide-box"></li>
-                                        <li class="slide-box"></li>
-                                        <li class="slide-box"></li>
-                                        <li class="slide-box"></li>
-                                        <li class="slide-box"></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="slideshow fade">
-                                <div id="slideshowContainer3" class="page3">
-                                    <ul class="product-list">
-                                        <li class="slide-box"></li>
-                                        <li class="slide-box"></li>
-                                        <li class="slide-box"></li>
-                                        <li class="slide-box"></li>
-                                        <li class="slide-box"></li>
-                                        <li class="slide-box"></li>
-                                    </ul>
-                                </div>
+                        <div id="slideshowContainer" class="slideshow-container">
+                            <div id="carouselPages">                                
                             </div>
                             <a id="prev">&#10094;</a>
                             <a id="next">&#10095;</a>
@@ -527,7 +492,7 @@
 
         <div id="pageAllProducts">
             <div class="mainContainer">
-            <div id="bannerSectionAllProducts" class="banner-section"></div>
+                <div id="bannerSectionAllProducts" class="banner-section"></div>
             </div>
         </div>
         <div id="pageSecondHand">SecondHand</div>
@@ -669,17 +634,61 @@
         </div>
     </script>
 
+    <script id="carouselTempl" type="text/x-handlebars-template">
+        {{#each slidesTemplates}}
+            <div class="slideshow fade">
+                <div id="slideshowContainer{{inc @index}}" class="page{{inc @index}}"></div>
+                    <ul class="product-list">
+                    {{#each this}}
+                        <li class="slide-box">
+                            <div class="favourite-icon-container">
+                                <span class="favourite-icon"></span>
+                            </div>
+                            <div class="cornerWrapper">
+                                <span class="discount">%</span>
+                                <span class="outletPic"></span>
+                            </div>
+                            <div class="product-box">
+                                <a class="product-photos" href="#">
+                                    <img src="{{this.image_front}}" alt="{{this.name}}" class="product-img">
+                                </a>
+                            </div>
+                            <div class="product-info">
+                                <a class="product-brand" href="#">{{this.brand}}</a>
+                                <span class="product-size">{{this.size}}</span>
+                            </div>
+                            <div class="price-box">
+                                <div class="old-price-box">
+                                    <span class="price-title">Начална цена</span>
+                                    <span class="old-price">{{this.price}}лв</span>
+                                </div>
+                                <div class="new-price-box">
+                                    <span class="promo">{{this.discount}}%</span>
+                                    <span class="new-price">{{this.price}}лв</span>
+                                </div>
+                            </div>
+                            <div class="product-button">
+                                <button class="add-button">Добавете</button>
+                            </div>
+                        </li>
+                    {{/each}}
+                    </ul>
+                </div>
+            </div>
+        {{/each}}
+    </script>
+
     <script src="./node_modules/handlebars/dist/handlebars.js"></script>
     <script src="assets/js/utils.js"></script>
     <script src="assets/js/male_clothes.js"></script>
     <script src="assets/js/femaleClothes.js"></script>
-    <script src="assets/js/UserModule.js"></script>
-    <script src="assets/js/ManagerModule.js"></script>
-    <script src="assets/js/ProductModule.js"></script>
+    <script src="assets/js/UserModel.js"></script>
+    <script src="assets/js/ManagerModel.js"></script>
+    <script src="assets/js/ProductModel.js"></script>
     <script src="assets/js/ManagerController.js"></script>
     <script src="assets/js/BannersModel.js"></script>
-    <script src="assets/js/index.js"></script>
+    <script src="assets/js/CarouselControler.js"></script>
+    <script src="assets/js/index.js"></script>    
 
 </body>
-
 </html>
