@@ -17,3 +17,6 @@ class Manager {
         this.allProducts = [...this.maleClothes, ...this.femaleClothes];
     }
 }
+
+
+
