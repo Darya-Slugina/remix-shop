@@ -57,6 +57,53 @@
     //created the array with all products
     siteManager.createAllProducts();
 
+
+    // Create Carousel products    
+    createCarouselList(siteManager.allProducts);
+    carouselController();
+
+    // Carousel
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    let next = document.getElementById("next");
+    next.addEventListener("click", plusSlides);
+
+    let previous = document.getElementById("prev");
+    previous.addEventListener("click", plusSlides);
+
+    // Next/previous controls
+    function plusSlides(e) {
+        if (e.target.id === "next" ? showSlides(slideIndex += 1) : showSlides(slideIndex -= 1));
+    }
+
+    let dots = Array.from(document.getElementsByClassName("dot"));
+    dots.forEach(function (elem) {
+        elem.addEventListener("click", currentSlide);
+    })
+
+    // Thumbnail image controls
+    function currentSlide(e) {
+        showSlides(slideIndex = e.target.id.slice(-1));
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("slideshow");
+        let dots = document.getElementsByClassName("dot");
+
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+    }
+
     //Event listeners
     window.addEventListener('scroll', onScroll);
     showBrands.addEventListener("click", showMoreBrands);
@@ -138,174 +185,7 @@
         }
     }
 
- 
-
- 
-
-    // showCarousel(slides);
-
-    // let freeClothes = [...siteManager.allProducts];
-    // list.forEach(function (el) {
-    //     showCarousel(el, freeClothes);
-    // })
-
-    // function showCarousel(product) {
-    //     let carousel =  '';
-
-    //     for (let i = 0; i < product.length; i++) {
-
-    //         carousel += '<div class="slideshow fade">';
-    //         carousel += '<div id="slideshowContainer' + (i+1) + '" class="page' + (i+1) + '">';
-    //         carousel += '<ul class="product-list">';
-
-    //         for (let j = 0; j < product[i].length; j++) {
-    //             let currentProduct = product[i][j];
-    //             carousel += '<li class="slide-box">';
-    //             carousel += '<div class="favourite-icon-container">';
-    //             carousel += '<span class="favourite-icon"></span></div>';
-    //             carousel += '<div class="cornerWrapper"><span class="discount">%</span>';
-    //             carousel += '<span class="outletPic"></span></div><div class="product-box"><a class="product-photos" href="#">';
-    //             carousel += '<img src="' + currentProduct.image_front + '" alt="' + currentProduct.name + '" class="product-img">';
-    //             carousel += '</a></div><div class="product-info"><a class="product-brand" href="#">' + currentProduct.brand  + '</a>';
-    //             carousel += '<span class="product-size">' + currentProduct.size + '</span></div><div class="price-box"><div class="old-price-box">';
-    //             carousel += '<span class="price-title">Начална цена</span><span class="old-price">' + currentProduct.price + 'лв</span></div><div class="new-price-box">';
-    //             carousel += '<span class="promo">' + currentProduct.discount + '%</span><span class="new-price">' + getNewPrice(currentProduct.price, currentProduct.discount) + 'лв</span></div></div><div class="product-button">';
-    //             carousel += '<button class="add-button">Добавете</button></div></li>';
-
-
-    //             // let currentProduct = product[i][j];
-
-    //             // // Product container and img //////////////////////////////
-    //             // let li = document.createElement("li");
-    //             // li.classList.add("slide-box");
-
-    //             // let productBox = document.createElement("div");
-    //             // productBox.classList.add("product-box");
-    //             // let link = document.createElement("a");
-    //             // link.classList.add("product-photos");
-    //             // link.href = "#";
-    //             // let img = document.createElement("img");
-    //             // img.src = currentProduct.image_front;
-    //             // img.alt = currentProduct.name;
-    //             // img.classList.add("product-img");
-
-    //             // // Change picture on hover////////////////////////////
-    //             // img.addEventListener("mouseover", function (ev) {
-    //             //     ev.target.src = currentProduct.image_back;
-    //             // });
-    //             // img.addEventListener("mouseout", function (ev) {
-    //             //     ev.target.src = currentProduct.image_front;
-    //             // });
-
-    //             // link.appendChild(img);
-    //             // productBox.appendChild(link);
-
-    //             // // Favourite ion ////////////////////////////////
-    //             // let productDetailInfo = document.createElement("div");
-    //             // productDetailInfo.classList.add("favourite-icon-container");
-    //             // let favouriteIcon = document.createElement("span");
-    //             // favouriteIcon.classList.add("favourite-icon");
-    //             // productDetailInfo.appendChild(favouriteIcon);
-    //             // li.appendChild(productDetailInfo);
-
-    //             // //  Product discount pictures //////////////////////////////////
-    //             // if (currentProduct.discount.length > 0) {
-    //             //     console.log(currentProduct.discount);
-    //             //     let cornerWrapper = document.createElement("div");
-    //             //     cornerWrapper.classList.add("cornerWrapper");
-    //             //     let discountPic = document.createElement("span");
-    //             //     discountPic.innerHTML = "%";
-    //             //     discountPic.classList.add("discount");
-    //             //     cornerWrapper.append(discountPic);
-    //             //     if (currentProduct.type.some(el => el === "OUTLET ПРОДУКТ")) {
-    //             //         let outlet = document.createElement("span");
-    //             //         outlet.classList.add("outletPic");
-    //             //         cornerWrapper.appendChild(outlet);
-    //             //     }
-    //             //     if (currentProduct.type.some(el => el === "ПРОДУКТ ОТ СЛЕДВАЩ СЕЗОН")) {
-    //             //         let nextSeason = document.createElement("span");
-    //             //         nextSeason.classList.add("nextSeasonPic");
-    //             //         cornerWrapper.appendChild(nextSeason);
-    //             //     }
-    //             //     li.appendChild(cornerWrapper);
-    //             // }
-
-    //             // //Product info - brand and size/////////////////////
-    //             // let productInfo = document.createElement("div");
-    //             // productInfo.classList.add("product-info");
-    //             // let productLink = document.createElement("a");
-    //             // productLink.classList.add("product-brand")
-    //             // productLink.href = "#";
-    //             // productLink.innerHTML = currentProduct.brand;
-    //             // let size = document.createElement("span");
-    //             // size.classList.add("product-size");
-    //             // size.innerHTML = currentProduct.size;
-    //             // productInfo.append(productLink, size);
-
-    //             // // Product price /////////////////////////////////////
-    //             // let productPrice = document.createElement("div");
-    //             // productPrice.classList.add("price-box");
-    //             // if (currentProduct.discount.length > 0) {
-    //             //     let oldPriceBox = document.createElement("div");
-    //             //     oldPriceBox.classList.add("old-price-box");
-    //             //     let priceTitle = document.createElement("span");
-    //             //     priceTitle.classList.add("price-title");
-    //             //     priceTitle.innerHTML = "Начална цена";
-    //             //     let oldPrice = document.createElement("span");
-    //             //     oldPrice.classList.add("old-price");
-    //             //     oldPrice.innerHTML = `${currentProduct.price}лв`;
-    //             //     oldPriceBox.append(priceTitle, oldPrice);
-
-    //             //     let newPriceBox = document.createElement("div");
-    //             //     newPriceBox.classList.add("new-price-box");
-    //             //     let newPriceTitle = document.createElement("span");
-    //             //     newPriceTitle.classList.add("promo");
-    //             //     newPriceTitle.innerHTML = currentProduct.discount;
-    //             //     let newPrice = document.createElement("span");
-    //             //     newPrice.classList.add("new-price");
-    //             //     newPrice.innerHTML = `${getNewPrice(currentProduct.price, currentProduct.discount)}лв`;
-    //             //     newPriceBox.append(newPriceTitle, newPrice);
-
-    //             //     productPrice.append(oldPriceBox, newPriceBox);
-    //             // } else {
-    //             //     let priceBox = document.createElement("div");
-    //             //     priceBox.classList.add("price-container");
-    //             //     let onePriceTitle = document.createElement("span");
-    //             //     onePriceTitle.classList.add("price-without-discount");
-    //             //     onePriceTitle.innerHTML = "Цена";
-    //             //     let onePrice = document.createElement("span");
-    //             //     onePrice.classList.add("price");
-    //             //     onePrice.innerHTML = `${currentProduct.price}лв`;
-    //             //     priceBox.append(onePriceTitle, onePrice)
-    //             //     productPrice.append(priceBox);
-    //             // }
-
-    //             // // Product button //////////////////////////////////////
-    //             // let productButton = document.createElement("div");
-    //             // productButton.classList.add("product-button");
-    //             // let button = document.createElement("button");
-    //             // button.innerHTML = "Добавете";
-    //             // button.classList.add("add-button");
-    //             // productButton.appendChild(button);
-
-    //             // li.append(productBox, productInfo, productPrice, productButton);
-    //             // el.appendChild(li);
-
-    //             // // product.splice(index, 1);
-
-    //         }
-
-    //         carousel += '</ul></div></div>';
-    //     }
-
-    //     let mainDiv = document.getElementById('carouselPages');
-    //     mainDiv.innerHTML = carousel;
-    // }
-
-    
-
-
-    // Show more brands on click
+     // Show more brands on click
     function showMoreBrands(e) {
         e.preventDefault();
         let hiddenBrands = getById("brands-hidden");
