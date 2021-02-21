@@ -1,6 +1,8 @@
 (function () {
     window.addEventListener("hashchange", onHashChange);
     window.addEventListener("DOMContentLoaded", onHashChange);
+    window.addEventListener("hashchange", showCarousel);
+    window.addEventListener("DOMContentLoaded", showCarousel);
 
     //  Site manager
     let siteManager = new Manager;
@@ -142,53 +144,62 @@
 
     // Prepare the list for carousel 
     const shuffledArr = array => array.sort(() => 0.5 - Math.random());
-    let listForCarousel = shuffledArr(siteManager.allProducts);
 
-    // Create Carousel products    
-    createCarouselList(listForCarousel);
-    carouselController();
 
     // Carousel
-    let slideIndex = 1;
-    showSlides(slideIndex);
-
-    let next = document.getElementById("next");
-    next.addEventListener("click", plusSlides);
-
-    let previous = document.getElementById("prev");
-    previous.addEventListener("click", plusSlides);
-
-    // Next/previous controls
-    function plusSlides(e) {
-        if (e.target.id === "next" ? showSlides(slideIndex += 1) : showSlides(slideIndex -= 1));
-    }
-
-    let dots = Array.from(document.getElementsByClassName("dot"));
-    dots.forEach(function (elem) {
-        elem.addEventListener("click", currentSlide);
-    })
-
-    // Thumbnail image controls
-    function currentSlide(e) {
-        showSlides(slideIndex = e.target.id.slice(-1));
-    }
-
-    function showSlides(n) {
-        let i;
-        let slides = document.getElementsByClassName("slideshow");
-        let dots = document.getElementsByClassName("dot");
-
-        if (n > slides.length) { slideIndex = 1 }
-        if (n < 1) { slideIndex = slides.length }
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
+    function showCarousel(e) {
+        let page = location.hash.slice(1);
+        if (page === "home") {
+            let listForCarousel = shuffledArr(siteManager.allProducts);
+            createCarouselList(listForCarousel, 3);
+            
+        } else if (page === "overView") {
+            let listForCarousel = shuffledArr(siteManager.allProducts);
+            createCarouselList(listForCarousel, 2);
         }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
+        carouselController(page);
+
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        let next = document.getElementById("next");
+        next.addEventListener("click", plusSlides);
+
+        let previous = document.getElementById("prev");
+        previous.addEventListener("click", plusSlides);
+
+        // Next/previous controls
+        function plusSlides(e) {
+            if (e.target.id === "next" ? showSlides(slideIndex += 1) : showSlides(slideIndex -= 1));
         }
-        slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " active";
-    }
+
+        let dots = Array.from(document.getElementsByClassName("dot"));
+        dots.forEach(function (elem) {
+            elem.addEventListener("click", currentSlide);
+        })
+
+        // Thumbnail image controls
+        function currentSlide(e) {
+            showSlides(slideIndex = Number(e.target.id.slice(-1)));
+        }
+
+        function showSlides(n) {
+            let slides = document.getElementsByClassName("slideshow");
+            let dots = document.getElementsByClassName("dot");
+
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) { slideIndex = slides.length}
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            
+        }
+    }   
 
     // Show more brands on click
     function showMoreBrands(e) {

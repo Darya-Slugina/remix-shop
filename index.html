@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="reset" href="./assets/styles/reset.css">
-    <link rel="stylesheet" href="assets/styles/index.css">
+    <link rel="stylesheet" href="./assets/styles/index.css">
     <link rel="fonts" href="./assets/styles/CeraPro-Medium/CeraPro-Medium.ttf">
     <link rel="fonts" href="./assets/styles/CeraPro-Medium/CeraPro-Medium.woff">
     <link rel="fonts" href="./assets/styles/CeraPro-Medium/CeraPro-Medium.woff2">
-    <link rel="stylesheet" href="assets/styles/CeraPro-Medium/style.css">
+    <!-- <link rel="fonts" href="./assets/styles/CeraPro-Medium/style.css"> -->
     <title>RemixShop</title>
 </head>
 
@@ -122,18 +122,6 @@
                 <section id="suggestionsCarousel">
                     <h3 id="homePageSuggestions" class="section-title">Нашите предложения</h3>
                     <div id="recomend-wrapper">
-                        <div id="slideshowContainer" class="slideshow-container">
-                            <div id="carouselPages">
-                            </div>
-                            <a id="prev">&#10094;</a>
-                            <a id="next">&#10095;</a>
-                        </div>
-                        <br>
-                        <div style="text-align:center">
-                            <span class="dot" id="slide1"></span>
-                            <span class="dot" id="slide2"></span>
-                            <span class="dot" id="slide3"></span>
-                        </div>
                     </div>
                 </section>
                 <section id="advantages">
@@ -220,14 +208,87 @@
         <div id="pageNewSeason">pageNewSeason</div>
         <div id="pageOverView">
             <div class="wayLinksContainer">
-                    <ul class="custom-way">
-                        <li class="back-link"><a href="javascript:;" onclick="goBack()">назад</a></li>
-                        <li><a href="#home">Начална страница</a></li>
-                        <li><a href="/bg/womens-clothes">Дамски дрехи</a></li>
-                        <li><a href="/bg/womens-clothes/blazers">Сака</a></li>
-                        <li class="active">Дамско кожено сако Apart</li>
-                    </ul>
-                    <div class="breadcrumb-border col-md-7 col-lg-8 d-none d-lg-block"></div>
+                <ul class="custom-way">
+                    <li class="back-link"><a href="javascript:;" onclick="goBack()">назад</a></li>
+                    <li><a href="#home">Начална страница</a></li>
+                    <li><a href="/bg/womens-clothes">Дамски дрехи</a></li>
+                    <!-- <li><a href="/bg/womens-clothes/blazers">Сака</a></li> -->
+                    <li class="active">Дамско кожено сако Apart</li>
+                </ul>
+                <div class="product-border"></div>
+                <div class="product-container">
+                    <div class="product-details">
+                        <div class="row">
+                            <div class="product-image">
+                                <div class="row">
+                                    <div class="main-img">
+                                        <div class="big-img-container">
+                                            <img class="img"
+                                                src="https://media.remix.eu/files/04-2021/Damsko-kojeno-yake---110489933a.jpg"
+                                                alt="Дамско кожено сако Apart, Размер L, Цвят Зелен, Естествен велур, Цена 125,21&nbsp;лв.">
+                                        </div>
+                                        <div class="cornerWrapperOverView" id="corner-wrapper">
+                                            <span class="voucher-badge">%</span>
+                                        </div>
+                                        <span class="favourite">
+                                            <span class="fav-icon"></span>
+                                        </span>
+                                    </div>
+                                    <div class="side-img-container">
+                                        <div class="item">
+                                            <a href="#" class="elevatezoom-gallery">
+                                                <img class="img-fluid"
+                                                    src="https://media.remix.eu/files/04-2021/312_Damsko-kojeno-yake---110489933a.jpg"
+                                                    alt="Дамско кожено сако Apart, Размер L, Цвят Зелен, Естествен велур, Цена 125,21&nbsp;лв.">
+                                            </a>
+                                        </div>
+                                        <div class="item">
+                                            <a href="#" class="elevatezoom-gallery">
+                                                <img class="img-fluid"
+                                                    src="https://media.remix.eu/files/04-2021/312_Damsko-kojeno-yake---110489933b.jpg"
+                                                    alt="Дамско кожено сако Apart, Размер L, Цвят Зелен, Естествен велур, Цена 125,21&nbsp;лв.">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info-box">
+                                <div class="product-information">
+                                    <div id="action-tabs" class="action-tabs">
+                                        <ul class="item-navigation-tabs">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" href="#overview" data-toggle="tab" id="overview-link">
+                                                    <span class="tab-icon">Детайли</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#delivery" data-toggle="tab" id="delivery-link">
+                                                    <span class="tab-icon">Доставка</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#reclamation" data-toggle="tab" id="reclamation-link">
+                                                    <span class="tab-icon ">Връщане</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div class="content">
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-product-list">
+                <h3 class="text-center text-uppercase section-title">Препоръчани продукти</h3>
+                <div id="suggestions-wrapper">
                 </div>
             </div>
         </div>
@@ -367,47 +428,57 @@
     </script>
 
     <script id="carouselTempl" type="text/x-handlebars-template">
-        {{#each slidesTemplates}}
-            <div class="slideshow fade">
-                <div id="slideshowContainer{{inc @index}}" class="page{{inc @index}}"></div>
-                    <ul class="product-list">
-                    {{#each this}}
-                        <li class="slide-box">
-                            <div class="favourite-icon-container">
-                                <span class="favourite-icon"></span>
-                            </div>
-                            <div class="cornerWrapper">
-                                <span class="discount">%</span>
-                                <span class="outletPic"></span>
-                            </div>
-                            <div class="product-box">
-                                <a class="product-photos" href="#overView">
-                                    <img src="{{this.image_front}}" alt="{{this.name}}" class="product-img">
-                                </a>
-                            </div>
-                            <div class="product-info">
-                                <a class="product-brand" href="#">{{this.brand}}</a>
-                                <span class="product-size">{{this.size}}</span>
-                            </div>
-                            <div class="price-box">
-                                <div class="old-price-box">
-                                    <span class="price-title">Начална цена</span>
-                                    <span class="old-price">{{this.price}}лв</span>
+        <div class="slideshow-container">
+            {{#each slidesTemplates}}
+                <div class="slideshow fade">
+                    <div id="slideshowContainer{{inc @index}}" class="page{{inc @index}}">
+                        <ul class="product-list">
+                        {{#each this}}
+                            <li class="slide-box">
+                                <div class="favourite-icon-container">
+                                    <span class="favourite-icon"></span>
                                 </div>
-                                <div class="new-price-box">
-                                    <span class="promo">{{this.discount}}%</span>
-                                    <span class="new-price">{{this.price}}лв</span>
+                                <div class="cornerWrapper">
+                                    <span class="discount">%</span>
+                                    <span class="outletPic"></span>
                                 </div>
-                            </div>
-                            <div class="product-button">
-                                <button class="add-button">Добавете</button>
-                            </div>
-                        </li>
-                    {{/each}}
-                    </ul>
+                                <div class="product-box">
+                                    <a class="product-photos" href="#overView">
+                                        <img src="{{this.image_front}}" alt="{{this.name}}" class="product-img">
+                                    </a>
+                                </div>
+                                <div class="product-info">
+                                    <a class="product-brand" href="#">{{this.brand}}</a>
+                                    <span class="product-size">{{this.size}}</span>
+                                </div>
+                                <div class="price-box">
+                                    <div class="old-price-box">
+                                        <span class="price-title">Начална цена</span>
+                                        <span class="old-price">{{this.price}}лв</span>
+                                    </div>
+                                    <div class="new-price-box">
+                                        <span class="promo">{{this.discount}}%</span>
+                                        <span class="new-price">{{this.price}}лв</span>
+                                    </div>
+                                </div>
+                                <div class="product-button">
+                                    <button class="add-button">Добавете</button>
+                                </div>
+                            </li>
+                        {{/each}}
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        {{/each}}
+            {{/each}}
+            <a id="prev">&#10094;</a>
+            <a id="next">&#10095;</a>
+        </div>
+        <br>
+        <div style="text-align:center">
+            {{#each slidesTemplates}}
+                <span class="dot" id="slide{{inc @index}}"></span>
+            {{/each}}
+        </div>
     </script>
 
     <script id="brandsTempl" type="text/x-handlebars-template">
