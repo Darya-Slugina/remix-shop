@@ -1,3 +1,9 @@
+.wrapper{
+    margin: 0 auto;
+    width: 1250px;
+    padding: 0 20px;
+}
+
 .container-breadcrumbs {
     background-color: #f1f1f3;
     border-radius: 4px;
@@ -17,11 +23,14 @@
 
 .breadcrumbs > ul{
     display: flex;
+    margin: 0;
+    padding-inline-start: 0;
 }
 
 .breadcrumbs > ul > li{
     list-style: none;
     padding: 3px 10px;
+    padding-bottom: 0px;
 }
 
 .breadcrumbs > ul > li > *{
@@ -34,24 +43,48 @@
     background: url(../images/arrow-icon-2.PNG) no-repeat;
     background-size: contain;
     width: 28px;
-    height: 40px;
+    height: 20px;
     display: inline-block;
     vertical-align: top;
     margin-left: 5px;
 }
 
+.container-personalFilters{
+    padding: 15px 20px;
+    padding-bottom: 0px;
+}
+
+.container-personalFilters > a {
+    text-decoration: none;
+    color: #303030;
+    font-family: "Cera Pro Medium",sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+}
+
 .container-personalFilters > a::after{
     content: '';
     background: url(../images/filter-icon.PNG) no-repeat;
-    width: 50%;
-    height: 50%;
+    width: 28px;
+    height: 30px;
     display: inline-block;
+    vertical-align: bottom;
+}
+
+.container-filters{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding: 5px 15px;
+    padding-top: 0px;
 }
 
 .filters{
     display: flex;
-    padding-bottom: 5px;
+    box-sizing: border-box;
+    width: 1250px;
     padding-inline-start: 0;
+    margin: 0 auto;
 }
 
 .filters > *{
@@ -81,7 +114,43 @@
     vertical-align: middle;
 }
 
+.container-clothesDisplay{
+    box-sizing: border-box;
+    width: 1250px;
+    padding-inline-start: 0;
+    margin: 0 auto;
+}
 .sorter *{
     text-decoration: none;
+    color: #303030;
+    font-weight: 400;
+    font-size: 14px;
 }
 
+#sorterText:after{
+    content: '';
+    background: url(../images/sort-icon.PNG) no-repeat;
+    background-size: contain;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    margin-left: 2px;
+    vertical-align: middle;
+}
+
+#dropdown-sort{
+    background-color: #f1f1f3;
+    border-radius: 4px;
+    width: 240px;
+    display: none;
+}
+
+#dropdown-sort > ul{
+    padding: 15px 13px;
+}
+
+#dropdown-sort *{
+    text-decoration: none;
+    list-style: none;
+    padding-inline-start: 0;
+}
