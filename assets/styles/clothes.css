@@ -1,6 +1,6 @@
 .wrapper{
+    max-width: 1245px;
     margin: 0 auto;
-    width: 1250px;
     padding: 0 20px;
 }
 
@@ -82,7 +82,7 @@
 .filters{
     display: flex;
     box-sizing: border-box;
-    width: 1250px;
+    max-width: 1245px;
     padding-inline-start: 0;
     margin: 0 auto;
 }
@@ -116,7 +116,7 @@
 
 .container-clothesDisplay{
     box-sizing: border-box;
-    width: 1250px;
+    max-width: 1245px;
     padding-inline-start: 0;
     margin: 0 auto;
 }
