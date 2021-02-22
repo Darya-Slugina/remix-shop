@@ -223,4 +223,17 @@
         let newImg = siteManager.allProducts.find(el => el.image_back === picture);
         e.target.src = newImg.image_front;
     }
+
+    //show sort list on hover
+    let sorterIcon = document.getElementById('sorterIcon');
+    let dropdownSort = document.getElementById('dropdown-sort');
+
+    sorterIcon.addEventListener('mouseover', function () {
+        dropdownSort.style.display = 'block';
+    });
+
+    sorterIcon.addEventListener('mouseout', function () {
+        dropdownSort.style.display = 'none';
+    });
+
 })();
