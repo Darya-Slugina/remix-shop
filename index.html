@@ -240,7 +240,7 @@
 
             <div class="container-clothesDisplay">
                 <div class="sorter">
-                    <div>
+                    <div class="sorter-nav">
                         <span>Сортиране по:</span>
                         <a href=""><img src="./assets/images/sort-icon.PNG" alt="sort-icon" id="sorterIcon">
                             <div id="dropdown-sort">
@@ -253,6 +253,7 @@
                             </div>
                         </a>
                     </div>
+                    <div id="display"></div>
                 </div>
             </div>
         </div>
@@ -436,7 +437,7 @@
                                     <span class="old-price">{{this.price}}лв</span>
                                 </div>
                                 <div class="new-price-box">
-                                    <span class="promo">{{this.discount}}%</span>
+                                    <span class="promo">{{this.discount}}</span>
                                     <span class="new-price">{{this.price}}лв</span>
                                 </div>
                             </div>
@@ -495,6 +496,43 @@
             {{/each}}
     </script>
 
+    <script id="clothesDisplay-template" type="text/x-handlebars-template">
+                    {{#each allProducts}}
+                        <div class="display-box">
+                            <div class="favourite-icon-container">
+                                <span class="favourite-icon icon-display"></span>
+                            </div>
+                            <div class="cornerWrapper">
+                                <span class="discount">%</span>
+                                <span class="outletPic"></span>
+                            </div>
+                            <div class="product-box">
+                                <a class="product-photos" href="#overView">
+                                    <img src="{{image_front}}" alt="{{name}}" class="product-img img-display">
+                                </a>
+                            </div>
+                            <div class="product-info">
+                                <a class="product-brand" href="#">{{brand}}</a>
+                                <span class="product-size">{{size}}</span>
+                            </div>
+                            <div class="price-box">
+                                <div class="old-price-box">
+                                    <span class="price-title">Начална цена</span>
+                                    <span class="old-price">{{price}}лв</span>
+                                </div>
+                                <div class="new-price-box">
+                                    <span class="promo">{{discount}}</span>
+                                    <span class="new-price">{{price}}лв</span>
+                                </div>
+                            </div>
+                            <div class="product-button">
+                                <button class="add-button button-display">Добавете</button>
+                            </div>
+                        </div>
+                    {{/each}} 
+    </script>
+
+
     <script src="./node_modules/handlebars/dist/handlebars.js"></script>
     <script src="assets/js/utils.js"></script>
     <script src="assets/js/male_clothes.js"></script>
@@ -509,6 +547,7 @@
     <script src="assets/js/BrandsController.js"></script>
     <script src="assets/js/BlogModel.js"></script>
     <script src="assets/js/BlogController.js"></script>
+    <script src="assets/js/clothesDisplay.js"></script>
     <script src="assets/js/index.js"></script>
 </body>
 

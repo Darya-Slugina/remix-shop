@@ -55,6 +55,8 @@
 
     //created the array with all products
     siteManager.createAllProducts();
+    
+    clothesController(siteManager);
 
     //Event listeners
     window.addEventListener('scroll', onScroll);
@@ -224,16 +226,5 @@
         e.target.src = newImg.image_front;
     }
 
-    //show sort list on hover
-    let sorterIcon = document.getElementById('sorterIcon');
-    let dropdownSort = document.getElementById('dropdown-sort');
-
-    sorterIcon.addEventListener('mouseover', function () {
-        dropdownSort.style.display = 'block';
-    });
-
-    sorterIcon.addEventListener('mouseout', function () {
-        dropdownSort.style.display = 'none';
-    });
 
 })();
