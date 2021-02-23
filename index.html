@@ -11,6 +11,7 @@
     <link rel="fonts" href="./assets/styles/CeraPro-Medium/CeraPro-Medium.woff">
     <link rel="fonts" href="./assets/styles/CeraPro-Medium/CeraPro-Medium.woff2">
     <link rel="stylesheet" href="assets/styles/CeraPro-Medium/style.css">
+    <link rel="icon" href="./assets/images/favicon.jpg">
     <title>RemixShop</title>
 </head>
 
@@ -35,7 +36,7 @@
         </div>
         <div id="main-header" class="main-header">
             <div class="main-navigation">
-                <a href="#home"><img src="assets/images/Logo-1.png" alt="remixShopLogo" class="main-logo"></a>
+                <a href="#home" class="main-logo" id="logo"></a>
                 <div class="navigation-container">
                     <nav class="navigation">
                         <ul class="navigation-list">
@@ -395,7 +396,7 @@
                                     <span class="old-price">{{this.price}}лв</span>
                                 </div>
                                 <div class="new-price-box">
-                                    <span class="promo">{{this.discount}}%</span>
+                                    <span class="promo">{{this.discount}}</span>
                                     <span class="new-price">{{this.price}}лв</span>
                                 </div>
                             </div>
