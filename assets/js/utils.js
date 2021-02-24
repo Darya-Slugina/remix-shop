@@ -43,3 +43,10 @@ function isNewProduct(condition) {
     }
     return false;
 }
+
+function isFemail (){
+    if(product.id > 20) {
+        return true;
+    }
+    return false
+}

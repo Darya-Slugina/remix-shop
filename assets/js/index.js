@@ -245,12 +245,6 @@
         product = siteManager.allProducts.find(el => el.id === Number(productId));
 
         productController();
-        
-        if (productId === "undefined" || productId === "null") {
-            let errorMessage = document.getById("overViewContainer");
-            errorMessage.innerHTML = "Не е избран продукт за отобразяването";
-        }
-        // TODO, if no product -> show Msg to user -> === undefinded
     }
 
     // Show the current tab in overView page

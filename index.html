@@ -210,16 +210,14 @@
         <div id="pageNewSeason">pageNewSeason</div>
         <div id="pageOverView">
             <div class="wayLinksContainer">
-                <ul class="custom-way">
-                    <li class="back-link"><a href="#homePage">назад</a></li>
-                    <li><a href="#home">Начална страница</a></li>
-                    <li><a href="/bg/womens-clothes">Дамски дрехи</a></li>
-                    <li class="active">Дамско кожено сако Apart</li>
+                <ul class="custom-way" id="customWay">
                 </ul>
                 <div class="product-border"></div>
                 <div class="product-container">
                     <div class="product-details">
                         <div class="row" id="overViewContainer">
+                            <span class="empty-info">Изберете продукт за да получите подробна информация за него</span>
+
                         </div>
                     </div>
                 </div>
@@ -479,6 +477,18 @@
                 </div>
             </li>
             {{/each}}
+    </script>
+
+    <script id="overViewNavigationTempl" type="text/x-handlebars-template">
+            <li class="back-link"><a href="#homePage">назад</a></li>
+            <li><a href="#home">Начална страница</a></li>
+            {{#if this.femail}}
+            <li><a href="/bg/womens-clothes">Дамски дрехи</a></li>
+            {{/if}}
+            {{# unless this.femail}}
+            <li><a href="/bg/mans-clothes">Мъжки дрехи</a></li>
+            {{/ unless}}
+            <li class="active">{{this.name}} {{this.brand}}</li>
     </script>
 
     <script id="overViewTempl" type="text/x-handlebars-template">
