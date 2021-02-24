@@ -3,6 +3,7 @@
     window.addEventListener("DOMContentLoaded", onHashChange);
     window.addEventListener("hashchange", showCarousel);
     window.addEventListener("DOMContentLoaded", showCarousel);
+    window.addEventListener("DOMContentLoaded", loadEvents);
 
     //  Site manager
     let siteManager = new Manager;
@@ -62,6 +63,9 @@
     window.addEventListener('scroll', onScroll);
     showBrands.addEventListener("click", showMoreBrands);
     hiddenButton.addEventListener("click", showMoreInfo);
+
+
+
 
     //   Router
     function onHashChange() {
@@ -152,7 +156,7 @@
         if (page === "home") {
             let listForCarousel = shuffledArr(siteManager.allProducts);
             createCarouselList(listForCarousel, 3);
-            
+
         } else if (page === "overView") {
             let listForCarousel = shuffledArr(siteManager.allProducts);
             createCarouselList(listForCarousel, 2);
@@ -187,8 +191,8 @@
             let slides = document.getElementsByClassName("slideshow");
             let dots = document.getElementsByClassName("dot");
 
-            if (n > slides.length) {slideIndex = 1}
-            if (n < 1) { slideIndex = slides.length}
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
             for (let i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
             }
@@ -197,9 +201,11 @@
             }
             slides[slideIndex - 1].style.display = "block";
             dots[slideIndex - 1].className += " active";
-            
+
         }
-    }   
+
+        loadEvents();
+    }
 
     // Show more brands on click
     function showMoreBrands(e) {
@@ -216,13 +222,8 @@
         hiddenText.classList.toggle("hidden-text-show");
         hiddenButton.classList.toggle("reverse");
     }
-    // Change img on hover
-    let productImages = Array.from(document.getElementsByClassName("product-img"));
-    productImages.forEach(function (img) {
-        img.addEventListener("mouseover", onMouseOver);
-        img.addEventListener("mouseout", onMouseOut);
-    })
 
+    // Change img on hover
     function onMouseOver(e) {
         let picture = e.target.src;
         let newImg = siteManager.allProducts.find(el => el.image_front === picture);
@@ -234,4 +235,76 @@
         let newImg = siteManager.allProducts.find(el => el.image_back === picture);
         e.target.src = newImg.image_front;
     }
+
+    // Select current product
+    function selectProduct(e) {
+        let productId = e.target.parentNode.children[0].value;
+        product = siteManager.allProducts.find(el => el.id === Number(productId));
+
+        productController();
+        
+        if (productId === "undefined" || productId === "null") {
+            let errorMessage = document.getById("overViewContainer");
+            errorMessage.innerHTML = "Не е избран продукт за отобразяването";
+        }
+        // TODO, if no product -> show Msg to user -> === undefinded
+    }
+
+    // Show the current tab in overView page
+    function changeInfo(e) {
+        e.preventDefault();
+        let info = getById("overview");
+        let delivery = getById("delivery");
+        let reclamation = getById("reclamation");
+
+        // let newClass = Array.from(document.getElementsByClassName("nav-item"));
+
+
+        if (e.target.innerHTML === "Доставка") {
+            delivery.classList.add("show");
+            reclamation.classList.remove("show");
+            info.classList.remove("show");
+        } else if (e.target.innerHTML === "Връщане") {
+            delivery.classList.remove("show");
+            reclamation.classList.add("show");
+            info.classList.remove("show");
+        } else if (e.target.innerHTML === "Детайли") {
+            delivery.classList.remove("show");
+            reclamation.classList.remove("show");
+            info.classList.add("show");
+        }
+    }
+
+    //Change big img on overViewPage on click
+    function changeImg(e) {
+        let mainImg = getById("big-img");
+        mainImg.src = e.target.src;
+    }
+
+    function loadEvents() {
+        let productImages = Array.from(document.getElementsByClassName("product-img"));
+        productImages.forEach(function (img) {
+            img.addEventListener("mouseover", onMouseOver);
+            img.addEventListener("mouseout", onMouseOut);
+        });
+
+        let buttons = Array.from(document.getElementsByClassName("product-photos"));
+        buttons.forEach(function (currentBtn) {
+            currentBtn.addEventListener('click', selectProduct)
+        });
+
+        let nav = Array.from(document.getElementsByClassName("nav-item"));
+        nav.forEach(function (currentBtn) {
+            currentBtn.addEventListener("click", changeInfo);
+        });
+
+        let items = Array.from(document.getElementsByClassName("img-fluid"));
+        items.forEach(function (currentImg) {
+            currentImg.addEventListener("click", changeImg);
+        });
+    }
+
+
+
+
 })();

@@ -1,4 +1,4 @@
-// let slides = Array.from(Array(3), () => new Array(6));
+let slides = Array.from(Array(3), () => new Array(6));
 
 function createCarouselList(products, limit) {
   slides = Array.from(Array(limit), () => new Array(6));
@@ -7,6 +7,9 @@ function createCarouselList(products, limit) {
   for (let j = 0; j < limit; j++) {
     for (let k = 0; k < 6; k++) {
       slides[j][k] = products[counter];
+      slides[j][k].newPrice = getNewPrice(slides[j][k].price, slides[j][k].discount);
+      slides[j][k].isOutlet = isOutlet(slides[j][k].type);
+      slides[j][k].isNewSeason = isNewSeason(slides[j][k].type);
       counter++;
     }
   }
@@ -14,7 +17,7 @@ function createCarouselList(products, limit) {
 
 // Controller
 const carouselController = function (page) {
-  
+
   let divToNull = 'suggestions';
   let divToShow = 'recomend';
   if (page == "overView") {
