@@ -20,6 +20,7 @@
     let header = getById("main-header");
     let bannerTop = getById("banner-container");
     let hiddenButton = getById("hidden-text-button");
+    let logo = getById('logo');
 
     bannersController();
 
@@ -137,9 +138,11 @@
         if (scroll > 25) {
             header.classList.add("main-header-new");
             bannerTop.classList.add("goDown");
+            logo.classList.add("small-logo");
         } else {
             header.classList.remove("main-header-new");
             bannerTop.classList.remove("goDown");
+            logo.classList.remove("small-logo");
         }
     }
 
@@ -303,8 +306,4 @@
             currentImg.addEventListener("click", changeImg);
         });
     }
-
-
-
-
 })();

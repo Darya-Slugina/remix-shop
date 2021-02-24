@@ -14,6 +14,7 @@ body {
     color: #303030;
     line-height: 1.2;
     background-color: #fff;
+    margin: 0;
 }
 
 .mainContainer {
@@ -113,6 +114,7 @@ body {
     width: 100%;
     background-color: #fff;
     position: relative;
+    padding-bottom: 10px;
 }
 
 .main-header-new {
@@ -130,7 +132,28 @@ body {
 }
 
 .main-logo {
-    margin-top: 10px;
+    display: inline-block;
+    width: 165px;
+    height: 80px;
+    position: relative;
+    margin-top: -10px;
+    overflow: hidden;
+    transition: all 0.25s ease-in-out;
+}
+
+.main-logo:before{
+    content: "";
+    background: url(../images/Logo-1.png) no-repeat;
+    display: inline-block;
+    width: 159px;
+    height: 80px;
+    position: relative;
+    left: 5px;
+    top: 15px;
+}
+
+.small-logo{
+    width: 65px;
 }
 
 .main-navigation {
@@ -425,6 +448,8 @@ body {
     width: auto;
     margin-top: -22px;
     padding: 10px;
+    padding-bottom: 4px;
+    padding-top: 4px;
     color: black;
     font-weight: bold;
     font-size: 18px;
