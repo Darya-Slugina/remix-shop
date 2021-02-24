@@ -6,10 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="reset" href="./assets/styles/reset.css">
-    <link rel="stylesheet" href="assets/styles/index.css">
+    <link rel="stylesheet" href="./assets/styles/index.css">
     <link rel="fonts" href="./assets/styles/CeraPro-Medium/CeraPro-Medium.ttf">
     <link rel="fonts" href="./assets/styles/CeraPro-Medium/CeraPro-Medium.woff">
     <link rel="fonts" href="./assets/styles/CeraPro-Medium/CeraPro-Medium.woff2">
+    <link rel="fonts" href="./assets/styles/CeraPro-Medium/style.css">
     <link rel="stylesheet" href="assets/styles/CeraPro-Medium/style.css">
     <link rel="icon" href="./assets/images/favicon.jpg">
     <title>RemixShop</title>
@@ -123,18 +124,6 @@
                 <section id="suggestionsCarousel">
                     <h3 id="homePageSuggestions" class="section-title">Нашите предложения</h3>
                     <div id="recomend-wrapper">
-                        <div id="slideshowContainer" class="slideshow-container">
-                            <div id="carouselPages">
-                            </div>
-                            <a id="prev">&#10094;</a>
-                            <a id="next">&#10095;</a>
-                        </div>
-                        <br>
-                        <div style="text-align:center">
-                            <span class="dot" id="slide1"></span>
-                            <span class="dot" id="slide2"></span>
-                            <span class="dot" id="slide3"></span>
-                        </div>
                     </div>
                 </section>
                 <section id="advantages">
@@ -221,14 +210,21 @@
         <div id="pageNewSeason">pageNewSeason</div>
         <div id="pageOverView">
             <div class="wayLinksContainer">
-                    <ul class="custom-way">
-                        <li class="back-link"><a href="javascript:;" onclick="goBack()">назад</a></li>
-                        <li><a href="#home">Начална страница</a></li>
-                        <li><a href="/bg/womens-clothes">Дамски дрехи</a></li>
-                        <li><a href="/bg/womens-clothes/blazers">Сака</a></li>
-                        <li class="active">Дамско кожено сако Apart</li>
-                    </ul>
-                    <div class="breadcrumb-border col-md-7 col-lg-8 d-none d-lg-block"></div>
+                <ul class="custom-way" id="customWay">
+                </ul>
+                <div class="product-border"></div>
+                <div class="product-container">
+                    <div class="product-details">
+                        <div class="row" id="overViewContainer">
+                            <span class="empty-info">Изберете продукт за да получите подробна информация за него</span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-product-list">
+                <h3 class="text-center text-uppercase section-title">Препоръчани продукти</h3>
+                <div id="suggestions-wrapper">
                 </div>
             </div>
         </div>
@@ -368,47 +364,75 @@
     </script>
 
     <script id="carouselTempl" type="text/x-handlebars-template">
-        {{#each slidesTemplates}}
-            <div class="slideshow fade">
-                <div id="slideshowContainer{{inc @index}}" class="page{{inc @index}}"></div>
-                    <ul class="product-list">
-                    {{#each this}}
-                        <li class="slide-box">
-                            <div class="favourite-icon-container">
-                                <span class="favourite-icon"></span>
-                            </div>
-                            <div class="cornerWrapper">
-                                <span class="discount">%</span>
-                                <span class="outletPic"></span>
-                            </div>
-                            <div class="product-box">
-                                <a class="product-photos" href="#overView">
-                                    <img src="{{this.image_front}}" alt="{{this.name}}" class="product-img">
-                                </a>
-                            </div>
-                            <div class="product-info">
-                                <a class="product-brand" href="#">{{this.brand}}</a>
-                                <span class="product-size">{{this.size}}</span>
-                            </div>
-                            <div class="price-box">
-                                <div class="old-price-box">
-                                    <span class="price-title">Начална цена</span>
-                                    <span class="old-price">{{this.price}}лв</span>
+        <div class="slideshow-container">
+            {{#each slidesTemplates}}
+                <div class="slideshow fade">
+                    <div id="slideshowContainer{{inc @index}}" class="page{{inc @index}}">
+                        <ul class="product-list">
+                        {{#each this}}
+                            <li class="slide-box">
+                                <div class="favourite-icon-container">
+                                    <span class="favourite-icon"></span>
                                 </div>
-                                <div class="new-price-box">
-                                    <span class="promo">{{this.discount}}</span>
-                                    <span class="new-price">{{this.price}}лв</span>
+                                <div class="cornerWrapper">
+                                    {{#if this.discount}}
+                                    <span class="discount">%</span>
+                                    {{/if}}
+                                    {{#if this.isOutlet}}
+                                    <span class="outletPic"></span>
+                                    {{/if}}
+                                    {{#if this.isNewSeason}}
+                                    <span class="nextSeasonPic"></span>
+                                    {{/if}}
                                 </div>
-                            </div>
-                            <div class="product-button">
-                                <button class="add-button">Добавете</button>
-                            </div>
-                        </li>
-                    {{/each}}
-                    </ul>
+                                <div class="product-box">
+                                    <a class="product-photos" href="#overView">
+                                        <input type="hidden" value="{{this.id}}">
+                                        <img src="{{this.image_front}}" alt="{{this.name}}" class="product-img">
+                                    </a>
+                                </div>
+                                <div class="product-info">
+                                    <a class="product-brand" href="#">{{this.brand}}</a>
+                                    <span class="product-size">{{this.size}}</span>
+                                </div>
+                                <div class="price-box">
+                                    {{#if this.discount}}
+                                        <div class="old-price-box">
+                                            <span class="price-title">Начална цена</span>
+                                            <span class="old-price">{{this.price}}лв</span>
+                                        </div>
+                                        <div class="new-price-box">
+                                            <span class="promo">{{this.discount}}</span>
+                                            <span class="new-price">{{newPrice}}лв</span>
+                                        </div>
+                                    {{/if}}
+                                    {{# unless this.discount}}
+                                        <div class="product-price">
+                                            <div class="price-container">
+                                                <span class="price-title">Цена</span>
+                                                <span class="price-without-discount">{{this.price}}лв</span>
+                                            </div>
+                                        </div>
+                                    {{/unless}}
+                                </div>
+                                <div class="product-button">
+                                    <button class="add-button">Добавете</button>
+                                </div>
+                            </li>
+                        {{/each}}
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        {{/each}}
+            {{/each}}
+            <a id="prev">&#10094;</a>
+            <a id="next">&#10095;</a>
+        </div>
+        <br>
+        <div style="text-align:center">
+            {{#each slidesTemplates}}
+                <span class="dot" id="slide{{inc @index}}"></span>
+            {{/each}}
+        </div>
     </script>
 
     <script id="brandsTempl" type="text/x-handlebars-template">
@@ -455,7 +479,173 @@
             {{/each}}
     </script>
 
-    <script src="./node_modules/handlebars/dist/handlebars.js"></script>
+    <script id="overViewNavigationTempl" type="text/x-handlebars-template">
+            <li class="back-link"><a href="#homePage">назад</a></li>
+            <li><a href="#home">Начална страница</a></li>
+            {{#if this.femail}}
+            <li><a href="/bg/womens-clothes">Дамски дрехи</a></li>
+            {{/if}}
+            {{# unless this.femail}}
+            <li><a href="/bg/mans-clothes">Мъжки дрехи</a></li>
+            {{/ unless}}
+            <li class="active">{{this.name}} {{this.brand}}</li>
+    </script>
+
+    <script id="overViewTempl" type="text/x-handlebars-template">
+        <div class="product-image">
+            <div class="row">
+                <div class="main-img">
+                    <div class="big-img-container">
+                        <img id="big-img" class="img" src="{{this.image_front}}" alt="{{this.name}}">
+                    </div>
+                    <div class="cornerWrapperOverView" id="corner-wrapper">
+                        <span class="voucher-badge">%</span>
+                    </div>
+                    <span class="favourite">
+                        <span class="fav-icon"></span>
+                    </span>
+                </div>
+                <div class="side-img-container">
+                    <div class="item">
+                        <a href="javascript:;" class="elevatezoom-gallery">
+                            <img class="img-fluid" src="{{this.image_front}}" alt="{{this.name}}">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="javascript:;" class="elevatezoom-gallery">
+                            <img class="img-fluid" src="{{this.image_back}}" alt="{{this.name}}">
+                        </a>
+                    </div>
+                </div>
+            </div>    
+        <div class="item-info-box">
+            <div class="product-information">
+                <div id="action-tabs" class="action-tabs">
+                    <ul class="item-navigation-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="javascript:;" id="overview-link">
+                                <span class="tab-icon">Детайли</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:;" id="delivery-link">
+                                <span class="tab-icon">Доставка</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:;" id="reclamation-link">
+                                <span class="tab-icon ">Връщане</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="content">
+                        <div class="panel show" id="overview">
+                            <h1 class="product-titles"> {{this.name}}
+                                <a href="#" title="Вижте всички продукти на марката">{{this.brand}}</a>
+                            </h1>
+                            <div class="product-price">
+                                {{#if discount}}
+                                    <div class="item-price" id="startingPrice">
+                                            <span class="price-title old">
+                                                Начална цена:
+                                            </span>
+                                            <span class="old-price">
+                                                <span>{{this.price}}лв.</span>
+                                            </span>
+                                    </div>
+                                    <div class="item-price" id="afterDailyDiscountPrice">
+                                            <span class="price-title-new">
+                                                КРАЙНА ЦЕНА:
+                                            </span>
+                                            <span class="new-price">
+                                                {{this.newPrice}} лв.
+                                            </span>
+                                    </div>
+                                    <div class="discounts">
+                                        <div class="discount-container">
+                                            <span class="promo-badge">{{this.discount}}</span>
+                                            <div class="badge-text">
+                                                Промоционална отстъпка
+                                            </div>
+                                        </div>
+                                    </div>     
+                                {{/if}}
+                                {{# unless this.discount}}
+                                <span class="price-title-original">
+                                    Цена:
+                                </span>
+                                <span class="original-price">
+                                    <span>{{this.price}} лв.</span>
+                                </span>
+                                {{/unless}}
+                            </div>
+                            <div class="product-properties">
+                                <div class="overView-product-size">
+                                    <span>Размер: </span>
+                                    <strong>{{this.size}}</strong>
+                                    <a href="javascript:;" class="sizes-link">Нашите размери</a>
+                                </div>
+                            </div>
+                            <div class="product-cond">
+                                <span>Състояние: </span>
+                                <span class="new">
+                                    <span class="new-label"></span>
+                                    {{this.condition}}</span>
+                            </div>
+                            <div class="product-content">
+                                <span>Състав: </span>{{this.materials}}
+                            </div>
+                            <div class="product-color">
+                                <span>Цвят</span> : {{this.color}}
+                            </div>
+                            <div class="product-description">
+                                <span>Описание: </span>
+                                    {{this.description}}
+                            </div>
+                            <div class="product-button">
+                                <a href="javascript:;" class="site-btn" id="product-button-18430789">
+                                    <span class="text">Добавете</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="panel" id="delivery">
+                            <p>Доставка до всяка точка на България със Speedy в срок до 3
+                                работни дни: до офис на куриера за&nbsp;4.29 лв. или до адрес за
+                                4.49 лв.</p>
+                            <p>Безплатна доставка за поръчки с поне един продукт над 70 лв. и
+                                предплатени поръчки над 90 лв.</p>
+                            <p>Експресна доставка на следващия работен ден за 5.50 лв. за
+                                поръчки, направени до 14 ч.</p>
+                            <p>Връщане до 14 дни от доставката.</p>
+                            <p>Всички дрехи втора употреба, преди да бъдат използвани по
+                                предназначение, задължително трябва да бъдат изпрани и при
+                                възможност - изгладени.</p>
+                        </div>
+                        <div class="panel" id="reclamation">
+                            <p><strong>Връщане&nbsp;до 14 дни</strong></p>
+                            <p>Продуктът не Ви допада или не е подходящият размер? Съжаляваме да
+                                го чуем, но с&nbsp;удоволствие ще го приемем обратно. Можете да
+                                върнете всеки продукт в срок от 14 дни&nbsp;след получаването
+                                му, независимо от&nbsp;причината. Вижте как <u><a
+                                        href="https:#">ТУК</a></u>.
+                            </p>
+                            <p><strong>По&nbsp;банков път или Виртуален портфейл</strong></p>
+                            <p>След&nbsp;получаване на стоката в нашия международен&nbsp;склад,
+                                веднага ще обработим връщането&nbsp;и ще възстановим парите в
+                                14-дневен срок. Ако изберете връщане във Виртуалния портфейл на
+                                Вашия Профил, ще видите&nbsp;сумата веднага, без да изчаквате да
+                                бъде&nbsp;извършен банков превод.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
+        integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
+        crossorigin="anonymous"></script>
     <script src="assets/js/utils.js"></script>
     <script src="assets/js/male_clothes.js"></script>
     <script src="assets/js/femaleClothes.js"></script>
@@ -469,6 +659,7 @@
     <script src="assets/js/BrandsController.js"></script>
     <script src="assets/js/BlogModel.js"></script>
     <script src="assets/js/BlogController.js"></script>
+    <script src="assets/js/ProductController.js"></script>
     <script src="assets/js/index.js"></script>
 </body>
 
