@@ -1,26 +1,41 @@
 let slides = Array.from(Array(3), () => new Array(6));
 
-function createCarouselList(products) {
+function createCarouselList(products, limit) {
+  slides = Array.from(Array(limit), () => new Array(6));
+
   let counter = 0;
-  for (let j = 0; j < 3; j++) {
+  for (let j = 0; j < limit; j++) {
     for (let k = 0; k < 6; k++) {
       slides[j][k] = products[counter];
+      slides[j][k].newPrice = getNewPrice(slides[j][k].price, slides[j][k].discount);
+      slides[j][k].isOutlet = isOutlet(slides[j][k].type);
+      slides[j][k].isNewSeason = isNewSeason(slides[j][k].type);
       counter++;
     }
   }
 }
 
-const carouselController = function () {
-  // Controller
+// Controller
+const carouselController = function (page) {
+
+  let divToNull = 'suggestions';
+  let divToShow = 'recomend';
+  if (page == "overView") {
+    divToNull = 'recomend';
+    divToShow = 'suggestions';
+  }
+
+  document.getElementById(divToNull + "-wrapper").innerHTML = "";
   const source = document.getElementById("carouselTempl").innerHTML;
   const template = Handlebars.compile(source);
 
   let obj = {
     'slidesTemplates': slides,
   };
+
   const html = template(obj);
 
-  let container = document.getElementById("carouselPages");
+  let container = document.getElementById(divToShow + "-wrapper");
   container.innerHTML = html;
 };
 
