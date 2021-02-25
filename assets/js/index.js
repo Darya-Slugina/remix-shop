@@ -22,7 +22,6 @@
     let hiddenButton = getById("hidden-text-button");
     let logo = getById('logo');
 
-    bannersController();
 
     //   Adds the initial male products
     maleClothes.forEach(function (item) {
@@ -64,9 +63,6 @@
     window.addEventListener('scroll', onScroll);
     showBrands.addEventListener("click", showMoreBrands);
     hiddenButton.addEventListener("click", showMoreInfo);
-
-
-
 
     //   Router
     function onHashChange() {
@@ -146,17 +142,17 @@
         }
     }
 
+    bannersController();
     brandsController();
     blogController();
 
     // Prepare the list for carousel 
     const shuffledArr = array => array.sort(() => 0.5 - Math.random());
 
-
     // Carousel
     function showCarousel(e) {
         let page = location.hash.slice(1);
-        if (page === "home") {
+        if (page === "home" || page === "") {
             let listForCarousel = shuffledArr(siteManager.allProducts);
             createCarouselList(listForCarousel, 3);
 
