@@ -589,7 +589,19 @@
                             <div class="product-cond">
                                 <span>Състояние: </span>
                                 <span class="new">
-                                    <span class="new-label"></span>
+                                    {{#if new}}
+                                    <span class="new-label">
+                                    {{/if}}
+                                    {{#if likeNew}}
+                                    <span class="like-new-label">
+                                    {{/if}}
+                                    {{#if noLabel}}
+                                    <span class="no-label">
+                                    {{/if}}
+                                    {{#if good}}
+                                    <span class="good-label">
+                                    {{/if}}
+                                    </span>
                                     {{this.condition}}</span>
                             </div>
                             <div class="product-content">

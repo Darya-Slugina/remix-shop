@@ -1,9 +1,9 @@
 (function () {
-    window.addEventListener("hashchange", onHashChange);
     window.addEventListener("DOMContentLoaded", onHashChange);
-    window.addEventListener("hashchange", showCarousel);
     window.addEventListener("DOMContentLoaded", showCarousel);
     window.addEventListener("DOMContentLoaded", loadEvents);
+    window.addEventListener("hashchange", onHashChange);
+    window.addEventListener("hashchange", showCarousel);
 
     //  Site manager
     let siteManager = new Manager;
@@ -245,6 +245,8 @@
         product = siteManager.allProducts.find(el => el.id === Number(productId));
 
         productController();
+        loadEvents();
+        window.scrollTo(0, 0);
     }
 
     // Show the current tab in overView page

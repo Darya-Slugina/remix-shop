@@ -1654,6 +1654,30 @@ footer a {
     background: url(./../images/label-new-1-icon.png) no-repeat;
 }
 
+#pageOverView .product-details .like-new-label {
+    display: inline-block;
+    width: 16px;
+    height: 14px;
+    vertical-align: middle;
+    background: url(./../images/like-new-icon.png) no-repeat;
+}
+
+#pageOverView .product-details .no-label {
+    display: inline-block;
+    width: 16px;
+    height: 14px;
+    vertical-align: middle;
+    background: url(./../images/no-label-icon.png) no-repeat;
+}
+
+#pageOverView .product-details .good-label {
+    display: inline-block;
+    width: 16px;
+    height: 14px;
+    vertical-align: middle;
+    background: url(./../images/good-icon.png) no-repeat;
+}
+
 #pageOverView .product-details .site-btn {
     font-size: 16px;
     margin: 20px 0 30px;

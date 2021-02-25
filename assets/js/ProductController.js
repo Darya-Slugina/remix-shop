@@ -1,7 +1,11 @@
 let product = {};
 
 const productController = function () {
-    // Controller
+
+    product.new = isNewProduct(product.condition);
+    product.likeNew = isLikeNewProduct(product.condition);
+    product.noLabel = isNoLabelProduct(product.condition);
+    product.good = isGoodProduct(product.condition);
     product.newPrice = getNewPrice(product.price, product.discount);
     product.femail = isFemail();
 
