@@ -252,12 +252,14 @@
     // Show the current tab in overView page
     function changeInfo(e) {
         e.preventDefault();
+
+        let tab = Array.from(document.getElementsByClassName("nav-link"));
+        tab.forEach(el => el.classList.remove("active"));
+        e.target.parentElement.classList.add("active");
+
         let info = getById("overview");
         let delivery = getById("delivery");
         let reclamation = getById("reclamation");
-
-        // let newClass = Array.from(document.getElementsByClassName("nav-item"));
-
 
         if (e.target.innerHTML === "Доставка") {
             delivery.classList.add("show");
