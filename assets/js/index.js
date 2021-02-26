@@ -1,9 +1,9 @@
 (function () {
-    window.addEventListener("hashchange", onHashChange);
     window.addEventListener("DOMContentLoaded", onHashChange);
-    window.addEventListener("hashchange", showCarousel);
     window.addEventListener("DOMContentLoaded", showCarousel);
     window.addEventListener("DOMContentLoaded", loadEvents);
+    window.addEventListener("hashchange", onHashChange);
+    window.addEventListener("hashchange", showCarousel);
 
     //  Site manager
     let siteManager = new Manager;
@@ -22,7 +22,6 @@
     let hiddenButton = getById("hidden-text-button");
     let logo = getById('logo');
 
-    bannersController();
 
     //   Adds the initial male products
     maleClothes.forEach(function (item) {
@@ -66,9 +65,6 @@
     window.addEventListener('scroll', onScroll);
     showBrands.addEventListener("click", showMoreBrands);
     hiddenButton.addEventListener("click", showMoreInfo);
-
-
-
 
     //   Router
     function onHashChange() {
@@ -148,17 +144,17 @@
         }
     }
 
+    bannersController();
     brandsController();
     blogController();
 
     // Prepare the list for carousel 
     const shuffledArr = array => array.sort(() => 0.5 - Math.random());
 
-
     // Carousel
     function showCarousel(e) {
         let page = location.hash.slice(1);
-        if (page === "home") {
+        if (page === "home" || page === "") {
             let listForCarousel = shuffledArr(siteManager.allProducts);
             createCarouselList(listForCarousel, 3);
 
@@ -248,17 +244,21 @@
         product = siteManager.allProducts.find(el => el.id === Number(productId));
 
         productController();
+        loadEvents();
+        window.scrollTo(0, 0);
     }
 
     // Show the current tab in overView page
     function changeInfo(e) {
         e.preventDefault();
+
+        let tab = Array.from(document.getElementsByClassName("nav-link"));
+        tab.forEach(el => el.classList.remove("active"));
+        e.target.parentElement.classList.add("active");
+
         let info = getById("overview");
         let delivery = getById("delivery");
         let reclamation = getById("reclamation");
-
-        // let newClass = Array.from(document.getElementsByClassName("nav-item"));
-
 
         if (e.target.innerHTML === "Доставка") {
             delivery.classList.add("show");

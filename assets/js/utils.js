@@ -33,15 +33,29 @@ function isNewSeason(type) {
 function isNewProduct(condition) {
     if (condition === "Нов продукт") {
         return true;
-    }
-    return false;
+    } 
+    // return false;
 }
 
-function isNewProduct(condition) {
-    if (condition === "Нов продукт") {
+function isLikeNewProduct(condition) {
+    if (condition === "Без следи от употреба") {
         return true;
     }
-    return false;
+    // return false;
+}
+
+function isNoLabelProduct(condition) {
+    if (condition === "Нов продукт, без етикет") {
+        return true;
+    }
+    // return false;
+}
+
+function isGoodProduct(condition) {
+    if (condition === "В много добро състояние") {
+        return true;
+    }
+    // return false;
 }
 
 function isFemail (){

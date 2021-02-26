@@ -569,7 +569,7 @@
 
     <script src="./node_modules/handlebars/dist/handlebars.js"></script>
     <script id="overViewNavigationTempl" type="text/x-handlebars-template">
-            <li class="back-link"><a href="#homePage">назад</a></li>
+            <li class="back-link"><a href="#home">назад</a></li>
             <li><a href="#home">Начална страница</a></li>
             {{#if this.femail}}
             <li><a href="/bg/womens-clothes">Дамски дрехи</a></li>
@@ -678,7 +678,19 @@
                             <div class="product-cond">
                                 <span>Състояние: </span>
                                 <span class="new">
-                                    <span class="new-label"></span>
+                                    {{#if new}}
+                                    <span class="new-label">
+                                    {{/if}}
+                                    {{#if likeNew}}
+                                    <span class="like-new-label">
+                                    {{/if}}
+                                    {{#if noLabel}}
+                                    <span class="no-label">
+                                    {{/if}}
+                                    {{#if good}}
+                                    <span class="good-label">
+                                    {{/if}}
+                                    </span>
                                     {{this.condition}}</span>
                             </div>
                             <div class="product-content">
