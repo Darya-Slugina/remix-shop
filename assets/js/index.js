@@ -20,7 +20,11 @@
     let header = getById("main-header");
     let bannerTop = getById("banner-container");
     let hiddenButton = getById("hidden-text-button");
-    let logo = getById('logo');
+    let logo = getById("logo");
+    let enter = getById("enterButton");
+    let loginForm = getById("loginForm");
+    let loginCloseIcon = getById("loginCloseIcon");
+    let registerLink = getById("registerLink")
 
 
     //   Adds the initial male products
@@ -63,6 +67,9 @@
     window.addEventListener('scroll', onScroll);
     showBrands.addEventListener("click", showMoreBrands);
     hiddenButton.addEventListener("click", showMoreInfo);
+    enter.addEventListener("click", showloginForm);
+    loginCloseIcon.addEventListener("click", closeLoginForm);
+    registerLink.addEventListener("click", showRegistrationForm)
 
     //   Router
     function onHashChange() {
@@ -140,6 +147,22 @@
             bannerTop.classList.remove("goDown");
             logo.classList.remove("small-logo");
         }
+    }
+
+    function showloginForm(e) {
+        e.preventDefault();
+        loginForm.classList.add("show");
+    }
+
+    function closeLoginForm(e) {
+        e.preventDefault();
+        loginForm.classList.remove("show");
+    }
+
+    function showRegistrationForm(e) {
+        e.preventDefault();
+        getById("loginSlide").style.visibility = "hidden";
+        getById("registerSlide").style.visibility = "visible";
     }
 
     bannersController();

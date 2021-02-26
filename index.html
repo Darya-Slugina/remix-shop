@@ -17,7 +17,54 @@
 </head>
 
 <body>
-    <header>
+    <div id="loginForm" class="loginForm">
+        <div class="form-container">
+            <div class="modal-cont">
+                <div class="login-header">
+                    <a href="javascript:;" class="login-back-btn" style="visibility: hidden;">Назад</a>
+                    <a href="javascript:;" id="loginCloseIcon" class="login-close-icon"><img
+                            src="./assets/images/x-close.png"></a>
+                </div>
+                <div class="login-slides-container">
+                    <div id="loginSlide" class="login-slide">
+                        <div class="login-title">Вход</div>
+                        <div class="content">
+                            <div class="login-form">
+                                <input type="email" placeholder="Имейл" class="login-email">
+                                <input type="password" placeholder="Парола" class="login-password">
+                                <span class="forgot-password">Забравили сте паролата си?</span>
+                                <button class="login-btn">Вход</button>
+                            </div>
+                            <div class="separator">
+                                <img src="./assets/images/separator.png" alt="separator">
+                            </div>
+                            <div class="login-buttons">
+                                <a id="fb" href="javascript:;" class="fb-login-btn">
+                                    <span class="icon"></span>
+                                    <span class="text">Влезте с Facebook</span>
+                                </a>
+                                <a id="google" href="javascript:;" class="google-login-btn">
+                                    <span class="icon"></span>
+                                    <span class="text">Влезте с Google</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="login-footer">
+                            <div class="text">Нямате профил в Remix?
+                                <span id="registerLink" class="hover-link">Регистрирайте се.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="registerSlide" class="register-slide">
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <header id="headerContainer">
         <div class="headerMessage">
             <div class="freeDelivery">
                 <span class="delivery-top-icon"></span>
@@ -59,7 +106,7 @@
                                 <a href="#">Продайте на Remix</a>
                             </li>
                             <li>
-                                <a href="#">Вход</a>
+                                <a href="javascript:;" id="enterButton">Вход</a>
                             </li>
                         </ul>
                     </nav>
