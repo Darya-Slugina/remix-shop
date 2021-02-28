@@ -236,25 +236,40 @@
     }
 
 
-    // only on allProducts page, eventListener for hashchange, if ... allBtn.classList.add('selectedNav');
-    // const allBtn = document.querySelector('#all');
-    // allBtn.addEventListener('click', function () {
-    //     allBtn.classList.add('selectedNav');
-    // })
+    // change nav style on click
+    const navListMain = Array.from(document.querySelector('.navigation-list').children);
+    navListMain.forEach(function(currentNav) {
+        currentNav.addEventListener('click', selectPage);
+    })
+
+    function selectPage (ev){
+        ev.preventDefault();
+        navListMain.forEach(nav => nav.classList.remove('selectedNav'))
+        ev.target.parentElement.classList.add('selectedNav')
+    }
+    
+
+    //change filter style on click
+    const allFilters = Array.from(document.querySelectorAll('.main-category'));
+    allFilters.forEach(function (currentFilter) {
+        currentFilter.addEventListener('click', selectFilter)
+    })
+
+    function selectFilter(ev) {
+        ev.preventDefault();
+        allFilters.forEach(filter => filter.classList.remove('selectedFilter'));
+        ev.target.parentElement.classList.add("selectedFilter");
+    }
 
     // select female clothes
     const womenBtn = document.getElementById('womenBtn');
     womenBtn.addEventListener('click', function () {
-        // menBtn.parentElement.classList.remove('selectedFilter');
-        // womenBtn.parentElement.classList.add('selectedFilter');
         womenClothesController(siteManager);
     })
 
     // select male clothes
     const menBtn = document.getElementById('menBtn');
     menBtn.addEventListener('click', function () {
-        // womenBtn.parentElement.classList.remove('selectedFilter');
-        // menBtn.parentElement.classList.add('selectedFilter');
         menClothesController(siteManager);
     })
 
