@@ -58,7 +58,6 @@
 
     //created the array with all products
     siteManager.createAllProducts();
-    
 
     //Event listeners
     window.addEventListener('scroll', onScroll);
@@ -238,7 +237,10 @@
 
 
     // only on allProducts page, eventListener for hashchange, if ... allBtn.classList.add('selectedNav');
-    const allBtn = document.querySelector('.all');
+    // const allBtn = document.querySelector('#all');
+    // allBtn.addEventListener('click', function () {
+    //     allBtn.classList.add('selectedNav');
+    // })
 
     // select female clothes
     const womenBtn = document.getElementById('womenBtn');
