@@ -99,18 +99,18 @@
         </div>
     </header>
     <main>
-        <div id="pageHome">
+        <div id="home">
             <div class="mainContainer">
                 <section id="banners">
                     <div id="banner-container" class="banner-container">
                         <div class="banner-categories">
-                            <a href="#">
+                            <a href="#allProducts">
                                 <img src="assets/images/woman.png" class="img-category">
                                 <span class="categoty-button">ЖЕНИ</span>
                             </a>
                         </div>
                         <div class="banner-categories">
-                            <a href="#">
+                            <a href="#allProducts">
                                 <img src="assets/images/man.png" class="img-category">
                                 <span class="categoty-button">МЪЖЕ</span>
                             </a>
@@ -201,7 +201,7 @@
             </section>
         </div>
 
-        <div id="pageAllProducts">
+        <div id="allProducts">
             <div class="mainContainer">
                 <div id="bannerSectionAllProducts" class="banner-section"></div>
             </div>
@@ -215,7 +215,12 @@
                         </ul>
                     </div>
                     <div class="container-personalFilters">
-                        <a href="">запазени филтри</a>
+                        <a href="javascript:;">запазени филтри</a>
+                        <div id="dropdown-personal-filters">
+                            Филтрирайте и запазете избраните филтри, за да следите лесно всеки ден за нови продукти, които
+                            съответстват с Вашия запазен филтър.
+                            <a href="">Вижте още</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -247,10 +252,10 @@
                 </div>
             </div>
         </div>
-        <div id="pageSecondHand">pageSecondHand</div>
-        <div id="pageOutlet">pageOutlet</div>
-        <div id="pageNewSeason">pageNewSeason</div>
-        <div id="pageOverView">
+        <div id="secondHand">pageSecondHand</div>
+        <div id="outlet">pageOutlet</div>
+        <div id="newSeason">pageNewSeason</div>
+        <div id="overView">
             <div class="wayLinksContainer">
                 <ul class="custom-way">
                     <li class="back-link"><a href="javascript:;" onclick="goBack()">назад</a></li>
@@ -566,7 +571,7 @@
         {{/each}} 
 </script>
 
-<script id="menClothesDisplay-template" type="text/x-handlebars-template">
+    <script id="menClothesDisplay-template" type="text/x-handlebars-template">
     {{#each maleClothes}}
         <div class="display-box">
             <div class="favourite-icon-container">

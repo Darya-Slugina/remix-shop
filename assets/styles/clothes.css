@@ -62,6 +62,7 @@
     font-size: 16px;
     text-transform: uppercase;
     padding: 3px 10px;
+    position: relative;
 }
 
 .container-personalFilters > a::after{
@@ -71,6 +72,20 @@
     height: 30px;
     display: inline-block;
     vertical-align: bottom;
+}
+
+#dropdown-personal-filters{
+    box-sizing: border-box;
+    display: none;
+    position: absolute;
+    top: 480px;
+    z-index: 100;
+    background: #f3f3f5;
+    padding: 15px 13px;
+    border-radius: 4px;
+    min-width: 220px;
+    right: 40px;
+    width: 360px;
 }
 
 .container-filters{
@@ -117,7 +132,7 @@
 }
 
 .container-clothesDisplay{
-    /* box-sizing: border-box; */
+    box-sizing: border-box;
     max-width: 1245px;
     padding-inline-start: 0;
     margin: 0 auto;
