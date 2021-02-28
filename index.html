@@ -68,10 +68,10 @@
                     <div class="main-filters">
                         <ul class="filter-item">
                             <li class="main-category">
-                                <a href="#" title="Жени">Жени</a>
+                                <a href="#allProducts" title="Жени" id="womenBtn">Жени</a>
                             </li>
                             <li class="main-category">
-                                <a href="#" title="Мъже">Мъже</a>
+                                <a href="#allProducts" title="Мъже" id="menBtn">Мъже</a>
                             </li>
                             <li class="main-category">
                                 <a href="#" title="Чанти">Чанти</a>
@@ -530,41 +530,77 @@
             {{/each}}
     </script>
 
-    <script id="clothesDisplay-template" type="text/x-handlebars-template">
-                    {{#each allProducts}}
-                        <div class="display-box">
-                            <div class="favourite-icon-container">
-                                <span class="favourite-icon icon-display"></span>
-                            </div>
-                            <div class="cornerWrapper">
-                                <span class="discount">%</span>
-                                <span class="outletPic"></span>
-                            </div>
-                            <div class="product-box">
-                                <a class="product-photos" href="#overView">
-                                    <img src="{{image_front}}" alt="{{name}}" class="product-img img-display">
-                                </a>
-                            </div>
-                            <div class="product-info">
-                                <a class="product-brand" href="#">{{brand}}</a>
-                                <span class="product-size">{{size}}</span>
-                            </div>
-                            <div class="price-box">
-                                <div class="old-price-box">
-                                    <span class="price-title">Начална цена</span>
-                                    <span class="old-price">{{price}}лв</span>
-                                </div>
-                                <div class="new-price-box">
-                                    <span class="promo">{{discount}}</span>
-                                    <span class="new-price">{{price}}лв</span>
-                                </div>
-                            </div>
-                            <div class="product-button">
-                                <button class="add-button button-display">Добавете</button>
-                            </div>
-                        </div>
-                    {{/each}} 
-    </script>
+    <script id="womenClothesDisplay-template" type="text/x-handlebars-template">
+        {{#each femaleClothes}}
+            <div class="display-box">
+                <div class="favourite-icon-container">
+                    <span class="favourite-icon icon-display"></span>
+                </div>
+                <div class="cornerWrapper">
+                    <span class="discount">%</span>
+                    <span class="outletPic"></span>
+                </div>
+                <div class="product-box">
+                    <a class="product-photos" href="#overView">
+                        <img src="{{image_front}}" alt="{{name}}" class="product-img img-display">
+                    </a>
+                </div>
+                <div class="product-info">
+                    <a class="product-brand" href="#">{{brand}}</a>
+                    <span class="product-size">{{size}}</span>
+                </div>
+                <div class="price-box">
+                    <div class="old-price-box">
+                        <span class="price-title">Начална цена</span>
+                        <span class="old-price">{{price}}лв</span>
+                    </div>
+                    <div class="new-price-box">
+                        <span class="promo">{{discount}}</span>
+                        <span class="new-price">{{price}}лв</span>
+                    </div>
+                </div>
+                <div class="product-button">
+                    <button class="add-button button-display">Добавете</button>
+                </div>
+            </div>
+        {{/each}} 
+</script>
+
+<script id="menClothesDisplay-template" type="text/x-handlebars-template">
+    {{#each maleClothes}}
+        <div class="display-box">
+            <div class="favourite-icon-container">
+                <span class="favourite-icon icon-display"></span>
+            </div>
+            <div class="cornerWrapper">
+                <span class="discount">%</span>
+                <span class="outletPic"></span>
+            </div>
+            <div class="product-box">
+                <a class="product-photos" href="#overView">
+                    <img src="{{image_front}}" alt="{{name}}" class="product-img img-display">
+                </a>
+            </div>
+            <div class="product-info">
+                <a class="product-brand" href="#">{{brand}}</a>
+                <span class="product-size">{{size}}</span>
+            </div>
+            <div class="price-box">
+                <div class="old-price-box">
+                    <span class="price-title">Начална цена</span>
+                    <span class="old-price">{{price}}лв</span>
+                </div>
+                <div class="new-price-box">
+                    <span class="promo">{{discount}}</span>
+                    <span class="new-price">{{price}}лв</span>
+                </div>
+            </div>
+            <div class="product-button">
+                <button class="add-button button-display">Добавете</button>
+            </div>
+        </div>
+    {{/each}} 
+</script>
 
 
     <script src="./node_modules/handlebars/dist/handlebars.js"></script>

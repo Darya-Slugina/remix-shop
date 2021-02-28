@@ -185,3 +185,13 @@
     width: 100%;
 }
 
+.selectedNav{
+    background-color: #f3f3f5;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.selectedFilter{
+    background-color: white;
+    border-radius: 4px;
+}
+
