@@ -237,7 +237,7 @@ body {
     right: 0;
 }
 
-.main-navigation .main-filters {
+.main-filters {
     background-color: #f3f3f5;
     padding: 5px;
     border-radius: 4px;
@@ -247,7 +247,7 @@ body {
     height: 25px;
 }
 
-.main-navigation .main-filters .filter-item {
+.filter-item {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -256,7 +256,7 @@ body {
     list-style: none;
 }
 
-.main-filters .filter-item>li>a {
+.filter-item>li>a {
     position: relative;
     padding: 3px 12px;
     line-height: normal;
@@ -264,7 +264,6 @@ body {
     font-family: "Cera Pro", sans-serif;
     font-size: 16px;
     font-weight: 400;
-    padding: 0 12px;
     color: #707070;
     text-transform: uppercase;
     display: inline-block;
@@ -272,7 +271,7 @@ body {
     outline: none;
 }
 
-.main-filters .filter-item>li>a:hover {
+.filter-item>li>a:hover {
     color: #252525;
 }
 
@@ -1003,6 +1002,8 @@ body {
 .hidden-text-show {
     max-height: 500px;
 }
+
+/* ==== Footer =============================================================== */
 
 footer {
     color: #707070;

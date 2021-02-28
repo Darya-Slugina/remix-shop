@@ -235,6 +235,29 @@
         e.target.src = newImg.image_front;
     }
 
+
+    // only on allProducts page, eventListener for hashchange, if ... allBtn.classList.add('selectedNav');
+    // const allBtn = document.querySelector('#all');
+    // allBtn.addEventListener('click', function () {
+    //     allBtn.classList.add('selectedNav');
+    // })
+
+    // select female clothes
+    const womenBtn = document.getElementById('womenBtn');
+    womenBtn.addEventListener('click', function () {
+        menBtn.parentElement.classList.remove('selectedFilter');
+        womenBtn.parentElement.classList.add('selectedFilter');
+        womenClothesController(siteManager);
+    })
+
+    // select male clothes
+    const menBtn = document.getElementById('menBtn');
+    menBtn.addEventListener('click', function () {
+        womenBtn.parentElement.classList.remove('selectedFilter');
+        menBtn.parentElement.classList.add('selectedFilter');
+        menClothesController(siteManager);
+    })
+
     // Select current product
     function selectProduct(e) {
         let productId = e.target.parentNode.children[0].value;
