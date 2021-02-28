@@ -153,7 +153,11 @@
 }
 
 #dropdown-sort > ul{
-    padding: 15px 13px;
+    padding: 0 13px;
+}
+
+#dropdown-sort > ul>li{
+    padding: 5px 0;
 }
 
 #dropdown-sort *{

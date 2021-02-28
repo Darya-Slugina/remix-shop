@@ -243,7 +243,6 @@
     })
 
     function selectPage (ev){
-        ev.preventDefault();
         navListMain.forEach(nav => nav.classList.remove('selectedNav'))
         ev.target.parentElement.classList.add('selectedNav')
     }
