@@ -245,16 +245,16 @@
     // select female clothes
     const womenBtn = document.getElementById('womenBtn');
     womenBtn.addEventListener('click', function () {
-        menBtn.parentElement.classList.remove('selectedFilter');
-        womenBtn.parentElement.classList.add('selectedFilter');
+        // menBtn.parentElement.classList.remove('selectedFilter');
+        // womenBtn.parentElement.classList.add('selectedFilter');
         womenClothesController(siteManager);
     })
 
     // select male clothes
     const menBtn = document.getElementById('menBtn');
     menBtn.addEventListener('click', function () {
-        womenBtn.parentElement.classList.remove('selectedFilter');
-        menBtn.parentElement.classList.add('selectedFilter');
+        // womenBtn.parentElement.classList.remove('selectedFilter');
+        // menBtn.parentElement.classList.add('selectedFilter');
         menClothesController(siteManager);
     })
 
