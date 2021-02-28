@@ -10,12 +10,12 @@
 
 
     // Initial DOM elements selectors
-    let homePage = getById("pageHome");
-    let allProducts = getById("pageAllProducts");
-    let secondHand = getById("pageSecondHand");
-    let outlet = getById("pageOutlet");
-    let newSeason = getById("pageNewSeason");
-    let overView = getById("pageOverView");
+    let homePage = getById("home");
+    let allProducts = getById("allProducts");
+    let secondHand = getById("secondHand");
+    let outlet = getById("outlet");
+    let newSeason = getById("newSeason");
+    let overView = getById("overView");
     let showBrands = getById("show-more");
     let header = getById("main-header");
     let bannerTop = getById("banner-container");
@@ -64,14 +64,18 @@
     showBrands.addEventListener("click", showMoreBrands);
     hiddenButton.addEventListener("click", showMoreInfo);
 
-    //   Router
+
+    //Router
     function onHashChange() {
         let page = location.hash.slice(1);
 
         let allPages = document.querySelector('main').children;
         for (let i = 0; i < allPages.length; i++) {
-            if(allPages[i].id === page) {
+            if (allPages[i].id === page) {
                 allPages[i].style.display = 'block'
+            } else if (page === '') {
+                allPages[i].style.display = 'none'
+                homePage.style.display = 'block';
             } else {
                 allPages[i].style.display = 'none'
             }
