@@ -11,11 +11,6 @@
 
     // Initial DOM elements selectors
     let homePage = getById("home");
-    let allProducts = getById("allProducts");
-    let secondHand = getById("secondHand");
-    let outlet = getById("outlet");
-    let newSeason = getById("newSeason");
-    let overView = getById("overView");
     let showBrands = getById("show-more");
     let header = getById("main-header");
     let bannerTop = getById("banner-container");
@@ -286,6 +281,8 @@
         product = siteManager.allProducts.find(el => el.id === Number(productId));
 
         productController();
+        goBack();
+
         loadEvents();
         window.scrollTo(0, 0);
     }
@@ -304,15 +301,15 @@
         let delivery = getById("delivery");
         let reclamation = getById("reclamation");
 
-        if (e.target.innerHTML === "Доставка") {
+        if (e.target.innerHTML === "Доставка" || e.target.innerText === "ДОСТАВКА") {
             delivery.classList.add("show");
             reclamation.classList.remove("show");
             info.classList.remove("show");
-        } else if (e.target.innerHTML === "Връщане") {
+        } else if (e.target.innerHTML === "Връщане" || e.target.innerText === "ВРЪЩАНЕ") {
             delivery.classList.remove("show");
             reclamation.classList.add("show");
             info.classList.remove("show");
-        } else if (e.target.innerHTML === "Детайли") {
+        } else if (e.target.innerHTML === "Детайли" || e.target.innerText === "ДЕТАЙЛИ") {
             delivery.classList.remove("show");
             reclamation.classList.remove("show");
             info.classList.add("show");
@@ -323,6 +320,15 @@
     function changeImg(e) {
         let mainImg = getById("big-img");
         mainImg.src = e.target.src;
+    }
+
+    //Go back on the previous page 
+    function goBack() {
+        let backButton = getById("goBack");
+        backButton.addEventListener("click", function (e) {
+            e.preventDefault();
+            history.go(-1);
+        })
     }
 
     function loadEvents() {
