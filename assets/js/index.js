@@ -10,12 +10,12 @@
 
 
     // Initial DOM elements selectors
-    let homePage = getById("pageHome");
-    let allProducts = getById("pageAllProducts");
-    let secondHand = getById("pageSecondHand");
-    let outlet = getById("pageOutlet");
-    let newSeason = getById("pageNewSeason");
-    let overView = getById("pageOverView");
+    let homePage = getById("home");
+    let allProducts = getById("allProducts");
+    let secondHand = getById("secondHand");
+    let outlet = getById("outlet");
+    let newSeason = getById("newSeason");
+    let overView = getById("overView");
     let showBrands = getById("show-more");
     let header = getById("main-header");
     let bannerTop = getById("banner-container");
@@ -78,66 +78,21 @@
     loginBackBtn.addEventListener("click", backTologinForm);
     loginLink.addEventListener("click", backTologinForm)
 
-    //   Router
+
+    //Router
     function onHashChange() {
         let page = location.hash.slice(1);
 
-        switch (page) {
-            case "home":
-                homePage.style.display = "block";
-                allProducts.style.display = "none";
-                secondHand.style.display = "none";
-                outlet.style.display = "none";
-                newSeason.style.display = "none";
-                overView.style.display = "none";
-                break;
-            case "allProducts":
-                homePage.style.display = "none";
-                allProducts.style.display = "block";
-                secondHand.style.display = "none";
-                outlet.style.display = "none";
-                newSeason.style.display = "none";
-                overView.style.display = "none";
-                break;
-            case "secondHand":
-                homePage.style.display = "none";
-                allProducts.style.display = "none";
-                secondHand.style.display = "block";
-                outlet.style.display = "none";
-                newSeason.style.display = "none";
-                overView.style.display = "none";
-                break;
-            case "outlet":
-                homePage.style.display = "none";
-                allProducts.style.display = "none";
-                secondHand.style.display = "none";
-                outlet.style.display = "block";
-                newSeason.style.display = "none";
-                overView.style.display = "none";
-                break;
-            case "newSeason":
-                homePage.style.display = "none";
-                allProducts.style.display = "none";
-                secondHand.style.display = "none";
-                outlet.style.display = "none";
-                newSeason.style.display = "block";
-                overView.style.display = "none";
-                break;
-            case "overView":
-                homePage.style.display = "none";
-                allProducts.style.display = "none";
-                secondHand.style.display = "none";
-                outlet.style.display = "none";
-                newSeason.style.display = "none";
-                overView.style.display = "block";
-                break;
-            default:
-                homePage.style.display = "block";
-                allProducts.style.display = "none";
-                secondHand.style.display = "none";
-                outlet.style.display = "none";
-                newSeason.style.display = "none";
-                overView.style.display = "none";
+        let allPages = document.querySelector('main').children;
+        for (let i = 0; i < allPages.length; i++) {
+            if (allPages[i].id === page) {
+                allPages[i].style.display = 'block'
+            } else if (page === '') {
+                allPages[i].style.display = 'none'
+                homePage.style.display = 'block';
+            } else {
+                allPages[i].style.display = 'none'
+            }
         }
     }
 
@@ -276,6 +231,54 @@
         let newImg = siteManager.allProducts.find(el => el.image_back === picture);
         e.target.src = newImg.image_front;
     }
+
+
+    // change nav style on click
+    const navListMain = Array.from(document.querySelector('.navigation-list').children);
+    navListMain.forEach(function (currentNav) {
+        currentNav.addEventListener('click', selectPage);
+    })
+
+    function selectPage(ev) {
+        navListMain.forEach(nav => nav.classList.remove('selectedNav'))
+        ev.target.parentElement.classList.add('selectedNav')
+    }
+
+
+    //change filter style on click
+    const allFilters = Array.from(document.querySelectorAll('.main-category'));
+    allFilters.forEach(function (currentFilter) {
+        currentFilter.addEventListener('click', selectFilter)
+    })
+
+    function selectFilter(ev) {
+        ev.preventDefault();
+        allFilters.forEach(filter => filter.classList.remove('selectedFilter'));
+        ev.target.parentElement.classList.add("selectedFilter");
+    }
+
+    // select female clothes
+    const womenBtn = document.getElementById('womenBtn');
+    womenBtn.addEventListener('click', function () {
+        womenClothesController(siteManager);
+    })
+
+    // select male clothes
+    const menBtn = document.getElementById('menBtn');
+    menBtn.addEventListener('click', function () {
+        menClothesController(siteManager);
+    })
+
+    // personal filters - dropdown info on hover
+    const dropdownPersonalFilters = document.getElementById('dropdown-personal-filters');
+    const containerPersonalFilters = document.querySelector('.container-personalFilters');
+    containerPersonalFilters.addEventListener('mouseover', function () {
+        dropdownPersonalFilters.style.display = 'block';
+    })
+    containerPersonalFilters.addEventListener('mouseout', function () {
+        dropdownPersonalFilters.style.display = 'none';
+    })
+
 
     // Select current product
     function selectProduct(e) {

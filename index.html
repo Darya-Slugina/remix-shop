@@ -12,6 +12,7 @@
     <link rel="fonts" href="./assets/styles/CeraPro-Medium/CeraPro-Medium.woff2">
     <link rel="fonts" href="./assets/styles/CeraPro-Medium/style.css">
     <link rel="stylesheet" href="assets/styles/CeraPro-Medium/style.css">
+    <link rel="stylesheet" href="./assets/styles/clothes.css">
     <link rel="icon" href="./assets/images/favicon.jpg">
     <title>RemixShop</title>
 </head>
@@ -124,16 +125,16 @@
                 <div class="navigation-container">
                     <nav class="navigation">
                         <ul class="navigation-list">
-                            <li class="all">
+                            <li id="all">
                                 <a href="#allProducts">Всичко</a>
                             </li>
-                            <li class="secondHand">
+                            <li id="secondHand">
                                 <a href="#secondHand">Second Hand</a>
                             </li>
-                            <li class="outlet">
+                            <li id="outlet">
                                 <a href="#outlet">Outlet</a>
                             </li>
-                            <li class="newSeason">
+                            <li id="newSeason">
                                 <a href="#newSeason">Следващ сезон</a>
                             </li>
                         </ul>
@@ -150,10 +151,10 @@
                     <div class="main-filters">
                         <ul class="filter-item">
                             <li class="main-category">
-                                <a href="#" title="Жени">Жени</a>
+                                <a href="#allProducts" title="Жени" id="womenBtn">Жени</a>
                             </li>
                             <li class="main-category">
-                                <a href="#" title="Мъже">Мъже</a>
+                                <a href="#allProducts" title="Мъже" id="menBtn">Мъже</a>
                             </li>
                             <li class="main-category">
                                 <a href="#" title="Чанти">Чанти</a>
@@ -181,18 +182,18 @@
         </div>
     </header>
     <main>
-        <div id="pageHome">
+        <div id="home">
             <div class="mainContainer">
                 <section id="banners">
                     <div id="banner-container" class="banner-container">
                         <div class="banner-categories">
-                            <a href="#">
+                            <a href="#allProducts">
                                 <img src="assets/images/woman.png" class="img-category">
                                 <span class="categoty-button">ЖЕНИ</span>
                             </a>
                         </div>
                         <div class="banner-categories">
-                            <a href="#">
+                            <a href="#allProducts">
                                 <img src="assets/images/man.png" class="img-category">
                                 <span class="categoty-button">МЪЖЕ</span>
                             </a>
@@ -296,16 +297,64 @@
             </section>
         </div>
 
-        <div id="pageAllProducts">
+        <div id="allProducts">
             <div class="mainContainer">
                 <div id="bannerSectionAllProducts" class="banner-section"></div>
             </div>
+            <div class="wrapper">
+                <div class="container-breadcrumbs">
+                    <div class="breadcrumbs">
+                        <ul>
+                            <li><a href="./index.html">Начало</a></li>
+                            <li><a href="">Всичко</a></li>
+                            <li id="final-breadcrumb"><a href="">Дамски дрехи</a></li>
+                        </ul>
+                    </div>
+                    <div class="container-personalFilters">
+                        <a href="javascript:;">запазени филтри</a>
+                        <div id="dropdown-personal-filters">
+                            Филтрирайте и запазете избраните филтри, за да следите лесно всеки ден за нови продукти,
+                            които
+                            съответстват с Вашия запазен филтър.
+                            <a href="">Вижте още</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-filters">
+                <ul class="filters">
+                    <li><a href="#">Категории</a></li>
+                    <li><a href="#">Размер</a></li>
+                    <li><a href="#">Състояние</a></li>
+                    <li><a href="#">Цена</a></li>
+                </ul>
+            </div>
+
+            <div class="container-clothesDisplay">
+                <div class="sorter">
+                    <div class="sorter-nav">
+                        <span>Сортиране по:</span>
+                        <a href=""><img src="./assets/images/sort-icon.PNG" alt="sort-icon" id="sorterIcon">
+                            <div id="dropdown-sort">
+                                <ul>
+                                    <li><a href="">Дата на публикуване</a></li>
+                                    <li><a href="">Цена (възходящ ред)</a></li>
+                                    <li><a href="">Цена (низходящ ред)</a></li>
+                                    <li><a href="">Най-харесвани продукти</a></li>
+                                </ul>
+                            </div>
+                        </a>
+                    </div>
+                    <div id="display"></div>
+                </div>
+            </div>
         </div>
-        <div id="pageSecondHand">SecondHand</div>
-        <div id="pageOutlet">pageOutlet</div>
-        <div id="pageNewSeason">pageNewSeason</div>
-        <div id="pageOverView">
+        <div id="secondHand">pageSecondHand</div>
+        <div id="outlet">pageOutlet</div>
+        <div id="newSeason">pageNewSeason</div>
+        <div id="overView">
             <div class="wayLinksContainer">
+                <div class="breadcrumb-border col-md-7 col-lg-8 d-none d-lg-block"></div>
                 <ul class="custom-way" id="customWay">
                 </ul>
                 <div class="product-border"></div>
@@ -324,6 +373,7 @@
                 <div id="suggestions-wrapper">
                 </div>
             </div>
+        </div>
         </div>
     </main>
     <footer>
@@ -433,13 +483,13 @@
                         <a href="https://corporate.remixshop.com/bg/">Remix Global AD</a>
                     </span>
                     <span id="sitemap_link">
-                        <a href="https://remixshop.com/bg/info/sitemap">Карта на сайта</a>
+                        <a href="">Карта на сайта</a>
                     </span>
                 </div>
             </div>
         </div>
         <div id="footer-bottom">
-            <a href="#popup">
+            <a href="">
                 <img src="./assets/images/reuse-reduce-remix-icon.PNG" alt="">
                 <span>reuse</span>
                 <strong>reduce</strong>
@@ -576,6 +626,79 @@
             </li>
             {{/each}}
     </script>
+
+    <script id="womenClothesDisplay-template" type="text/x-handlebars-template">
+        {{#each femaleClothes}}
+            <div class="display-box">
+                <div class="favourite-icon-container">
+                    <span class="favourite-icon icon-display"></span>
+                </div>
+                <div class="cornerWrapper">
+                    <span class="discount">%</span>
+                    <span class="outletPic"></span>
+                </div>
+                <div class="product-box">
+                    <a class="product-photos" href="#overView">
+                        <img src="{{image_front}}" alt="{{name}}" class="product-img img-display">
+                    </a>
+                </div>
+                <div class="product-info">
+                    <a class="product-brand" href="#">{{brand}}</a>
+                    <span class="product-size">{{size}}</span>
+                </div>
+                <div class="price-box">
+                    <div class="old-price-box">
+                        <span class="price-title">Начална цена</span>
+                        <span class="old-price">{{price}}лв</span>
+                    </div>
+                    <div class="new-price-box">
+                        <span class="promo">{{discount}}</span>
+                        <span class="new-price">{{price}}лв</span>
+                    </div>
+                </div>
+                <div class="product-button">
+                    <button class="add-button button-display">Добавете</button>
+                </div>
+            </div>
+        {{/each}} 
+</script>
+
+    <script id="menClothesDisplay-template" type="text/x-handlebars-template">
+    {{#each maleClothes}}
+        <div class="display-box">
+            <div class="favourite-icon-container">
+                <span class="favourite-icon icon-display"></span>
+            </div>
+            <div class="cornerWrapper">
+                <span class="discount">%</span>
+                <span class="outletPic"></span>
+            </div>
+            <div class="product-box">
+                <a class="product-photos" href="#overView">
+                    <img src="{{image_front}}" alt="{{name}}" class="product-img img-display">
+                </a>
+            </div>
+            <div class="product-info">
+                <a class="product-brand" href="#">{{brand}}</a>
+                <span class="product-size">{{size}}</span>
+            </div>
+            <div class="price-box">
+                <div class="old-price-box">
+                    <span class="price-title">Начална цена</span>
+                    <span class="old-price">{{price}}лв</span>
+                </div>
+                <div class="new-price-box">
+                    <span class="promo">{{discount}}</span>
+                    <span class="new-price">{{price}}лв</span>
+                </div>
+            </div>
+            <div class="product-button">
+                <button class="add-button button-display">Добавете</button>
+            </div>
+        </div>
+    {{/each}} 
+</script>
+
 
     <script id="overViewNavigationTempl" type="text/x-handlebars-template">
             <li class="back-link"><a href="#home">назад</a></li>
@@ -770,6 +893,7 @@
     <script src="assets/js/BrandsController.js"></script>
     <script src="assets/js/BlogModel.js"></script>
     <script src="assets/js/BlogController.js"></script>
+    <script src="assets/js/clothesDisplay.js"></script>
     <script src="assets/js/ProductController.js"></script>
     <script src="assets/js/index.js"></script>
 </body>

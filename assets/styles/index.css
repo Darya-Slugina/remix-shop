@@ -17,6 +17,9 @@ body {
     margin: 0;
 }
 
+#home{
+    display: block;
+}
 .mainContainer {
     max-width: 1245px;
     width: 100%;
@@ -36,7 +39,7 @@ body {
     top: 0;
     font-size: 13px;
     border-bottom: 1px solid #dedee3;
-    padding: 3px 12px;
+    padding: 3px 0px;
     overflow: hidden;
     z-index: -1;
     font-family: "Cera Pro", sans-serif;
@@ -237,7 +240,7 @@ body {
     right: 0;
 }
 
-.main-navigation .main-filters {
+.main-filters {
     background-color: #f3f3f5;
     padding: 5px;
     border-radius: 4px;
@@ -247,7 +250,7 @@ body {
     height: 25px;
 }
 
-.main-navigation .main-filters .filter-item {
+.filter-item {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -256,7 +259,7 @@ body {
     list-style: none;
 }
 
-.main-filters .filter-item>li>a {
+.filter-item>li>a {
     position: relative;
     padding: 3px 12px;
     line-height: normal;
@@ -264,7 +267,6 @@ body {
     font-family: "Cera Pro", sans-serif;
     font-size: 16px;
     font-weight: 400;
-    padding: 0 12px;
     color: #707070;
     text-transform: uppercase;
     display: inline-block;
@@ -272,7 +274,7 @@ body {
     outline: none;
 }
 
-.main-filters .filter-item>li>a:hover {
+.filter-item>li>a:hover {
     color: #252525;
 }
 
@@ -388,7 +390,7 @@ body {
 
 /* Home page--------------------------------------------------------------------------- */
 
-#pageHome h1 {
+#home h1 {
     font-size: 15px;
     color: #cecece;
     margin: 10px 0 20px;
@@ -480,7 +482,7 @@ body {
     height: 15px;
     width: 15px;
     margin: 0 2px;
-    background-color: #bbb;
+    background-color: #bbbbbb;
     border-radius: 50%;
     display: inline-block;
 }
@@ -626,7 +628,7 @@ body {
     text-decoration: line-through #ed1c24;
 }
 
-.promo, #pageOverView .product-details .promo-badge {
+.promo, #overView .product-details .promo-badge {
     font-size: 0.714em;
     width: 3.5em;
     height: 2.5em;
@@ -1004,6 +1006,8 @@ body {
     max-height: 500px;
 }
 
+/* ==== Footer =============================================================== */
+
 footer {
     color: #707070;
 }
@@ -1071,7 +1075,7 @@ footer a {
 #footer-top p {
     font-family: "Cera Pro", sans-serif;
     font-size: 13px;
-    color: #303030;
+    color: #707070;
     line-height: 21px;
     margin-top: 0;
     margin-bottom: 20px;
@@ -1339,7 +1343,7 @@ footer a {
     background-color: #dedee3;
 }
 
-#pageOverView .row {
+#overView .row {
     display: flex;
     width: 1265px;
     margin-right: -15px;
@@ -1352,7 +1356,7 @@ footer a {
     margin: 30px 0 0 290px;
 }
 
-#pageOverView .product-image {
+#overView .product-image {
     position: relative;
     width: 100%;
     min-height: 1px;
@@ -1363,7 +1367,7 @@ footer a {
     justify-content: space-between;
 }
 
-#pageOverView .main-img {
+#overView .main-img {
     flex: 0 0 80%;
     max-width: 80%;
     order: 1;
@@ -1387,7 +1391,7 @@ footer a {
     height: auto;
 }
 
-#pageOverView .product-details .cornerWrapperOverView {
+#overView .product-details .cornerWrapperOverView {
     top: 20px;
     right: 90px;
     position: absolute;
@@ -1443,7 +1447,7 @@ footer a {
     padding-left: 15px;
 }
 
-#pageOverView .product-details .img-fluid {
+#overView .product-details .img-fluid {
     cursor: pointer;
     border-radius: 4px;
     max-width: 100%;
@@ -1452,12 +1456,12 @@ footer a {
     border-style: none;
 }
 
-#pageOverView .product-details .item {
+#overView .product-details .item {
     max-width: 84px;
     margin-bottom: 10px;
 }
 
-#pageOverView .product-details .section-product-list {
+#overView .product-details .section-product-list {
     display: block;
     max-width: 1280px;
     width: 100%;
@@ -1467,7 +1471,7 @@ footer a {
     margin-left: auto;
 }
 
-#pageOverView .product-details .item-info-box {
+#overView .product-details .item-info-box {
     display: flex;
     flex: 0 0 30%;
     max-width: 30%;
@@ -1478,12 +1482,12 @@ footer a {
     padding-left: 15px;
 }
 
-#pageOverView .product-details .product-information {
+#overView .product-details .product-information {
     background-color: #f1f1f3;
     width: 100%;
 }
 
-#pageOverView .product-details .item-navigation-tabs {
+#overView .product-details .item-navigation-tabs {
     margin: 0;
     display: flex;
     flex-wrap: wrap;
@@ -1491,7 +1495,7 @@ footer a {
     list-style: none;
 }
 
-#pageOverView .product-details .nav-item {
+#overView .product-details .nav-item {
     flex: 0 0 33.3%;
     max-width: 33.33333%;
     position: relative;
@@ -1514,7 +1518,7 @@ footer a {
     background-color: #f1f1f3;
 }
 
-#pageOverView .product-details .nav-link {
+#overView .product-details .nav-link {
     padding: 20px 10px;
     justify-content: center;
     display: flex;
@@ -1530,26 +1534,26 @@ footer a {
     color: #303030;
 }
 
-#pageOverView .product-details .content {
+#overView .product-details .content {
     padding: 30px;
     background-color: #f1f1f3;
 }
 
-#pageOverView .product-details .panel.show {
+#overView .product-details .panel.show {
     background-color: #f1f1f3;
     font-family: "Cera Pro", sans-serif;
     display: block;
 }
 
-#pageOverView .product-details .panel.show a {
+#overView .product-details .panel.show a {
     color: #303030;
 }
 
-#pageOverView .product-details .panel {
+#overView .product-details .panel {
     display: none;
 }
 
-#pageOverView .product-details .product-titles {
+#overView .product-details .product-titles {
     font-size: 20px;
     text-transform: uppercase;
     font-family: "Cera Pro", sans-serif;
@@ -1559,94 +1563,94 @@ footer a {
     color: #303030;
 }
 
-#pageOverView .product-details .product-titles a {
+#overView .product-details .product-titles a {
     text-decoration: underline;
     color: #303030;
     cursor: pointer;
 }
 
-#pageOverView .product-details .product-price {
+#overView .product-details .product-price {
     margin-bottom: 20px;
     font-family: "Cera Pro", sans-serif;
     margin: 0 0 20px;
 }
 
-#pageOverView .product-details .item-price {
+#overView .product-details .item-price {
     font-size: 16px;
     margin-bottom: 5px;
 }
 
-#pageOverView .product-details .price-title.old {
+#overView .product-details .price-title.old {
     font-size: 13px;
     display: inline-block;
     text-transform: none;
     font-family: "Cera Pro", sans-serif;
 }
 
-#pageOverView .product-details .old-price {
+#overView .product-details .old-price {
     font-size: 13px;
     text-decoration: line-through;
     color: #ed1c24;
 }
 
-#pageOverView .product-details .old-price>span {
+#overView .product-details .old-price>span {
     color: #a3a3a3;
     font-size: 13px;
 }
 
-#pageOverView .product-details .price-title-new {
+#overView .product-details .price-title-new {
     display: inline-block;
     text-transform: uppercase !important;
 }
 
-#pageOverView .product-details .new-price {
+#overView .product-details .new-price {
     color: #ed1c24;
     font-size: 16px;
     font-family: "Cera Pro", sans-serif;
 }
 
-#pageOverView .product-details .discounts {
+#overView .product-details .discounts {
     margin-top: 20px;
 }
 
-#pageOverView .product-details .discount-container {
+#overView .product-details .discount-container {
     display: flex;
     align-items: center;
     margin-bottom: 5px;
 }
 
-#pageOverView .product-details .badge-text {
+#overView .product-details .badge-text {
     font-family: "Cera Pro", sans-serif;
     font-size: 12px;
     font-weight: 500;
 }
 
-#pageOverView .product-details .promo-badge {
+#overView .product-details .promo-badge {
     margin-right: 20px;
 }
 
-#pageOverView .product-details .overView-product-size, .product-cond, .product-content, .product-color, .product-description, .product-button {
+#overView .product-details .overView-product-size, .product-cond, .product-content, .product-color, .product-description, .product-button {
     margin-bottom: 10px;
     font-family: "Cera Pro", sans-serif;
     font-size: 13px;
     color: #131313;
 }
 
-#pageOverView .product-details .overView-product-size>span, .product-cond>span, .product-content>span, .product-color>span, .product-description>span {
+#overView .product-details .overView-product-size>span, .product-cond>span, .product-content>span, .product-color>span, .product-description>span {
     font-weight: 600;
     font-family: "Cera Pro", sans-serif;
     font-size: 13px;
     color: #131313;
 }
 
-#pageOverView .product-details .sizes-link {
+#overView .product-details .sizes-link {
     font-weight: 700;
     margin-left: 5px;
     text-decoration: underline;
     color: #303030;
 }
 
-#pageOverView .product-details .new-label {
+#overView .product-details .new-label {
     display: inline-block;
     width: 16px;
     height: 14px;
@@ -1654,7 +1658,7 @@ footer a {
     background: url(./../images/label-new-1-icon.png) no-repeat;
 }
 
-#pageOverView .product-details .like-new-label {
+#overView .product-details .like-new-label {
     display: inline-block;
     width: 16px;
     height: 14px;
@@ -1662,7 +1666,7 @@ footer a {
     background: url(./../images/like-new-icon.png) no-repeat;
 }
 
-#pageOverView .product-details .no-label {
+#overView .product-details .no-label {
     display: inline-block;
     width: 16px;
     height: 14px;
@@ -1670,7 +1674,7 @@ footer a {
     background: url(./../images/no-label-icon.png) no-repeat;
 }
 
-#pageOverView .product-details .good-label {
+#overView .product-details .good-label {
     display: inline-block;
     width: 16px;
     height: 14px;
@@ -1678,7 +1682,7 @@ footer a {
     background: url(./../images/good-icon.png) no-repeat;
 }
 
-#pageOverView .product-details .site-btn {
+#overView .product-details .site-btn {
     font-size: 16px;
     margin: 20px 0 30px;
     padding: 12px;
@@ -1698,14 +1702,14 @@ footer a {
     outline: none;
 }
 
-#pageOverView .product-details .price-title-original {
+#overView .product-details .price-title-original {
     text-transform: uppercase;
     display: inline-block;
     font-size: 16px;
     font-family: "Cera Pro", sans-serif;
 }
 
-#pageOverView .product-details .original-price {
+#overView .product-details .original-price {
     font-size: 16px;
     font-family: "Cera Pro", sans-serif;
     margin-left: 20px;
@@ -1720,7 +1724,7 @@ footer a {
     margin-left: auto;
 }
 
-#pageOverView .product-button a:hover {
+#overView .product-button a:hover {
     background-color: rgb(243, 243, 243);
 }
 
