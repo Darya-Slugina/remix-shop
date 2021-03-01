@@ -1507,7 +1507,7 @@ footer a {
     font-family: "Cera Pro", sans-serif;
 }
 
-#action-tabs .nav-item>.active {
+#action-tabs .nav-item>.activeTab {
     border-bottom: none !important;
     border-left: none;
     border-top: 1px solid #dedee3;

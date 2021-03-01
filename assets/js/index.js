@@ -292,8 +292,10 @@
         e.preventDefault();
 
         let tab = Array.from(document.getElementsByClassName("nav-link"));
-        tab.forEach(el => el.classList.remove("active"));
-        e.target.parentElement.classList.add("active");
+        tab.forEach(el => el.classList.remove("activeTab"));
+
+        e.target.parentElement.classList.add("activeTab");
+        e.target.classList.add("activeTab");
 
         let info = getById("overview");
         let delivery = getById("delivery");
