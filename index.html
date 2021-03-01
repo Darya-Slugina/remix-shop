@@ -21,7 +21,8 @@
         <div class="form-container">
             <div class="modal-cont">
                 <div class="login-header">
-                    <a href="javascript:;" class="login-back-btn" style="visibility: hidden;">Назад</a>
+                    <a href="javascript:;" id="loginBackBtn" class="login-back-btn"
+                        style="visibility: hidden;">Назад</a>
                     <a href="javascript:;" id="loginCloseIcon" class="login-close-icon"><img
                             src="./assets/images/x-close.png"></a>
                 </div>
@@ -30,10 +31,11 @@
                         <div class="login-title">Вход</div>
                         <div class="content">
                             <div class="login-form">
-                                <input type="email" placeholder="Имейл" class="login-email">
-                                <input type="password" placeholder="Парола" class="login-password">
+                                <input type="email" placeholder="Имейл" class="login-email" id="emailInput">
+                                <input type="password" placeholder="Парола" class="login-password" id="passwordInput">
+                                <span id="loginError" class="login-error" style="display: none;">Грешен имейл или парола</span>
                                 <span class="forgot-password">Забравили сте паролата си?</span>
-                                <button class="login-btn">Вход</button>
+                                <button id="loginButton" class="login-btn">Вход</button>
                             </div>
                             <div class="separator">
                                 <img src="./assets/images/separator.png" alt="separator">
@@ -55,12 +57,46 @@
                             </div>
                         </div>
                     </div>
-                    <div id="registerSlide" class="register-slide">
-
+                    <div id="registerSlide" class="register-slide" style="display: none;">
+                        <div class="register-title">Регистрация</div>
+                        <div class="content">
+                            <div class="register-form">
+                                <input type="text" placeholder="Име и Фамилия *" class="login-name" id="nameInputReg">
+                                <input type="email" placeholder="Имейл *" class="login-email" id="emailInputReg">
+                                <input type="password" placeholder="Парола *" class="login-password"
+                                    id="passwordInputReg">
+                                <span id="usersGender">
+                                    <label class="radio">
+                                        <input type="radio" id="Users_gender_0" value="female" name="usersGender"> Жена
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" id="users_gender_1" value="male" name="usersGender"> Мъж
+                                    </label>
+                                </span>
+                                <button id="registrationButton" class="register-btn">Регистрация</button>
+                            </div>
+                            <div class="separator">
+                                <img src="./assets/images/separator.png" alt="separator">
+                            </div>
+                            <div class="login-buttons">
+                                <a id="fb" href="javascript:;" class="fb-login-btn">
+                                    <span class="icon"></span>
+                                    <span class="text">Влезте с Facebook</span>
+                                </a>
+                                <a id="google" href="javascript:;" class="google-login-btn">
+                                    <span class="icon"></span>
+                                    <span class="text">Влезте с Google</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="register-footer">
+                            <div class="text">Имате регистрация?
+                                <span id="loginLink" class="hover-link">Влезте в профила си.</span>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -210,33 +246,46 @@
             <section id="aboutUsInformation">
                 <div class="container-information">
                     <div class="text-content">
-                        <h3 class="section-title"> Remix: eдин от водещите онлайн магазини за second hand и outlet мода
+                        <h3 class="section-title"> Remix: eдин от водещите онлайн магазини за second hand и outlet
+                            мода
                             в Европа</h3>
                         <div class="section-text">
-                            <p>Remixshop.com е един от водещите онлайн магазини за second hand и outlet мода в Европа.
+                            <p>Remixshop.com е един от водещите онлайн магазини за second hand и outlet мода в
+                                Европа.
                                 Предлагаме висококачествени и изгодни маркови дрехи и аксесоари за жени, мъже и
                                 деца.&nbsp;</p>
                             <div id="hiddenText" class="hidden-text">
-                                <p>Всеки ден добавяме над 10 000 продукта към вече наличния на сайта асортимент от над
+                                <p>Всеки ден добавяме над 10 000 продукта към вече наличния на сайта асортимент от
+                                    над
                                     100 000. Цените на second hand продуктите падат с -5% на ден точно в 16:00 ч., а
                                     отстъпката се натрупва до -75%.&nbsp;Не пропускайте и ексклузивните промоции с
                                     допълнителни отстъпки, както и специалните ни колекции за следващия сезон!</p>
-                                <p>В remixshop.com ще откриете дрехи с размери от XXS до 5ХL в широко разнообразие от
-                                    модели, цветове и десени, а крайната им цена я определяте Вие - добавяйте продукти в
-                                    "Любими", следете цената им и активните промоции, за да прецените точния момент, в
+                                <p>В remixshop.com ще откриете дрехи с размери от XXS до 5ХL в широко разнообразие
+                                    от
+                                    модели, цветове и десени, а крайната им цена я определяте Вие - добавяйте
+                                    продукти в
+                                    "Любими", следете цената им и активните промоции, за да прецените точния момент,
+                                    в
                                     който да купите находката си преди всички останали.&nbsp;</p>
-                                <p>В портфолиото ни има повече от 5 000 световноизвестни марки в три ценови сегмента -
-                                    Luxury (дизайнерски марки, високо ценово ниво), Mid Range (модерни марки, по-високо
-                                    ценово ниво от budget) и Budget (популярни марки, изгодна комбинация качество/цена).
-                                    Използвайте "Каталог на марките", за да потърсите Вашите фаворити и да ги добавите в
+                                <p>В портфолиото ни има повече от 5 000 световноизвестни марки в три ценови сегмента
+                                    -
+                                    Luxury (дизайнерски марки, високо ценово ниво), Mid Range (модерни марки,
+                                    по-високо
+                                    ценово ниво от budget) и Budget (популярни марки, изгодна комбинация
+                                    качество/цена).
+                                    Използвайте "Каталог на марките", за да потърсите Вашите фаворити и да ги
+                                    добавите в
                                     "Любими марки", където ще са Ви винаги подръка.&nbsp;</p>
                                 <p>Ако пък желаете да освободите място в гардероба си и да се освободите от всички
                                     неносени и запазени дрехи и аксесоари, изпратете ги за продажба на remixshop.com
-                                    чрез “Продайте на Remix”.&nbsp;Вижте повече информация за услугата в "Продайте" и
+                                    чрез “Продайте на Remix”.&nbsp;Вижте повече информация за услугата в "Продайте"
+                                    и
                                     поръчайте своя Remix Bag.&nbsp;</p>
                                 <p>Ние вярваме в зелената страна на модата и затова даваме втори живот на запазени и
-                                    почти нови дрехи и аксесоари, заставайки зад нашето мото: reuse reduce remix. Можем
-                                    да изглеждаме стилно, без да вредим на природата, а най-лесният начин да го правим е
+                                    почти нови дрехи и аксесоари, заставайки зад нашето мото: reuse reduce remix.
+                                    Можем
+                                    да изглеждаме стилно, без да вредим на природата, а най-лесният начин да го
+                                    правим е
                                     да не насърчаваме свръхпроизводството на модната индустрия и да избираме секънд
                                     хенд.</p>
                             </div>
@@ -263,7 +312,8 @@
                 <div class="product-container">
                     <div class="product-details">
                         <div class="row" id="overViewContainer">
-                            <span class="empty-info">Изберете продукт за да получите подробна информация за него</span>
+                            <span class="empty-info">Изберете продукт за да получите подробна информация за
+                                него</span>
 
                         </div>
                     </div>
@@ -305,7 +355,8 @@
                     <div id="delivery">
                         <h3>доставка и връщане</h3>
                         <p>
-                            Доставка до всяка точка на България със Speedy в срок до 3 работни дни: до офис на куриера
+                            Доставка до всяка точка на България със Speedy в срок до 3 работни дни: до офис на
+                            куриера
                             за
                             4.29
                             лв.
@@ -709,6 +760,7 @@
     <script src="assets/js/male_clothes.js"></script>
     <script src="assets/js/femaleClothes.js"></script>
     <script src="assets/js/UserModel.js"></script>
+    <script src="assets/js/UserController.js"></script>
     <script src="assets/js/ManagerModel.js"></script>
     <script src="assets/js/ProductModel.js"></script>
     <script src="assets/js/BannersModel.js"></script>

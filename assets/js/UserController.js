@@ -1,43 +1,46 @@
-// Controller
 (function () {
-    // DOM Selectors
-    // Pages
     const loginForm = getById("loginForm");
-    const container = getById("headerContainer");
   
     // Inputs
-    const nameInput = getById("nameInput");
     const emailInput = getById("emailInput");
     const passwordInput = getById("passwordInput");
+    const nameInputReg = getById("nameInputReg");
     const emailInputReg = getById("emailInputReg");
     const passwordInputReg = getById("passwordInputReg");
+    const loginError = getById("loginError");
   
     // Buttons
-    const loginBtn = getById("loginBtn");
-    const submitBtnReg = getById("submitBtnReg");
+    const loginButton = getById("loginButton");
+    const registrationButton = getById("registrationButton");
   
     // On login submit
-    loginBtn.addEventListener("click", function (ev) {
+    loginButton.addEventListener("click", function (ev) {
       ev.preventDefault();
-      const name = nameInput.value;
       const email = emailInput.value;
       const password = passwordInput.value;
-      const gender = genderInput.value;
   
-      if (userStorage.login(name, email, password, gender)) {
-        loginForm.style.display = "none";
-        homePage.style.display = "block";
+      if (userStorage.login(email, password)) {
+        loginForm.classList.remove("show");
+      } else {
+        loginError.style.display = "block";
       }
     });
+
+    let genders = Array.from(document.getElementsByClassName("radio"));
+   
+      let gender;
+      genders.forEach(el => el.addEventListener("click", function(e){
+        gender = e.target.value;
+      }));
   
-    submitBtnReg.addEventListener("click", function (ev) {
+    registrationButton.addEventListener("click", function (ev) {
       ev.preventDefault();
 
       const name = nameInputReg.value;
       const email = emailInputReg.value;
       const password = passwordInputReg.value;
-      const gender = genderInputReg.value;
   
       userStorage.register(name, email, password, gender);
+      loginForm.classList.remove("show");
     });
   })();

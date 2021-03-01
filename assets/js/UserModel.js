@@ -24,6 +24,7 @@ const userStorage = (function () {
       register(name, email, password, gender) {
         this.users.push(new User(name, email, password, gender));
         localStorage.setItem('users', JSON.stringify(this.users));
+        console.log(this.users);
       }
   
       login(email, password) {

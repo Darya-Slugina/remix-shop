@@ -1732,9 +1732,13 @@ body {
 
 .loginForm {
     position: fixed;
-    display: none;
+    /* display: none; */
+    max-height: 0;
+    overflow: hidden;
     width: 100%;
     z-index: 1000;
+    transition: 0.4s ease max-height;
+
 }
 
 .loginForm.show {
@@ -1742,6 +1746,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
+    max-height: 100%;
     height: 100%;
     background-color: rgb(36 36 36 / 36%);
 }
@@ -1753,7 +1758,6 @@ body {
 
 .modal-cont {
     width: 760px;
-    height: 390px;
     background-color: white;
     border-radius: 4px;
     padding: 0px 30px 30px !important;
@@ -1766,16 +1770,17 @@ body {
 
 .login-slides-container {
     position: relative !important;
+    margin-top: -15px;
 }
 
-.login-slide {
+.login-slide, .register-slide {
     display: block;
     visibility: visible;
     max-width: 660px;
     margin: 0 auto;
 }
 
-.login-title {
+.login-title, .register-title {
     margin: 40px auto;
     font-family: "Cera Pro Medium", sans-serif;
     font-size: 20px;
@@ -1793,16 +1798,15 @@ body {
     width: 25px;
 }
 
-.login-form {
+.login-form, .register-form {
     font-family: "Cera Pro", sans-serif;
     max-width: 300px;
     width: 300px;
-    height: 228px;
     display: flex;
     flex-direction: column;
 }
 
-.content {
+.content{
     display: flex;
     flex-wrap: nowrap;
 }
@@ -1861,18 +1865,18 @@ body {
     color: #303030;
 }
 
-.login-footer {
+.login-footer, .register-footer {
     text-align: center !important;
     font-family: "Cera Pro",sans-serif;
-    border-top: 1px solid #303030;
+    border-top: 1px solid #d1cfcf;
 }
 
-.login-footer .text {
+.login-footer .text, .register-footer .text {
     font-family: "Cera Pro",sans-serif;
     margin-top: 10px;
 }
 
-.login-footer .hover-link {
+.login-footer .hover-link, .register-footer .hover-link {
     font-family: "Cera Pro",sans-serif;
     color: #4b7637;
     text-decoration: underline;
@@ -1883,12 +1887,12 @@ body {
     text-decoration: none;
 }
 
-.login-email, .login-password {
+.login-email, .login-password, .login-name {
     margin-bottom: 10px;
     font-family: "Cera Pro",sans-serif;
     border-color: #dedee3;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 400;
     color: #303030;
     line-height: normal;
     padding: 10px 15px;
@@ -1907,7 +1911,7 @@ body {
     cursor: pointer;
 }
 
-.login-btn {
+.login-btn, .register-btn {
     font-size: 16px;
     padding: 0;
     height: 42px;
@@ -1923,8 +1927,40 @@ body {
     border-radius: 4px;
     margin-top: 20px;
     width: 95%;
+    margin-bottom: 10px;
 }
 
-.login-btn:hover {
+.login-btn:hover, .register-btn:hover {
     background-color: #669255;
+}
+
+.login-back-btn {
+    font-family: "Cera Pro",sans-serif;
+    color: #4b7637;
+    display: inline-block;
+    padding-left: 15px;
+    background: url(./../images/arrow-left-green-icon.png) no-repeat left center;
+    background-size: 8px;
+    text-decoration: none;
+    outline: none;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.register-form {
+    margin-bottom: 20px; 
+}
+
+.radio {
+    font-family: "Cera Pro",sans-serif;
+    min-height: 20px;
+    font-size: 16px;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+}
+
+.login-error {
+    margin: 0 0 10px 10px;
+    color: #b84055;
 }

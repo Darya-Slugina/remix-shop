@@ -24,7 +24,12 @@
     let enter = getById("enterButton");
     let loginForm = getById("loginForm");
     let loginCloseIcon = getById("loginCloseIcon");
-    let registerLink = getById("registerLink")
+    let registerLink = getById("registerLink");
+    let loginBackBtn = getById("loginBackBtn");
+    let loginSlide = getById("loginSlide");
+    let registerSlide = getById("registerSlide");
+    let loginLink = getById("loginLink");
+
 
 
     //   Adds the initial male products
@@ -70,6 +75,8 @@
     enter.addEventListener("click", showloginForm);
     loginCloseIcon.addEventListener("click", closeLoginForm);
     registerLink.addEventListener("click", showRegistrationForm)
+    loginBackBtn.addEventListener("click", backTologinForm);
+    loginLink.addEventListener("click", backTologinForm)
 
     //   Router
     function onHashChange() {
@@ -149,20 +156,32 @@
         }
     }
 
+    // On click show Login page
     function showloginForm(e) {
         e.preventDefault();
         loginForm.classList.add("show");
     }
 
+    // On click close Login page
     function closeLoginForm(e) {
         e.preventDefault();
         loginForm.classList.remove("show");
     }
 
+    //// On click change Login page on Registration page
     function showRegistrationForm(e) {
         e.preventDefault();
-        getById("loginSlide").style.visibility = "hidden";
-        getById("registerSlide").style.visibility = "visible";
+        loginSlide.style.display = "none";
+        registerSlide.style.display = "block";
+        loginBackBtn.style.visibility = "visible";
+    }
+
+    // On click back to login page
+    function backTologinForm(e) {
+        e.preventDefault();
+        loginSlide.style.display = "block";
+        registerSlide.style.display = "none";
+        loginBackBtn.style.visibility = "hidden";
     }
 
     bannersController();
