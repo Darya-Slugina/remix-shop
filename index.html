@@ -142,8 +142,29 @@
                             <li>
                                 <a href="#">Продайте на Remix</a>
                             </li>
-                            <li>
-                                <a href="javascript:;" id="enterButton">Вход</a>
+                            <li class="afterRegistration user">
+                                <a href="javascript:;" class="logged" id="user-button"></a>
+                            </li>
+                            <li class="afterRegistration">
+                                <a href="javascript:;" class="favourites-logged icon-animation">
+								    <span id="favourit-icon-main" class="favourit-icon-main"></span>
+								    <span id="favorites_count_top" class="count"></span>
+								    <span class="dot-wrapper">
+										<span class="dot"></span>
+									</span>
+                                </a>
+                            </li>
+                            <li class="afterRegistration shopping-bag-content">
+                                <a href="javascript:;" class="shopping-bag icon-count icon-animation">
+                                    <span id="basket-icon" class="basket-icon"></span>
+                                    <span id="basket-product-count" class="basket-product-count count">0</span>
+                                    <span class="dot-wrapper">
+										<span class="dot"></span>
+									</span>
+                                </a>
+                            </li>
+                            <li class="beforeRegistration">
+                                <a href="javascript:;" id="enterButton" class="enter" style="display: block;">Вход</a>
                             </li>
                         </ul>
                     </nav>
@@ -520,6 +541,7 @@
                         {{#each this}}
                             <li class="slide-box">
                                 <div class="favourite-icon-container">
+                                    <input type="hidden" value="{{this.id}}" style="display: none;">
                                     <span class="favourite-icon"></span>
                                 </div>
                                 <div class="cornerWrapper">
@@ -535,7 +557,7 @@
                                 </div>
                                 <div class="product-box">
                                     <a class="product-photos" href="#overView">
-                                        <input type="hidden" value="{{this.id}}">
+                                        <input type="hidden" value="{{this.id}}" style="display: none;">
                                         <img src="{{this.image_front}}" alt="{{this.name}}" class="product-img">
                                     </a>
                                 </div>

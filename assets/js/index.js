@@ -1,7 +1,7 @@
 (function () {
     window.addEventListener("DOMContentLoaded", onHashChange);
+    window.addEventListener("DOMContentLoaded", loadPreviousSession);
     window.addEventListener("DOMContentLoaded", showCarousel);
-    window.addEventListener("DOMContentLoaded", loadEvents);
     window.addEventListener("hashchange", onHashChange);
     window.addEventListener("hashchange", showCarousel);
 
@@ -24,6 +24,8 @@
     let loginSlide = getById("loginSlide");
     let registerSlide = getById("registerSlide");
     let loginLink = getById("loginLink");
+    let favoritesCounter = getById("favorites_count_top");
+    let favouritIconMain = getById("favourit-icon-main");
 
 
 
@@ -132,6 +134,15 @@
         loginSlide.style.display = "block";
         registerSlide.style.display = "none";
         loginBackBtn.style.visibility = "hidden";
+    }
+
+    function loadPreviousSession() {
+        if (JSON.parse(localStorage.getItem("login"))) {
+            loginForm.classList.remove("show");
+            enterButton.style.display = "none";
+            let icons = document.querySelectorAll(".registration>.afterRegistration>a");
+            icons.forEach(el => el.style.display = "block");
+        }
     }
 
     bannersController();
@@ -352,5 +363,32 @@
         items.forEach(function (currentImg) {
             currentImg.addEventListener("click", changeImg);
         });
+
+        let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
+        favouriteIcon.forEach(el => el.addEventListener("click", function (e) {
+
+            if (JSON.parse(localStorage.getItem("login"))) {
+                let currentItem = siteManager.allProducts.filter(el => el.id === Number(e.target.previousElementSibling.value));
+
+                if (userStorage.myFavourites.filter(function (elem) { return elem.id === currentItem[0].id }).length > 0) {
+                    userStorage.removeFromFavourite(currentItem[0]);
+                    e.target.classList.remove("liked");
+                    favoritesCounter.innerHTML = userStorage.myFavourites.length;
+                    if (userStorage.myFavourites.length <= 0){
+                        favoritesCounter.style.display = "none";
+                        favouritIconMain.classList.remove("liked");
+                    }
+                } else {
+                    userStorage.addToFavourite(currentItem[0]);
+                    e.target.classList.add("liked");
+                    favoritesCounter.innerHTML = userStorage.myFavourites.length;
+                    if (userStorage.myFavourites.length > 0) {
+                        favoritesCounter.style.display = "flex";
+                        favouritIconMain.classList.add("liked");
+                    }
+                }
+            }
+        }));
+
     }
 })();

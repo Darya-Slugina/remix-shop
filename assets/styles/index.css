@@ -17,9 +17,10 @@ body {
     margin: 0;
 }
 
-#home{
+#home {
     display: block;
 }
+
 .mainContainer {
     max-width: 1245px;
     width: 100%;
@@ -716,6 +717,10 @@ body {
 
 .favourite-icon:hover {
     background: url(../images/favorite-icon-hover.png) no-repeat;
+}
+
+.favourite-icon.liked {
+    background: url(../images/favorite-icon-liked.png) no-repeat;
 }
 
 /*  Brands section */
@@ -1742,7 +1747,6 @@ body {
     width: 100%;
     z-index: 1000;
     transition: 0.4s ease max-height;
-
 }
 
 .loginForm.show {
@@ -1810,7 +1814,7 @@ body {
     flex-direction: column;
 }
 
-.content{
+.content {
     display: flex;
     flex-wrap: nowrap;
 }
@@ -1864,24 +1868,24 @@ body {
 .fb-login-btn .text, .google-login-btn .text {
     display: inline-block;
     vertical-align: middle;
-    font-family: "Cera Pro",sans-serif;
+    font-family: "Cera Pro", sans-serif;
     font-size: 16px;
     color: #303030;
 }
 
 .login-footer, .register-footer {
     text-align: center !important;
-    font-family: "Cera Pro",sans-serif;
+    font-family: "Cera Pro", sans-serif;
     border-top: 1px solid #d1cfcf;
 }
 
 .login-footer .text, .register-footer .text {
-    font-family: "Cera Pro",sans-serif;
+    font-family: "Cera Pro", sans-serif;
     margin-top: 10px;
 }
 
 .login-footer .hover-link, .register-footer .hover-link {
-    font-family: "Cera Pro",sans-serif;
+    font-family: "Cera Pro", sans-serif;
     color: #4b7637;
     text-decoration: underline;
     cursor: pointer;
@@ -1893,7 +1897,7 @@ body {
 
 .login-email, .login-password, .login-name {
     margin-bottom: 10px;
-    font-family: "Cera Pro",sans-serif;
+    font-family: "Cera Pro", sans-serif;
     border-color: #dedee3;
     font-size: 16px;
     font-weight: 400;
@@ -1909,7 +1913,7 @@ body {
 }
 
 .forgot-password {
-    font-family: "Cera Pro",sans-serif;
+    font-family: "Cera Pro", sans-serif;
     color: #4b7637;
     text-decoration: underline;
     cursor: pointer;
@@ -1925,7 +1929,7 @@ body {
     color: #fff;
     border: none;
     background-color: #447130;
-    font-family: "Cera Pro",sans-serif;
+    font-family: "Cera Pro", sans-serif;
     text-transform: uppercase;
     cursor: pointer;
     border-radius: 4px;
@@ -1939,7 +1943,7 @@ body {
 }
 
 .login-back-btn {
-    font-family: "Cera Pro",sans-serif;
+    font-family: "Cera Pro", sans-serif;
     color: #4b7637;
     display: inline-block;
     padding-left: 15px;
@@ -1952,11 +1956,11 @@ body {
 }
 
 .register-form {
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
 }
 
 .radio {
-    font-family: "Cera Pro",sans-serif;
+    font-family: "Cera Pro", sans-serif;
     min-height: 20px;
     font-size: 16px;
     position: relative;
@@ -1967,4 +1971,122 @@ body {
 .login-error {
     margin: 0 0 10px 10px;
     color: #b84055;
+}
+
+/* Navigation after registration -----------------------------------------------------------*/
+
+.main-navigation .registration>.afterRegistration>a {
+    display: none;
+    margin-left: 25px;
+    position: relative;
+    max-height: 25px;
+    list-style: none;
+    padding: 0;
+}
+
+.favourites-logged {
+    height: 29px;
+}
+
+.favourites-logged .count {
+    margin-top: -18px;
+    background-color: #dd2852;
+    color: #fff;
+    display: none;
+    z-index: 11;
+    align-items: center;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    right: -11px;
+    padding: 0 2px;
+    min-width: 15px;
+    min-height: 15px;
+    justify-content: center;
+    font-size: 10px;
+}
+
+.favourites-logged .dot-wrapper, .basket-product-count .dot-wrapper {
+    position: absolute;
+    z-index: 10;
+    transform: scale(0.5);
+}
+
+.favourites-logged .dot {
+    background-color: #dd2852;
+    position: absolute;
+    visibility: hidden;
+    transform-origin: 50%;
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.shopping-bag-content {
+    height: 34px;
+}
+
+.basket-product-count {
+    top: -3px;
+    background-color: #60894e;
+    color: #fff;
+    display: none;
+    font-size: 9px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: -8px;
+    padding: 0 2px;
+    min-width: 16px;
+    min-height: 16px;
+}
+
+.shopping-bag .dot {
+    background-color: #60894e;
+    position: absolute;
+    visibility: hidden;
+    transform-origin: 50%;
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.logged {
+    display: inline-block;
+    background: url(./../images/profile-icon.png) no-repeat;
+    width: 25px;
+    height: 25px;
+    margin-top: -5px;
+}
+
+.logged:hover {
+    background: url(./../images/profile-icon-hover.png) no-repeat;
+}
+
+.favourit-icon-main {
+    display: inline-block;
+    background: url(./../images/favorite-icon-main-big.png) no-repeat;
+    width: 25px;
+    height: 25px;
+    margin-top: -2px;
+}
+
+.favourit-icon-main:hover, .favourit-icon-main.liked  {
+    background: url(./../images/favorite-icon-main-big-hover.png) no-repeat;
+}
+
+.basket-icon {
+    display: inline-block;
+    background: url(./../images/bag-icon.png) no-repeat;
+    width: 22px;
+    height: 35px;
+    margin-top: -3px;
+}
+
+.basket-icon:hover {
+    background: url(./../images/bag-green-icon.png) no-repeat;
 }
