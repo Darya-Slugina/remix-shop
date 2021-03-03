@@ -14,6 +14,14 @@
     // Buttons
     const loginButton = getById("loginButton");
     const registrationButton = getById("registrationButton");
+
+    function pageIsLogged (email){
+      userStorage.login(email);
+        loginForm.classList.remove("show");
+        enterButton.style.display = "none";
+        let icons = document.querySelectorAll(".registration>.afterRegistration>a");
+        icons.forEach(el => el.style.display="block");
+    }
   
     // On login submit
     loginButton.addEventListener("click", function (ev) {
@@ -22,11 +30,7 @@
       const password = passwordInput.value;
   
       if (userStorage.isGoodCredentials(email, password)) {
-        userStorage.login();
-        loginForm.classList.remove("show");
-        enterButton.style.display = "none";
-        let icons = document.querySelectorAll(".registration>.afterRegistration>a");
-        icons.forEach(el => el.style.display="block");
+        pageIsLogged(email);
       } else {
         loginError.style.display = "block";
       }
@@ -39,6 +43,7 @@
         gender = e.target.value;
       }));
   
+      // On registration submitt
     registrationButton.addEventListener("click", function (ev) {
       ev.preventDefault();
 
@@ -48,5 +53,18 @@
   
       userStorage.register(name, email, password, gender);
       loginForm.classList.remove("show");
+      pageIsLogged(email);
     });
   })();
+
+  // Logout controller
+  const userLogoutController = function () {
+    const source = document.getElementById("userLogoutTempl").innerHTML;
+    const template = Handlebars.compile(source);
+
+    let user = JSON.parse(localStorage.getItem("currentUser"));
+    const html = template(user[0]);
+  
+    let container = document.getElementById("userMenuContainer");
+    container.innerHTML = html;
+  };

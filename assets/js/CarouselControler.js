@@ -10,6 +10,7 @@ function createCarouselList(products, limit) {
       slides[j][k].newPrice = getNewPrice(slides[j][k].price, slides[j][k].discount);
       slides[j][k].isOutlet = isOutlet(slides[j][k].type);
       slides[j][k].isNewSeason = isNewSeason(slides[j][k].type);
+      slides[j][k].isInFavourites = userStorage.isInFavourites(slides[j][k]);
       counter++;
     }
   }

@@ -144,6 +144,7 @@
                             </li>
                             <li class="afterRegistration user">
                                 <a href="javascript:;" class="logged" id="user-button"></a>
+                                <div id="userMenuContainer"></div>
                             </li>
                             <li class="afterRegistration">
                                 <a href="javascript:;" class="favourites-logged icon-animation">
@@ -542,7 +543,12 @@
                             <li class="slide-box">
                                 <div class="favourite-icon-container">
                                     <input type="hidden" value="{{this.id}}" style="display: none;">
+                                    {{#if this.isInFavourites}}
+                                    <span class="favourite-icon liked"></span>
+                                    {{/if}}
+                                    {{# unless this.isInFavourites}}
                                     <span class="favourite-icon"></span>
+                                    {{/unless}}
                                 </div>
                                 <div class="cornerWrapper">
                                     {{#if this.discount}}
@@ -896,6 +902,21 @@
             </div>
         </div>
     </script>
+
+    <script id="userLogoutTempl" type="text/x-handlebars-template">
+        <div id="userSubMenu" class="user-submenu">
+            <a class="hi-user">
+                <span class="hi-username">
+                    <span class="username">Здравейте, </span>
+                    <span class="username">{{this.name}}</span>
+                </span>
+                <span class="usermail">{{this.email}}</span>
+            </a>       
+            <span class="logout">
+                <a href="javascript:;" id="logOutBtn">Изход</a>
+            </span>
+        </div>
+</script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"

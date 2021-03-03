@@ -342,6 +342,20 @@
         })
     }
 
+    //favourite items counter
+    function updatefavouriteCounter() {
+        let counter = userStorage.myFavourites.length;
+
+        if (counter > 0) {
+            favoritesCounter.style.display = "flex";
+            favouritIconMain.classList.add("liked");
+            favoritesCounter.innerHTML = counter;
+        } else if (counter < 0) {
+            favoritesCounter.style.display = "none";
+            favouritIconMain.classList.remove("liked");
+        }
+    }
+
     function loadEvents() {
         let productImages = Array.from(document.getElementsByClassName("product-img"));
         productImages.forEach(function (img) {
@@ -364,6 +378,8 @@
             currentImg.addEventListener("click", changeImg);
         });
 
+        updatefavouriteCounter()
+
         let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
         favouriteIcon.forEach(el => el.addEventListener("click", function (e) {
 
@@ -373,22 +389,34 @@
                 if (userStorage.myFavourites.filter(function (elem) { return elem.id === currentItem[0].id }).length > 0) {
                     userStorage.removeFromFavourite(currentItem[0]);
                     e.target.classList.remove("liked");
-                    favoritesCounter.innerHTML = userStorage.myFavourites.length;
-                    if (userStorage.myFavourites.length <= 0){
-                        favoritesCounter.style.display = "none";
-                        favouritIconMain.classList.remove("liked");
-                    }
+                    counter = userStorage.myFavourites.length;
+                    favoritesCounter.innerHTML = counter;
                 } else {
                     userStorage.addToFavourite(currentItem[0]);
                     e.target.classList.add("liked");
-                    favoritesCounter.innerHTML = userStorage.myFavourites.length;
-                    if (userStorage.myFavourites.length > 0) {
-                        favoritesCounter.style.display = "flex";
-                        favouritIconMain.classList.add("liked");
-                    }
+                    counter = userStorage.myFavourites.length;
+                    favoritesCounter.innerHTML = counter;
                 }
+                updatefavouriteCounter();
             }
         }));
+
+        // On click show the user subMenu with logout button
+        let userMenu = getById("user-button");
+        userMenu.addEventListener("click", function () {
+            userLogoutController();
+            let userSubMenu = getById("userSubMenu");
+            userSubMenu.style.display = "block";
+
+            let logOutBtn = getById("logOutBtn");
+            logOutBtn.addEventListener("click", function () {
+                userStorage.logout();
+                enterButton.style.display = "block";
+                let icons = document.querySelectorAll(".registration>.afterRegistration>a");
+                icons.forEach(el => el.style.display = "none");
+                userSubMenu.style.display = "none";
+            })
+        });
 
     }
 })();
