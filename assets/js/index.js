@@ -345,24 +345,27 @@
 
     //favourite items counter
     function updatefavouriteCounter() {
-        let counter = userStorage.myFavourites.length;
+        let counter = userStorage.myFavouritesCount;
 
         if (counter > 0) {
             favoritesCounter.style.display = "flex";
             favouritIconMain.classList.add("liked");
             favoritesCounter.innerHTML = counter;
-        } else if (counter < 0) {
+
+        } else {
             favoritesCounter.style.display = "none";
             favouritIconMain.classList.remove("liked");
+            favoritesCounter.innerHTML = '';
         }
     }
+
     // On click like the item
     function likeItem() {
         let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
-        
-        favouriteIcon.forEach(el => el.addEventListener("click", function (e) {
+        userStorage.init();
 
-            if (JSON.parse(localStorage.getItem("login"))) {
+        favouriteIcon.forEach(el => el.addEventListener("click", function (e) {
+            if (userStorage.isLogged == true) {
                 let currentItem = siteManager.allProducts.filter(el => el.id === Number(e.target.previousElementSibling.value));
 
                 if (userStorage.myFavourites.filter(function (elem) { return elem.id === currentItem[0].id }).length > 0) {
@@ -370,12 +373,15 @@
                     e.target.classList.remove("liked");
                     counter = userStorage.myFavourites.length;
                     favoritesCounter.innerHTML = counter;
+                    userStorage.myFavouritesCount = counter;
                 } else {
                     userStorage.addToFavourite(currentItem[0]);
                     e.target.classList.add("liked");
                     counter = userStorage.myFavourites.length;
                     favoritesCounter.innerHTML = counter;
+                    userStorage.myFavouritesCount = counter;
                 }
+
                 updatefavouriteCounter();
             }
         }));
