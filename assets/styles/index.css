@@ -2012,7 +2012,7 @@ body {
     transform: scale(0.5);
 }
 
-.favourites-logged .dot {
+.favourites-logged .dot-counter {
     background-color: #dd2852;
     position: absolute;
     visibility: hidden;
@@ -2044,7 +2044,7 @@ body {
     min-height: 16px;
 }
 
-.shopping-bag .dot {
+.shopping-bag .dot-counter {
     background-color: #60894e;
     position: absolute;
     visibility: hidden;
@@ -2063,7 +2063,7 @@ body {
     margin-top: -5px;
 }
 
-.logged:hover {
+.logged:hover, .logged.clicked {
     background: url(./../images/profile-icon-hover.png) no-repeat;
 }
 

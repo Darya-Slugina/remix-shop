@@ -151,7 +151,7 @@
 								    <span id="favourit-icon-main" class="favourit-icon-main"></span>
 								    <span id="favorites_count_top" class="count"></span>
 								    <span class="dot-wrapper">
-										<span class="dot"></span>
+										<span class="dot-counter"></span>
 									</span>
                                 </a>
                             </li>
@@ -160,7 +160,7 @@
                                     <span id="basket-icon" class="basket-icon"></span>
                                     <span id="basket-product-count" class="basket-product-count count">0</span>
                                     <span class="dot-wrapper">
-										<span class="dot"></span>
+										<span class="dot-counter"></span>
 									</span>
                                 </a>
                             </li>
@@ -544,10 +544,10 @@
                                 <div class="favourite-icon-container">
                                     <input type="hidden" value="{{this.id}}" style="display: none;">
                                     {{#if this.isInFavourites}}
-                                    <span class="favourite-icon liked"></span>
+                                    <span class="favourite-icon liked" productId="{{this.id}}"></span>
                                     {{/if}}
                                     {{# unless this.isInFavourites}}
-                                    <span class="favourite-icon"></span>
+                                    <span class="favourite-icon" productId="{{this.id}}"></span>
                                     {{/unless}}
                                 </div>
                                 <div class="cornerWrapper">
@@ -751,6 +751,7 @@
                         <span class="voucher-badge">%</span>
                     </div>
                     <span class="favourite">
+                        <input type="hidden" value="{{this.id}}" style="display: none;">
                         <span class="fav-icon"></span>
                     </span>
                 </div>

@@ -13,6 +13,7 @@ const userStorage = (function () {
     constructor() {
       this.myFavourites = [];
       this.isLogged = false;
+      this.currentUser = [];
 
       if (localStorage.getItem("users")) {
         this.users = JSON.parse(localStorage.getItem("users"));
@@ -24,12 +25,14 @@ const userStorage = (function () {
         localStorage.setItem("users", JSON.stringify(this.users));
       }
 
-      if (localStorage.getItem("myFavourites")) {
-        this.myFavourites = JSON.parse(localStorage.getItem("myFavourites"));
+      if (localStorage.getItem("currentUser")) {
+        this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+        if (localStorage.getItem(this.currentUser[0].email)) {
+          this.myFavourites = JSON.parse(localStorage.getItem(this.currentUser[0].email));
+        }
       }
     }
-
-
 
     register(name, email, password, gender) {
       this.users.push(new User(name, email, password, gender));
@@ -53,11 +56,19 @@ const userStorage = (function () {
 
       let currentUser = JSON.parse(localStorage.getItem("users")).filter(el => el.email === userEmail);
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      this.currentUser = currentUser;
+
+      this.myFavourites = JSON.parse(localStorage.getItem(userEmail));
     }
 
     logout() {
       this.isLogged = false;
+      this.currentUser = [];
+      this.myFavourites = [];
+  
       localStorage.removeItem("login");
+      localStorage.removeItem("currentUser");
+      localStorage.removeItem("myFavourites");
     }
 
     validate(email, password) {
@@ -69,21 +80,48 @@ const userStorage = (function () {
     }
 
     addToFavourite(el) {
-      this.myFavourites = JSON.parse(localStorage.getItem("myFavourites"));
+
       this.myFavourites.push(el);
-      localStorage.setItem("myFavourites", JSON.stringify(this.myFavourites));
+      localStorage.setItem(this.currentUser[0].email, JSON.stringify(this.myFavourites));
+
+
+
+//       if (this.myFavourites[userStorage.currentUser[0].email] === undefined) {
+//         this.myFavourites[userStorage.currentUser[0].email] = [];
+//       }
+
+//       let x = {};
+//       x.storage = [];
+//       x.storage[12] = [];
+//       x.storage[12].push(el);
+//       console.log(JSON.stringify(x));jhhjjl
+
+
+//       this.myFavourites[userStorage.currentUser[0].email].push(el);
+// console.log('before', this.myFavourites, localStorage.getItem("myFavourites"), JSON.stringify(this.myFavourites));
+
+//       localStorage.removeItem("myFavourites");
+// console.log('removed', this.myFavourites, localStorage.getItem("myFavourites"), JSON.stringify(this.myFavourites));
+
+//       localStorage.setItem("myFavourites", JSON.stringify(this.myFavourites));
+// console.log('added new', this.myFavourites,   localStorage.getItem("myFavourites"), JSON.stringify(this.myFavourites));
     }
 
-    removeFromFavourite(el) {
-      localStorage.removeItem("myFavourites");
+    removeFromFavourite(el) {      
       this.myFavourites = this.myFavourites.filter(item => item.id !== el.id);
-      localStorage.setItem("myFavourites", JSON.stringify(this.myFavourites));
+      // localStorage.removeItem("myFavourites");
+      localStorage.setItem(this.currentUser[0].email, JSON.stringify(this.myFavourites));
     }
 
     isInFavourites(el) {
+      if (this.myFavourites === undefined) {
+        return false;
+      }
+  
       if (this.myFavourites.filter(element => element.id === el.id).length > 0) {
         return true;
       }
+  
       return false;
     }
   }

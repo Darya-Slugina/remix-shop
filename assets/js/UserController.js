@@ -15,12 +15,12 @@
     const loginButton = getById("loginButton");
     const registrationButton = getById("registrationButton");
 
-    function pageIsLogged (email){
+    function loginUser(email){
       userStorage.login(email);
-        loginForm.classList.remove("show");
-        enterButton.style.display = "none";
-        let icons = document.querySelectorAll(".registration>.afterRegistration>a");
-        icons.forEach(el => el.style.display="block");
+      loginForm.classList.remove("show");
+      enterButton.style.display = "none";
+      let icons = document.querySelectorAll(".registration>.afterRegistration>a");
+      icons.forEach(el => el.style.display="block");
     }
   
     // On login submit
@@ -30,7 +30,7 @@
       const password = passwordInput.value;
   
       if (userStorage.isGoodCredentials(email, password)) {
-        pageIsLogged(email);
+        loginUser(email);
       } else {
         loginError.style.display = "block";
       }
@@ -43,7 +43,7 @@
         gender = e.target.value;
       }));
   
-      // On registration submitt
+      // On registration submit
     registrationButton.addEventListener("click", function (ev) {
       ev.preventDefault();
 
@@ -53,7 +53,7 @@
   
       userStorage.register(name, email, password, gender);
       loginForm.classList.remove("show");
-      pageIsLogged(email);
+      loginUser(email);
     });
   })();
 

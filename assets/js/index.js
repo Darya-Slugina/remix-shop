@@ -26,8 +26,9 @@
     let loginLink = getById("loginLink");
     let favoritesCounter = getById("favorites_count_top");
     let favouritIconMain = getById("favourit-icon-main");
+    let loginButton = getById("loginButton");
 
-
+    
 
     //   Adds the initial male products
     maleClothes.forEach(function (item) {
@@ -73,9 +74,10 @@
     loginCloseIcon.addEventListener("click", closeLoginForm);
     registerLink.addEventListener("click", showRegistrationForm)
     loginBackBtn.addEventListener("click", backTologinForm);
-    loginLink.addEventListener("click", backTologinForm)
+    loginLink.addEventListener("click", backTologinForm);
+    loginButton.addEventListener("click", updateFavourites);
 
-
+    
     //Router
     function onHashChange() {
         let page = location.hash.slice(1);
@@ -205,7 +207,6 @@
             dots[slideIndex - 1].className += " active";
 
         }
-
         loadEvents();
     }
 
@@ -355,8 +356,50 @@
             favouritIconMain.classList.remove("liked");
         }
     }
+    // On click like the item
+    function likeItem() {
+        let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
+        
+        favouriteIcon.forEach(el => el.addEventListener("click", function (e) {
+
+            if (JSON.parse(localStorage.getItem("login"))) {
+                let currentItem = siteManager.allProducts.filter(el => el.id === Number(e.target.previousElementSibling.value));
+
+                if (userStorage.myFavourites.filter(function (elem) { return elem.id === currentItem[0].id }).length > 0) {
+                    userStorage.removeFromFavourite(currentItem[0]);
+                    e.target.classList.remove("liked");
+                    counter = userStorage.myFavourites.length;
+                    favoritesCounter.innerHTML = counter;
+                } else {
+                    userStorage.addToFavourite(currentItem[0]);
+                    e.target.classList.add("liked");
+                    counter = userStorage.myFavourites.length;
+                    favoritesCounter.innerHTML = counter;
+                }
+                updatefavouriteCounter();
+            }
+        }));
+    }
+
+    function updateLikes() {
+        let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
+        favouriteIcon.forEach(el => {
+           if(userStorage.myFavourites.some(item => item.id == el.getAttribute("productId"))) {
+            el.classList.add("liked");
+           }
+        });
+    }
+
+    function updateFavourites() {
+        updatefavouriteCounter();
+        updateLikes();
+    }
 
     function loadEvents() {
+
+        updatefavouriteCounter();
+        likeItem();
+
         let productImages = Array.from(document.getElementsByClassName("product-img"));
         productImages.forEach(function (img) {
             img.addEventListener("mouseover", onMouseOver);
@@ -378,35 +421,14 @@
             currentImg.addEventListener("click", changeImg);
         });
 
-        updatefavouriteCounter()
-
-        let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
-        favouriteIcon.forEach(el => el.addEventListener("click", function (e) {
-
-            if (JSON.parse(localStorage.getItem("login"))) {
-                let currentItem = siteManager.allProducts.filter(el => el.id === Number(e.target.previousElementSibling.value));
-
-                if (userStorage.myFavourites.filter(function (elem) { return elem.id === currentItem[0].id }).length > 0) {
-                    userStorage.removeFromFavourite(currentItem[0]);
-                    e.target.classList.remove("liked");
-                    counter = userStorage.myFavourites.length;
-                    favoritesCounter.innerHTML = counter;
-                } else {
-                    userStorage.addToFavourite(currentItem[0]);
-                    e.target.classList.add("liked");
-                    counter = userStorage.myFavourites.length;
-                    favoritesCounter.innerHTML = counter;
-                }
-                updatefavouriteCounter();
-            }
-        }));
-
         // On click show the user subMenu with logout button
         let userMenu = getById("user-button");
         userMenu.addEventListener("click", function () {
             userLogoutController();
+            userMenu.classList.add("clicked");
             let userSubMenu = getById("userSubMenu");
             userSubMenu.style.display = "block";
+            setTimeout(function(){ userSubMenu.style.display = "none"; }, 5000);
 
             let logOutBtn = getById("logOutBtn");
             logOutBtn.addEventListener("click", function () {
@@ -415,6 +437,8 @@
                 let icons = document.querySelectorAll(".registration>.afterRegistration>a");
                 icons.forEach(el => el.style.display = "none");
                 userSubMenu.style.display = "none";
+                let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
+                favouriteIcon.forEach(el => el.classList.remove("liked"));
             })
         });
 
