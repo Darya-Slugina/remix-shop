@@ -298,6 +298,8 @@ body {
     border: none;
     border-radius: 4px;
     width: 350px;
+    font-family: "Cera Pro", sans-serif;
+    color: #4b7637;
 }
 
 .search-box .icon {
@@ -1416,8 +1418,6 @@ footer a {
     line-height: normal;
     border-radius: 4px;
     cursor: default;
-    /* position: absolute;
-    right: 55px; */
 }
 
 .favourite {
@@ -2075,7 +2075,7 @@ body {
     margin-top: -2px;
 }
 
-.favourit-icon-main:hover, .favourit-icon-main.liked  {
+.favourit-icon-main:hover, .favourit-icon-main.liked {
     background: url(./../images/favorite-icon-main-big-hover.png) no-repeat;
 }
 
@@ -2129,7 +2129,7 @@ body {
 
 .hi-username {
     display: flex;
-    flex-wrap: wrap ; 
+    flex-wrap: wrap;
     font-weight: 600;
     color: #447130;
     font-size: 15px;
@@ -2153,7 +2153,7 @@ body {
 .hi-user .usermail {
     display: block;
     color: #bdbdbd;
-    font-family: "Cera Pro",sans-serif;
+    font-family: "Cera Pro", sans-serif;
     font-size: 12px;
 }
 
@@ -2173,5 +2173,5 @@ body {
     text-decoration: none;
     outline: none;
     font-size: 16px;
-    font-family: "Cera Pro",sans-serif;
+    font-family: "Cera Pro", sans-serif;
 }

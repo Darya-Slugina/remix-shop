@@ -33,3 +33,17 @@ const menClothesController = function (products) {
     let html = template(products);
     containerClothesDisplay.innerHTML = html;
 }
+
+
+//display filtered products
+const filteredClothesController = function (products) {
+    let containerClothesDisplay = getById('display');
+    products.forEach(el => el.newPrice = getNewPrice(el.price, el.discount));
+    let filteredprod = { 'filteredProducts': products};
+
+    let source = document.getElementById('filteredClothesDisplayTempl').innerHTML;
+    let template = Handlebars.compile(source);
+
+    let html = template(filteredprod);
+    containerClothesDisplay.innerHTML = html;
+}

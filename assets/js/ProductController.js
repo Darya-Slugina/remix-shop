@@ -8,7 +8,6 @@ const productController = function () {
     product.good = isGoodProduct(product.condition);
     product.newPrice = getNewPrice(product.price, product.discount);
     product.femail = isFemail();
-
     const source = document.getElementById("overViewTempl").innerHTML;
     const template = Handlebars.compile(source);
     const html = template(product);

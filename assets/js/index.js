@@ -27,8 +27,9 @@
     let favoritesCounter = getById("favorites_count_top");
     let favouritIconMain = getById("favourit-icon-main");
     let loginButton = getById("loginButton");
+    let srchProd = getById("srchProd");
 
-    
+
 
     //   Adds the initial male products
     maleClothes.forEach(function (item) {
@@ -77,7 +78,7 @@
     loginLink.addEventListener("click", backTologinForm);
     loginButton.addEventListener("click", updateFavourites);
 
-    
+
     //Router
     function onHashChange() {
         let page = location.hash.slice(1);
@@ -150,6 +151,26 @@
     bannersController();
     brandsController();
     blogController();
+
+    //Serch by name
+    srchProd.addEventListener("blur", function (event) {
+        let filtered = siteManager.filterByName(event.target.value);
+        showFilteredProducts(filtered);
+
+    });
+
+    // Show allProducts page with filtered content
+    function showFilteredProducts(products) {
+        getById("home").style.display = "none";
+        getById("allProducts").style.display = "block";
+        filteredClothesController(products);
+        getById("search-button").addEventListener("click", function () {
+            srchProd.value = "";
+        })
+
+        let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
+        productImages.forEach(img => changeImgOnHover(img));
+    }
 
     // Prepare the list for carousel 
     const shuffledArr = array => array.sort(() => 0.5 - Math.random());
@@ -268,12 +289,16 @@
     const womenBtn = document.getElementById('womenBtn');
     womenBtn.addEventListener('click', function () {
         womenClothesController(siteManager);
+        let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
+        productImages.forEach(img => changeImgOnHover(img));
     })
 
     // select male clothes
     const menBtn = document.getElementById('menBtn');
     menBtn.addEventListener('click', function () {
         menClothesController(siteManager);
+        let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
+        productImages.forEach(img => changeImgOnHover(img));
     })
 
     // personal filters - dropdown info on hover
@@ -390,9 +415,9 @@
     function updateLikes() {
         let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
         favouriteIcon.forEach(el => {
-           if(userStorage.myFavourites.some(item => item.id == el.getAttribute("productId"))) {
-            el.classList.add("liked");
-           }
+            if (userStorage.myFavourites.some(item => item.id == el.getAttribute("productId"))) {
+                el.classList.add("liked");
+            }
         });
     }
 
@@ -401,16 +426,18 @@
         updateLikes();
     }
 
+    function changeImgOnHover(img) {
+        img.addEventListener("mouseover", onMouseOver);
+        img.addEventListener("mouseout", onMouseOut);
+    }
+
     function loadEvents() {
 
         updatefavouriteCounter();
         likeItem();
 
         let productImages = Array.from(document.getElementsByClassName("product-img"));
-        productImages.forEach(function (img) {
-            img.addEventListener("mouseover", onMouseOver);
-            img.addEventListener("mouseout", onMouseOut);
-        });
+        productImages.forEach(img => changeImgOnHover(img));
 
         let buttons = Array.from(document.getElementsByClassName("product-photos"));
         buttons.forEach(function (currentBtn) {
@@ -434,7 +461,10 @@
             userMenu.classList.add("clicked");
             let userSubMenu = getById("userSubMenu");
             userSubMenu.style.display = "block";
-            setTimeout(function(){ userSubMenu.style.display = "none"; }, 5000);
+            setTimeout(function () {
+                userSubMenu.style.display = "none";
+                userMenu.classList.remove("clicked")
+            }, 5000);
 
             let logOutBtn = getById("logOutBtn");
             logOutBtn.addEventListener("click", function () {
