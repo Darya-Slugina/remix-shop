@@ -1,7 +1,7 @@
 (function () {
     window.addEventListener("DOMContentLoaded", onHashChange);
+    window.addEventListener("DOMContentLoaded", loadPreviousSession);
     window.addEventListener("DOMContentLoaded", showCarousel);
-    window.addEventListener("DOMContentLoaded", loadEvents);
     window.addEventListener("hashchange", onHashChange);
     window.addEventListener("hashchange", showCarousel);
 
@@ -24,6 +24,10 @@
     let loginSlide = getById("loginSlide");
     let registerSlide = getById("registerSlide");
     let loginLink = getById("loginLink");
+    let favoritesCounter = getById("favorites_count_top");
+    let favouritIconMain = getById("favourit-icon-main");
+    let loginButton = getById("loginButton");
+    let srchProd = getById("srchProd");
 
 
 
@@ -71,7 +75,8 @@
     loginCloseIcon.addEventListener("click", closeLoginForm);
     registerLink.addEventListener("click", showRegistrationForm)
     loginBackBtn.addEventListener("click", backTologinForm);
-    loginLink.addEventListener("click", backTologinForm)
+    loginLink.addEventListener("click", backTologinForm);
+    loginButton.addEventListener("click", updateFavourites);
 
 
     //Router
@@ -134,9 +139,38 @@
         loginBackBtn.style.visibility = "hidden";
     }
 
+    function loadPreviousSession() {
+        if (JSON.parse(localStorage.getItem("login"))) {
+            loginForm.classList.remove("show");
+            enterButton.style.display = "none";
+            let icons = document.querySelectorAll(".registration>.afterRegistration>a");
+            icons.forEach(el => el.style.display = "block");
+        }
+    }
+
     bannersController();
     brandsController();
     blogController();
+
+    //Serch by name
+    srchProd.addEventListener("blur", function (event) {
+        let filtered = siteManager.filterByName(event.target.value);
+        showFilteredProducts(filtered);
+
+    });
+
+    // Show allProducts page with filtered content
+    function showFilteredProducts(products) {
+        getById("home").style.display = "none";
+        getById("allProducts").style.display = "block";
+        filteredClothesController(products);
+        getById("search-button").addEventListener("click", function () {
+            srchProd.value = "";
+        })
+
+        let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
+        productImages.forEach(img => changeImgOnHover(img));
+    }
 
     // Prepare the list for carousel 
     const shuffledArr = array => array.sort(() => 0.5 - Math.random());
@@ -194,7 +228,6 @@
             dots[slideIndex - 1].className += " active";
 
         }
-
         loadEvents();
     }
 
@@ -256,12 +289,32 @@
     const womenBtn = document.getElementById('womenBtn');
     womenBtn.addEventListener('click', function () {
         womenClothesController(siteManager);
+
+        let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
+        productImages.forEach(img => changeImgOnHover(img));
+
+        let buttons = Array.from(document.getElementsByClassName("product-photos"));
+        buttons.forEach(function (currentBtn) {
+            currentBtn.addEventListener('click', selectProduct);
+        });
+
+        likeItem();
     })
 
     // select male clothes
     const menBtn = document.getElementById('menBtn');
     menBtn.addEventListener('click', function () {
         menClothesController(siteManager);
+
+        let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
+        productImages.forEach(img => changeImgOnHover(img));
+
+        let buttons = Array.from(document.getElementsByClassName("product-photos"));
+        buttons.forEach(function (currentBtn) {
+            currentBtn.addEventListener('click', selectProduct);
+        });
+
+        likeItem();
     })
 
     // personal filters - dropdown info on hover
@@ -278,6 +331,7 @@
     // Select current product
     function selectProduct(e) {
         let productId = e.target.parentNode.children[0].value;
+        console.log(e);
         product = siteManager.allProducts.find(el => el.id === Number(productId));
 
         productController();
@@ -331,12 +385,76 @@
         })
     }
 
-    function loadEvents() {
-        let productImages = Array.from(document.getElementsByClassName("product-img"));
-        productImages.forEach(function (img) {
-            img.addEventListener("mouseover", onMouseOver);
-            img.addEventListener("mouseout", onMouseOut);
+    //favourite items counter
+    function updatefavouriteCounter() {
+        let counter = userStorage.myFavouritesCount;
+
+        if (counter > 0) {
+            favoritesCounter.style.display = "flex";
+            favouritIconMain.classList.add("liked");
+            favoritesCounter.innerHTML = counter;
+
+        } else {
+            favoritesCounter.style.display = "none";
+            favouritIconMain.classList.remove("liked");
+            favoritesCounter.innerHTML = '';
+        }
+    }
+
+    // On click like the item
+    function likeItem() {
+        let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
+        userStorage.init();
+
+        favouriteIcon.forEach(el => el.addEventListener("click", function (e) {
+            if (userStorage.isLogged == true) {
+                let currentItem = siteManager.allProducts.filter(el => el.id === Number(e.target.previousElementSibling.value));
+
+                if (userStorage.myFavourites.filter(function (elem) { return elem.id === currentItem[0].id }).length > 0) {
+                    userStorage.removeFromFavourite(currentItem[0]);
+                    e.target.classList.remove("liked");
+                    counter = userStorage.myFavourites.length;
+                    favoritesCounter.innerHTML = counter;
+                    userStorage.myFavouritesCount = counter;
+                } else {
+                    userStorage.addToFavourite(currentItem[0]);
+                    e.target.classList.add("liked");
+                    counter = userStorage.myFavourites.length;
+                    favoritesCounter.innerHTML = counter;
+                    userStorage.myFavouritesCount = counter;
+                }
+
+                updatefavouriteCounter();
+            }
+        }));
+    }
+
+    function updateLikes() {
+        let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
+        favouriteIcon.forEach(el => {
+            if (userStorage.myFavourites.some(item => item.id == el.getAttribute("productId"))) {
+                el.classList.add("liked");
+            }
         });
+    }
+
+    function updateFavourites() {
+        updatefavouriteCounter();
+        updateLikes();
+    }
+
+    function changeImgOnHover(img) {
+        img.addEventListener("mouseover", onMouseOver);
+        img.addEventListener("mouseout", onMouseOut);
+    }
+
+    function loadEvents() {
+
+        updatefavouriteCounter();
+        likeItem();
+
+        let productImages = Array.from(document.getElementsByClassName("product-img"));
+        productImages.forEach(img => changeImgOnHover(img));
 
         let buttons = Array.from(document.getElementsByClassName("product-photos"));
         buttons.forEach(function (currentBtn) {
@@ -352,5 +470,57 @@
         items.forEach(function (currentImg) {
             currentImg.addEventListener("click", changeImg);
         });
+
+        // On click show the user subMenu with logout button
+        let userMenu = getById("user-button");
+        userMenu.addEventListener("click", function () {
+            userLogoutController();
+            userMenu.classList.add("clicked");
+            let userSubMenu = getById("userSubMenu");
+            userSubMenu.style.display = "block";
+            setTimeout(function () {
+                userSubMenu.style.display = "none";
+                userMenu.classList.remove("clicked")
+            }, 5000);
+
+            let logOutBtn = getById("logOutBtn");
+            logOutBtn.addEventListener("click", function () {
+                userStorage.logout();
+                enterButton.style.display = "block";
+                let icons = document.querySelectorAll(".registration>.afterRegistration>a");
+                icons.forEach(el => el.style.display = "none");
+                userSubMenu.style.display = "none";
+                let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
+                favouriteIcon.forEach(el => el.classList.remove("liked"));
+            })
+        });
+
+        let showFavouritesBtn = getById("showFavouritesBtn");
+        showFavouritesBtn.addEventListener("click", showMyFavourites);
+
+        // showMyFavourites();
+    }
+
+    // Update favourites page with favourites products
+    function showMyFavourites() {
+        likeItem();
+        window.scrollTo(0, 0);
+        let user = userStorage.currentUser[0].email;
+        favouritesClothesController(JSON.parse(localStorage.getItem(user)));
+        let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
+        favouriteIcon.forEach(el => {
+            if (userStorage.myFavourites.some(item => item.id == el.getAttribute("productId"))) {
+                el.classList.add("liked");
+            }
+        });
+
+        let buttons = Array.from(document.getElementsByClassName("product-photos"));
+        buttons.forEach(function (currentBtn) {
+            currentBtn.addEventListener('click', selectProduct)
+        });
+
+        let productImages = Array.from(document.getElementsByClassName("product-img"));
+        productImages.forEach(img => changeImgOnHover(img));
+
     }
 })();

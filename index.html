@@ -13,6 +13,7 @@
     <link rel="fonts" href="./assets/styles/CeraPro-Medium/style.css">
     <link rel="stylesheet" href="assets/styles/CeraPro-Medium/style.css">
     <link rel="stylesheet" href="./assets/styles/clothes.css">
+    <link rel="stylesheet" href="./assets/styles/favourites.css">
     <link rel="icon" href="./assets/images/favicon.jpg">
     <title>RemixShop</title>
 </head>
@@ -34,7 +35,8 @@
                             <div class="login-form">
                                 <input type="email" placeholder="Имейл" class="login-email" id="emailInput">
                                 <input type="password" placeholder="Парола" class="login-password" id="passwordInput">
-                                <span id="loginError" class="login-error" style="display: none;">Грешен имейл или парола</span>
+                                <span id="loginError" class="login-error" style="display: none;">Грешен имейл или
+                                    парола</span>
                                 <span class="forgot-password">Забравили сте паролата си?</span>
                                 <button id="loginButton" class="login-btn">Вход</button>
                             </div>
@@ -142,8 +144,30 @@
                             <li>
                                 <a href="#">Продайте на Remix</a>
                             </li>
-                            <li>
-                                <a href="javascript:;" id="enterButton">Вход</a>
+                            <li class="afterRegistration user">
+                                <a href="javascript:;" class="logged" id="user-button"></a>
+                                <div id="userMenuContainer"></div>
+                            </li>
+                            <li class="afterRegistration">
+                                <a href="#favourites" class="favourites-logged icon-animation" id="showFavouritesBtn">
+                                    <span id="favourit-icon-main" class="favourit-icon-main"></span>
+                                    <span id="favorites_count_top" class="count"></span>
+                                    <span class="dot-wrapper">
+                                        <span class="dot-counter"></span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="afterRegistration shopping-bag-content">
+                                <a href="javascript:;" class="shopping-bag icon-count icon-animation">
+                                    <span id="basket-icon" class="basket-icon"></span>
+                                    <span id="basket-product-count" class="basket-product-count count">0</span>
+                                    <span class="dot-wrapper">
+                                        <span class="dot-counter"></span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="beforeRegistration">
+                                <a href="javascript:;" id="enterButton" class="enter" style="display: block;">Вход</a>
                             </li>
                         </ul>
                     </nav>
@@ -171,7 +195,7 @@
                         </ul>
                         <div class="search-box">
                             <span class="search-container-input">
-                                <input type="text" id="srch-term" name="search"
+                                <input type="text" id="srchProd" name="search"
                                     placeholder="Търсете блуза XS, рокля коприна, яке Nike..." class="search-input">
                             </span>
                             <span class="icon" id="search-button"></span>
@@ -374,7 +398,33 @@
                 </div>
             </div>
         </div>
+        <div id="favourites">
+            <div class="container-fluid">
+                <div class="bannerSection">
+                    <div class="fav-banner-wrapper">
+                        <div class="fav-box-border">
+                            <span class="favorite-icon"></span>
+                            <span class="fav-text">
+                                <p>Знаете ли, че цените на селектирани second hand продукти в&nbsp;remixshop.com падат с
+                                    -5% всеки ден? <br>Добавяйте продукти в "Любими", следете колко харесвания имат и
+                                    решете кога да ги грабнете, за да са Ваши!</p>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <h2 class="title-left"> Любими </h2>
+            </div>
+            <div class="container-fluid">
+                <ul class="fav-product-list" id="favouritesListContent">
+                    <span class="empty-favorites">Добавяйте продукти в "Любими" и следете
+                        цената им и колко харесвания имат, за да прецените кога да ги купите преди всички
+                        останали.</span>
+                </ul>
+            </div>
         </div>
+
     </main>
     <footer>
         <div id="footer-top">
@@ -520,7 +570,13 @@
                         {{#each this}}
                             <li class="slide-box">
                                 <div class="favourite-icon-container">
-                                    <span class="favourite-icon"></span>
+                                    <input type="hidden" value="{{this.id}}" style="display: none;">
+                                    {{#if this.isInFavourites}}
+                                    <span class="favourite-icon liked" productId="{{this.id}}"></span>
+                                    {{/if}}
+                                    {{# unless this.isInFavourites}}
+                                    <span class="favourite-icon" productId="{{this.id}}"></span>
+                                    {{/unless}}
                                 </div>
                                 <div class="cornerWrapper">
                                     {{#if this.discount}}
@@ -535,7 +591,7 @@
                                 </div>
                                 <div class="product-box">
                                     <a class="product-photos" href="#overView">
-                                        <input type="hidden" value="{{this.id}}">
+                                        <input type="hidden" value="{{this.id}}" style="display: none;">
                                         <img src="{{this.image_front}}" alt="{{this.name}}" class="product-img">
                                     </a>
                                 </div>
@@ -629,75 +685,183 @@
 
     <script id="womenClothesDisplay-template" type="text/x-handlebars-template">
         {{#each femaleClothes}}
+        <div class="display-box">
+            <div class="favourite-icon-container">
+                <input type="hidden" value="{{this.id}}" style="display: none;">
+                {{#if this.isInFavourites}}
+                <span class="favourite-icon icon-display liked" productId="{{this.id}}"></span>
+                {{/if}}
+                {{# unless this.isInFavourites}}
+                <span class="favourite-icon icon-display" productId="{{this.id}}"></span>
+                {{/unless}}
+            </div>
+            <div class="cornerWrapper">
+                {{#if this.discount}}
+                <span class="discount">%</span>
+                {{/if}}
+                {{#if this.isOutlet}}
+                <span class="outletPic"></span>
+                {{/if}}
+                {{#if this.isNewSeason}}
+                <span class="nextSeasonPic"></span>
+                {{/if}}
+            </div>
+            <div class="product-box">
+                <a class="product-photos" href="#overView">
+                    <input type="hidden" value="{{this.id}}" style="display: none;">
+                    <img src="{{this.image_front}}" alt="{{this.name}}" class="product-img img-display">
+                </a>
+            </div>
+            <div class="product-info">
+                <a class="product-brand" href="#">{{this.brand}}</a>
+                <span class="product-size">{{this.size}}</span>
+            </div>
+            <div class="price-box">
+                {{#if this.discount}}
+                    <div class="old-price-box">
+                        <span class="price-title">Начална цена</span>
+                        <span class="old-price">{{this.price}}лв</span>
+                    </div>
+                    <div class="new-price-box">
+                        <span class="promo">{{this.discount}}</span>
+                        <span class="new-price">{{this.newPrice}}лв</span>
+                    </div>
+                {{/if}}
+                {{# unless this.discount}}
+                    <div class="product-price">
+                        <div class="price-container">
+                            <span class="price-title">Цена</span>
+                            <span class="price-without-discount">{{this.price}}лв</span>
+                        </div>
+                    </div>
+                {{/unless}}
+            </div>
+            <div class="product-button">
+                <button class="add-button button-display">Добавете</button>
+            </div>
+        </div>
+        {{/each}} 
+    </script>
+
+    <script id="menClothesDisplay-template" type="text/x-handlebars-template">
+    {{#each maleClothes}}
+    <div class="display-box">
+        <div class="favourite-icon-container">
+            <input type="hidden" value="{{this.id}}" style="display: none;">
+            {{#if this.isInFavourites}}
+            <span class="favourite-icon icon-display liked" productId="{{this.id}}"></span>
+            {{/if}}
+            {{# unless this.isInFavourites}}
+            <span class="favourite-icon icon-display" productId="{{this.id}}"></span>
+            {{/unless}}
+        </div>
+        <div class="cornerWrapper">
+            {{#if this.discount}}
+            <span class="discount">%</span>
+            {{/if}}
+            {{#if this.isOutlet}}
+            <span class="outletPic"></span>
+            {{/if}}
+            {{#if this.isNewSeason}}
+            <span class="nextSeasonPic"></span>
+            {{/if}}
+        </div>
+        <div class="product-box">
+            <a class="product-photos" href="#overView">
+                <input type="hidden" value="{{this.id}}" style="display: none;">
+                <img src="{{this.image_front}}" alt="{{this.name}}" class="product-img img-display">
+            </a>
+        </div>
+        <div class="product-info">
+            <a class="product-brand" href="#">{{this.brand}}</a>
+            <span class="product-size">{{this.size}}</span>
+        </div>
+        <div class="price-box">
+            {{#if this.discount}}
+                <div class="old-price-box">
+                    <span class="price-title">Начална цена</span>
+                    <span class="old-price">{{this.price}}лв</span>
+                </div>
+                <div class="new-price-box">
+                    <span class="promo">{{this.discount}}</span>
+                    <span class="new-price">{{this.newPrice}}лв</span>
+                </div>
+            {{/if}}
+            {{# unless this.discount}}
+                <div class="product-price">
+                    <div class="price-container">
+                        <span class="price-title">Цена</span>
+                        <span class="price-without-discount">{{this.price}}лв</span>
+                    </div>
+                </div>
+            {{/unless}}
+        </div>
+        <div class="product-button">
+            <button class="add-button button-display">Добавете</button>
+        </div>
+    </div>
+    {{/each}} 
+    </script>
+
+    <script id="filteredClothesDisplayTempl" type="text/x-handlebars-template">
+        {{#each filteredProducts}}
             <div class="display-box">
                 <div class="favourite-icon-container">
-                    <span class="favourite-icon icon-display"></span>
+                    <input type="hidden" value="{{this.id}}" style="display: none;">
+                    {{#if this.isInFavourites}}
+                    <span class="favourite-icon icon-display liked" productId="{{this.id}}"></span>
+                    {{/if}}
+                    {{# unless this.isInFavourites}}
+                    <span class="favourite-icon icon-display" productId="{{this.id}}"></span>
+                    {{/unless}}
                 </div>
                 <div class="cornerWrapper">
+                    {{#if this.discount}}
                     <span class="discount">%</span>
+                    {{/if}}
+                    {{#if this.isOutlet}}
                     <span class="outletPic"></span>
+                    {{/if}}
+                    {{#if this.isNewSeason}}
+                    <span class="nextSeasonPic"></span>
+                    {{/if}}
                 </div>
                 <div class="product-box">
                     <a class="product-photos" href="#overView">
-                        <img src="{{image_front}}" alt="{{name}}" class="product-img img-display">
+                        <input type="hidden" value="{{this.id}}" style="display: none;">
+                        <img src="{{this.image_front}}" alt="{{this.name}}" class="product-img img-display">
                     </a>
                 </div>
                 <div class="product-info">
-                    <a class="product-brand" href="#">{{brand}}</a>
-                    <span class="product-size">{{size}}</span>
+                    <a class="product-brand" href="#">{{this.brand}}</a>
+                    <span class="product-size">{{this.size}}</span>
                 </div>
                 <div class="price-box">
-                    <div class="old-price-box">
-                        <span class="price-title">Начална цена</span>
-                        <span class="old-price">{{price}}лв</span>
-                    </div>
-                    <div class="new-price-box">
-                        <span class="promo">{{discount}}</span>
-                        <span class="new-price">{{price}}лв</span>
-                    </div>
+                    {{#if this.discount}}
+                        <div class="old-price-box">
+                            <span class="price-title">Начална цена</span>
+                            <span class="old-price">{{this.price}}лв</span>
+                        </div>
+                        <div class="new-price-box">
+                            <span class="promo">{{this.discount}}</span>
+                            <span class="new-price">{{this.newPrice}}лв</span>
+                        </div>
+                    {{/if}}
+                    {{# unless this.discount}}
+                        <div class="product-price">
+                            <div class="price-container">
+                                <span class="price-title">Цена</span>
+                                <span class="price-without-discount">{{this.price}}лв</span>
+                            </div>
+                        </div>
+                    {{/unless}}
                 </div>
                 <div class="product-button">
                     <button class="add-button button-display">Добавете</button>
                 </div>
             </div>
         {{/each}} 
-</script>
-
-    <script id="menClothesDisplay-template" type="text/x-handlebars-template">
-    {{#each maleClothes}}
-        <div class="display-box">
-            <div class="favourite-icon-container">
-                <span class="favourite-icon icon-display"></span>
-            </div>
-            <div class="cornerWrapper">
-                <span class="discount">%</span>
-                <span class="outletPic"></span>
-            </div>
-            <div class="product-box">
-                <a class="product-photos" href="#overView">
-                    <img src="{{image_front}}" alt="{{name}}" class="product-img img-display">
-                </a>
-            </div>
-            <div class="product-info">
-                <a class="product-brand" href="#">{{brand}}</a>
-                <span class="product-size">{{size}}</span>
-            </div>
-            <div class="price-box">
-                <div class="old-price-box">
-                    <span class="price-title">Начална цена</span>
-                    <span class="old-price">{{price}}лв</span>
-                </div>
-                <div class="new-price-box">
-                    <span class="promo">{{discount}}</span>
-                    <span class="new-price">{{price}}лв</span>
-                </div>
-            </div>
-            <div class="product-button">
-                <button class="add-button button-display">Добавете</button>
-            </div>
-        </div>
-    {{/each}} 
-</script>
+    </script>
 
 
     <script id="overViewNavigationTempl" type="text/x-handlebars-template">
@@ -723,6 +887,7 @@
                         <span class="voucher-badge">%</span>
                     </div>
                     <span class="favourite">
+                        <input type="hidden" value="{{this.id}}" style="display: none;">
                         <span class="fav-icon"></span>
                     </span>
                 </div>
@@ -875,23 +1040,94 @@
         </div>
     </script>
 
+    <script id="userLogoutTempl" type="text/x-handlebars-template">
+        <div id="userSubMenu" class="user-submenu">
+            <a class="hi-user">
+                <span class="hi-username">
+                    <span class="username">Здравейте, </span>
+                    <span class="username">{{this.name}}</span>
+                </span>
+                <span class="usermail">{{this.email}}</span>
+            </a>       
+            <span class="logout">
+                <a href="javascript:;" id="logOutBtn">Изход</a>
+            </span>
+        </div>
+    </script>
+
+    <script id="favouritesTempl" type="text/x-handlebars-template">
+        {{#each favouritesProducts}}
+            <li class="slide-box">
+                <div class="favourite-icon-container">
+                    <input type="hidden" value="{{this.id}}" style="display: none;">
+                    {{#if this.isInFavourites}}
+                    <span class="favourite-icon liked" productId="{{this.id}}"></span>
+                    {{/if}}
+                    {{# unless this.isInFavourites}}
+                    <span class="favourite-icon" productId="{{this.id}}"></span>
+                    {{/unless}}
+                </div>
+                <div class="cornerWrapper">
+                    {{#if this.discount}}
+                    <span class="discount">%</span>
+                    {{/if}}
+                    {{#if this.isOutlet}}
+                    <span class="outletPic"></span>
+                    {{/if}}
+                    {{#if this.isNewSeason}}
+                    <span class="nextSeasonPic"></span>
+                    {{/if}}
+                </div>
+                <div class="product-box">
+                    <a class="product-photos" href="#overView">
+                        <input type="hidden" value="{{this.id}}" style="display: none;">
+                        <img src="{{this.image_front}}" alt="{{this.name}}" class="product-img">
+                    </a>
+                </div>
+                <div class="product-info">
+                    <a class="product-brand" href="#">{{this.brand}}</a>
+                    <span class="product-size">{{this.size}}</span>
+                </div>
+                <div class="price-box">
+                    {{#if this.discount}}
+                        <div class="old-price-box">
+                            <span class="price-title">Начална цена</span>
+                            <span class="old-price">{{this.price}}лв</span>
+                        </div>
+                        <div class="new-price-box">
+                            <span class="promo">{{this.discount}}</span>
+                            <span class="new-price">{{newPrice}}лв</span>
+                        </div>
+                    {{/if}}
+                    {{# unless this.discount}}
+                        <div class="product-price">
+                            <div class="price-container">
+                                <span class="price-title">Цена</span>
+                                <span class="price-without-discount">{{this.price}}лв</span>
+                            </div>
+                        </div>
+                    {{/unless}}
+                </div>
+                <div class="product-button">
+                    <button class="add-button">Добавете</button>
+                </div>
+            </li>
+        {{/each}}            
+    </script>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
         integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
         crossorigin="anonymous"></script>
     <script src="assets/js/utils.js"></script>
-    <script src="assets/js/male_clothes.js"></script>
-    <script src="assets/js/femaleClothes.js"></script>
+    <script src="assets/js/ProductsData/male_clothes.js"></script>
+    <script src="assets/js/ProductsData/femaleClothes.js"></script>
     <script src="assets/js/UserModel.js"></script>
     <script src="assets/js/UserController.js"></script>
-    <script src="assets/js/ManagerModel.js"></script>
     <script src="assets/js/ProductModel.js"></script>
-    <script src="assets/js/BannersModel.js"></script>
     <script src="assets/js/BannersController.js"></script>
     <script src="assets/js/CarouselControler.js"></script>
-    <script src="assets/js/BrandsModel.js"></script>
     <script src="assets/js/BrandsController.js"></script>
-    <script src="assets/js/BlogModel.js"></script>
     <script src="assets/js/BlogController.js"></script>
     <script src="assets/js/clothesDisplay.js"></script>
     <script src="assets/js/ProductController.js"></script>

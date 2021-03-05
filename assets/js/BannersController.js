@@ -1,3 +1,16 @@
+let banner = {
+  bannersTemplates: [
+    {
+      image:
+        "assets/images/banner-1.png",
+      description: "Условия",
+    },
+    {
+      image: "assets/images/banner-2.png",
+    },
+  ],
+};
+
 const bannersController = function () {
     // Controller
     const source = document.getElementById("bannersTempl").innerHTML;
