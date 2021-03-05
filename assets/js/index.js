@@ -80,20 +80,55 @@
 
 
     //Router
+    const navListMain = Array.from(document.querySelector('.navigation-list').children);
+    const allFilters = Array.from(document.querySelectorAll('.main-category'));
+    const womenBtn = getById('womenBtn');
+
+
     function onHashChange() {
         let page = location.hash.slice(1);
 
         let allPages = document.querySelector('main').children;
         for (let i = 0; i < allPages.length; i++) {
-            if (allPages[i].id === page) {
-                allPages[i].style.display = 'block'
-            } else if (page === '') {
-                allPages[i].style.display = 'none'
+            if (page !== 'home' && allPages[i].id === page) {
+                allPages[i].style.display = 'block';
+                allFilters.forEach(el => el.classList.remove("selectedFilter"));
+                womenBtn.classList.add("selectedFilter");
+                womenClothesController(siteManager);
+            } else if (page === 'home' || page === '') {
+                allPages[i].style.display = 'none';
                 homePage.style.display = 'block';
+                allFilters.forEach(el => el.classList.remove("selectedFilter"));
+                navListMain.forEach(nav => nav.classList.remove('selectedNav'));
+                womenBtn.classList.remove("selectedFilter");
             } else {
-                allPages[i].style.display = 'none'
+                allPages[i].style.display = 'none';
             }
         }
+    }
+
+
+    // change nav style on click
+
+    navListMain.forEach(function (currentNav) {
+        currentNav.addEventListener('click', selectPage);
+    })
+
+    function selectPage(ev) {
+        navListMain.forEach(nav => nav.classList.remove('selectedNav'))
+        ev.target.parentElement.classList.add('selectedNav')
+    }
+
+
+    //change filter style on click
+    allFilters.forEach(function (currentFilter) {
+        currentFilter.addEventListener('click', selectFilter)
+    })
+
+    function selectFilter(ev) {
+        ev.preventDefault();
+        allFilters.forEach(filter => filter.classList.remove('selectedFilter'));
+        ev.target.parentElement.classList.add("selectedFilter");
     }
 
     // OnScroll event handler
@@ -152,7 +187,7 @@
     brandsController();
     blogController();
 
-    //Serch by name
+    //Search by name
     srchProd.addEventListener("blur", function (event) {
         let filtered = siteManager.filterByName(event.target.value);
         showFilteredProducts(filtered);
@@ -261,32 +296,7 @@
     }
 
 
-    // change nav style on click
-    const navListMain = Array.from(document.querySelector('.navigation-list').children);
-    navListMain.forEach(function (currentNav) {
-        currentNav.addEventListener('click', selectPage);
-    })
-
-    function selectPage(ev) {
-        navListMain.forEach(nav => nav.classList.remove('selectedNav'))
-        ev.target.parentElement.classList.add('selectedNav')
-    }
-
-
-    //change filter style on click
-    const allFilters = Array.from(document.querySelectorAll('.main-category'));
-    allFilters.forEach(function (currentFilter) {
-        currentFilter.addEventListener('click', selectFilter)
-    })
-
-    function selectFilter(ev) {
-        ev.preventDefault();
-        allFilters.forEach(filter => filter.classList.remove('selectedFilter'));
-        ev.target.parentElement.classList.add("selectedFilter");
-    }
-
     // select female clothes
-    const womenBtn = document.getElementById('womenBtn');
     womenBtn.addEventListener('click', function () {
         womenClothesController(siteManager);
 
@@ -304,6 +314,7 @@
     // select male clothes
     const menBtn = document.getElementById('menBtn');
     menBtn.addEventListener('click', function () {
+        womenBtn.classList.remove("selectedFilter");
         menClothesController(siteManager);
 
         let productImages = Array.from(document.getElementsByClassName("product-img img-display"));

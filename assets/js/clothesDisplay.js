@@ -10,6 +10,16 @@ sorterIcon.addEventListener('mouseout', function () {
     dropdownSort.style.display = 'none';
 });
 
+// event listeners for sort buttons
+
+function sortByPriceAsc(){
+//    take into account which display is on - women or men
+}
+
+function sortByPriceDesc(){
+
+}
+
 //display women's clothes
 
 const womenClothesController = function (products) {
@@ -67,3 +77,4 @@ const favouritesClothesController = function (products) {
 
 
 }
+
