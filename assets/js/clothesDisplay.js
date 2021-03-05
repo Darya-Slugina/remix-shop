@@ -14,7 +14,7 @@ sorterIcon.addEventListener('mouseout', function () {
 
 const womenClothesController = function (products) {
     let containerClothesDisplay = document.getElementById('display');
-
+    products.femaleClothes.forEach(el => el.newPrice = getNewPrice(el.price, el.discount));
     let source = document.getElementById('womenClothesDisplay-template').innerHTML;
     let template = Handlebars.compile(source);
 
@@ -26,7 +26,7 @@ const womenClothesController = function (products) {
 
 const menClothesController = function (products) {
     let containerClothesDisplay = document.getElementById('display');
-
+    products.maleClothes.forEach(el => el.newPrice = getNewPrice(el.price, el.discount));
     let source = document.getElementById('menClothesDisplay-template').innerHTML;
     let template = Handlebars.compile(source);
 
@@ -39,11 +39,31 @@ const menClothesController = function (products) {
 const filteredClothesController = function (products) {
     let containerClothesDisplay = getById('display');
     products.forEach(el => el.newPrice = getNewPrice(el.price, el.discount));
-    let filteredprod = { 'filteredProducts': products};
+    let filteredProd = { 'filteredProducts': products };
 
     let source = document.getElementById('filteredClothesDisplayTempl').innerHTML;
     let template = Handlebars.compile(source);
 
-    let html = template(filteredprod);
+    let html = template(filteredProd);
     containerClothesDisplay.innerHTML = html;
+}
+
+//display favourites products on favourites page
+const favouritesClothesController = function (products) {
+    let containerClothesDisplay = getById('favouritesListContent');
+    let favouritesProd = { 'favouritesProducts': products };
+
+    let source = document.getElementById('favouritesTempl').innerHTML;
+    let template = Handlebars.compile(source);
+
+    let html = template(favouritesProd);
+    if(products.length > 0) {
+        containerClothesDisplay.innerHTML = html;
+    } else {
+        containerClothesDisplay.innerHTML =  `<span class="empty-favorites">Добавяйте продукти в "Любими" и следете
+        цената им и колко харесвания имат, за да прецените кога да ги купите преди всички
+        останали.</span>`;
+    }
+
+
 }

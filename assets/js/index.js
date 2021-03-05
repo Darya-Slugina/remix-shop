@@ -289,16 +289,32 @@
     const womenBtn = document.getElementById('womenBtn');
     womenBtn.addEventListener('click', function () {
         womenClothesController(siteManager);
+
         let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
         productImages.forEach(img => changeImgOnHover(img));
+
+        let buttons = Array.from(document.getElementsByClassName("product-photos"));
+        buttons.forEach(function (currentBtn) {
+            currentBtn.addEventListener('click', selectProduct);
+        });
+
+        likeItem();
     })
 
     // select male clothes
     const menBtn = document.getElementById('menBtn');
     menBtn.addEventListener('click', function () {
         menClothesController(siteManager);
+
         let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
         productImages.forEach(img => changeImgOnHover(img));
+
+        let buttons = Array.from(document.getElementsByClassName("product-photos"));
+        buttons.forEach(function (currentBtn) {
+            currentBtn.addEventListener('click', selectProduct);
+        });
+
+        likeItem();
     })
 
     // personal filters - dropdown info on hover
@@ -315,6 +331,7 @@
     // Select current product
     function selectProduct(e) {
         let productId = e.target.parentNode.children[0].value;
+        console.log(e);
         product = siteManager.allProducts.find(el => el.id === Number(productId));
 
         productController();
@@ -477,6 +494,33 @@
                 favouriteIcon.forEach(el => el.classList.remove("liked"));
             })
         });
+
+        let showFavouritesBtn = getById("showFavouritesBtn");
+        showFavouritesBtn.addEventListener("click", showMyFavourites);
+
+        // showMyFavourites();
+    }
+
+    // Update favourites page with favourites products
+    function showMyFavourites() {
+        likeItem();
+        window.scrollTo(0, 0);
+        let user = userStorage.currentUser[0].email;
+        favouritesClothesController(JSON.parse(localStorage.getItem(user)));
+        let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
+        favouriteIcon.forEach(el => {
+            if (userStorage.myFavourites.some(item => item.id == el.getAttribute("productId"))) {
+                el.classList.add("liked");
+            }
+        });
+
+        let buttons = Array.from(document.getElementsByClassName("product-photos"));
+        buttons.forEach(function (currentBtn) {
+            currentBtn.addEventListener('click', selectProduct)
+        });
+
+        let productImages = Array.from(document.getElementsByClassName("product-img"));
+        productImages.forEach(img => changeImgOnHover(img));
 
     }
 })();
