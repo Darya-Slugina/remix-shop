@@ -26,6 +26,8 @@
     let loginLink = getById("loginLink");
     let favoritesCounter = getById("favorites_count_top");
     let favouritIconMain = getById("favourit-icon-main");
+    let desiredCounter = getById("basketProductCount");
+    let basketIcon = getById("basket-icon");
     let loginButton = getById("loginButton");
     let srchProd = getById("srchProd");
 
@@ -77,6 +79,8 @@
     loginBackBtn.addEventListener("click", backTologinForm);
     loginLink.addEventListener("click", backTologinForm);
     loginButton.addEventListener("click", updateFavourites);
+    loginButton.addEventListener("click", updateDesires);
+    basketIcon.addEventListener("click", showBasketInfo);
 
 
     //Router
@@ -93,7 +97,12 @@
             } else {
                 allPages[i].style.display = 'none'
             }
+
+            if (page === 'favourites') {
+                showMyFavourites();
+            }
         }
+        moveToBasket();
     }
 
     // OnScroll event handler
@@ -229,6 +238,7 @@
 
         }
         loadEvents();
+        moveToBasket();
     }
 
     // Show more brands on click
@@ -299,6 +309,8 @@
         });
 
         likeItem();
+        moveToBasket();
+        updateDesires();
     })
 
     // select male clothes
@@ -315,6 +327,8 @@
         });
 
         likeItem();
+        moveToBasket();
+        updateDesires();
     })
 
     // personal filters - dropdown info on hover
@@ -331,7 +345,6 @@
     // Select current product
     function selectProduct(e) {
         let productId = e.target.parentNode.children[0].value;
-        console.log(e);
         product = siteManager.allProducts.find(el => el.id === Number(productId));
 
         productController();
@@ -401,6 +414,22 @@
         }
     }
 
+     //Desired items counter
+    function updateDesiredCounter() {
+        let counter = userStorage.myDesiredCounter;
+
+        if (counter > 0) {
+            desiredCounter.style.display = "flex";
+            basketIcon.classList.add("full");
+            desiredCounter.innerHTML = counter;
+
+        } else {
+            desiredCounter.style.display = "none";
+            basketIcon.classList.remove("full");
+            desiredCounter.innerHTML = '';
+        }
+    }
+
     // On click like the item
     function likeItem() {
         let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
@@ -429,6 +458,7 @@
         }));
     }
 
+    // Check if item in favourites and put current styles
     function updateLikes() {
         let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
         favouriteIcon.forEach(el => {
@@ -438,9 +468,25 @@
         });
     }
 
+    // Check if item in desired and put current styles
+    function updateDesiredProd() {
+        let desiredBtn = document.querySelectorAll(".add-button");
+        desiredBtn.forEach(el => {
+            if (userStorage.myDesiredProd.some(item => item.id == el.value)) {
+                el.innerText = "Добавено";
+                el.classList.add("clicked");
+            }
+        });
+    }
+
     function updateFavourites() {
         updatefavouriteCounter();
         updateLikes();
+    }
+
+    function updateDesires() {
+        updateDesiredCounter();
+        updateDesiredProd();
     }
 
     function changeImgOnHover(img) {
@@ -452,6 +498,8 @@
 
         updatefavouriteCounter();
         likeItem();
+        updateDesiredCounter();
+        updateDesiredProd();
 
         let productImages = Array.from(document.getElementsByClassName("product-img"));
         productImages.forEach(img => changeImgOnHover(img));
@@ -522,5 +570,54 @@
         let productImages = Array.from(document.getElementsByClassName("product-img"));
         productImages.forEach(img => changeImgOnHover(img));
 
+        moveToBasket();
+        updateDesires();
+
     }
+
+    // On click add to shopping bag
+    function moveToBasket() {
+        let wantedProduct = document.querySelectorAll(".add-button");
+        userStorage.init();
+
+        wantedProduct.forEach(el => el.addEventListener("click", function (e) {
+            if (userStorage.isLogged == true) {
+                let currentItem = siteManager.allProducts.filter(el => el.id === Number(e.target.value));
+
+                if (userStorage.myDesiredProd.filter(function (elem) { return elem.id === currentItem[0].id }).length > 0) {
+                    userStorage.removeFromDesired(currentItem[0]);
+                    e.target.innerHTML = "Добавете";
+                    e.target.classList.remove("clicked");
+                    counter = userStorage.myDesiredProd.length;
+                    desiredCounter.innerHTML = counter;
+                    userStorage.myDesiredCounter = counter;
+                    updateDesiredCounter();
+                } else {
+                    userStorage.addToDesired(currentItem[0]);
+                    e.target.innerHTML = "Добавено";
+                    e.target.classList.add("clicked");
+                    counter = userStorage.myDesiredProd.length;
+                    desiredCounter.innerHTML = counter;
+                    userStorage.myDesiredCounter = counter;
+                    updateDesiredCounter();
+                }
+            } 
+        }));
+    }
+
+    //On click show the shopping-bag
+    function showBasketInfo(e) {
+        e.preventDefault();
+        let basket = getById("shopping-cart-content");
+        basket.classList.toggle("show");
+
+        if (userStorage.myDesiredCounter <= 0){
+            getById("emptyBag").style.display = "block";
+        } else if (userStorage.myDesiredCounter > 0) {
+            getById("emptyBag").style.display = "none";
+            getById("fullBag").style.display = "block";
+            shoppingBagController(userStorage.myDesiredProd);
+        }
+    }
+
 })();

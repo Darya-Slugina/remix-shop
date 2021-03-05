@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="assets/styles/CeraPro-Medium/style.css">
     <link rel="stylesheet" href="./assets/styles/clothes.css">
     <link rel="stylesheet" href="./assets/styles/favourites.css">
+    <link rel="stylesheet" href="./assets/styles/shopping-bag.css">
     <link rel="icon" href="./assets/images/favicon.jpg">
     <title>RemixShop</title>
 </head>
@@ -160,11 +161,25 @@
                             <li class="afterRegistration shopping-bag-content">
                                 <a href="javascript:;" class="shopping-bag icon-count icon-animation">
                                     <span id="basket-icon" class="basket-icon"></span>
-                                    <span id="basket-product-count" class="basket-product-count count">0</span>
+                                    <span id="basketProductCount" class="basket-product-count count"></span>
                                     <span class="dot-wrapper">
                                         <span class="dot-counter"></span>
                                     </span>
                                 </a>
+                                <div id="shopping-cart-content" class="shopping-bag-dropdown">
+                                    <div class="cart-inner-wrapper">
+                                        <div class="empty-bag" id="emptyBag" style="display: none;">
+                                            <div class="empty-bag-text" id="cart-empty-info">
+                                                <div class="cart-total-wrapper">
+                                                    <span class="empty">Кошницата Ви е празна</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="full-bag" id="fullBag" style="display: none;">
+                                        </div>
+                                    </div>
+                                    <div id="cartTotal" class="cart-total"></div>
+                                </div>
                             </li>
                             <li class="beforeRegistration">
                                 <a href="javascript:;" id="enterButton" class="enter" style="display: block;">Вход</a>
@@ -620,7 +635,7 @@
                                     {{/unless}}
                                 </div>
                                 <div class="product-button">
-                                    <button class="add-button">Добавете</button>
+                                    <button class="add-button" value="{{this.id}}">Добавете</button>
                                 </div>
                             </li>
                         {{/each}}
@@ -737,7 +752,7 @@
                 {{/unless}}
             </div>
             <div class="product-button">
-                <button class="add-button button-display">Добавете</button>
+                <button class="add-button button-display" value="{{this.id}}">Добавете</button>
             </div>
         </div>
         {{/each}} 
@@ -797,7 +812,7 @@
             {{/unless}}
         </div>
         <div class="product-button">
-            <button class="add-button button-display">Добавете</button>
+            <button class="add-button button-display" value="{{this.id}}">Добавете</button>
         </div>
     </div>
     {{/each}} 
@@ -857,7 +872,7 @@
                     {{/unless}}
                 </div>
                 <div class="product-button">
-                    <button class="add-button button-display">Добавете</button>
+                    <button class="add-button button-display" value="{{this.id}}">Добавете</button>
                 </div>
             </div>
         {{/each}} 
@@ -1109,10 +1124,75 @@
                     {{/unless}}
                 </div>
                 <div class="product-button">
-                    <button class="add-button">Добавете</button>
+                    <button class="add-button" value="{{this.id}}">Добавете</button>
                 </div>
             </li>
         {{/each}}            
+    </script>
+
+    <script id="shoppingBagTempl" type="text/x-handlebars-template">
+        {{#each desiredProducts}}
+            <div id="cart-content-item-list">
+                <div class="cart-item-row d-flex product-data">
+                    <div class="img-wrapper">
+                        <a href="javascript:;"class="product-image">
+                            <img id="cart_image_holder" class="cart-image-holder" src="{{this.image_front}}">
+                        </a>
+                    </div>
+                
+                <div class="info-wrapper">
+                    <div class="product-brand">{{this.brand}}</div>
+                    <div class="product-size">Размер {{this.size}}</div>
+                    <div class="product-price price-item d-flex justify-content-between align-items-end">
+                        {{#if this.discount}}
+                        <div class="align-items-end">
+                            <span class="promo">{{this.discount}}</span>
+                        </div>
+                        <div>
+                            <div class="price old-price">
+                                <span>{{this.price}} лв.</span>
+                            </div>
+                            <div class="price new-price"> {{newPrice}}лв.
+                            </div>
+                        </div>
+                        {{/if}}
+                        {{# unless this.discount}}
+                        <div class="align-items-end">
+                            <div class="price">
+                                <span class="realPrice">{{this.price}} лв.</span>
+                            </div>
+                        </div>
+                        {{/unless}}    
+                        <a href="javascript:void(0);" class="delete">×</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </script>
+
+    <script id="shoppingBagTempl2" type="text/x-handlebars-template">
+        <div class="cart-total-wrapper">
+            <div id="dropped-cart-sum" class="cart-sums ab-price">
+                <div class="cart-discount-list">
+                    <div class="cart-subtotal ">
+                        Цена 
+                        <span>{{amount}}лв.</span>
+                    </div>
+                    <div class="discount-price">
+                        ОТСТЪПКА <span>{{discount}}лв.</span>
+                    </div>
+                    <div class="dropped-cart-total">
+                            Общо <span id="cart-info-total">{{sum}} лв.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cart-button-order">
+            <a href="javascript:;" class="shopping-bag-btn">
+                    Поръчайте
+            </a>
+        </div>         
     </script>
 
 
@@ -1131,6 +1211,7 @@
     <script src="assets/js/BlogController.js"></script>
     <script src="assets/js/clothesDisplay.js"></script>
     <script src="assets/js/ProductController.js"></script>
+    <script src="assets/js/ShoppingBagController.js"></script>
     <script src="assets/js/index.js"></script>
 </body>
 

@@ -700,6 +700,11 @@ body {
     background-color: rgb(243, 243, 243);
 }
 
+.add-button.clicked {
+    background-color: #d4e6d6;
+    color: #447130;
+}
+
 .favourite-icon-container {
     position: relative;
 }
@@ -2037,8 +2042,8 @@ body {
     align-items: center;
     border-radius: 50%;
     position: absolute;
-    top: 0;
-    right: -8px;
+    top: -5px;
+    right: -13px;
     padding: 0 2px;
     min-width: 16px;
     min-height: 16px;
@@ -2087,7 +2092,7 @@ body {
     margin-top: -3px;
 }
 
-.basket-icon:hover {
+.basket-icon:hover, .basket-icon.full  {
     background: url(./../images/bag-green-icon.png) no-repeat;
 }
 

@@ -14,7 +14,9 @@ const userStorage = (function () {
       this.isLogged = false;
       this.currentUser = [];
       this.myFavourites = [];
+      this.myDesiredProd = [];
       this.myFavouritesCount = 0;
+      this.myDesiredCounter = 0;
       this.init();      
     }
 
@@ -46,6 +48,19 @@ const userStorage = (function () {
           if (localStorageFavorites !== null) {
             this.myFavourites = localStorageFavorites;
             this.myFavouritesCount = this.myFavourites.length;
+          }
+        }
+
+        // check if in local storage we have key = email1
+        if (localStorage.getItem(this.currentUser[0].email+1)) {
+
+          // get data by key
+          let localStorageDesired  = JSON.parse(localStorage.getItem(this.currentUser[0].email+1));
+
+          // check if this data is not empty, and set favorites
+          if (localStorageDesired !== null) {
+            this.myDesiredProd = localStorageDesired;
+            this.myDesiredCounter = this.myDesiredProd.length;
           }
         }
       }
@@ -105,7 +120,6 @@ const userStorage = (function () {
     }
 
     addToFavourite(el) {
-
       this.myFavourites.push(el);
       localStorage.setItem(this.currentUser[0].email, JSON.stringify(this.myFavourites));
     }
@@ -125,6 +139,16 @@ const userStorage = (function () {
       }
   
       return false;
+    }
+
+    addToDesired(el) {
+      this.myDesiredProd.push(el);
+      localStorage.setItem(this.currentUser[0].email+1, JSON.stringify(this.myDesiredProd));
+    }
+
+    removeFromDesired(el) {      
+      this.myDesiredProd = this.myDesiredProd.filter(item => item.id !== el.id);
+      localStorage.setItem(this.currentUser[0].email+1, JSON.stringify(this.myDesiredProd));
     }
   }
 
