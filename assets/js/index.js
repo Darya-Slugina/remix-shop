@@ -115,10 +115,33 @@
             womenBtn.classList.add("selectedFilter");
             menBtn.classList.remove('selectedFilter');
             womenClothesController(siteManager);
+            // event listeners for sort buttons
+            sortByPriceAscBtn.addEventListener('click', function(ev){
+                ev.preventDefault();
+                siteManager.femaleClothes.sort((a, b) => (a.price - b.price));
+                womenClothesController(siteManager);
+            });
+            sortByPriceDescBtn.addEventListener('click', function(ev){
+                ev.preventDefault();
+                siteManager.femaleClothes.sort((a, b) => (b.price - a.price));
+                womenClothesController(siteManager);
+            });
+            
         } else if (extension === '/men') {
             womenBtn.classList.remove('selectedFilter');
             menBtn.classList.add("selectedFilter");
             menClothesController(siteManager);
+             // event listeners for sort buttons
+             sortByPriceAscBtn.addEventListener('click', function(ev){
+                 ev.preventDefault();
+                siteManager.maleClothes.sort((a, b) => (a.price - b.price));
+                menClothesController(siteManager);
+            });
+            sortByPriceDescBtn.addEventListener('click', function(ev){
+                ev.preventDefault();
+                siteManager.maleClothes.sort((a, b) => (b.price - a.price));
+                menClothesController(siteManager);
+            });
         } else {
             womenBtn.classList.remove('selectedFilter');
             menBtn.classList.remove('selectedFilter');
@@ -126,9 +149,9 @@
 
         // change nav style
         navListMain.forEach(el => {
-            if(el.id === wholePage) {
+            if (el.id === wholePage) {
                 el.classList.add('selectedNav');
-            } else{
+            } else {
                 el.classList.remove('selectedNav');
             }
         })
@@ -329,7 +352,7 @@
     })
 
     // select male clothes
-    
+
     menBtn.addEventListener('click', function () {
         womenBtn.classList.remove("selectedFilter");
         window.location.href = '#allProducts/men';

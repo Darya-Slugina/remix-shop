@@ -1,24 +1,22 @@
 //show sort list on hover
-let sorterIcon = document.getElementById('sorterIcon');
-let dropdownSort = document.getElementById('dropdown-sort');
+// let sorterIcon = getById('sorterIcon');
+let sortDropdownWrapper = getById('sort');
+let dropdownSort = getById('dropdown-sort');
+let sortByPriceAscBtn = getById('sortByPriceAscBtn');
+let sortByPriceDescBtn = getById('sortByPriceDescBtn');
 
-sorterIcon.addEventListener('mouseover', function () {
+sortDropdownWrapper.addEventListener('mouseover', function () {
     dropdownSort.style.display = 'block';
 });
 
-sorterIcon.addEventListener('mouseout', function () {
+sortDropdownWrapper.addEventListener('mouseout', function () {
     dropdownSort.style.display = 'none';
 });
 
-// event listeners for sort buttons
+// Breadcrumbs links corresponding to women/men display
 
-function sortByPriceAsc(){
-//    take into account which display is on - women or men
-}
-
-function sortByPriceDesc(){
-
-}
+let finalBreadcrumbTarget = getById('final-breadcrumb-target');
+let allBreadcrumbTarget = getById('all-breadcrumb-target');
 
 //display women's clothes
 
@@ -30,6 +28,9 @@ const womenClothesController = function (products) {
 
     let html = template(products);
     containerClothesDisplay.innerHTML = html;
+    finalBreadcrumbTarget.innerHTML = 'Дамски дрехи';
+    finalBreadcrumbTarget.href = '#allProducts/women';
+    allBreadcrumbTarget.href = '#allProducts/women';
 }
 
 //display men's clothes
@@ -42,6 +43,9 @@ const menClothesController = function (products) {
 
     let html = template(products);
     containerClothesDisplay.innerHTML = html;
+    finalBreadcrumbTarget.innerHTML = 'Мъжки дрехи';
+    finalBreadcrumbTarget.href = '#allProducts/men';
+    allBreadcrumbTarget.href = '#allProducts/men';
 }
 
 
