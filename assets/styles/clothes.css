@@ -136,17 +136,29 @@
     transform: rotate(90deg);
 }
 
+.filters > li{
+    position: relative;
+}
+
+.filter-dropdown{
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    display: none;
+    z-index: 200;
+}
+
 .container-clothesDisplay{
     box-sizing: border-box;
     max-width: 1245px;
     padding-inline-start: 0;
     margin: 0 auto;
     height: 100%;
-
     width: 100%;
     padding-right: 15px;
     padding-left: 15px;
 }
+
 .sorter-nav *{
     text-decoration: none;
     color: #303030;
@@ -162,15 +174,18 @@
     position: relative;
 }
 
+#sort{
+    position: relative;
+}
+
 #dropdown-sort{
     background-color: #f1f1f3;
     border-radius: 4px;
     display: none;
     position: absolute;
-    left: 0;
     z-index: 100;
     min-width: 220px;
-    left: 100px;
+    left: 0;
 }
 
 #dropdown-sort > ul{
@@ -182,14 +197,17 @@
 }
 
 #dropdown-sort button{
-    border: 0px;
-    
+    border: 0px;   
 }
 
 #dropdown-sort *{
     text-decoration: none;
     list-style: none;
     padding-inline-start: 0;
+}
+
+#sortByPriceAscBtn:hover, #sortByPriceDescBtn:hover{
+    font-weight: bold;
 }
 
 #display{

@@ -83,40 +83,81 @@
     const navListMain = Array.from(document.querySelector('.navigation-list').children);
     const allFilters = Array.from(document.querySelectorAll('.main-category'));
     const womenBtn = getById('womenBtn');
-
+    const menBtn = getById('menBtn');
+    let wholePage;
 
     function onHashChange() {
         let page = location.hash.slice(1);
-
+        let slashLocation = page.indexOf('/') + 1;
+        let extension = location.hash.slice(slashLocation);
         let allPages = document.querySelector('main').children;
+
+        if (slashLocation > 1) {
+            wholePage = location.hash.slice(1, slashLocation);
+        } else {
+            wholePage = page;
+        }
+
         for (let i = 0; i < allPages.length; i++) {
-            if (page !== 'home' && allPages[i].id === page) {
+            if (allPages[i].id === wholePage) {
                 allPages[i].style.display = 'block';
-                allFilters.forEach(el => el.classList.remove("selectedFilter"));
-                womenBtn.classList.add("selectedFilter");
-                womenClothesController(siteManager);
-            } else if (page === 'home' || page === '') {
+            } else if (wholePage === 'home' || wholePage === '') {
                 allPages[i].style.display = 'none';
                 homePage.style.display = 'block';
-                allFilters.forEach(el => el.classList.remove("selectedFilter"));
                 navListMain.forEach(nav => nav.classList.remove('selectedNav'));
-                womenBtn.classList.remove("selectedFilter");
+                allFilters.forEach(el => el.classList.remove("selectedFilter"));
             } else {
                 allPages[i].style.display = 'none';
             }
         }
-    }
 
+        if (extension === '/women') {
+            womenBtn.classList.add("selectedFilter");
+            menBtn.classList.remove('selectedFilter');
+            womenClothesController(siteManager);
+            getFilterOptions(siteManager.femaleClothes);
+            // event listeners for sort buttons
+            sortByPriceAscBtn.addEventListener('click', function(ev){
+                ev.preventDefault();
+                siteManager.femaleClothes.sort((a, b) => (a.price - b.price));
+                womenClothesController(siteManager);
+            });
+            sortByPriceDescBtn.addEventListener('click', function(ev){
+                ev.preventDefault();
+                siteManager.femaleClothes.sort((a, b) => (b.price - a.price));
+                womenClothesController(siteManager);
+            });
+            
+        } else if (extension === '/men') {
+            womenBtn.classList.remove('selectedFilter');
+            menBtn.classList.add("selectedFilter");
+            menClothesController(siteManager);
+            getFilterOptions(siteManager.maleClothes);
+             // event listeners for sort buttons
+             sortByPriceAscBtn.addEventListener('click', function(ev){
+                 ev.preventDefault();
+                siteManager.maleClothes.sort((a, b) => (a.price - b.price));
+                menClothesController(siteManager);
+            });
+            sortByPriceDescBtn.addEventListener('click', function(ev){
+                ev.preventDefault();
+                siteManager.maleClothes.sort((a, b) => (b.price - a.price));
+                menClothesController(siteManager);
+            });
+        } else {
+            womenBtn.classList.remove('selectedFilter');
+            menBtn.classList.remove('selectedFilter');
+        }
 
-    // change nav style on click
+        // change nav style
+        navListMain.forEach(el => {
+            if (el.id === wholePage) {
+                el.classList.add('selectedNav');
+            } else {
+                el.classList.remove('selectedNav');
+            }
+        })
 
-    navListMain.forEach(function (currentNav) {
-        currentNav.addEventListener('click', selectPage);
-    })
-
-    function selectPage(ev) {
-        navListMain.forEach(nav => nav.classList.remove('selectedNav'))
-        ev.target.parentElement.classList.add('selectedNav')
     }
 
 
@@ -299,6 +340,7 @@
     // select female clothes
     womenBtn.addEventListener('click', function () {
         womenClothesController(siteManager);
+        window.location.href = '#allProducts/women';
 
         let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
         productImages.forEach(img => changeImgOnHover(img));
@@ -312,9 +354,10 @@
     })
 
     // select male clothes
-    const menBtn = document.getElementById('menBtn');
+
     menBtn.addEventListener('click', function () {
         womenBtn.classList.remove("selectedFilter");
+        window.location.href = '#allProducts/men';
         menClothesController(siteManager);
 
         let productImages = Array.from(document.getElementsByClassName("product-img img-display"));

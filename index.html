@@ -127,17 +127,17 @@
                 <div class="navigation-container">
                     <nav class="navigation">
                         <ul class="navigation-list">
-                            <li id="all">
-                                <a href="#allProducts">Всичко</a>
+                            <li id="allProducts">
+                                <a href="#allProducts/women">Всичко</a>
                             </li>
                             <li id="secondHand">
-                                <a href="#secondHand">Second Hand</a>
+                                <a href="#secondHand/women">Second Hand</a>
                             </li>
                             <li id="outlet">
-                                <a href="#outlet">Outlet</a>
+                                <a href="#outlet/women">Outlet</a>
                             </li>
                             <li id="newSeason">
-                                <a href="#newSeason">Следващ сезон</a>
+                                <a href="#newSeason/women">Следващ сезон</a>
                             </li>
                         </ul>
                         <ul class="registration">
@@ -175,22 +175,22 @@
                     <div class="main-filters">
                         <ul class="filter-item">
                             <li class="main-category">
-                                <a href="#allProducts" title="Жени" id="womenBtn">Жени</a>
+                                <a href="#allProducts/women" title="Жени" id="womenBtn">Жени</a>
                             </li>
                             <li class="main-category">
-                                <a href="#allProducts" title="Мъже" id="menBtn">Мъже</a>
+                                <a href="#allProducts/men" title="Мъже" id="menBtn">Мъже</a>
                             </li>
                             <li class="main-category">
-                                <a href="#" title="Чанти">Чанти</a>
+                                <a href="#allProducts/women" title="Чанти">Чанти</a>
                             </li>
                             <li class="main-category">
-                                <a href="#" title="Аксесоари">Аксесоари</a>
+                                <a href="#allProducts/women" title="Аксесоари">Аксесоари</a>
                             </li>
                             <li class="main-category">
-                                <a href="#" title="Обувки">Обувки</a>
+                                <a href="#allProducts/women" title="Обувки">Обувки</a>
                             </li>
                             <li class="main-category">
-                                <a href="#" title="Деца">Деца</a>
+                                <a href="#allProducts/women" title="Деца">Деца</a>
                             </li>
                         </ul>
                         <div class="search-box">
@@ -211,13 +211,13 @@
                 <section id="banners">
                     <div id="banner-container" class="banner-container">
                         <div class="banner-categories">
-                            <a href="#allProducts">
+                            <a href="#allProducts/women">
                                 <img src="assets/images/woman.png" class="img-category">
                                 <span class="categoty-button">ЖЕНИ</span>
                             </a>
                         </div>
                         <div class="banner-categories">
-                            <a href="#allProducts">
+                            <a href="#allProducts/men">
                                 <img src="assets/images/man.png" class="img-category">
                                 <span class="categoty-button">МЪЖЕ</span>
                             </a>
@@ -329,9 +329,9 @@
                 <div class="container-breadcrumbs">
                     <div class="breadcrumbs">
                         <ul>
-                            <li><a href="./index.html">Начало</a></li>
-                            <li><a href="">Всичко</a></li>
-                            <li id="final-breadcrumb"><a href="">Дамски дрехи</a></li>
+                            <li><a href="#home">Начало</a></li>
+                            <li><a href="" id="all-breadcrumb-target">Всичко</a></li>
+                            <li id="final-breadcrumb"><a href="" id="final-breadcrumb-target"></a></li>
                         </ul>
                     </div>
                     <div class="container-personalFilters">
@@ -347,10 +347,34 @@
             </div>
             <div class="container-filters">
                 <ul class="filters">
-                    <li><a href="#">Категории</a></li>
-                    <li><a href="#">Размер</a></li>
-                    <li><a href="#">Състояние</a></li>
-                    <li><a href="#">Цена</a></li>
+                    <li id="brandsFilterWrapper"><a href="#">Марки</a>
+                        <div class="filter-dropdown" id="brandsFilterBox"></div>
+                    </li>
+                    <li id="sizeFilterWrapper"><a href="#">Размер</a>
+                        <div class="filter-dropdown" id="sizeFilterBox"></div>
+                    </li>
+                    <li id="conditionFilterWrapper"><a href="#">Състояние</a>
+                        <div class="filter-dropdown" id="conditionFilterBox"></div>
+                    </li>
+                    <li id="priceFilterWrapper"><a href="#">Цена</a>
+                        <div class="filter-dropdown" id="priceFilterBox">
+                            <div><input type="checkbox" id="priceBelow5">
+                            <label for="priceBelow5">До 5лв</label>
+                            </div>
+                            <div><input type="checkbox" id="price5To10">
+                            <label for="price5To10">От 5лв до 10лв</label>
+                            </div>
+                            <div><input type="checkbox" id="price10To50">
+                            <label for="price10To50">От 10 лв до 50 лв</label>
+                            </div>
+                            <div><input type="checkbox" id="price50To100">
+                            <label for="price50To100">От 50 лв до 100 лв</label>
+                            </div>
+                            <div><input type="checkbox" id="priceAbove100">
+                            <label for="priceAbove100">Над 100 лв</label>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </div>
 
@@ -358,7 +382,7 @@
                 <div class="sorter">
                     <div class="sorter-nav">
                         <span>Сортиране по:</span>
-                        <a href=""><img src="./assets/images/sort-icon.PNG" alt="sort-icon" id="sorterIcon">
+                        <a href="" id="sort"><img src="./assets/images/sort-icon.PNG" alt="sort-icon" id="sorterIcon">
                             <div id="dropdown-sort">
                                 <ul>
                                     <li><button id="sortByPriceAscBtn">Цена (възходящ ред)</button></li>
