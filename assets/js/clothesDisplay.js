@@ -179,37 +179,20 @@ function displayByBrand(data, target) {
 
 
 // Breadcrumbs links corresponding to women/men display
-let finalBreadcrumbTarget = getById('final-breadcrumb-target');
-let allBreadcrumbTarget = getById('all-breadcrumb-target');
 
-//display women's clothes
-const womenClothesController = function (products) {
+
+
+
+// display clothes
+const displayClothes = function (data){
     let containerClothesDisplay = document.getElementById('display');
-    products.femaleClothes.forEach(el => el.newPrice = getNewPrice(el.price, el.discount));
-    let source = document.getElementById('womenClothesDisplay-template').innerHTML;
+    data.forEach(el => el.newPrice = getNewPrice(el.price, el.discount));
+
+    let source = getById('clothesDisplay-template').innerHTML;
     let template = Handlebars.compile(source);
-
-    let html = template(products);
+    let html = template(data);
     containerClothesDisplay.innerHTML = html;
-    finalBreadcrumbTarget.innerHTML = 'Дамски дрехи';
-    finalBreadcrumbTarget.href = '#allProducts/women';
-    allBreadcrumbTarget.href = '#allProducts/women';
 }
-
-//display men's clothes
-const menClothesController = function (products) {
-    let containerClothesDisplay = document.getElementById('display');
-    products.maleClothes.forEach(el => el.newPrice = getNewPrice(el.price, el.discount));
-    let source = document.getElementById('menClothesDisplay-template').innerHTML;
-    let template = Handlebars.compile(source);
-
-    let html = template(products);
-    containerClothesDisplay.innerHTML = html;
-    finalBreadcrumbTarget.innerHTML = 'Мъжки дрехи';
-    finalBreadcrumbTarget.href = '#allProducts/men';
-    allBreadcrumbTarget.href = '#allProducts/men';
-}
-
 
 //display filtered products
 const filteredClothesController = function (products) {

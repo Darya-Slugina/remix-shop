@@ -28,7 +28,8 @@
     let favouritIconMain = getById("favourit-icon-main");
     let loginButton = getById("loginButton");
     let srchProd = getById("srchProd");
-
+    let finalBreadcrumbTarget = getById('final-breadcrumb-target');
+    let allBreadcrumbTarget = getById('all-breadcrumb-target');
 
 
     //   Adds the initial male products
@@ -114,36 +115,44 @@
         if (extension === '/women') {
             womenBtn.classList.add("selectedFilter");
             menBtn.classList.remove('selectedFilter');
-            womenClothesController(siteManager);
+            displayClothes(siteManager.femaleClothes);
             getFilterOptions(siteManager.femaleClothes);
             // event listeners for sort buttons
-            sortByPriceAscBtn.addEventListener('click', function(ev){
+            sortByPriceAscBtn.addEventListener('click', function (ev) {
                 ev.preventDefault();
                 siteManager.femaleClothes.sort((a, b) => (a.price - b.price));
-                womenClothesController(siteManager);
+                displayClothes(siteManager.femaleClothes);
             });
-            sortByPriceDescBtn.addEventListener('click', function(ev){
+            sortByPriceDescBtn.addEventListener('click', function (ev) {
                 ev.preventDefault();
                 siteManager.femaleClothes.sort((a, b) => (b.price - a.price));
-                womenClothesController(siteManager);
+                displayClothes(siteManager.femaleClothes);
             });
-            
+
+            finalBreadcrumbTarget.innerHTML = 'Дамски дрехи';
+            finalBreadcrumbTarget.href = '#allProducts/women';
+            allBreadcrumbTarget.href = '#allProducts/women';
+
         } else if (extension === '/men') {
             womenBtn.classList.remove('selectedFilter');
             menBtn.classList.add("selectedFilter");
-            menClothesController(siteManager);
+            displayClothes(siteManager.maleClothes);
             getFilterOptions(siteManager.maleClothes);
-             // event listeners for sort buttons
-             sortByPriceAscBtn.addEventListener('click', function(ev){
-                 ev.preventDefault();
+            // event listeners for sort buttons
+            sortByPriceAscBtn.addEventListener('click', function (ev) {
+                ev.preventDefault();
                 siteManager.maleClothes.sort((a, b) => (a.price - b.price));
-                menClothesController(siteManager);
+                displayClothes(siteManager.maleClothes)
             });
-            sortByPriceDescBtn.addEventListener('click', function(ev){
+            sortByPriceDescBtn.addEventListener('click', function (ev) {
                 ev.preventDefault();
                 siteManager.maleClothes.sort((a, b) => (b.price - a.price));
-                menClothesController(siteManager);
+                displayClothes(siteManager.maleClothes)
             });
+
+            finalBreadcrumbTarget.innerHTML = 'Мъжки дрехи';
+            finalBreadcrumbTarget.href = '#allProducts/men';
+            allBreadcrumbTarget.href = '#allProducts/men';
         } else {
             womenBtn.classList.remove('selectedFilter');
             menBtn.classList.remove('selectedFilter');
@@ -339,7 +348,7 @@
 
     // select female clothes
     womenBtn.addEventListener('click', function () {
-        womenClothesController(siteManager);
+        displayClothes(siteManager.femaleClothes);
         window.location.href = '#allProducts/women';
 
         let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
@@ -354,11 +363,10 @@
     })
 
     // select male clothes
-
     menBtn.addEventListener('click', function () {
         womenBtn.classList.remove("selectedFilter");
         window.location.href = '#allProducts/men';
-        menClothesController(siteManager);
+        displayClothes(siteManager.maleClothes)
 
         let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
         productImages.forEach(img => changeImgOnHover(img));

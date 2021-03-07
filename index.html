@@ -705,8 +705,8 @@
             {{/each}}
     </script>
 
-    <script id="womenClothesDisplay-template" type="text/x-handlebars-template">
-        {{#each femaleClothes}}
+    <script id="clothesDisplay-template" type="text/x-handlebars-template">
+        {{#each this}}
         <div class="display-box">
             <div class="favourite-icon-container">
                 <input type="hidden" value="{{this.id}}" style="display: none;">
@@ -765,7 +765,7 @@
         {{/each}} 
     </script>
 
-    <script id="menClothesDisplay-template" type="text/x-handlebars-template">
+    <!-- <script id="menClothesDisplay-template" type="text/x-handlebars-template">
     {{#each maleClothes}}
     <div class="display-box">
         <div class="favourite-icon-container">
@@ -823,7 +823,7 @@
         </div>
     </div>
     {{/each}} 
-    </script>
+    </script> -->
 
     <script id="filteredClothesDisplayTempl" type="text/x-handlebars-template">
         {{#each filteredProducts}}
