@@ -73,14 +73,14 @@ function getFilterOptions(data) {
         let allSizeOptions = data.map(el => el.size);
         let uniqueSizeOptions = allSizeOptions.filter(onlyUnique);
         sizeFilterBox.innerHTML = '';
-        uniqueSizeOptions.forEach(size => createSizeHTML(size));
+        uniqueSizeOptions.forEach(size => createSizeHTML(size, data));
     }
 
     function getConditionOptions(data) {
         let allConditionOptions = data.map(el => el.condition);
         let uniqueConditionOptions = allConditionOptions.filter(onlyUnique);
         conditionFilterBox.innerHTML = '';
-        uniqueConditionOptions.forEach(condition => createConditionHTML(condition));
+        uniqueConditionOptions.forEach(condition => createConditionHTML(condition, data));
     }
 
     function getBrandsOptions(data) {
@@ -90,17 +90,12 @@ function getFilterOptions(data) {
         uniqueBrandoptions.forEach(brand => createBrandHTML(brand, data));
     }
 
-
-    function onlyUnique(value, index, self) {
-        return self.indexOf(value) === index;
-    }
-
     getSizeOptions(data);
     getConditionOptions(data);
     getBrandsOptions(data);
 }
 
-function createSizeHTML(size) {
+function createSizeHTML(size, data) {
     let sizeBox = document.createElement('button');
     sizeBox.innerText = size;
     sizeBox.id = 'sizeBox' + size;
@@ -110,16 +105,16 @@ function createSizeHTML(size) {
     sizeBox.addEventListener('click', function (ev) {
         ev.preventDefault();
         // let id = ev.target.id;
-        if (ev.target.classList.contains('checkedBtn')) {
-            ev.target.classList.remove('checkedBtn');
+        if (ev.target.classList.contains('checkedSize')) {
+            ev.target.classList.remove('checkedSize');
         } else {
-            ev.target.classList.add('checkedBtn');
+            ev.target.classList.add('checkedSize');
         }
-        displayByFilters()
+        displayByFilters(data)
     })
 }
 
-function createConditionHTML(condition) {
+function createConditionHTML(condition, data) {
     let conditionWrapper = document.createElement('div');
     conditionWrapper.classList.add('conditionFilterBtn');
 
@@ -137,12 +132,12 @@ function createConditionHTML(condition) {
     conditionBox.addEventListener('change', function (ev) {
         ev.preventDefault();
         let target = ev.target;
-        if (target.classList.contains('checked')) {
-            target.classList.remove('checked');
+        if (target.classList.contains('checkedCondition')) {
+            target.classList.remove('checkedCondition');
         } else {
-            target.classList.add('checked');
+            target.classList.add('checkedCondition');
         }
-        displayByFilters()
+        displayByFilters(data)
     })
 }
 
@@ -164,31 +159,56 @@ function createBrandHTML(brand, data) {
     brandBox.addEventListener('change', function (ev) {
         ev.preventDefault();
         let target = ev.target;
-        if (target.classList.contains('checked')) {
-            target.classList.remove('checked');
+        if (target.classList.contains('checkedBrand')) {
+            target.classList.remove('checkedBrand');
         } else {
-            target.classList.add('checked');
+            target.classList.add('checkedBrand');
         }
-        displayByFilters()
+        displayByFilters(data)
     })
 }
 
-function displayByFilters() {
-    let allCheckedFilters = Array.from(document.querySelectorAll('.checked~label'));
-    let allCheckedValues = allCheckedFilters.map(label => label.outerText);
-    // console.log(allCheckedValues)
+function displayByFilters(data) {
+    let perfectItem = {};
 
-    let allCheckedBtns = Array.from(document.querySelectorAll('.checkedBtn'));
-    let allCheckedBtnsValues = allCheckedBtns.map(btn => btn.innerText);
-    // console.log(allCheckedBtnsValues);
+    let allCheckedSizes = Array.from(document.querySelectorAll('.checkedSize'));
+    let allCheckedSizesValues = allCheckedSizes.map(btn => btn.innerText);
+
+    let allCheckedConditions = Array.from(document.querySelectorAll('.checkedCondition~label'));
+    let allCheckedConditionsValues = allCheckedConditions.map(label => label.outerText);
+
+    let allCheckedBrands = Array.from(document.querySelectorAll('.checkedBrand~label'));
+    let allCheckedBrandsValues = allCheckedBrands.map(label => label.outerText);
+
+    if (allCheckedSizesValues) {
+        allCheckedSizesValues.forEach(size => {
+            perfectItem.size = size;
+        })
+    }
+
+    if (allCheckedConditionsValues) {
+        allCheckedConditionsValues.forEach(condition => {
+            perfectItem.condition = condition;
+        })
+    }
+
+    if (allCheckedBrandsValues) {
+        allCheckedBrandsValues.forEach(brand => {
+            perfectItem.brand = brand;
+        })
+    }
+
+    let dataToDisplay = data.filter(item => {
+        let filter = item;
+        returnValue = Object.keys(perfectItem).forEach(key => {
+            if (item[key] !== perfectItem[key]) {
+                filter = false;
+            }
+        })
+        return filter;
+    })
+    displayClothes(dataToDisplay);
 }
-// let dataToDisplay = filterByBrand(data, brand);
-// displayClothes(dataToDisplay);
-
-function filterByBrand(data, target) {
-    return data.filter(item => (item.brand === target));
-}
-
 
 // display clothes
 const displayClothes = function (data) {
