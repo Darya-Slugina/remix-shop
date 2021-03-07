@@ -1,5 +1,4 @@
 //show sort list on hover
-// let sorterIcon = getById('sorterIcon');
 let sortDropdownWrapper = getById('sort');
 let dropdownSort = getById('dropdown-sort');
 let sortByPriceAscBtn = getById('sortByPriceAscBtn');
@@ -54,17 +53,21 @@ priceFilterWrapper.addEventListener('mouseout', function () {
     displayNoneElement(priceFilterBox)
 })
 
+let allPriceBoxes = Array.from(document.querySelectorAll('#priceFilterBox input'));
+
+allPriceBoxes.forEach(box => {
+    box.addEventListener('change', function (ev) {
+        ev.preventDefault();
+        // let id = ev.target.id;
+        if (ev.target.classList.contains('checked')) {
+            ev.target.classList.remove('checked');
+        } else {
+            ev.target.classList.add('checked');
+        }
+    })
+})
+
 // fill filter list with data
-
-// според /women /men -> от window.location.hash; let uniqueSizes = siteManager.(fe)maleClothes.size.filter(onlyUnique)
-// function onlyUnique(value, index, self) {
-//   return self.indexOf(value) === index;
-// }
-// uniqueSizes.forEach(html prettiness + add.eventListeners)
-
-// eventListeners - click, според /women /men -> siteManager.(fe)maleClothes.filter(item => item.size === checkedFilter)
-// (fe)male controller 
-
 function getFilterOptions(data) {
     function getSizeOptions(data) {
         let allSizeOptions = data.map(el => el.size);
@@ -84,7 +87,7 @@ function getFilterOptions(data) {
         let allBrandOptions = data.map(el => el.brand);
         let uniqueBrandoptions = allBrandOptions.filter(onlyUnique);
         brandsFilterBox.innerHTML = '';
-        uniqueBrandoptions.forEach(brand => createBrandHTML(brand));
+        uniqueBrandoptions.forEach(brand => createBrandHTML(brand, data));
     }
 
 
@@ -141,7 +144,7 @@ function createConditionHTML(condition) {
     })
 }
 
-function createBrandHTML(brand) {
+function createBrandHTML(brand, data) {
     let brandWrapper = document.createElement('div');
     brandWrapper.classList.add('brandFilterBtn');
 
@@ -158,18 +161,20 @@ function createBrandHTML(brand) {
 
     brandBox.addEventListener('change', function (ev) {
         ev.preventDefault();
-        // let id = ev.target.id;
-        if (ev.target.classList.contains('checked')) {
-            ev.target.classList.remove('checked');
+        let target = ev.target;
+        if (target.classList.contains('checked')) {
+            target.classList.remove('checked');
         } else {
-            ev.target.classList.add('checked');
+            target.classList.add('checked');
+            displayByBrand(data, target);
         }
     })
 }
 
 
-function displayByFilter() {
-
+function displayByBrand(data, target) {
+    let dataToDisplay = data.filter();
+    
 }
 
 
