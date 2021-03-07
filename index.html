@@ -765,66 +765,6 @@
         {{/each}} 
     </script>
 
-    <!-- <script id="menClothesDisplay-template" type="text/x-handlebars-template">
-    {{#each maleClothes}}
-    <div class="display-box">
-        <div class="favourite-icon-container">
-            <input type="hidden" value="{{this.id}}" style="display: none;">
-            {{#if this.isInFavourites}}
-            <span class="favourite-icon icon-display liked" productId="{{this.id}}"></span>
-            {{/if}}
-            {{# unless this.isInFavourites}}
-            <span class="favourite-icon icon-display" productId="{{this.id}}"></span>
-            {{/unless}}
-        </div>
-        <div class="cornerWrapper">
-            {{#if this.discount}}
-            <span class="discount">%</span>
-            {{/if}}
-            {{#if this.isOutlet}}
-            <span class="outletPic"></span>
-            {{/if}}
-            {{#if this.isNewSeason}}
-            <span class="nextSeasonPic"></span>
-            {{/if}}
-        </div>
-        <div class="product-box">
-            <a class="product-photos" href="#overView">
-                <input type="hidden" value="{{this.id}}" style="display: none;">
-                <img src="{{this.image_front}}" alt="{{this.name}}" class="product-img img-display">
-            </a>
-        </div>
-        <div class="product-info">
-            <a class="product-brand" href="#">{{this.brand}}</a>
-            <span class="product-size">{{this.size}}</span>
-        </div>
-        <div class="price-box">
-            {{#if this.discount}}
-                <div class="old-price-box">
-                    <span class="price-title">Начална цена</span>
-                    <span class="old-price">{{this.price}}лв</span>
-                </div>
-                <div class="new-price-box">
-                    <span class="promo">{{this.discount}}</span>
-                    <span class="new-price">{{this.newPrice}}лв</span>
-                </div>
-            {{/if}}
-            {{# unless this.discount}}
-                <div class="product-price">
-                    <div class="price-container">
-                        <span class="price-title">Цена</span>
-                        <span class="price-without-discount">{{this.price}}лв</span>
-                    </div>
-                </div>
-            {{/unless}}
-        </div>
-        <div class="product-button">
-            <button class="add-button button-display">Добавете</button>
-        </div>
-    </div>
-    {{/each}} 
-    </script> -->
-
     <script id="filteredClothesDisplayTempl" type="text/x-handlebars-template">
         {{#each filteredProducts}}
             <div class="display-box">

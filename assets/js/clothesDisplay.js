@@ -100,21 +100,22 @@ function getFilterOptions(data) {
     getBrandsOptions(data);
 }
 
-function createSizeHTML(type) {
+function createSizeHTML(size) {
     let sizeBox = document.createElement('button');
-    sizeBox.innerText = type;
-    sizeBox.id = 'sizeBox' + type;
+    sizeBox.innerText = size;
+    sizeBox.id = 'sizeBox' + size;
     sizeBox.classList.add('sizeFilterBtn');
     sizeFilterBox.append(sizeBox);
 
     sizeBox.addEventListener('click', function (ev) {
         ev.preventDefault();
         // let id = ev.target.id;
-        if (ev.target.classList.contains('checked')) {
-            ev.target.classList.remove('checked');
+        if (ev.target.classList.contains('checkedBtn')) {
+            ev.target.classList.remove('checkedBtn');
         } else {
-            ev.target.classList.add('checked');
+            ev.target.classList.add('checkedBtn');
         }
+        displayByFilters()
     })
 }
 
@@ -135,12 +136,13 @@ function createConditionHTML(condition) {
 
     conditionBox.addEventListener('change', function (ev) {
         ev.preventDefault();
-        // let id = ev.target.id;
-        if (ev.target.classList.contains('checked')) {
-            ev.target.classList.remove('checked');
+        let target = ev.target;
+        if (target.classList.contains('checked')) {
+            target.classList.remove('checked');
         } else {
-            ev.target.classList.add('checked');
+            target.classList.add('checked');
         }
+        displayByFilters()
     })
 }
 
@@ -166,25 +168,30 @@ function createBrandHTML(brand, data) {
             target.classList.remove('checked');
         } else {
             target.classList.add('checked');
-            displayByBrand(data, target);
         }
+        displayByFilters()
     })
 }
 
+function displayByFilters() {
+    let allCheckedFilters = Array.from(document.querySelectorAll('.checked~label'));
+    let allCheckedValues = allCheckedFilters.map(label => label.outerText);
+    // console.log(allCheckedValues)
 
-function displayByBrand(data, target) {
-    let dataToDisplay = data.filter();
-    
+    let allCheckedBtns = Array.from(document.querySelectorAll('.checkedBtn'));
+    let allCheckedBtnsValues = allCheckedBtns.map(btn => btn.innerText);
+    // console.log(allCheckedBtnsValues);
+}
+// let dataToDisplay = filterByBrand(data, brand);
+// displayClothes(dataToDisplay);
+
+function filterByBrand(data, target) {
+    return data.filter(item => (item.brand === target));
 }
 
 
-// Breadcrumbs links corresponding to women/men display
-
-
-
-
 // display clothes
-const displayClothes = function (data){
+const displayClothes = function (data) {
     let containerClothesDisplay = document.getElementById('display');
     data.forEach(el => el.newPrice = getNewPrice(el.price, el.discount));
 
