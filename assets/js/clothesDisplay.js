@@ -13,17 +13,15 @@ sortDropdownWrapper.addEventListener('mouseout', function () {
     dropdownSort.style.display = 'none';
 });
 
-// fill filter list with data
-
 // show corresponding filter list on hover
-// categories
-let categoriesFilterWrapper = getById('categoriesFilterWrapper');
-let categoriesFilterBox = getById('categoriesFilterBox');
-categoriesFilterWrapper.addEventListener('mouseover', function () {
-    displayElement(categoriesFilterBox)
+// brands
+let brandsFilterWrapper = getById('brandsFilterWrapper');
+let brandsFilterBox = getById('brandsFilterBox');
+brandsFilterWrapper.addEventListener('mouseover', function () {
+    displayElement(brandsFilterBox)
 })
-categoriesFilterWrapper.addEventListener('mouseout', function () {
-    displayNoneElement(categoriesFilterBox)
+brandsFilterWrapper.addEventListener('mouseout', function () {
+    displayNoneElement(brandsFilterBox)
 })
 
 // size
@@ -56,16 +54,130 @@ priceFilterWrapper.addEventListener('mouseout', function () {
     displayNoneElement(priceFilterBox)
 })
 
+// fill filter list with data
 
+// според /women /men -> от window.location.hash; let uniqueSizes = siteManager.(fe)maleClothes.size.filter(onlyUnique)
+// function onlyUnique(value, index, self) {
+//   return self.indexOf(value) === index;
+// }
+// uniqueSizes.forEach(html prettiness + add.eventListeners)
+
+// eventListeners - click, според /women /men -> siteManager.(fe)maleClothes.filter(item => item.size === checkedFilter)
+// (fe)male controller 
+
+function getFilterOptions(data) {
+    function getSizeOptions(data) {
+        let allSizeOptions = data.map(el => el.size);
+        let uniqueSizeOptions = allSizeOptions.filter(onlyUnique);
+        sizeFilterBox.innerHTML = '';
+        uniqueSizeOptions.forEach(size => createSizeHTML(size));
+    }
+
+    function getConditionOptions(data) {
+        let allConditionOptions = data.map(el => el.condition);
+        let uniqueConditionOptions = allConditionOptions.filter(onlyUnique);
+        conditionFilterBox.innerHTML = '';
+        uniqueConditionOptions.forEach(condition => createConditionHTML(condition));
+    }
+
+    function getBrandsOptions(data) {
+        let allBrandOptions = data.map(el => el.brand);
+        let uniqueBrandoptions = allBrandOptions.filter(onlyUnique);
+        brandsFilterBox.innerHTML = '';
+        uniqueBrandoptions.forEach(brand => createBrandHTML(brand));
+    }
+
+
+    function onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+    }
+
+    getSizeOptions(data);
+    getConditionOptions(data);
+    getBrandsOptions(data);
+}
+
+function createSizeHTML(type) {
+    let sizeBox = document.createElement('button');
+    sizeBox.innerText = type;
+    sizeBox.id = 'sizeBox' + type;
+    sizeBox.classList.add('sizeFilterBtn');
+    sizeFilterBox.append(sizeBox);
+
+    sizeBox.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        // let id = ev.target.id;
+        if (ev.target.classList.contains('checked')) {
+            ev.target.classList.remove('checked');
+        } else {
+            ev.target.classList.add('checked');
+        }
+    })
+}
+
+function createConditionHTML(condition) {
+    let conditionWrapper = document.createElement('div');
+    conditionWrapper.classList.add('conditionFilterBtn');
+
+    let conditionBox = document.createElement('input');
+    conditionBox.type = 'checkbox';
+    conditionBox.id = 'checkbox' + condition;
+
+    let conditionLabel = document.createElement('label');
+    conditionLabel.for = conditionBox.id;
+    conditionLabel.innerText = condition;
+
+    conditionWrapper.append(conditionBox, conditionLabel);
+    conditionFilterBox.append(conditionWrapper);
+
+    conditionBox.addEventListener('change', function (ev) {
+        ev.preventDefault();
+        // let id = ev.target.id;
+        if (ev.target.classList.contains('checked')) {
+            ev.target.classList.remove('checked');
+        } else {
+            ev.target.classList.add('checked');
+        }
+    })
+}
+
+function createBrandHTML(brand) {
+    let brandWrapper = document.createElement('div');
+    brandWrapper.classList.add('brandFilterBtn');
+
+    let brandBox = document.createElement('input');
+    brandBox.type = 'checkbox';
+    brandBox.id = 'checkbox' + brand;
+
+    let brandLabel = document.createElement('label');
+    brandLabel.for = brandBox.id;
+    brandLabel.innerText = brand;
+
+    brandWrapper.append(brandBox, brandLabel);
+    brandsFilterBox.append(brandWrapper);
+
+    brandBox.addEventListener('change', function (ev) {
+        ev.preventDefault();
+        // let id = ev.target.id;
+        if (ev.target.classList.contains('checked')) {
+            ev.target.classList.remove('checked');
+        } else {
+            ev.target.classList.add('checked');
+        }
+    })
+}
+
+
+function displayByFilter() {
+
+}
 
 
 // Breadcrumbs links corresponding to women/men display
-
 let finalBreadcrumbTarget = getById('final-breadcrumb-target');
 let allBreadcrumbTarget = getById('all-breadcrumb-target');
 
 //display women's clothes
-
 const womenClothesController = function (products) {
     let containerClothesDisplay = document.getElementById('display');
     products.femaleClothes.forEach(el => el.newPrice = getNewPrice(el.price, el.discount));
@@ -80,7 +192,6 @@ const womenClothesController = function (products) {
 }
 
 //display men's clothes
-
 const menClothesController = function (products) {
     let containerClothesDisplay = document.getElementById('display');
     products.maleClothes.forEach(el => el.newPrice = getNewPrice(el.price, el.discount));

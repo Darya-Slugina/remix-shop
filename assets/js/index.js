@@ -115,6 +115,7 @@
             womenBtn.classList.add("selectedFilter");
             menBtn.classList.remove('selectedFilter');
             womenClothesController(siteManager);
+            getFilterOptions(siteManager.femaleClothes);
             // event listeners for sort buttons
             sortByPriceAscBtn.addEventListener('click', function(ev){
                 ev.preventDefault();
@@ -131,6 +132,7 @@
             womenBtn.classList.remove('selectedFilter');
             menBtn.classList.add("selectedFilter");
             menClothesController(siteManager);
+            getFilterOptions(siteManager.maleClothes);
              // event listeners for sort buttons
              sortByPriceAscBtn.addEventListener('click', function(ev){
                  ev.preventDefault();
