@@ -136,6 +136,18 @@
     transform: rotate(90deg);
 }
 
+.filters > li{
+    position: relative;
+}
+
+.filter-dropdown{
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    display: none;
+    z-index: 200;
+}
+
 .container-clothesDisplay{
     box-sizing: border-box;
     max-width: 1245px;

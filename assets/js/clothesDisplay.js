@@ -13,6 +13,52 @@ sortDropdownWrapper.addEventListener('mouseout', function () {
     dropdownSort.style.display = 'none';
 });
 
+// fill filter list with data
+
+// show corresponding filter list on hover
+// categories
+let categoriesFilterWrapper = getById('categoriesFilterWrapper');
+let categoriesFilterBox = getById('categoriesFilterBox');
+categoriesFilterWrapper.addEventListener('mouseover', function () {
+    displayElement(categoriesFilterBox)
+})
+categoriesFilterWrapper.addEventListener('mouseout', function () {
+    displayNoneElement(categoriesFilterBox)
+})
+
+// size
+let sizeFilterWrapper = getById('sizeFilterWrapper');
+let sizeFilterBox = getById('sizeFilterBox');
+sizeFilterWrapper.addEventListener('mouseover', function () {
+    displayElement(sizeFilterBox)
+})
+sizeFilterWrapper.addEventListener('mouseout', function () {
+    displayNoneElement(sizeFilterBox)
+})
+
+// condition
+let conditionFilterWrapper = getById('conditionFilterWrapper');
+let conditionFilterBox = getById('conditionFilterBox');
+conditionFilterWrapper.addEventListener('mouseover', function () {
+    displayElement(conditionFilterBox)
+})
+conditionFilterWrapper.addEventListener('mouseout', function () {
+    displayNoneElement(conditionFilterBox)
+})
+
+// price
+let priceFilterWrapper = getById('priceFilterWrapper');
+let priceFilterBox = getById('priceFilterBox');
+priceFilterWrapper.addEventListener('mouseover', function () {
+    displayElement(priceFilterBox)
+})
+priceFilterWrapper.addEventListener('mouseout', function () {
+    displayNoneElement(priceFilterBox)
+})
+
+
+
+
 // Breadcrumbs links corresponding to women/men display
 
 let finalBreadcrumbTarget = getById('final-breadcrumb-target');
@@ -71,10 +117,10 @@ const favouritesClothesController = function (products) {
     let template = Handlebars.compile(source);
 
     let html = template(favouritesProd);
-    if(products.length > 0) {
+    if (products.length > 0) {
         containerClothesDisplay.innerHTML = html;
     } else {
-        containerClothesDisplay.innerHTML =  `<span class="empty-favorites">Добавяйте продукти в "Любими" и следете
+        containerClothesDisplay.innerHTML = `<span class="empty-favorites">Добавяйте продукти в "Любими" и следете
         цената им и колко харесвания имат, за да прецените кога да ги купите преди всички
         останали.</span>`;
     }
