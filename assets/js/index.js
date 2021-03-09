@@ -122,16 +122,26 @@
                 ev.preventDefault();
                 siteManager.femaleClothes.sort((a, b) => (a.price - b.price));
                 displayClothes(siteManager.femaleClothes);
+                let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
+                productImages.forEach(img => changeImgOnHover(img));
             });
             sortByPriceDescBtn.addEventListener('click', function (ev) {
                 ev.preventDefault();
                 siteManager.femaleClothes.sort((a, b) => (b.price - a.price));
                 displayClothes(siteManager.femaleClothes);
+                let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
+                productImages.forEach(img => changeImgOnHover(img));
             });
 
             finalBreadcrumbTarget.innerHTML = 'Дамски дрехи';
             finalBreadcrumbTarget.href = '#allProducts/women';
-            allBreadcrumbTarget.href = '#allProducts/women';
+            allBreadcrumbTarget.addEventListener('click', function (ev) {
+                ev.preventDefault();
+                displayClothes(siteManager.femaleClothes);
+                let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
+                productImages.forEach(img => changeImgOnHover(img));
+                // clear checked filters
+            })
 
         } else if (extension === '/men') {
             womenBtn.classList.remove('selectedFilter');
@@ -142,17 +152,27 @@
             sortByPriceAscBtn.addEventListener('click', function (ev) {
                 ev.preventDefault();
                 siteManager.maleClothes.sort((a, b) => (a.price - b.price));
-                displayClothes(siteManager.maleClothes)
+                displayClothes(siteManager.maleClothes);
+                let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
+                productImages.forEach(img => changeImgOnHover(img));
             });
             sortByPriceDescBtn.addEventListener('click', function (ev) {
                 ev.preventDefault();
                 siteManager.maleClothes.sort((a, b) => (b.price - a.price));
-                displayClothes(siteManager.maleClothes)
+                displayClothes(siteManager.maleClothes);
+                let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
+                productImages.forEach(img => changeImgOnHover(img));
             });
 
             finalBreadcrumbTarget.innerHTML = 'Мъжки дрехи';
             finalBreadcrumbTarget.href = '#allProducts/men';
-            allBreadcrumbTarget.href = '#allProducts/men';
+            allBreadcrumbTarget.addEventListener('click', function (ev) {
+                ev.preventDefault();
+                displayClothes(siteManager.maleClothes);
+                let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
+                productImages.forEach(img => changeImgOnHover(img));
+                // clear checked filters
+            })
         } else {
             womenBtn.classList.remove('selectedFilter');
             menBtn.classList.remove('selectedFilter');
@@ -169,6 +189,7 @@
 
     }
 
+    // event listeners for brand, size, condition button filters - initialize them here first!
 
     //change filter style on click
     allFilters.forEach(function (currentFilter) {

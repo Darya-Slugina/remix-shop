@@ -102,6 +102,7 @@ function createSizeHTML(size, data) {
     sizeBox.classList.add('sizeFilterBtn');
     sizeFilterBox.append(sizeBox);
 
+    //move to index, so it has access to changeImgOnHover
     sizeBox.addEventListener('click', function (ev) {
         ev.preventDefault();
         // let id = ev.target.id;
@@ -110,7 +111,7 @@ function createSizeHTML(size, data) {
         } else {
             ev.target.classList.add('checkedSize');
         }
-        displayByFilters(data)
+        displayByFilters(data);
     })
 }
 
@@ -129,6 +130,7 @@ function createConditionHTML(condition, data) {
     conditionWrapper.append(conditionBox, conditionLabel);
     conditionFilterBox.append(conditionWrapper);
 
+    //move to index, so it has access to changeImgOnHover
     conditionBox.addEventListener('change', function (ev) {
         ev.preventDefault();
         let target = ev.target;
@@ -156,6 +158,7 @@ function createBrandHTML(brand, data) {
     brandWrapper.append(brandBox, brandLabel);
     brandsFilterBox.append(brandWrapper);
 
+    //move to index, so it has access to changeImgOnHover
     brandBox.addEventListener('change', function (ev) {
         ev.preventDefault();
         let target = ev.target;
@@ -164,7 +167,9 @@ function createBrandHTML(brand, data) {
         } else {
             target.classList.add('checkedBrand');
         }
-        displayByFilters(data)
+        displayByFilters(data);
+        let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
+        productImages.forEach(img => changeImgOnHover(img));
     })
 }
 
