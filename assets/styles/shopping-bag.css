@@ -104,13 +104,6 @@
     padding: 0 0 40px;
 }
 
-.cart-content-item-list {
-    max-height: 350px;
-    height: 350px;
-    padding: 15px 30px 2px;
-    overflow-y: auto !important;
-}
-
 .cart-item-row {
     display: flex !important;
     padding-top: 15px;
@@ -179,6 +172,7 @@
     font-family: "Cera Pro Regular", sans-serif;
     color: #ed1c24;
     text-decoration: line-through;
+    width: 80px;
 }
 
 .cart-item-row .product-price .price.old-price>span {
@@ -229,7 +223,7 @@
 .price>.realPrice {
     justify-content: flex-end;
     display: flex;
-    margin-right: -30px;
+    margin-right: -18px;
 }
 
 .cart-discount-list {

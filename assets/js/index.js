@@ -497,9 +497,10 @@
         }
     }
 
-     //Desired items counter
+    //Desired items counter
     function updateDesiredCounter() {
         let counter = userStorage.myDesiredCounter;
+        console.log(counter);
 
         if (counter > 0) {
             desiredCounter.style.display = "flex";
@@ -684,7 +685,7 @@
                     userStorage.myDesiredCounter = counter;
                     updateDesiredCounter();
                 }
-            } 
+            }
         }));
     }
 
@@ -694,13 +695,31 @@
         let basket = getById("shopping-cart-content");
         basket.classList.toggle("show");
 
-        if (userStorage.myDesiredCounter <= 0){
+        if (userStorage.myDesiredCounter <= 0) {
             getById("emptyBag").style.display = "block";
         } else if (userStorage.myDesiredCounter > 0) {
             getById("emptyBag").style.display = "none";
             getById("fullBag").style.display = "block";
             shoppingBagController(userStorage.myDesiredProd);
+            addEventForDeleting();
         }
+    }
+
+    function addEventForDeleting() {
+        let deleteBtn = document.querySelectorAll(".delete");
+
+        deleteBtn.forEach(el => el.addEventListener("click", function (e) {
+            updateBasket(Number(e.target.title));
+
+            let products = JSON.parse(localStorage.getItem(userStorage.currentUser[0].email + 1));
+            shoppingBagController(products);
+            addEventForDeleting();
+        }))
+    }
+
+    function updateBasket(num) {
+        userStorage.removeFromDesired(num);
+        updateDesires();
     }
 
 })();

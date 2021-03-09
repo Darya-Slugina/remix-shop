@@ -10,14 +10,14 @@ const userStorage = (function () {
   }
 
   class UserStorage {
-    constructor() {      
+    constructor() {
       this.isLogged = false;
       this.currentUser = [];
       this.myFavourites = [];
       this.myDesiredProd = [];
       this.myFavouritesCount = 0;
       this.myDesiredCounter = 0;
-      this.init();      
+      this.init();
     }
 
     init() {
@@ -42,7 +42,7 @@ const userStorage = (function () {
         if (localStorage.getItem(this.currentUser[0].email)) {
 
           // get data by key
-          let localStorageFavorites  = JSON.parse(localStorage.getItem(this.currentUser[0].email));
+          let localStorageFavorites = JSON.parse(localStorage.getItem(this.currentUser[0].email));
 
           // check if this data is not empty, and set favorites
           if (localStorageFavorites !== null) {
@@ -52,10 +52,10 @@ const userStorage = (function () {
         }
 
         // check if in local storage we have key = email1
-        if (localStorage.getItem(this.currentUser[0].email+1)) {
+        if (localStorage.getItem(this.currentUser[0].email + 1)) {
 
           // get data by key
-          let localStorageDesired  = JSON.parse(localStorage.getItem(this.currentUser[0].email+1));
+          let localStorageDesired = JSON.parse(localStorage.getItem(this.currentUser[0].email + 1));
 
           // check if this data is not empty, and set favorites
           if (localStorageDesired !== null) {
@@ -98,14 +98,14 @@ const userStorage = (function () {
       this.myFavouritesCount = 0;
       if (this.myFavourites !== null && this.myFavourites !== undefined) {
         this.myFavouritesCount = this.myFavourites.length;
-      }      
+      }
     }
 
     logout() {
       this.isLogged = false;
       this.currentUser = [];
       this.myFavourites = [];
-  
+
       localStorage.removeItem("login");
       localStorage.removeItem("currentUser");
       localStorage.removeItem("myFavourites");
@@ -124,7 +124,7 @@ const userStorage = (function () {
       localStorage.setItem(this.currentUser[0].email, JSON.stringify(this.myFavourites));
     }
 
-    removeFromFavourite(el) {      
+    removeFromFavourite(el) {
       this.myFavourites = this.myFavourites.filter(item => item.id !== el.id);
       localStorage.setItem(this.currentUser[0].email, JSON.stringify(this.myFavourites));
     }
@@ -133,22 +133,29 @@ const userStorage = (function () {
       if (this.myFavourites === undefined || this.myFavourites === null) {
         return false;
       }
-  
+
       if (this.myFavourites.filter(element => element.id === el.id).length > 0) {
         return true;
       }
-  
+
       return false;
     }
 
     addToDesired(el) {
       this.myDesiredProd.push(el);
-      localStorage.setItem(this.currentUser[0].email+1, JSON.stringify(this.myDesiredProd));
+      localStorage.setItem(this.currentUser[0].email + 1, JSON.stringify(this.myDesiredProd));
     }
 
-    removeFromDesired(el) {      
-      this.myDesiredProd = this.myDesiredProd.filter(item => item.id !== el.id);
-      localStorage.setItem(this.currentUser[0].email+1, JSON.stringify(this.myDesiredProd));
+    removeFromDesired(el) {
+      if (typeof el === "number" || typeof el === "string") {
+        this.myDesiredProd = this.myDesiredProd.filter(item => item.id !== el);
+        this.myDesiredCounter = this.myDesiredProd.length;
+        localStorage.setItem(this.currentUser[0].email + 1, JSON.stringify(this.myDesiredProd));
+      } else {
+        this.myDesiredProd = this.myDesiredProd.filter(item => item.id !== el.id);
+        localStorage.setItem(this.currentUser[0].email + 1, JSON.stringify(this.myDesiredProd));
+      }
+      console.log(this.myDesiredProd);
     }
   }
 

@@ -1154,7 +1154,7 @@
 
     <script id="shoppingBagTempl" type="text/x-handlebars-template">
         {{#each desiredProducts}}
-            <div id="cart-content-item-list">
+            <div class="cart-content-item-list" value="{{this.id}}" >
                 <div class="cart-item-row d-flex product-data">
                     <div class="img-wrapper">
                         <a href="javascript:;"class="product-image">
@@ -1185,7 +1185,7 @@
                             </div>
                         </div>
                         {{/unless}}    
-                        <a href="javascript:void(0);" class="delete">×</a>
+                        <a href="javascript:void(0);" class="delete" title="{{this.id}}">×</a>
                     </div>
                     </div>
                 </div>
