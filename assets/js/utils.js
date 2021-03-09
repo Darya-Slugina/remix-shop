@@ -2,6 +2,18 @@ function getById(id) {
     return document.getElementById(id);
 }
 
+function displayElement (el){
+    el.style.display = 'block'
+}
+
+function displayNoneElement (el) {
+    el.style.display = 'none'
+}
+
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+}
+
 function getNewPrice(price, discount) {
     if (hasDiscount(discount)) {
         return price;

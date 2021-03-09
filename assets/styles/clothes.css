@@ -1,7 +1,6 @@
 .wrapper{
     max-width: 1245px;
     margin: 0 auto;
-    padding: 0 15px;
     width: 100%;
 }
 
@@ -43,16 +42,21 @@
     content: '';
     background: url(../images/arrow-icon-2.PNG) no-repeat;
     background-size: contain;
-    width: 28px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     display: inline-block;
     vertical-align: top;
     margin-left: 5px;
 }
 
+#final-breadcrumb > a::after{
+    transform: rotate(90deg);
+}
+
 .container-personalFilters{
     padding: 15px 20px;
     padding-bottom: 0px;
+    position: relative;
 }
 
 .container-personalFilters > a {
@@ -72,19 +76,19 @@
     height: 30px;
     display: inline-block;
     vertical-align: bottom;
+    transform: scale(0.7);
 }
 
 #dropdown-personal-filters{
     box-sizing: border-box;
     display: none;
     position: absolute;
-    top: 480px;
+    left: -150px;
     z-index: 100;
     background: #f3f3f5;
-    padding: 15px 13px;
+    padding: 20px 13px;
     border-radius: 4px;
     min-width: 220px;
-    right: 40px;
     width: 360px;
 }
 
@@ -92,8 +96,6 @@
     margin: 20px auto;
     max-width: 1245px;
     width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
 }
 
 .filters{
@@ -124,11 +126,24 @@
     content: '';
     background: url(../images/arrow-icon-2.PNG) no-repeat;
     background-size: contain;
-    height: 17.5px;
-    width: 25px;
+    height: 18px;
+    width: 18px;
     display: inline-block;
     margin-left: 2px;
     vertical-align: middle;
+    transform: rotate(90deg);
+}
+
+.filters > li{
+    position: relative;
+}
+
+.filter-dropdown{
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    display: none;
+    z-index: 200;
 }
 
 .container-clothesDisplay{
@@ -137,11 +152,9 @@
     padding-inline-start: 0;
     margin: 0 auto;
     height: 100%;
-
     width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
 }
+
 .sorter-nav *{
     text-decoration: none;
     color: #303030;
@@ -157,6 +170,10 @@
     position: relative;
 }
 
+#sort{
+    position: relative;
+}
+
 #dropdown-sort{
     background-color: #f1f1f3;
     border-radius: 4px;
@@ -164,7 +181,7 @@
     position: absolute;
     z-index: 100;
     min-width: 220px;
-    left: 100px;
+    left: 0;
 }
 
 #dropdown-sort > ul{
@@ -175,10 +192,18 @@
     padding: 5px 0;
 }
 
+#dropdown-sort button{
+    border: 0px;   
+}
+
 #dropdown-sort *{
     text-decoration: none;
     list-style: none;
     padding-inline-start: 0;
+}
+
+#sortByPriceAscBtn:hover, #sortByPriceDescBtn:hover{
+    font-weight: bold;
 }
 
 #display{

@@ -30,7 +30,8 @@
     let basketIcon = getById("basket-icon");
     let loginButton = getById("loginButton");
     let srchProd = getById("srchProd");
-
+    let finalBreadcrumbTarget = getById('final-breadcrumb-target');
+    let allBreadcrumbTarget = getById('all-breadcrumb-target');
 
 
     //   Adds the initial male products
@@ -84,18 +85,34 @@
 
 
     //Router
+    const navListMain = Array.from(document.querySelector('.navigation-list').children);
+    const allFilters = Array.from(document.querySelectorAll('.main-category'));
+    const womenBtn = getById('womenBtn');
+    const menBtn = getById('menBtn');
+    let wholePage;
+
     function onHashChange() {
         let page = location.hash.slice(1);
-
+        let slashLocation = page.indexOf('/') + 1;
+        let extension = location.hash.slice(slashLocation);
         let allPages = document.querySelector('main').children;
+
+        if (slashLocation > 1) {
+            wholePage = location.hash.slice(1, slashLocation);
+        } else {
+            wholePage = page;
+        }
+
         for (let i = 0; i < allPages.length; i++) {
-            if (allPages[i].id === page) {
-                allPages[i].style.display = 'block'
-            } else if (page === '') {
-                allPages[i].style.display = 'none'
+            if (allPages[i].id === wholePage) {
+                allPages[i].style.display = 'block';
+            } else if (wholePage === 'home' || wholePage === '') {
+                allPages[i].style.display = 'none';
                 homePage.style.display = 'block';
+                navListMain.forEach(nav => nav.classList.remove('selectedNav'));
+                allFilters.forEach(el => el.classList.remove("selectedFilter"));
             } else {
-                allPages[i].style.display = 'none'
+                allPages[i].style.display = 'none';
             }
 
             if (page === 'favourites') {
@@ -103,6 +120,95 @@
             }
         }
         moveToBasket();
+
+        if (extension === '/women') {
+            womenBtn.classList.add("selectedFilter");
+            menBtn.classList.remove('selectedFilter');
+            displayClothes(siteManager.femaleClothes);
+            getFilterOptions(siteManager.femaleClothes);
+            // event listeners for sort buttons
+            sortByPriceAscBtn.addEventListener('click', function (ev) {
+                ev.preventDefault();
+                siteManager.femaleClothes.sort((a, b) => (a.price - b.price));
+                displayClothes(siteManager.femaleClothes);
+                let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
+                productImages.forEach(img => changeImgOnHover(img));
+            });
+            sortByPriceDescBtn.addEventListener('click', function (ev) {
+                ev.preventDefault();
+                siteManager.femaleClothes.sort((a, b) => (b.price - a.price));
+                displayClothes(siteManager.femaleClothes);
+                let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
+                productImages.forEach(img => changeImgOnHover(img));
+            });
+
+            finalBreadcrumbTarget.innerHTML = 'Дамски дрехи';
+            finalBreadcrumbTarget.href = '#allProducts/women';
+            allBreadcrumbTarget.addEventListener('click', function (ev) {
+                ev.preventDefault();
+                displayClothes(siteManager.femaleClothes);
+                let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
+                productImages.forEach(img => changeImgOnHover(img));
+                // clear checked filters
+            })
+
+        } else if (extension === '/men') {
+            womenBtn.classList.remove('selectedFilter');
+            menBtn.classList.add("selectedFilter");
+            displayClothes(siteManager.maleClothes);
+            getFilterOptions(siteManager.maleClothes);
+            // event listeners for sort buttons
+            sortByPriceAscBtn.addEventListener('click', function (ev) {
+                ev.preventDefault();
+                siteManager.maleClothes.sort((a, b) => (a.price - b.price));
+                displayClothes(siteManager.maleClothes);
+                let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
+                productImages.forEach(img => changeImgOnHover(img));
+            });
+            sortByPriceDescBtn.addEventListener('click', function (ev) {
+                ev.preventDefault();
+                siteManager.maleClothes.sort((a, b) => (b.price - a.price));
+                displayClothes(siteManager.maleClothes);
+                let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
+                productImages.forEach(img => changeImgOnHover(img));
+            });
+
+            finalBreadcrumbTarget.innerHTML = 'Мъжки дрехи';
+            finalBreadcrumbTarget.href = '#allProducts/men';
+            allBreadcrumbTarget.addEventListener('click', function (ev) {
+                ev.preventDefault();
+                displayClothes(siteManager.maleClothes);
+                let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
+                productImages.forEach(img => changeImgOnHover(img));
+                // clear checked filters
+            })
+        } else {
+            womenBtn.classList.remove('selectedFilter');
+            menBtn.classList.remove('selectedFilter');
+        }
+
+        // change nav style
+        navListMain.forEach(el => {
+            if (el.id === wholePage) {
+                el.classList.add('selectedNav');
+            } else {
+                el.classList.remove('selectedNav');
+            }
+        })
+
+    }
+
+    // event listeners for brand, size, condition button filters - initialize them here first!
+
+    //change filter style on click
+    allFilters.forEach(function (currentFilter) {
+        currentFilter.addEventListener('click', selectFilter)
+    })
+
+    function selectFilter(ev) {
+        ev.preventDefault();
+        allFilters.forEach(filter => filter.classList.remove('selectedFilter'));
+        ev.target.parentElement.classList.add("selectedFilter");
     }
 
     // OnScroll event handler
@@ -161,7 +267,7 @@
     brandsController();
     blogController();
 
-    //Serch by name
+    //Search by name
     srchProd.addEventListener("blur", function (event) {
         let filtered = siteManager.filterByName(event.target.value);
         showFilteredProducts(filtered);
@@ -271,34 +377,10 @@
     }
 
 
-    // change nav style on click
-    const navListMain = Array.from(document.querySelector('.navigation-list').children);
-    navListMain.forEach(function (currentNav) {
-        currentNav.addEventListener('click', selectPage);
-    })
-
-    function selectPage(ev) {
-        navListMain.forEach(nav => nav.classList.remove('selectedNav'))
-        ev.target.parentElement.classList.add('selectedNav')
-    }
-
-
-    //change filter style on click
-    const allFilters = Array.from(document.querySelectorAll('.main-category'));
-    allFilters.forEach(function (currentFilter) {
-        currentFilter.addEventListener('click', selectFilter)
-    })
-
-    function selectFilter(ev) {
-        ev.preventDefault();
-        allFilters.forEach(filter => filter.classList.remove('selectedFilter'));
-        ev.target.parentElement.classList.add("selectedFilter");
-    }
-
     // select female clothes
-    const womenBtn = document.getElementById('womenBtn');
     womenBtn.addEventListener('click', function () {
-        womenClothesController(siteManager);
+        displayClothes(siteManager.femaleClothes);
+        window.location.href = '#allProducts/women';
 
         let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
         productImages.forEach(img => changeImgOnHover(img));
@@ -314,9 +396,10 @@
     })
 
     // select male clothes
-    const menBtn = document.getElementById('menBtn');
     menBtn.addEventListener('click', function () {
-        menClothesController(siteManager);
+        womenBtn.classList.remove("selectedFilter");
+        window.location.href = '#allProducts/men';
+        displayClothes(siteManager.maleClothes)
 
         let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
         productImages.forEach(img => changeImgOnHover(img));
