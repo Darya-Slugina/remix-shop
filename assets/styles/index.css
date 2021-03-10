@@ -370,10 +370,6 @@ body {
     justify-content: space-between;
 }
 
-.banner-section .main-banners-left {
-    position: relative;
-}
-
 .banner-section .conditions {
     position: absolute;
     bottom: 20px;
@@ -384,9 +380,14 @@ body {
 }
 
 .banner-section .main-banners-left {
+    position: relative;
     margin-right: 15px;
     display: flex;
     justify-content: flex-start;
+}
+
+#bannerSection>.banner-section .main-banners-left:last-child {
+    margin-right: 0px;
 }
 
 .banner-section img, .banner-container img {

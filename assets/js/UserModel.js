@@ -155,7 +155,6 @@ const userStorage = (function () {
         this.myDesiredProd = this.myDesiredProd.filter(item => item.id !== el.id);
         localStorage.setItem(this.currentUser[0].email + 1, JSON.stringify(this.myDesiredProd));
       }
-      console.log(this.myDesiredProd);
     }
   }
 

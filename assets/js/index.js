@@ -559,6 +559,9 @@
             if (userStorage.myDesiredProd.some(item => item.id == el.value)) {
                 el.innerText = "Добавено";
                 el.classList.add("clicked");
+            } else {
+                el.innerText = "Добавете";
+                el.classList.remove("clicked");
             }
         });
     }
