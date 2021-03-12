@@ -241,6 +241,7 @@ const filteredClothesController = function (products) {
 
 //display favourites products on favourites page
 const favouritesClothesController = function (products) {
+   
     let containerClothesDisplay = getById('favouritesListContent');
     let favouritesProd = { 'favouritesProducts': products };
 

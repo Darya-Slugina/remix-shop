@@ -2,8 +2,10 @@
     window.addEventListener("DOMContentLoaded", onHashChange);
     window.addEventListener("DOMContentLoaded", loadPreviousSession);
     window.addEventListener("DOMContentLoaded", showCarousel);
+
     window.addEventListener("hashchange", onHashChange);
     window.addEventListener("hashchange", showCarousel);
+    // window.addEventListener("hashchange", loadEvents);
 
     //  Site manager
     let siteManager = new Manager;
@@ -255,7 +257,8 @@
     }
 
     function loadPreviousSession() {
-        if (JSON.parse(localStorage.getItem("login"))) {
+        let currentUser = userStorage.getCurrentUser();
+        if (currentUser) {
             loginForm.classList.remove("show");
             enterButton.style.display = "none";
             let icons = document.querySelectorAll(".registration>.afterRegistration>a");
@@ -376,7 +379,6 @@
         e.target.src = newImg.image_front;
     }
 
-
     // select female clothes
     womenBtn.addEventListener('click', function () {
         displayClothes(siteManager.femaleClothes);
@@ -483,87 +485,113 @@
 
     //favourite items counter
     function updatefavouriteCounter() {
-        let counter = userStorage.myFavouritesCount;
+        let currentUser = userStorage.getCurrentUser();
+        if (currentUser) {
+            let counter = currentUser.myFavouritesCount;
 
-        if (counter > 0) {
-            favoritesCounter.style.display = "flex";
-            favouritIconMain.classList.add("liked");
-            favoritesCounter.innerHTML = counter;
+            if (counter > 0) {
+                favoritesCounter.style.display = "flex";
+                favouritIconMain.classList.add("liked");
+                favoritesCounter.innerHTML = counter;
 
-        } else {
-            favoritesCounter.style.display = "none";
-            favouritIconMain.classList.remove("liked");
-            favoritesCounter.innerHTML = '';
+            } else {
+                favoritesCounter.style.display = "none";
+                favouritIconMain.classList.remove("liked");
+                favoritesCounter.innerHTML = '';
+            }
         }
     }
 
     //Desired items counter
     function updateDesiredCounter() {
-        let counter = userStorage.myDesiredCounter;
-        console.log(counter);
+        let currentUser = userStorage.getCurrentUser();
 
-        if (counter > 0) {
-            desiredCounter.style.display = "flex";
-            basketIcon.classList.add("full");
-            desiredCounter.innerHTML = counter;
 
-        } else {
-            desiredCounter.style.display = "none";
-            basketIcon.classList.remove("full");
-            desiredCounter.innerHTML = '';
+        if (currentUser) {
+            let counter = currentUser.myDesiredCounter;
+
+
+            if (counter > 0) {
+                desiredCounter.style.display = "flex";
+                basketIcon.classList.add("full");
+                desiredCounter.innerHTML = counter;
+
+            } else {
+                desiredCounter.style.display = "none";
+                basketIcon.classList.remove("full");
+                desiredCounter.innerHTML = '';
+            }
         }
     }
 
     // On click like the item
     function likeItem() {
-        let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
-        userStorage.init();
+        let currentUser = userStorage.getCurrentUser();
+        if (currentUser) {
+            let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
+            // userStorage.init();
 
-        favouriteIcon.forEach(el => el.addEventListener("click", function (e) {
-            if (userStorage.isLogged == true) {
-                let currentItem = siteManager.allProducts.filter(el => el.id === Number(e.target.previousElementSibling.value));
+            favouriteIcon.forEach(el => el.addEventListener("click", function (e) {
+                let currentUser = userStorage.getCurrentUser();
+                if (currentUser.isLoggedIn == true) {
+                    let currentItem = siteManager.allProducts.filter(el => el.id === Number(e.target.previousElementSibling.value));
 
-                if (userStorage.myFavourites.filter(function (elem) { return elem.id === currentItem[0].id }).length > 0) {
-                    userStorage.removeFromFavourite(currentItem[0]);
-                    e.target.classList.remove("liked");
-                    counter = userStorage.myFavourites.length;
-                    favoritesCounter.innerHTML = counter;
-                    userStorage.myFavouritesCount = counter;
-                } else {
-                    userStorage.addToFavourite(currentItem[0]);
-                    e.target.classList.add("liked");
-                    counter = userStorage.myFavourites.length;
-                    favoritesCounter.innerHTML = counter;
-                    userStorage.myFavouritesCount = counter;
+                    if (currentUser.myFavourites.filter(elem => elem.id === currentItem[0].id).length > 0) {
+                        userStorage.removeFromFavourite(currentItem[0]);
+                        e.target.classList.remove("liked");
+                        counter = JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true)[0].myFavourites.length;
+                        favoritesCounter.innerHTML = counter;
+                        currentUser.myFavouritesCount = counter;
+                    } else {
+                        userStorage.addToFavourite(currentItem[0]);
+                        e.target.classList.add("liked");
+                        counter = JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true)[0].myFavourites.length;
+                        favoritesCounter.innerHTML = counter;
+                        currentUser.myFavouritesCount = counter;
+                    }
+
+                    updatefavouriteCounter();
                 }
-
-                updatefavouriteCounter();
-            }
-        }));
+            }));
+        }
     }
 
     // Check if item in favourites and put current styles
     function updateLikes() {
-        let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
-        favouriteIcon.forEach(el => {
-            if (userStorage.myFavourites.some(item => item.id == el.getAttribute("productId"))) {
-                el.classList.add("liked");
+        let currentUser = userStorage.getCurrentUser();
+        if (currentUser) {
+            let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
+            if (favouriteIcon.length > 0) {
+                favouriteIcon.forEach(el => {
+                    if (currentUser.myFavourites.some(item => item.id == el.getAttribute("productId"))) {
+                        el.classList.add("liked");
+                    }
+                });
             }
-        });
+        }
     }
 
     // Check if item in desired and put current styles
     function updateDesiredProd() {
-        let desiredBtn = document.querySelectorAll(".add-button");
-        desiredBtn.forEach(el => {
-            if (userStorage.myDesiredProd.some(item => item.id == el.value)) {
-                el.innerText = "Добавено";
-                el.classList.add("clicked");
-            } else {
-                el.innerText = "Добавете";
-                el.classList.remove("clicked");
-            }
-        });
+        let currentUser = userStorage.getCurrentUser();
+        if (currentUser) {
+            let desiredBtn = document.querySelectorAll(".add-button");
+            desiredBtn.forEach(el => {
+                if (currentUser.myDesiredProd.some(item => item.id == el.value)) {
+                    el.innerText = "Добавено";
+                    el.classList.add("clicked");
+                } else {
+                    el.innerText = "Добавете";
+                    el.classList.remove("clicked");
+                }
+            });
+        } else {
+            let desiredBtn = document.querySelectorAll(".add-button");
+            desiredBtn.forEach(el => {
+            el.innerText = "Добавете";
+            el.classList.remove("clicked");
+            });
+        }
     }
 
     function updateFavourites() {
@@ -627,25 +655,27 @@
                 userSubMenu.style.display = "none";
                 let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
                 favouriteIcon.forEach(el => el.classList.remove("liked"));
+                updateDesires();
             })
         });
 
         let showFavouritesBtn = getById("showFavouritesBtn");
         showFavouritesBtn.addEventListener("click", showMyFavourites);
-
-        // showMyFavourites();
     }
 
     // Update favourites page with favourites products
     function showMyFavourites() {
-        likeItem();
         window.scrollTo(0, 0);
-        let user = userStorage.currentUser[0].email;
-        favouritesClothesController(JSON.parse(localStorage.getItem(user)));
+        let currentUser = userStorage.getCurrentUser();
+        let currentUserFavourites = userStorage.getCurrentUser().myFavourites;
+
+        favouritesClothesController(currentUserFavourites);
         let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
         favouriteIcon.forEach(el => {
-            if (userStorage.myFavourites.some(item => item.id == el.getAttribute("productId"))) {
-                el.classList.add("liked");
+            if (currentUser) {
+                if (currentUser.myFavourites.some(item => item.id == el.getAttribute("productId"))) {
+                    el.classList.add("liked");
+                }
             }
         });
 
@@ -659,33 +689,33 @@
 
         moveToBasket();
         updateDesires();
-
     }
 
     // On click add to shopping bag
     function moveToBasket() {
         let wantedProduct = document.querySelectorAll(".add-button");
-        userStorage.init();
+        // userStorage.init();
 
         wantedProduct.forEach(el => el.addEventListener("click", function (e) {
-            if (userStorage.isLogged == true) {
+            let currentUser = userStorage.getCurrentUser();
+            if (currentUser) {
                 let currentItem = siteManager.allProducts.filter(el => el.id === Number(e.target.value));
 
-                if (userStorage.myDesiredProd.filter(function (elem) { return elem.id === currentItem[0].id }).length > 0) {
+                if (currentUser.myDesiredProd.filter(elem => elem.id === currentItem[0].id).length > 0) {
                     userStorage.removeFromDesired(currentItem[0]);
                     e.target.innerHTML = "Добавете";
                     e.target.classList.remove("clicked");
-                    counter = userStorage.myDesiredProd.length;
+                    counter = currentUser.myDesiredProd.length;
                     desiredCounter.innerHTML = counter;
-                    userStorage.myDesiredCounter = counter;
+                    currentUser.myDesiredCounter = counter;
                     updateDesiredCounter();
                 } else {
                     userStorage.addToDesired(currentItem[0]);
                     e.target.innerHTML = "Добавено";
                     e.target.classList.add("clicked");
-                    counter = userStorage.myDesiredProd.length;
+                    counter = currentUser.myDesiredProd.length;
                     desiredCounter.innerHTML = counter;
-                    userStorage.myDesiredCounter = counter;
+                    currentUser.myDesiredCounter = counter;
                     updateDesiredCounter();
                 }
             }
@@ -695,15 +725,16 @@
     //On click show the shopping-bag
     function showBasketInfo(e) {
         e.preventDefault();
+        let currentUser = userStorage.getCurrentUser();
         let basket = getById("shopping-cart-content");
         basket.classList.toggle("show");
 
-        if (userStorage.myDesiredCounter <= 0) {
+        if (currentUser.myDesiredCounter <= 0) {
             getById("emptyBag").style.display = "block";
-        } else if (userStorage.myDesiredCounter > 0) {
+        } else if (currentUser.myDesiredCounter > 0) {
             getById("emptyBag").style.display = "none";
             getById("fullBag").style.display = "block";
-            shoppingBagController(userStorage.myDesiredProd);
+            shoppingBagController(currentUser.myDesiredProd);
             addEventForDeleting();
         }
     }
@@ -714,7 +745,7 @@
         deleteBtn.forEach(el => el.addEventListener("click", function (e) {
             updateBasket(Number(e.target.title));
 
-            let products = JSON.parse(localStorage.getItem(userStorage.currentUser[0].email + 1));
+            let products = JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true)[0].myDesiredProd;
             shoppingBagController(products);
             addEventForDeleting();
         }))

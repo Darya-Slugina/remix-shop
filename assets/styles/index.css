@@ -128,7 +128,6 @@ body {
     right: 0;
     z-index: 997;
     width: 100%;
-    max-width: 1245px;
     background-color: #fff;
 }
 
@@ -730,7 +729,7 @@ body {
     background: url(../images/favorite-icon.png) no-repeat;
     cursor: pointer;
     display: inline-block;
-    z-index: 100;
+    z-index: 10;
 }
 
 .favourite-icon:hover {
