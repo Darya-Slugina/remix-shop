@@ -362,16 +362,16 @@
             </div>
             <div class="container-filters">
                 <ul class="filters">
-                    <li id="brandsFilterWrapper"><a href="#">Марки</a>
+                    <li id="brandsFilterWrapper" class="brandsFilterWrapper"><a href="#">Марки</a>
                         <div class="filter-dropdown" id="brandsFilterBox"></div>
                     </li>
-                    <li id="sizeFilterWrapper"><a href="#">Размер</a>
+                    <li id="sizeFilterWrapper" class="sizeFilterWrapper"><a href="#">Размер</a>
                         <div class="filter-dropdown" id="sizeFilterBox"></div>
                     </li>
-                    <li id="conditionFilterWrapper"><a href="#">Състояние</a>
+                    <li id="conditionFilterWrapper" class="conditionFilterWrapper"><a href="#">Състояние</a>
                         <div class="filter-dropdown" id="conditionFilterBox"></div>
                     </li>
-                    <li id="priceFilterWrapper"><a href="#">Цена</a>
+                    <li id="priceFilterWrapper" class="priceFilterWrapper"><a href="#">Цена</a>
                         <div class="filter-dropdown" id="priceFilterBox">
                             <div><input type="checkbox" id="priceBelow5">
                             <label for="priceBelow5">До 5лв</label>
@@ -925,7 +925,7 @@
                     </div>
                     <span class="favourite">
                         <input type="hidden" value="{{this.id}}" style="display: none;">
-                        <span class="fav-icon"></span>
+                        <span id="favIcon" class="fav-icon" productId="{{this.id}}"></span>
                     </span>
                 </div>
                 <div class="side-img-container">
@@ -1038,8 +1038,7 @@
                                     {{this.description}}
                             </div>
                             <div class="product-button">
-                                <a href="javascript:;" class="site-btn">
-                                    <span class="text">Добавете</span>
+                                <button class="site-btn"  id="siteBtn" value="{{this.id}}" productValue="{{this.id}}">Добавете</button>
                                 </a>
                             </div>
                         </div>
@@ -1224,7 +1223,7 @@
     <script src="assets/js/utils.js"></script>
     <script src="assets/js/ProductsData/male_clothes.js"></script>
     <script src="assets/js/ProductsData/femaleClothes.js"></script>
-    <script src="assets/js/UserModel1.js"></script>
+    <script src="assets/js/UserModel.js"></script>
     <script src="assets/js/UserController.js"></script>
     <script src="assets/js/ProductModel.js"></script>
     <script src="assets/js/BannersController.js"></script>

@@ -3,7 +3,7 @@ function getById(id) {
 }
 
 function displayElement (el){
-    el.style.display = 'block'
+    el.style.display = 'flex'
 }
 
 function displayNoneElement (el) {
@@ -75,4 +75,9 @@ function isFemail (){
         return true;
     }
     return false
+}
+
+function sortSizes(sizes){
+    console.log("sizes",sizes);
+    return sizes.sort();
 }

@@ -5,7 +5,6 @@
 
     window.addEventListener("hashchange", onHashChange);
     window.addEventListener("hashchange", showCarousel);
-    // window.addEventListener("hashchange", loadEvents);
 
     //  Site manager
     let siteManager = new Manager;
@@ -431,10 +430,14 @@
     function selectProduct(e) {
         let productId = e.target.parentNode.children[0].value;
         product = siteManager.allProducts.find(el => el.id === Number(productId));
-
         productController();
-        goBack();
+        if (product !== null) {
+            updateLikes();
+            moveToBasketFromOverView();
+            likeItemFromOverView();
+        }
 
+        goBack();
         loadEvents();
         window.scrollTo(0, 0);
     }
@@ -529,11 +532,10 @@
         let currentUser = userStorage.getCurrentUser();
         if (currentUser) {
             let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
-            // userStorage.init();
 
             favouriteIcon.forEach(el => el.addEventListener("click", function (e) {
                 let currentUser = userStorage.getCurrentUser();
-                if (currentUser.isLoggedIn == true) {
+                if (currentUser.isLoggedIn) {
                     let currentItem = siteManager.allProducts.filter(el => el.id === Number(e.target.previousElementSibling.value));
 
                     if (currentUser.myFavourites.filter(elem => elem.id === currentItem[0].id).length > 0) {
@@ -556,6 +558,37 @@
         }
     }
 
+    function likeItemFromOverView() {
+        let currentUser = userStorage.getCurrentUser();
+        if (currentUser) {
+            let favouriteIcon = getById("favIcon");
+
+            favouriteIcon.addEventListener("click", function (e) {
+                let currentUser = userStorage.getCurrentUser();
+                if (currentUser.isLoggedIn) {
+                    let currentItem = siteManager.allProducts.filter(el => el.id === Number(e.target.previousElementSibling.value));
+                    console.log(currentItem);
+
+                    if (currentUser.myFavourites.filter(elem => elem.id === currentItem[0].id).length > 0) {
+                        userStorage.removeFromFavourite(currentItem[0]);
+                        e.target.classList.remove("liked");
+                        counter = JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true)[0].myFavourites.length;
+                        favoritesCounter.innerHTML = counter;
+                        currentUser.myFavouritesCount = counter;
+                    } else {
+                        userStorage.addToFavourite(currentItem[0]);
+                        e.target.classList.add("liked");
+                        counter = JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true)[0].myFavourites.length;
+                        favoritesCounter.innerHTML = counter;
+                        currentUser.myFavouritesCount = counter;
+                    }
+
+                    updatefavouriteCounter();
+                }
+            });
+        }
+    }
+
     // Check if item in favourites and put current styles
     function updateLikes() {
         let currentUser = userStorage.getCurrentUser();
@@ -568,6 +601,10 @@
                     }
                 });
             }
+            let favouriteOverView = getById("favIcon");
+            if (currentUser.myFavourites.some(item => item.id == favouriteOverView.getAttribute("productId"))) {
+                favouriteOverView.classList.add("liked");
+            }
         }
     }
 
@@ -577,6 +614,7 @@
         if (currentUser) {
             let desiredBtn = document.querySelectorAll(".add-button");
             desiredBtn.forEach(el => {
+                
                 if (currentUser.myDesiredProd.some(item => item.id == el.value)) {
                     el.innerText = "Добавено";
                     el.classList.add("clicked");
@@ -585,11 +623,23 @@
                     el.classList.remove("clicked");
                 }
             });
+            let desiredBtnOverView = getById("siteBtn");
+
+            if (desiredBtnOverView !== null) {
+                if (currentUser.myDesiredProd.some(item => item.id == desiredBtnOverView.value)) {
+                    desiredBtnOverView.innerText = "Добавено";
+                    desiredBtnOverView.classList.add("clicked");
+                } else {
+                    desiredBtnOverView.innerText = "Добавете";
+                    desiredBtnOverView.classList.remove("clicked");
+                }
+            }
+
         } else {
             let desiredBtn = document.querySelectorAll(".add-button");
             desiredBtn.forEach(el => {
-            el.innerText = "Добавете";
-            el.classList.remove("clicked");
+                el.innerText = "Добавете";
+                el.classList.remove("clicked");
             });
         }
     }
@@ -694,7 +744,6 @@
     // On click add to shopping bag
     function moveToBasket() {
         let wantedProduct = document.querySelectorAll(".add-button");
-        // userStorage.init();
 
         wantedProduct.forEach(el => el.addEventListener("click", function (e) {
             let currentUser = userStorage.getCurrentUser();
@@ -720,6 +769,36 @@
                 }
             }
         }));
+    }
+
+    function moveToBasketFromOverView() {
+        let wantedProduct = getById("siteBtn");
+        wantedProduct.addEventListener("click", function (e) {
+
+            let currentUser = userStorage.getCurrentUser();
+            if (currentUser) {
+                let currentItem = siteManager.allProducts.filter(el => el.id === Number(e.target.value));
+                console.log(currentItem);
+
+                if (currentUser.myDesiredProd.filter(elem => elem.id === currentItem[0].id).length > 0) {
+                    userStorage.removeFromDesired(currentItem[0]);
+                    e.target.innerHTML = "Добавете";
+                    e.target.classList.remove("clicked");
+                    counter = currentUser.myDesiredProd.length;
+                    desiredCounter.innerHTML = counter;
+                    currentUser.myDesiredCounter = counter;
+                    updateDesiredCounter();
+                } else {
+                    userStorage.addToDesired(currentItem[0]);
+                    e.target.innerHTML = "Добавено";
+                    e.target.classList.add("clicked");
+                    counter = currentUser.myDesiredProd.length;
+                    desiredCounter.innerHTML = counter;
+                    currentUser.myDesiredCounter = counter;
+                    updateDesiredCounter();
+                }
+            }
+        });
     }
 
     //On click show the shopping-bag
@@ -755,5 +834,4 @@
         userStorage.removeFromDesired(num);
         updateDesires();
     }
-
 })();

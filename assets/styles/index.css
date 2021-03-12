@@ -1455,6 +1455,10 @@ footer a {
     background: url(./../images/favorite-icon-big-hover.png) no-repeat;
 }
 
+.fav-icon.liked {
+    background: url(./../images/favorite-icon-big-liked.png) no-repeat;
+}
+
 .side-img-container {
     padding-top: 1.5rem;
     justify-content: center;
@@ -1720,6 +1724,11 @@ footer a {
     cursor: pointer;
     text-decoration: none;
     outline: none;
+}
+
+#overView .product-details .site-btn.clicked {
+    background-color: #d4e6d6;
+    color: #447130;
 }
 
 #overView .product-details .price-title-original {

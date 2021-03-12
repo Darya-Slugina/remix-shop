@@ -72,6 +72,7 @@ function getFilterOptions(data) {
     function getSizeOptions(data) {
         let allSizeOptions = data.map(el => el.size);
         let uniqueSizeOptions = allSizeOptions.filter(onlyUnique);
+        sortSizes(uniqueSizeOptions);
         sizeFilterBox.innerHTML = '';
         uniqueSizeOptions.forEach(size => createSizeHTML(size, data));
     }
@@ -105,12 +106,11 @@ function createSizeHTML(size, data) {
     //move to index, so it has access to changeImgOnHover
     sizeBox.addEventListener('click', function (ev) {
         ev.preventDefault();
-        // let id = ev.target.id;
-        if (ev.target.classList.contains('checkedSize')) {
-            ev.target.classList.remove('checkedSize');
-        } else {
-            ev.target.classList.add('checkedSize');
-        }
+
+        let elements = ev.target.parentNode.childNodes;
+        elements.forEach(el => el.classList.remove("checkedSize"));
+        ev.target.classList.add('checkedSize');
+
         displayByFilters(data);
     })
 }
@@ -124,7 +124,7 @@ function createConditionHTML(condition, data) {
     conditionBox.id = 'checkbox' + condition;
 
     let conditionLabel = document.createElement('label');
-    conditionLabel.for = conditionBox.id;
+    conditionLabel.htmlFor = conditionBox.id;
     conditionLabel.innerText = condition;
 
     conditionWrapper.append(conditionBox, conditionLabel);
@@ -152,7 +152,7 @@ function createBrandHTML(brand, data) {
     brandBox.id = 'checkbox' + brand;
 
     let brandLabel = document.createElement('label');
-    brandLabel.for = brandBox.id;
+    brandLabel.htmlFor = brandBox.id;
     brandLabel.innerText = brand;
 
     brandWrapper.append(brandBox, brandLabel);
@@ -174,7 +174,9 @@ function createBrandHTML(brand, data) {
 }
 
 function displayByFilters(data) {
+
     let perfectItem = {};
+
 
     let allCheckedSizes = Array.from(document.querySelectorAll('.checkedSize'));
     let allCheckedSizesValues = allCheckedSizes.map(btn => btn.innerText);
@@ -210,6 +212,7 @@ function displayByFilters(data) {
                 filter = false;
             }
         })
+console.log("filter", filter);
         return filter;
     })
     displayClothes(dataToDisplay);
@@ -241,7 +244,7 @@ const filteredClothesController = function (products) {
 
 //display favourites products on favourites page
 const favouritesClothesController = function (products) {
-   
+
     let containerClothesDisplay = getById('favouritesListContent');
     let favouritesProd = { 'favouritesProducts': products };
 
@@ -259,4 +262,3 @@ const favouritesClothesController = function (products) {
 
 
 }
-
