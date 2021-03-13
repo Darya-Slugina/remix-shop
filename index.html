@@ -362,33 +362,45 @@
             </div>
             <div class="container-filters">
                 <ul class="filters">
-                    <li id="brandsFilterWrapper"><a href="#">Марки</a>
-                        <div class="filter-dropdown" id="brandsFilterBox"></div>
+                    <li id="brandsFilterWrapper">
+                        <a href="#">Марки
+                            <div class="filter-dropdown" id="brandsFilterBox">
+                                <label for="brandInputSearch">търсете марка</label>
+                                <input type="text" id="brandInputSearch" placeholder="Въведете марка">
+                                <div id="allBrands"></div>
+                            </div>
+                        </a>
                     </li>
-                    <li id="sizeFilterWrapper"><a href="#">Размер</a>
-                        <div class="filter-dropdown" id="sizeFilterBox"></div>
+                    <li id="sizeFilterWrapper">
+                        <a href="#">Размер
+                            <div class="filter-dropdown" id="sizeFilterBox"></div>
+                        </a>
                     </li>
-                    <li id="conditionFilterWrapper"><a href="#">Състояние</a>
-                        <div class="filter-dropdown" id="conditionFilterBox"></div>
+                    <li id="conditionFilterWrapper">
+                        <a href="#">Състояние
+                            <div class="filter-dropdown" id="conditionFilterBox"></div>
+                        </a>
                     </li>
-                    <li id="priceFilterWrapper"><a href="#">Цена</a>
-                        <div class="filter-dropdown" id="priceFilterBox">
-                            <div><input type="checkbox" id="priceBelow5">
-                            <label for="priceBelow5">До 5лв</label>
+                    <li id="priceFilterWrapper">
+                        <a href="#">Цена
+                            <div class="filter-dropdown" id="priceFilterBox">
+                                <div><input type="checkbox" id="priceBelow5">
+                                    <label for="priceBelow5">До 5лв</label>
+                                </div>
+                                <div><input type="checkbox" id="price5To10">
+                                    <label for="price5To10">От 5лв до 10лв</label>
+                                </div>
+                                <div><input type="checkbox" id="price10To50">
+                                    <label for="price10To50">От 10 лв до 50 лв</label>
+                                </div>
+                                <div><input type="checkbox" id="price50To100">
+                                    <label for="price50To100">От 50 лв до 100 лв</label>
+                                </div>
+                                <div><input type="checkbox" id="priceAbove100">
+                                    <label for="priceAbove100">Над 100 лв</label>
+                                </div>
                             </div>
-                            <div><input type="checkbox" id="price5To10">
-                            <label for="price5To10">От 5лв до 10лв</label>
-                            </div>
-                            <div><input type="checkbox" id="price10To50">
-                            <label for="price10To50">От 10 лв до 50 лв</label>
-                            </div>
-                            <div><input type="checkbox" id="price50To100">
-                            <label for="price50To100">От 50 лв до 100 лв</label>
-                            </div>
-                            <div><input type="checkbox" id="priceAbove100">
-                            <label for="priceAbove100">Над 100 лв</label>
-                            </div>
-                        </div>
+                        </a>
                     </li>
                 </ul>
             </div>

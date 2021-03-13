@@ -14,6 +14,7 @@ sortDropdownWrapper.addEventListener('mouseout', function () {
 
 // show corresponding filter list on hover
 // brands
+let allBrands = getById('allBrands')
 let brandsFilterWrapper = getById('brandsFilterWrapper');
 let brandsFilterBox = getById('brandsFilterBox');
 brandsFilterWrapper.addEventListener('mouseover', function () {
@@ -86,7 +87,7 @@ function getFilterOptions(data) {
     function getBrandsOptions(data) {
         let allBrandOptions = data.map(el => el.brand);
         let uniqueBrandoptions = allBrandOptions.filter(onlyUnique);
-        brandsFilterBox.innerHTML = '';
+        allBrands.innerHTML = '';
         uniqueBrandoptions.forEach(brand => createBrandHTML(brand, data));
     }
 
@@ -156,7 +157,7 @@ function createBrandHTML(brand, data) {
     brandLabel.innerText = brand;
 
     brandWrapper.append(brandBox, brandLabel);
-    brandsFilterBox.append(brandWrapper);
+    allBrands.append(brandWrapper);
 
     //move to index, so it has access to changeImgOnHover
     brandBox.addEventListener('change', function (ev) {
