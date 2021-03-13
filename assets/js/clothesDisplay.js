@@ -1,8 +1,3 @@
-//show sort list on hover
-let sortDropdownWrapper = getById('sort');
-let dropdownSort = getById('dropdown-sort');
-let sortByPriceAscBtn = getById('sortByPriceAscBtn');
-let sortByPriceDescBtn = getById('sortByPriceDescBtn');
 
 sortDropdownWrapper.addEventListener('mouseover', function () {
     dropdownSort.style.display = 'block';
@@ -12,10 +7,7 @@ sortDropdownWrapper.addEventListener('mouseout', function () {
     dropdownSort.style.display = 'none';
 });
 
-// show corresponding filter list on hover
-// brands
-let brandsFilterWrapper = getById('brandsFilterWrapper');
-let brandsFilterBox = getById('brandsFilterBox');
+
 brandsFilterWrapper.addEventListener('mouseover', function () {
     displayElement(brandsFilterBox)
 })
@@ -23,9 +15,7 @@ brandsFilterWrapper.addEventListener('mouseout', function () {
     displayNoneElement(brandsFilterBox)
 })
 
-// size
-let sizeFilterWrapper = getById('sizeFilterWrapper');
-let sizeFilterBox = getById('sizeFilterBox');
+
 sizeFilterWrapper.addEventListener('mouseover', function () {
     displayElement(sizeFilterBox)
 })
@@ -33,9 +23,7 @@ sizeFilterWrapper.addEventListener('mouseout', function () {
     displayNoneElement(sizeFilterBox)
 })
 
-// condition
-let conditionFilterWrapper = getById('conditionFilterWrapper');
-let conditionFilterBox = getById('conditionFilterBox');
+
 conditionFilterWrapper.addEventListener('mouseover', function () {
     displayElement(conditionFilterBox)
 })
@@ -43,9 +31,7 @@ conditionFilterWrapper.addEventListener('mouseout', function () {
     displayNoneElement(conditionFilterBox)
 })
 
-// price
-let priceFilterWrapper = getById('priceFilterWrapper');
-let priceFilterBox = getById('priceFilterBox');
+
 priceFilterWrapper.addEventListener('mouseover', function () {
     displayElement(priceFilterBox)
 })
@@ -53,22 +39,11 @@ priceFilterWrapper.addEventListener('mouseout', function () {
     displayNoneElement(priceFilterBox)
 })
 
-let allPriceBoxes = Array.from(document.querySelectorAll('#priceFilterBox input'));
-
-allPriceBoxes.forEach(box => {
-    box.addEventListener('change', function (ev) {
-        ev.preventDefault();
-        // let id = ev.target.id;
-        if (ev.target.classList.contains('checked')) {
-            ev.target.classList.remove('checked');
-        } else {
-            ev.target.classList.add('checked');
-        }
-    })
-})
+let allPriceBoxes = document.querySelectorAll('.priceCheckbox');
 
 // fill filter list with data
 function getFilterOptions(data) {
+
     function getSizeOptions(data) {
         let allSizeOptions = data.map(el => el.size);
         let uniqueSizeOptions = allSizeOptions.filter(onlyUnique);
@@ -86,6 +61,7 @@ function getFilterOptions(data) {
 
     function getBrandsOptions(data) {
         let allBrandOptions = data.map(el => el.brand);
+        console.log()
         let uniqueBrandoptions = allBrandOptions.filter(onlyUnique);
         brandsFilterBox.innerHTML = '';
         uniqueBrandoptions.forEach(brand => createBrandHTML(brand, data));
@@ -96,6 +72,7 @@ function getFilterOptions(data) {
     getBrandsOptions(data);
 }
 
+// Size filters
 function createSizeHTML(size, data) {
     let sizeBox = document.createElement('button');
     sizeBox.innerText = size;
@@ -111,10 +88,18 @@ function createSizeHTML(size, data) {
         elements.forEach(el => el.classList.remove("checkedSize"));
         ev.target.classList.add('checkedSize');
 
-        displayByFilters(data);
+        let allCheckedSizes = Array.from(document.querySelectorAll('.checkedSize'));
+        let allCheckedSizesValues = allCheckedSizes.map(btn => btn.innerText);
+
+        // Update the filters in the Model
+        siteManager.updateSizes(allCheckedSizesValues);
+
+        // Print on the screen all filtered items
+        displayClothes(siteManager.filteredItems);
     })
 }
 
+// Condition filters
 function createConditionHTML(condition, data) {
     let conditionWrapper = document.createElement('div');
     conditionWrapper.classList.add('conditionFilterBtn');
@@ -139,10 +124,19 @@ function createConditionHTML(condition, data) {
         } else {
             target.classList.add('checkedCondition');
         }
-        displayByFilters(data)
+
+        let allCheckedConditions = Array.from(document.querySelectorAll('.checkedCondition~label'));
+        let allCheckedConditionsValues = allCheckedConditions.map(label => label.outerText);
+
+        // Update the filters in the Model
+        siteManager.updateConditions(allCheckedConditionsValues);
+
+        // Print on the screen all filtered items
+        displayClothes(siteManager.filteredItems);
     })
 }
 
+// Brands filters
 function createBrandHTML(brand, data) {
     let brandWrapper = document.createElement('div');
     brandWrapper.classList.add('brandFilterBtn');
@@ -167,55 +161,125 @@ function createBrandHTML(brand, data) {
         } else {
             target.classList.add('checkedBrand');
         }
-        displayByFilters(data);
-        let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
-        productImages.forEach(img => changeImgOnHover(img));
+
+        let allCheckedBrands = Array.from(document.querySelectorAll('.checkedBrand~label'));
+        let allCheckedBrandsValues = allCheckedBrands.map(label => label.outerText);
+
+        siteManager.updateBrands(allCheckedBrandsValues);
+
+        // Print on the screen all filtered items
+        displayClothes(siteManager.filteredItems);
     })
 }
 
-function displayByFilters(data) {
+// On click add event on price options
+function eventOnPriceBox() {
 
-    let perfectItem = {};
+    let filterOptions = document.querySelectorAll(".priceCheckbox");
 
+    filterOptions.forEach(box => {
+        box.addEventListener('change', function (ev) {
+            ev.preventDefault();
 
-    let allCheckedSizes = Array.from(document.querySelectorAll('.checkedSize'));
-    let allCheckedSizesValues = allCheckedSizes.map(btn => btn.innerText);
-
-    let allCheckedConditions = Array.from(document.querySelectorAll('.checkedCondition~label'));
-    let allCheckedConditionsValues = allCheckedConditions.map(label => label.outerText);
-
-    let allCheckedBrands = Array.from(document.querySelectorAll('.checkedBrand~label'));
-    let allCheckedBrandsValues = allCheckedBrands.map(label => label.outerText);
-
-    if (allCheckedSizesValues) {
-        allCheckedSizesValues.forEach(size => {
-            perfectItem.size = size;
-        })
-    }
-
-    if (allCheckedConditionsValues) {
-        allCheckedConditionsValues.forEach(condition => {
-            perfectItem.condition = condition;
-        })
-    }
-
-    if (allCheckedBrandsValues) {
-        allCheckedBrandsValues.forEach(brand => {
-            perfectItem.brand = brand;
-        })
-    }
-
-    let dataToDisplay = data.filter(item => {
-        let filter = item;
-        returnValue = Object.keys(perfectItem).forEach(key => {
-            if (item[key] !== perfectItem[key]) {
-                filter = false;
+            if (ev.target.classList.contains('checked')) {
+                ev.target.classList.remove('checked');
+            } else {
+                ev.target.classList.add('checked');
             }
-        })
-console.log("filter", filter);
-        return filter;
-    })
-    displayClothes(dataToDisplay);
+
+            // TODO: Get all clicked prices.
+            let allCheckedPrices = Array.from(document.querySelectorAll('.checked'));
+            let allCheckedPricesValues = allCheckedPrices.map(label => label.id);
+            siteManager.updatePrices(allCheckedPricesValues);
+            console.log(allCheckedPricesValues);
+
+            // Print on the screen all filtered items
+            displayClothes(siteManager.filteredItems);
+        });
+    });
+}
+
+//Desired items counter
+function updateDesiredCounter() {
+    let currentUser = userStorage.getCurrentUser();
+
+
+    if (currentUser) {
+        let counter = currentUser.myDesiredCounter;
+
+
+        if (counter > 0) {
+            desiredCounter.style.display = "flex";
+            basketIcon.classList.add("full");
+            desiredCounter.innerHTML = counter;
+
+        } else {
+            desiredCounter.style.display = "none";
+            basketIcon.classList.remove("full");
+            desiredCounter.innerHTML = '';
+        }
+    }
+}
+
+// On click add to shopping bag
+function moveToBasket() {
+    let wantedProduct = document.querySelectorAll(".add-button");
+
+    wantedProduct.forEach(el => el.addEventListener("click", function (e) {
+        let currentUser = userStorage.getCurrentUser();
+        if (currentUser) {
+            let currentItem = siteManager.allProducts.filter(el => el.id === Number(e.target.value));
+
+            if (currentUser.myDesiredProd.filter(elem => elem.id === currentItem[0].id).length > 0) {
+                userStorage.removeFromDesired(currentItem[0]);
+                e.target.innerHTML = "Добавете";
+                e.target.classList.remove("clicked");
+                counter = currentUser.myDesiredProd.length;
+                desiredCounter.innerHTML = counter;
+                currentUser.myDesiredCounter = counter;
+                updateDesiredCounter();
+            } else {
+                userStorage.addToDesired(currentItem[0]);
+                e.target.innerHTML = "Добавено";
+                e.target.classList.add("clicked");
+                counter = currentUser.myDesiredProd.length;
+                desiredCounter.innerHTML = counter;
+                currentUser.myDesiredCounter = counter;
+                updateDesiredCounter();
+            }
+        }
+    }));
+}
+
+// On click like the item
+function likeItem() {
+    let currentUser = userStorage.getCurrentUser();
+    if (currentUser) {
+        let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
+
+        favouriteIcon.forEach(el => el.addEventListener("click", function (e) {
+            let currentUser = userStorage.getCurrentUser();
+            if (currentUser.isLoggedIn) {
+                let currentItem = siteManager.allProducts.filter(el => el.id === Number(e.target.previousElementSibling.value));
+
+                if (currentUser.myFavourites.filter(elem => elem.id === currentItem[0].id).length > 0) {
+                    userStorage.removeFromFavourite(currentItem[0]);
+                    e.target.classList.remove("liked");
+                    counter = JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true)[0].myFavourites.length;
+                    favoritesCounter.innerHTML = counter;
+                    currentUser.myFavouritesCount = counter;
+                } else {
+                    userStorage.addToFavourite(currentItem[0]);
+                    e.target.classList.add("liked");
+                    counter = JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true)[0].myFavourites.length;
+                    favoritesCounter.innerHTML = counter;
+                    currentUser.myFavouritesCount = counter;
+                }
+
+                // updatefavouriteCounter();
+            }
+        }));
+    }
 }
 
 // display clothes
@@ -227,7 +291,26 @@ const displayClothes = function (data) {
     let template = Handlebars.compile(source);
     let html = template(data);
     containerClothesDisplay.innerHTML = html;
+
+    // Add event listener
+    moveToBasket();
+    likeItem();
+
+    // Add hover effect
+    let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
+    productImages.forEach(img => changeImgOnHover(img));
+
+    //event for showing the product on overView
+    let buttons = Array.from(document.getElementsByClassName("product-img"));
+    buttons.forEach(function (currentBtn) {
+        currentBtn.addEventListener('click', function (ev) {
+            console.log(111, ev.target.previousElementSibling.value);
+            localStorage.setItem('productId', JSON.stringify(ev.target.previousElementSibling.value));
+            location.hash = '#overview';
+        })
+    });
 }
+
 
 //display filtered products
 const filteredClothesController = function (products) {

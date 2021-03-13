@@ -1,24 +1,5 @@
 (function () {
-    const loginForm = getById("loginForm");
-    const loginError = getById("loginError");
-    const enterButton = getById("enterButton");
-  
-    // Inputs
-    const emailInput = getById("emailInput");
-    const passwordInput = getById("passwordInput");
-    const nameInputReg = getById("nameInputReg");
-    const emailInputReg = getById("emailInputReg");
-    const passwordInputReg = getById("passwordInputReg");
 
-  
-    // Buttons
-    const loginButton = getById("loginButton");
-    const registrationButton = getById("registrationButton");
-
-    let desiredCounter = getById("basketProductCount");
-    let basketIcon = getById("basket-icon");
-    let favoritesCounter = getById("favorites_count_top");
-    let favouritIconMain = getById("favourit-icon-main");
 
     function loginUser(email, password){
       userStorage.login(email, password);

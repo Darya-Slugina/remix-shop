@@ -2,11 +2,11 @@ function getById(id) {
     return document.getElementById(id);
 }
 
-function displayElement (el){
+function displayElement(el) {
     el.style.display = 'flex'
 }
 
-function displayNoneElement (el) {
+function displayNoneElement(el) {
     el.style.display = 'none'
 }
 
@@ -45,7 +45,7 @@ function isNewSeason(type) {
 function isNewProduct(condition) {
     if (condition === "Нов продукт") {
         return true;
-    } 
+    }
     // return false;
 }
 
@@ -70,14 +70,31 @@ function isGoodProduct(condition) {
     // return false;
 }
 
-function isFemail (){
-    if(product.id > 20) {
+function isFemail() {
+    if (product.id > 20) {
         return true;
     }
     return false
 }
 
-function sortSizes(sizes){
-    console.log("sizes",sizes);
+function sortSizes(sizes) {
     return sizes.sort();
+}
+
+
+// Change img on hover
+function onMouseOver(e) {
+    let picture = e.target.src;
+    let newImg = siteManager.allProducts.find(el => el.image_front === picture);
+    e.target.src = newImg.image_back;
+}
+
+function onMouseOut(e) {
+    let picture = e.target.src;
+    let newImg = siteManager.allProducts.find(el => el.image_back === picture);
+    e.target.src = newImg.image_front;
+}
+function changeImgOnHover(img) {
+    img.addEventListener("mouseover", onMouseOver);
+    img.addEventListener("mouseout", onMouseOut);
 }

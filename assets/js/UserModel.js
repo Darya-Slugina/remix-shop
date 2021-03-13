@@ -1,4 +1,4 @@
-const userStorage = (function () {
+let userStorage = (function () {
 
   class User {
     constructor(name, email, password, gender) {
@@ -36,11 +36,13 @@ const userStorage = (function () {
         if (JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true).length> 0) {
 
           let localStorageFavorites = JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true)[0].myFavourites;
+
           let currentUser = this.users.find(user => user.isLoggedIn);
           currentUser.myFavourites = localStorageFavorites;
           currentUser.myFavouritesCount = localStorageFavorites.length;
 
           let localStorageDesired = JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true)[0].myDesiredProd;
+
           currentUser = this.users.find(user => user.isLoggedIn);
           currentUser.myDesiredProd = localStorageDesired;
           currentUser.myDesiredCounter = localStorageDesired.length;
