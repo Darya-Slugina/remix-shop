@@ -6,9 +6,6 @@
     window.addEventListener("DOMContentLoaded", loadPreviousSession);
 
     window.addEventListener("hashchange", onHashChange);
-    // window.addEventListener("hashchange", showCarousel);
-
-
 
     //   Adds the initial male products
     maleClothes.forEach(function (item) {
@@ -21,7 +18,6 @@
         let product = createProduct(item);
         siteManager.addWomanProduct(product);
     });
-
 
 
     // Create the product from array
@@ -101,20 +97,19 @@
             case 'allProducts':
                 showActivePage(allProductsPage);
                 renderAllProducts();
+                updateFavourites();
+                updateDesires();
                 break;
 
             case 'favourites':
                 showActivePage(favouritesPage);
                 showMyFavourites();
-                updateDesires();
-                updateFavourites();
                 break;
 
             case 'overView':
                 showActivePage(overviewPage);
                 selectProduct();
                 showCarousel();
-                eventsAfterLoading();
                 break;
 
             default:
@@ -140,8 +135,6 @@
             }
         })
     }
-
-    // event listeners for brand, size, condition button filters - initialize them here first!
 
     //change filter style on click
     allFilters.forEach(function (currentFilter) {
@@ -207,6 +200,38 @@
         }
     }
 
+    // On click show the user subMenu with logout button
+    let userMenu = getById("user-button");
+    userMenu.addEventListener("click", function () {
+        userLogoutController();
+        userMenu.classList.add("clicked");
+        let userSubMenu = getById("userSubMenu");
+        userSubMenu.style.display = "block";
+        setTimeout(function () {
+            userSubMenu.style.display = "none";
+            userMenu.classList.remove("clicked")
+        }, 5000);
+
+        let logOutBtn = getById("logOutBtn");
+        logOutBtn.addEventListener("click", function () {
+            userStorage.logout();
+            enterButton.style.display = "block";
+            let icons = document.querySelectorAll(".registration>.afterRegistration>a");
+            icons.forEach(el => el.style.display = "none");
+            userSubMenu.style.display = "none";
+            let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
+            favouriteIcon.forEach(el => el.classList.remove("liked"));
+            updateDesires();
+        })
+    });
+
+    // On click show the page with favourites products
+    let showFavouritesBtn = getById("showFavouritesBtn");
+    showFavouritesBtn.addEventListener("click", function () {
+        location.hash = "#favourites";
+        showMyFavourites();
+    });
+
     bannersController();
     brandsController();
     blogController();
@@ -214,17 +239,27 @@
     //Search by name
     srchProd.addEventListener("blur", function (event) {
         // siteManager.updateNames(event.target.value);
-        let filtered = siteManager.filterByName(event.target.value);
-        showFilteredProducts(filtered);
+        // let filtered = siteManager.filterByName(event.target.value);
+
+        siteManager.updateSearchFilter(event.target.value)
+
+        const extension = location.hash.split('/')[1];
+        if(!extension) {
+            location.hash = '#allProducts/women'
+        } else {
+            location.hash = '#allProducts/' + extension
+        }
+
+        // showFilteredProducts(filtered);
         // siteManager.updateNames(filtered);
 
     });
 
     // Show allProducts page with filtered content
     function showFilteredProducts(products) {
-       homePage.style.display = "none";
-       allProductsPage.style.display = "block";
-    //    displayClothes(products);
+        homePage.style.display = "none";
+        allProductsPage.style.display = "block";
+        //    displayClothes(products);
         filteredClothesController(products);
         getById("search-button").addEventListener("click", function () {
             srchProd.value = "";
@@ -233,23 +268,6 @@
         let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
         productImages.forEach(img => changeImgOnHover(img));
     }
-
-    // Select current product
-    // function selectProduct() {
-
-    //     let productId = localStorage.getItem('productId');
-    //     product = siteManager.allProducts.find(el => el.id === Number(productId));
-    //     productController();
-    //     if (product !== null) {
-    //         updateLikes();
-    //         moveToBasketFromOverView();
-    //         likeItemFromOverView();
-    //     }
-
-    //     goBack();
-    //     loadEvents();
-    //     window.scrollTo(0, 0);
-    // }
 
     // Prepare the list for carousel 
     const shuffledArr = array => array.sort(() => 0.5 - Math.random());
@@ -347,91 +365,7 @@
         dropdownPersonalFilters.style.display = 'none';
     })
 
-
-    //favourite items counter
-    function updatefavouriteCounter() {
-        let currentUser = userStorage.getCurrentUser();
-        if (currentUser) {
-            let counter = currentUser.myFavouritesCount;
-
-            if (counter > 0) {
-                favoritesCounter.style.display = "flex";
-                favouritIconMain.classList.add("liked");
-                favoritesCounter.innerHTML = counter;
-
-            } else {
-                favoritesCounter.style.display = "none";
-                favouritIconMain.classList.remove("liked");
-                favoritesCounter.innerHTML = '';
-            }
-        }
-    }
-
-    // Check if item in favourites and put current styles
-    function updateLikes() {
-        let currentUser = userStorage.getCurrentUser();
-        if (currentUser) {
-            let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
-            if (favouriteIcon.length > 0) {
-                favouriteIcon.forEach(el => {
-                    if (currentUser.myFavourites.some(item => item.id == el.getAttribute("productId"))) {
-                        el.classList.add("liked");
-                    }
-                });
-            }
-            let favouriteOverView = getById("favIcon");
-            if (currentUser.myFavourites.some(item => item.id == favouriteOverView.getAttribute("productId"))) {
-                favouriteOverView.classList.add("liked");
-            }
-        }
-    }
-
-    // Check if item in desired and put current styles
-    function updateDesiredProd() {
-        let currentUser = userStorage.getCurrentUser();
-        if (currentUser) {
-            let desiredBtn = document.querySelectorAll(".add-button");
-            desiredBtn.forEach(el => {
-
-                if (currentUser.myDesiredProd.some(item => item.id == el.value)) {
-                    el.innerText = "Добавено";
-                    el.classList.add("clicked");
-                } else {
-                    el.innerText = "Добавете";
-                    el.classList.remove("clicked");
-                }
-            });
-            let desiredBtnOverView = getById("siteBtn");
-
-            if (desiredBtnOverView !== null) {
-                if (currentUser.myDesiredProd.some(item => item.id == desiredBtnOverView.value)) {
-                    desiredBtnOverView.innerText = "Добавено";
-                    desiredBtnOverView.classList.add("clicked");
-                } else {
-                    desiredBtnOverView.innerText = "Добавете";
-                    desiredBtnOverView.classList.remove("clicked");
-                }
-            }
-
-        } else {
-            let desiredBtn = document.querySelectorAll(".add-button");
-            desiredBtn.forEach(el => {
-                el.innerText = "Добавете";
-                el.classList.remove("clicked");
-            });
-        }
-    }
-
-    function updateFavourites() {
-        updatefavouriteCounter();
-        updateLikes();
-    }
-
-    function updateDesires() {
-        updateDesiredCounter();
-        updateDesiredProd();
-    }
-
+    // Events after carousel loading
     function loadEvents() {
 
         likeItem();
@@ -446,43 +380,11 @@
         let buttons = Array.from(document.getElementsByClassName("product-img"));
         buttons.forEach(function (currentBtn) {
             currentBtn.addEventListener('click', function (ev) {
-                console.log(111, ev.target.previousElementSibling.value);
                 localStorage.setItem('productId', JSON.stringify(ev.target.previousElementSibling.value));
                 location.hash = '#overview';
             })
         });
     }
-
-        // On click show the user subMenu with logout button
-        let userMenu = getById("user-button");
-        userMenu.addEventListener("click", function () {
-            userLogoutController();
-            userMenu.classList.add("clicked");
-            let userSubMenu = getById("userSubMenu");
-            userSubMenu.style.display = "block";
-            setTimeout(function () {
-                userSubMenu.style.display = "none";
-                userMenu.classList.remove("clicked")
-            }, 5000);
-
-            let logOutBtn = getById("logOutBtn");
-            logOutBtn.addEventListener("click", function () {
-                userStorage.logout();
-                enterButton.style.display = "block";
-                let icons = document.querySelectorAll(".registration>.afterRegistration>a");
-                icons.forEach(el => el.style.display = "none");
-                userSubMenu.style.display = "none";
-                let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
-                favouriteIcon.forEach(el => el.classList.remove("liked"));
-                updateDesires();
-            })
-        });
-
-        // On click show the page with favourites products
-        let showFavouritesBtn = getById("showFavouritesBtn");
-        showFavouritesBtn.addEventListener("click", function() {
-            location.hash = "#favourites";
-        });
 
     //On click show the shopping-bag
     function showBasketInfo(e) {
@@ -501,6 +403,7 @@
         }
     }
 
+    // On X click delete from shopping-bag
     function addEventForDeleting() {
         let deleteBtn = document.querySelectorAll(".delete");
 
@@ -513,6 +416,7 @@
         }))
     }
 
+    // Update items in the basket
     function updateBasket(num) {
         userStorage.removeFromDesired(num);
         updateDesires();

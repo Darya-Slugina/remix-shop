@@ -62,13 +62,8 @@ const registrationButton = getById("registrationButton");
 const womenBtn = getById('womenBtn');
 const menBtn = getById('menBtn');
 
-// overView tabs
-const info = getById("overviewInfo");
-const delivery = getById("delivery");
-const reclamation = getById("reclamation");
 
 // Pages
-
 const favouritesPage = getById('favourites');
 const overviewPage = getById('overView');
 const allProductsPage = getById('allProductsPage');

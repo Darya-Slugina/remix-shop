@@ -4,22 +4,24 @@ function selectProduct() {
     product = siteManager.allProducts.find(el => el.id === Number(productId));
     productController();
 
-    // let items = Array.from(document.getElementsByClassName("img-fluid"));
-    // items.forEach(function (currentImg) {
-    //     currentImg.addEventListener("click", changeImg);
-    // });
+    let items = Array.from(document.getElementsByClassName("img-fluid"));
+    items.forEach(function (currentImg) {
+        currentImg.addEventListener("click", changeImg);
+    });
 
-    // let nav = Array.from(document.getElementsByClassName("nav-item"));
-    // nav.forEach(function (currentBtn) {
-    //     currentBtn.addEventListener("click", changeInfo);
-    // });
+    let nav = Array.from(document.getElementsByClassName("nav-item"));
+    nav.forEach(function (currentBtn) {
+        currentBtn.addEventListener("click", changeInfo);
+    });
+    
     moveToBasketFromOverView();
     likeItemFromOverView();
+    updateDesires();
+    updateLikes();
     goBack();
-    // loadEvents();
+
     window.scrollTo(0, 0);
 }
-
 
 // On click add to shopping bag from OverView page
 function moveToBasketFromOverView() {
@@ -92,23 +94,9 @@ function goBack() {
     })
 }
 
-
-function eventsAfterLoading(){
-    let items = Array.from(document.getElementsByClassName("img-fluid"));
-console.log("items", items);
-items.forEach(function (currentImg) {
-    currentImg.addEventListener("click", changeImg);
-});
-
-let nav = Array.from(document.getElementsByClassName("nav-item"));
-nav.forEach(function (currentBtn) {
-    currentBtn.addEventListener("click", changeInfo);
-});
-}
-
 //Change big img on overViewPage on click
 function changeImg(e) {
-    console.log("mainImg", mainImg)
+    const mainImg = getById("big-img");
     mainImg.src = e.target.src;
 }
 
@@ -123,8 +111,10 @@ function changeInfo(e) {
     e.target.parentElement.classList.add("activeTab");
     e.target.classList.add("activeTab");
 
-
-
+    let info = getById("overviewInfo");
+    let delivery = getById("delivery");
+    let reclamation = getById("reclamation");
+    
     if (e.target.innerHTML === "Доставка" || e.target.innerText === "ДОСТАВКА") {
         delivery.classList.add("show");
         reclamation.classList.remove("show");

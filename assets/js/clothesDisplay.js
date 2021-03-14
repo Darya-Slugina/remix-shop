@@ -79,22 +79,22 @@ function createSizeHTML(size) {
     sizeBox.classList.add('sizeFilterBtn');
     sizeFilterBox.append(sizeBox);
 
-    //move to index, so it has access to changeImgOnHover
     sizeBox.addEventListener('click', function (ev) {
         ev.preventDefault();
 
         let elements = ev.target.parentNode.childNodes;
-        elements.forEach(el => el.classList.remove("checkedSize"));
-        ev.target.classList.add('checkedSize');
+        elements.forEach(() => {
+            ev.target.classList.toggle("checkedSize");
 
-        let allCheckedSizes = Array.from(document.querySelectorAll('.checkedSize'));
-        let allCheckedSizesValues = allCheckedSizes.map(btn => btn.innerText);
+            let allCheckedSizes = Array.from(document.querySelectorAll('.checkedSize'));
+            let allCheckedSizesValues = allCheckedSizes.map(btn => btn.innerText);
 
-        // Update the filters in the Model
-        siteManager.updateSizes(allCheckedSizesValues);
+            // Update the filters in the Model
+            siteManager.updateSizes(allCheckedSizesValues);
 
-        // Print on the screen all filtered items
-        displayClothes(siteManager.filteredItems);
+            // Print on the screen all filtered items
+            displayClothes(siteManager.filteredItems);
+        })
     })
 }
 
@@ -198,28 +198,6 @@ function eventOnPriceBox() {
     });
 }
 
-//Desired items counter
-function updateDesiredCounter() {
-    let currentUser = userStorage.getCurrentUser();
-
-
-    if (currentUser) {
-        let counter = currentUser.myDesiredCounter;
-
-
-        if (counter > 0) {
-            desiredCounter.style.display = "flex";
-            basketIcon.classList.add("full");
-            desiredCounter.innerHTML = counter;
-
-        } else {
-            desiredCounter.style.display = "none";
-            basketIcon.classList.remove("full");
-            desiredCounter.innerHTML = '';
-        }
-    }
-}
-
 // On click add to shopping bag
 function moveToBasket() {
     let wantedProduct = document.querySelectorAll(".add-button");
@@ -281,6 +259,116 @@ function likeItem() {
     }
 }
 
+//Desired items counter
+function updateDesiredCounter() {
+    let currentUser = userStorage.getCurrentUser();
+
+
+    if (currentUser) {
+        let counter = currentUser.myDesiredCounter;
+
+
+        if (counter > 0) {
+            desiredCounter.style.display = "flex";
+            basketIcon.classList.add("full");
+            desiredCounter.innerHTML = counter;
+
+        } else {
+            desiredCounter.style.display = "none";
+            basketIcon.classList.remove("full");
+            desiredCounter.innerHTML = '';
+        }
+    }
+}
+
+  //favourite items counter
+  function updatefavouriteCounter() {
+    let currentUser = userStorage.getCurrentUser();
+    if (currentUser) {
+        let counter = currentUser.myFavouritesCount;
+
+        if (counter > 0) {
+            favoritesCounter.style.display = "flex";
+            favouritIconMain.classList.add("liked");
+            favoritesCounter.innerHTML = counter;
+
+        } else {
+            favoritesCounter.style.display = "none";
+            favouritIconMain.classList.remove("liked");
+            favoritesCounter.innerHTML = '';
+        }
+    }
+}
+
+// Check if item in favourites and put current styles
+function updateLikes() {
+    let currentUser = userStorage.getCurrentUser();
+    if (currentUser) {
+        let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
+        if (favouriteIcon.length > 0) {
+            favouriteIcon.forEach(el => {
+                if (currentUser.myFavourites.some(item => item.id == el.getAttribute("productId"))) {
+                    el.classList.add("liked");
+                }
+            });
+        }
+        if (location.hash === "#overView") {
+            console.log(111);
+            let favouriteOverView = getById("favIcon");
+            if (currentUser.myFavourites.some(item => item.id == favouriteOverView.getAttribute("productId"))) {
+                favouriteOverView.classList.add("liked");
+            }
+        }
+    }
+}
+
+// Check if item in desired and put current styles
+function updateDesiredProd() {
+    let currentUser = userStorage.getCurrentUser();
+    if (currentUser) {
+        let desiredBtn = document.querySelectorAll(".add-button");
+        desiredBtn.forEach(el => {
+
+            if (currentUser.myDesiredProd.some(item => item.id == el.value)) {
+                el.innerText = "Добавено";
+                el.classList.add("clicked");
+            } else {
+                el.innerText = "Добавете";
+                el.classList.remove("clicked");
+            }
+        });
+        let desiredBtnOverView = getById("siteBtn");
+
+        if (desiredBtnOverView !== null) {
+            if (currentUser.myDesiredProd.some(item => item.id == desiredBtnOverView.value)) {
+                desiredBtnOverView.innerText = "Добавено";
+                desiredBtnOverView.classList.add("clicked");
+            } else {
+                desiredBtnOverView.innerText = "Добавете";
+                desiredBtnOverView.classList.remove("clicked");
+            }
+        }
+
+    } else {
+        let desiredBtn = document.querySelectorAll(".add-button");
+        desiredBtn.forEach(el => {
+            el.innerText = "Добавете";
+            el.classList.remove("clicked");
+        });
+    }
+}
+
+function updateFavourites() {
+    updatefavouriteCounter();
+    updateLikes();
+}
+
+function updateDesires() {
+    updateDesiredCounter();
+    updateDesiredProd();
+}
+
+
 // display clothes
 const displayClothes = function (data) {
     let containerClothesDisplay = document.getElementById('display');
@@ -291,9 +379,14 @@ const displayClothes = function (data) {
     let html = template(data);
     containerClothesDisplay.innerHTML = html;
 
+    if(!data.length) {
+        // TODO: Error
+    }
+
     // Add event listener
     moveToBasket();
     likeItem();
+
 
     // Add hover effect
     let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
