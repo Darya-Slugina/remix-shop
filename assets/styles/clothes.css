@@ -147,6 +147,57 @@
     height: 250px;
     display: none;
     z-index: 200;
+    left: 0;
+    top: 35px;
+    background: #f3f3f5;
+    padding: 15px 13px;
+    border-radius: 4px;
+    min-width: 200px;
+}
+
+.filter-dropdown > label{
+    color: #515356;
+    font-size: 11px;
+    text-transform: uppercase;
+    margin: 20px 0 10px;
+    font-weight: 700;
+}
+
+#brandInputSearch{
+    margin: 3px 0 10px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 11px;
+    padding-right: 26px;
+    padding-left: 15px;
+    background: url(../images/delete_pf_icon.png) no-repeat right 10px center;
+    background-size: 8px 8px;
+
+    font-weight: 600;
+    color: #303030;
+    display: block;
+    border: 1px solid #b7b7b7;
+    border-radius: 4px;
+    outline: none;
+}
+
+.filter-dropdown > button{
+    width: 26px;
+    height: 26px;
+    text-align: center;
+    line-height: 24px;
+    float: left;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 400;
+    background-color: #fff;
+    border: 1px solid #484848;
+    border-radius: 4px;
+    margin: 5px;
+}
+
+.filter-dropdown *:hover{
+    font-weight: bolder;
 }
 
 .container-clothesDisplay{

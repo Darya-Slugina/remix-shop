@@ -7,7 +7,6 @@ sortDropdownWrapper.addEventListener('mouseout', function () {
     dropdownSort.style.display = 'none';
 });
 
-
 brandsFilterWrapper.addEventListener('mouseover', function () {
     displayElement(brandsFilterBox)
 })
@@ -63,7 +62,7 @@ function getFilterOptions(data) {
         let allBrandOptions = data.map(el => el.brand);
         console.log()
         let uniqueBrandoptions = allBrandOptions.filter(onlyUnique);
-        brandsFilterBox.innerHTML = '';
+        allBrands.innerHTML = '';
         uniqueBrandoptions.forEach(brand => createBrandHTML(brand, data));
     }
 
@@ -150,7 +149,7 @@ function createBrandHTML(brand) {
     brandLabel.innerText = brand;
 
     brandWrapper.append(brandBox, brandLabel);
-    brandsFilterBox.append(brandWrapper);
+    allBrands.append(brandWrapper);
 
     //move to index, so it has access to changeImgOnHover
     brandBox.addEventListener('change', function (ev) {
