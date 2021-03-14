@@ -20,4 +20,6 @@ function showMyFavourites() {
 
     moveToBasket();
     likeItem();
+    updateDesires();
+    updateFavourites();
 }

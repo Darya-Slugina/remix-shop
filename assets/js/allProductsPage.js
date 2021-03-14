@@ -40,11 +40,10 @@ function renderAllProducts() {
             displayClothes(siteManager.filteredItems);
             // clear checked filters
         })
-    } else {
-        womenBtn.classList.remove('selectedFilter');
-        menBtn.classList.remove('selectedFilter');
     }
 
+    womenBtn.classList.remove('selectedFilter');
+    menBtn.classList.remove('selectedFilter');
 }
 
 // event listeners for sort buttons

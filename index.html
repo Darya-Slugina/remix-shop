@@ -191,22 +191,22 @@
                     <div class="main-filters">
                         <ul class="filter-item">
                             <li class="main-category">
-                                <a href="#allProducts/women" title="Жени" id="womenBtn">Жени</a>
+                                <a href="#allProducts/women" title="Жени" id="womenBtn" class="navListBtn">Жени</a>
                             </li>
                             <li class="main-category">
-                                <a href="#allProducts/men" title="Мъже" id="menBtn">Мъже</a>
+                                <a href="#allProducts/men" title="Мъже" id="menBtn" class="navListBtn">Мъже</a>
                             </li>
                             <li class="main-category">
-                                <a href="#allProducts/women" title="Чанти">Чанти</a>
+                                <a href="#allProducts/women" title="Чанти" class="navListBtn">Чанти</a>
                             </li>
                             <li class="main-category">
-                                <a href="#allProducts/women" title="Аксесоари">Аксесоари</a>
+                                <a href="#allProducts/women" title="Аксесоари" class="navListBtn">Аксесоари</a>
                             </li>
                             <li class="main-category">
-                                <a href="#allProducts/women" title="Обувки">Обувки</a>
+                                <a href="#allProducts/women" title="Обувки" class="navListBtn">Обувки</a>
                             </li>
                             <li class="main-category">
-                                <a href="#allProducts/women" title="Деца">Деца</a>
+                                <a href="#allProducts/women" title="Деца" class="navListBtn">Деца</a>
                             </li>
                         </ul>
                         <div class="search-box">
@@ -364,7 +364,7 @@
             <div class="container-filters">
                 <ul class="filters">
                     <li id="brandsFilterWrapper" class="brandsFilterWrapper">
-                        <a href="#">Марки
+                        <a href="javascript:;">Марки
                             <div class="filter-dropdown" id="brandsFilterBox">
                                 <label for="brandInputSearch">търсете марка</label>
                                 <input type="text" id="brandInputSearch" placeholder="Въведете марка">
@@ -373,31 +373,31 @@
                         </a>
                     </li>
                     <li id="sizeFilterWrapper" class="sizeFilterWrapper">
-                        <a href="#">Размер
+                        <a href="javascript:;">Размер
                             <div class="filter-dropdown" id="sizeFilterBox"></div>
                         </a>
                     </li>
                     <li id="conditionFilterWrapper" class="conditionFilterWrapper">
-                        <a href="#">Състояние
+                        <a href="javascript:;">Състояние
                             <div class="filter-dropdown" id="conditionFilterBox"></div>
                         </a>
                     </li>
                     <li id="priceFilterWrapper" class="priceFilterWrapper">
-                        <a href="#">Цена
+                        <a href="javascript:;">Цена
                             <div class="filter-dropdown" id="priceFilterBox">
-                                <div><input type="checkbox" id="priceBelow5">
+                                <div><input type="checkbox" id="priceBelow5" class="priceCheckbox">
                                     <label for="priceBelow5">До 5лв</label>
                                 </div>
-                                <div><input type="checkbox" id="price5To10">
+                                <div><input type="checkbox" id="price5To10" class="priceCheckbox">
                                     <label for="price5To10">От 5лв до 10лв</label>
                                 </div>
-                                <div><input type="checkbox" id="price10To50">
+                                <div><input type="checkbox" id="price10To50" class="priceCheckbox">
                                     <label for="price10To50">От 10 лв до 50 лв</label>
                                 </div>
-                                <div><input type="checkbox" id="price50To100">
+                                <div><input type="checkbox" id="price50To100" class="priceCheckbox">
                                     <label for="price50To100">От 50 лв до 100 лв</label>
                                 </div>
-                                <div><input type="checkbox" id="priceAbove100">
+                                <div><input type="checkbox" id="priceAbove100" class="priceCheckbox">
                                     <label for="priceAbove100">Над 100 лв</label>
                                 </div>
                             </div>
@@ -870,7 +870,6 @@
             </div>
         {{/each}} 
     </script>
-
 
     <script id="overViewNavigationTempl" type="text/x-handlebars-template">
             <li class="back-link"><a href="javascript:;" id="goBack">назад</a></li>

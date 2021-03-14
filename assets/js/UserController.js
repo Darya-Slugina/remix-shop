@@ -1,6 +1,5 @@
 (function () {
 
-
     function loginUser(email, password){
       userStorage.login(email, password);
       loginForm.classList.remove("show");

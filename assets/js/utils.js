@@ -81,7 +81,6 @@ function sortSizes(sizes) {
     return sizes.sort();
 }
 
-
 // Change img on hover
 function onMouseOver(e) {
     let picture = e.target.src;
