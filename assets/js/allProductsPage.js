@@ -10,7 +10,7 @@ function renderAllProducts() {
         eventOnPriceBox();
         getFilterOptions(siteManager.femaleClothes);
         displayClothes(siteManager.filteredItems);
-        sortItems();
+        sortItems(); 
 
 
         finalBreadcrumbTarget.innerHTML = 'Дамски дрехи';

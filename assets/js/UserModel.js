@@ -33,19 +33,24 @@ let userStorage = (function () {
 
       if (localStorage.getItem("users")) {
 
-        if (JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true).length> 0) {
+        if (JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true).length > 0) {
 
           let localStorageFavorites = JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true)[0].myFavourites;
 
           let currentUser = this.users.find(user => user.isLoggedIn);
           currentUser.myFavourites = localStorageFavorites;
-          currentUser.myFavouritesCount = localStorageFavorites.length;
+          if (currentUser.myFavouritesCount) {
+            currentUser.myFavouritesCount = localStorageFavorites.length;
+          }
 
           let localStorageDesired = JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true)[0].myDesiredProd;
 
           currentUser = this.users.find(user => user.isLoggedIn);
           currentUser.myDesiredProd = localStorageDesired;
-          currentUser.myDesiredCounter = localStorageDesired.length;
+          if (currentUser.myDesiredCounter) {
+            currentUser.myDesiredCounter = localStorageDesired.length;
+          }
+
         }
       }
     }
@@ -147,7 +152,7 @@ let userStorage = (function () {
 
     removeFromDesired(el) {
       let currentUser = userStorage.getCurrentUser();
-      
+
       if (typeof el === "number" || typeof el === "string") {
         currentUser.myDesiredProd = currentUser.myDesiredProd.filter(item => item.id !== el);
         currentUser.myDesiredCounter = currentUser.myDesiredProd.length;
