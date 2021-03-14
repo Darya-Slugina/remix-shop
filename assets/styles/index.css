@@ -128,7 +128,6 @@ body {
     right: 0;
     z-index: 997;
     width: 100%;
-    max-width: 1245px;
     background-color: #fff;
 }
 
@@ -370,10 +369,6 @@ body {
     justify-content: space-between;
 }
 
-.banner-section .main-banners-left {
-    position: relative;
-}
-
 .banner-section .conditions {
     position: absolute;
     bottom: 20px;
@@ -384,9 +379,14 @@ body {
 }
 
 .banner-section .main-banners-left {
+    position: relative;
     margin-right: 15px;
     display: flex;
     justify-content: flex-start;
+}
+
+#bannerSection>.banner-section .main-banners-left:last-child {
+    margin-right: 0px;
 }
 
 .banner-section img, .banner-container img {
@@ -710,6 +710,11 @@ body {
     background-color: rgb(243, 243, 243);
 }
 
+.add-button.clicked {
+    background-color: #d4e6d6;
+    color: #447130;
+}
+
 .favourite-icon-container {
     position: relative;
 }
@@ -724,7 +729,7 @@ body {
     background: url(../images/favorite-icon.png) no-repeat;
     cursor: pointer;
     display: inline-block;
-    z-index: 100;
+    z-index: 10;
 }
 
 .favourite-icon:hover {
@@ -1450,6 +1455,10 @@ footer a {
     background: url(./../images/favorite-icon-big-hover.png) no-repeat;
 }
 
+.fav-icon.liked {
+    background: url(./../images/favorite-icon-big-liked.png) no-repeat;
+}
+
 .side-img-container {
     padding-top: 1.5rem;
     justify-content: center;
@@ -1715,6 +1724,11 @@ footer a {
     cursor: pointer;
     text-decoration: none;
     outline: none;
+}
+
+#overView .product-details .site-btn.clicked {
+    background-color: #d4e6d6;
+    color: #447130;
 }
 
 #overView .product-details .price-title-original {
@@ -2047,8 +2061,8 @@ body {
     align-items: center;
     border-radius: 50%;
     position: absolute;
-    top: 0;
-    right: -8px;
+    top: -5px;
+    right: -13px;
     padding: 0 2px;
     min-width: 16px;
     min-height: 16px;
@@ -2097,7 +2111,7 @@ body {
     margin-top: -3px;
 }
 
-.basket-icon:hover {
+.basket-icon:hover, .basket-icon.full  {
     background: url(./../images/bag-green-icon.png) no-repeat;
 }
 

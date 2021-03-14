@@ -1,5 +1,6 @@
 const maleClothes = [
     {
+        gender: 'men',
         id: 1,
         name: "МЪЖКИ СУИЧЪР",
         brand: "CORE BY JACK & JONES",
@@ -16,6 +17,7 @@ const maleClothes = [
         image_closeup: "https://media.remix.eu/files/05-2021/312_Majki-suichar-Core-By-Jack---Jones-110538541c.jpg",
     },
     {
+        gender: 'men',
         id: 2,
         name: "МЪЖКО ЯКЕ",
         brand: "JAMES & NICHOLSON",
@@ -33,6 +35,7 @@ const maleClothes = [
     },
 
     {
+        gender: 'men',
         id: 3,
         name: "МЪЖКО ЯКЕ",
         brand: "BILLABONG",
@@ -50,6 +53,7 @@ const maleClothes = [
     },
 
     {
+        gender: 'men',
         id: 4,
         name: "МЪЖКА БЛУЗА",
         brand: "CARNET DE VOL",
@@ -66,6 +70,7 @@ const maleClothes = [
         image_closeup: "https://media.remix.eu/files/02-2021/312_Majka-bluza-Carnet-De-Vol-110330606c.jpg",
     },
     {
+        gender: 'men',
         id: 5,
         name: "МЪЖКА ТЕНИСКА",
         brand: "PIER ONE",
@@ -82,6 +87,7 @@ const maleClothes = [
         image_closeup: "https://media.remix.eu/files/46-2020/312_Majka-teniska-Pier-One-109906655c.jpg",
     },
     {
+        gender: 'men',
         id: 6,
         name: "МЪЖКИ ПАНТАЛОН",
         brand: null,
@@ -98,6 +104,7 @@ const maleClothes = [
         image_closeup: "https://media.remix.eu/files/03-2021/312_Majki-pantalon---110408723c.jpg",
     },
     {
+        gender: 'men',
         id: 7,
         name: "МЪЖКИ ПАНТАЛОН",
         brand: "TAILOR & SON",
@@ -114,6 +121,7 @@ const maleClothes = [
         image_closeup: "https://media.remix.eu/files/52-2020/312_Majki-pantalon-Tailor---Son-110233152c.jpg",
     },
     {
+        gender: 'men',
         id: 8,
         name: "МЪЖКА РИЗА",
         brand: "SONDAG & SONS",
@@ -130,6 +138,7 @@ const maleClothes = [
         image_closeup: "https://media.remix.eu/files/03-2021/312_Majka-riza-Sondag---Sons-110419520c.jpg",
     },
     {
+        gender: 'men',
         id: 9,
         name: "МЪЖКА РИЗА",
         brand: "CAMICISSIMA",
@@ -146,6 +155,7 @@ const maleClothes = [
         image_closeup: "https://media.remix.eu/files/04-2021/312_Majka-riza-Camicissima-110495950c.jpg",
     },
     {
+        gender: 'men',
         id: 10,
         name: "МЪЖКИ КЪС ПАНТАЛОН",
         brand: "ODLO",
@@ -162,6 +172,7 @@ const maleClothes = [
         image_closeup: "https://media.remix.eu/files/04-2021/312_Majki-kas-pantalon-Odlo-110499517c.jpg",
     },
     {
+        gender: 'men',
         id: 11,
         name: "МЪЖКИ СУИЧЪР",
         brand: "ORIGINALS BY JACK & JONES",
@@ -178,6 +189,7 @@ const maleClothes = [
         image_closeup: "https://media.remix.eu/files/05-2021/312_Majki-suichar-Originals-By-Jack---Jones-110508606d.jpg",
     },
     {
+        gender: 'men',
         id: 12,
         name: "МЪЖКИ СУИЧЪР",
         brand: "BRUNO BANANI",
@@ -194,6 +206,7 @@ const maleClothes = [
         image_closeup: "https://media.remix.eu/files/04-2021/312_Majki-suichar-Bruno-Banani-110498572c.jpg",
     },
     {
+        gender: 'men',
         id: 13,
         name: "МЪЖКИ ПОЛАРЕН СУИЧЪР",
         brand: "COTTON ON",
@@ -210,6 +223,7 @@ const maleClothes = [
         image_closeup: "https://media.remix.eu/files/02-2021/312_Majki-polaren-suichar-Cotton-On-110379613c.jpg",
     },
     {
+        gender: 'men',
         id: 14,
         name: "МЪЖКО ЯКЕ",
         brand: "REVERSE",
@@ -226,6 +240,7 @@ const maleClothes = [
         image_closeup: "https://media.remix.eu/files/05-2021/312_Majko-yake-Reverse-110557010d.jpg",
     },
     {
+        gender: 'men',
         id: 15,
         name: "МЪЖКА РИЗА",
         brand: "JACK & JONES",
@@ -242,6 +257,7 @@ const maleClothes = [
         image_closeup: "https://media.remix.eu/files/05-2021/312_Majka-riza-Jack---Jones-110529287c.jpg",
     },
     {
+        gender: 'men',
         id: 16,
         name: "МЪЖКА РИЗА",
         brand: "KRONSTADT",
@@ -258,6 +274,7 @@ const maleClothes = [
         image_closeup: "https://media.remix.eu/files/05-2021/312_Majka-riza-Kronstadt-110530576c.jpg",
     },
     {
+        gender: 'men',
         id: 17,
         name: "МЪЖКИ ПАНТАЛОН",
         brand: "PETROL INDUSTRIES",
@@ -274,6 +291,7 @@ const maleClothes = [
         image_closeup: "https://media.remix.eu/files/05-2021/312_Majki-pantalon-Petrol-Industries-110411610c.jpg",
     },
     {
+        gender: 'men',
         id: 18,
         name: "МЪЖКИ КЪС ПАНТАЛОН",
         brand: "PULL&BEAR",
@@ -290,6 +308,7 @@ const maleClothes = [
         image_closeup: "https://media.remix.eu/files/06-2021/312_Majki-kas-pantalon-Pull-Bear-110608673c.jpg",
     },
     {
+        gender: 'men',
         id: 19,
         name: "МЪЖКИ ПАНТАЛОН",
         brand: "TOM TAILOR",
@@ -306,6 +325,7 @@ const maleClothes = [
         image_closeup: "https://media.remix.eu/files/03-2021/312_Majki-pantalon-Tom-Tailor-110443103c.jpg",
     },
     {
+        gender: 'men',
         id: 20,
         name: "МЪЖКО ЯКЕ",
         brand: "TOM TAILOR",

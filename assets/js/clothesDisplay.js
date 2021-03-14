@@ -1,8 +1,3 @@
-//show sort list on hover
-let sortDropdownWrapper = getById('sort');
-let dropdownSort = getById('dropdown-sort');
-let sortByPriceAscBtn = getById('sortByPriceAscBtn');
-let sortByPriceDescBtn = getById('sortByPriceDescBtn');
 
 sortDropdownWrapper.addEventListener('mouseover', function () {
     dropdownSort.style.display = 'block';
@@ -12,10 +7,6 @@ sortDropdownWrapper.addEventListener('mouseout', function () {
     dropdownSort.style.display = 'none';
 });
 
-// show corresponding filter list on hover
-// brands
-let brandsFilterWrapper = getById('brandsFilterWrapper');
-let brandsFilterBox = getById('brandsFilterBox');
 brandsFilterWrapper.addEventListener('mouseover', function () {
     displayElement(brandsFilterBox)
 })
@@ -23,9 +14,7 @@ brandsFilterWrapper.addEventListener('mouseout', function () {
     displayNoneElement(brandsFilterBox)
 })
 
-// size
-let sizeFilterWrapper = getById('sizeFilterWrapper');
-let sizeFilterBox = getById('sizeFilterBox');
+
 sizeFilterWrapper.addEventListener('mouseover', function () {
     displayElement(sizeFilterBox)
 })
@@ -33,9 +22,7 @@ sizeFilterWrapper.addEventListener('mouseout', function () {
     displayNoneElement(sizeFilterBox)
 })
 
-// condition
-let conditionFilterWrapper = getById('conditionFilterWrapper');
-let conditionFilterBox = getById('conditionFilterBox');
+
 conditionFilterWrapper.addEventListener('mouseover', function () {
     displayElement(conditionFilterBox)
 })
@@ -43,9 +30,7 @@ conditionFilterWrapper.addEventListener('mouseout', function () {
     displayNoneElement(conditionFilterBox)
 })
 
-// price
-let priceFilterWrapper = getById('priceFilterWrapper');
-let priceFilterBox = getById('priceFilterBox');
+
 priceFilterWrapper.addEventListener('mouseover', function () {
     displayElement(priceFilterBox)
 })
@@ -53,25 +38,15 @@ priceFilterWrapper.addEventListener('mouseout', function () {
     displayNoneElement(priceFilterBox)
 })
 
-let allPriceBoxes = Array.from(document.querySelectorAll('#priceFilterBox input'));
-
-allPriceBoxes.forEach(box => {
-    box.addEventListener('change', function (ev) {
-        ev.preventDefault();
-        // let id = ev.target.id;
-        if (ev.target.classList.contains('checked')) {
-            ev.target.classList.remove('checked');
-        } else {
-            ev.target.classList.add('checked');
-        }
-    })
-})
+let allPriceBoxes = document.querySelectorAll('.priceCheckbox');
 
 // fill filter list with data
 function getFilterOptions(data) {
+
     function getSizeOptions(data) {
         let allSizeOptions = data.map(el => el.size);
         let uniqueSizeOptions = allSizeOptions.filter(onlyUnique);
+        sortSizes(uniqueSizeOptions);
         sizeFilterBox.innerHTML = '';
         uniqueSizeOptions.forEach(size => createSizeHTML(size, data));
     }
@@ -85,8 +60,9 @@ function getFilterOptions(data) {
 
     function getBrandsOptions(data) {
         let allBrandOptions = data.map(el => el.brand);
+        console.log()
         let uniqueBrandoptions = allBrandOptions.filter(onlyUnique);
-        brandsFilterBox.innerHTML = '';
+        allBrands.innerHTML = '';
         uniqueBrandoptions.forEach(brand => createBrandHTML(brand, data));
     }
 
@@ -95,27 +71,35 @@ function getFilterOptions(data) {
     getBrandsOptions(data);
 }
 
-function createSizeHTML(size, data) {
+// Size filters
+function createSizeHTML(size) {
     let sizeBox = document.createElement('button');
     sizeBox.innerText = size;
     sizeBox.id = 'sizeBox' + size;
     sizeBox.classList.add('sizeFilterBtn');
     sizeFilterBox.append(sizeBox);
 
-    //move to index, so it has access to changeImgOnHover
     sizeBox.addEventListener('click', function (ev) {
         ev.preventDefault();
-        // let id = ev.target.id;
-        if (ev.target.classList.contains('checkedSize')) {
-            ev.target.classList.remove('checkedSize');
-        } else {
-            ev.target.classList.add('checkedSize');
-        }
-        displayByFilters(data);
+
+        let elements = ev.target.parentNode.childNodes;
+        elements.forEach(() => {
+            ev.target.classList.toggle("checkedSize");
+
+            let allCheckedSizes = Array.from(document.querySelectorAll('.checkedSize'));
+            let allCheckedSizesValues = allCheckedSizes.map(btn => btn.innerText);
+
+            // Update the filters in the Model
+            siteManager.updateSizes(allCheckedSizesValues);
+
+            // Print on the screen all filtered items
+            displayClothes(siteManager.filteredItems);
+        })
     })
 }
 
-function createConditionHTML(condition, data) {
+// Condition filters
+function createConditionHTML(condition) {
     let conditionWrapper = document.createElement('div');
     conditionWrapper.classList.add('conditionFilterBtn');
 
@@ -124,7 +108,7 @@ function createConditionHTML(condition, data) {
     conditionBox.id = 'checkbox' + condition;
 
     let conditionLabel = document.createElement('label');
-    conditionLabel.for = conditionBox.id;
+    conditionLabel.htmlFor = conditionBox.id;
     conditionLabel.innerText = condition;
 
     conditionWrapper.append(conditionBox, conditionLabel);
@@ -139,11 +123,20 @@ function createConditionHTML(condition, data) {
         } else {
             target.classList.add('checkedCondition');
         }
-        displayByFilters(data)
+
+        let allCheckedConditions = Array.from(document.querySelectorAll('.checkedCondition~label'));
+        let allCheckedConditionsValues = allCheckedConditions.map(label => label.outerText);
+
+        // Update the filters in the Model
+        siteManager.updateConditions(allCheckedConditionsValues);
+
+        // Print on the screen all filtered items
+        displayClothes(siteManager.filteredItems);
     })
 }
 
-function createBrandHTML(brand, data) {
+// Brands filters
+function createBrandHTML(brand) {
     let brandWrapper = document.createElement('div');
     brandWrapper.classList.add('brandFilterBtn');
 
@@ -152,11 +145,11 @@ function createBrandHTML(brand, data) {
     brandBox.id = 'checkbox' + brand;
 
     let brandLabel = document.createElement('label');
-    brandLabel.for = brandBox.id;
+    brandLabel.htmlFor = brandBox.id;
     brandLabel.innerText = brand;
 
     brandWrapper.append(brandBox, brandLabel);
-    brandsFilterBox.append(brandWrapper);
+    allBrands.append(brandWrapper);
 
     //move to index, so it has access to changeImgOnHover
     brandBox.addEventListener('change', function (ev) {
@@ -167,53 +160,212 @@ function createBrandHTML(brand, data) {
         } else {
             target.classList.add('checkedBrand');
         }
-        displayByFilters(data);
-        let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
-        productImages.forEach(img => changeImgOnHover(img));
+
+        let allCheckedBrands = Array.from(document.querySelectorAll('.checkedBrand~label'));
+        let allCheckedBrandsValues = allCheckedBrands.map(label => label.outerText);
+
+        siteManager.updateBrands(allCheckedBrandsValues);
+
+        // Print on the screen all filtered items
+        displayClothes(siteManager.filteredItems);
     })
 }
 
-function displayByFilters(data) {
-    let perfectItem = {};
+// On click add event on price options
+function eventOnPriceBox() {
 
-    let allCheckedSizes = Array.from(document.querySelectorAll('.checkedSize'));
-    let allCheckedSizesValues = allCheckedSizes.map(btn => btn.innerText);
+    let filterOptions = document.querySelectorAll(".priceCheckbox");
 
-    let allCheckedConditions = Array.from(document.querySelectorAll('.checkedCondition~label'));
-    let allCheckedConditionsValues = allCheckedConditions.map(label => label.outerText);
+    filterOptions.forEach(box => {
+        box.addEventListener('change', function (ev) {
+            ev.preventDefault();
 
-    let allCheckedBrands = Array.from(document.querySelectorAll('.checkedBrand~label'));
-    let allCheckedBrandsValues = allCheckedBrands.map(label => label.outerText);
-
-    if (allCheckedSizesValues) {
-        allCheckedSizesValues.forEach(size => {
-            perfectItem.size = size;
-        })
-    }
-
-    if (allCheckedConditionsValues) {
-        allCheckedConditionsValues.forEach(condition => {
-            perfectItem.condition = condition;
-        })
-    }
-
-    if (allCheckedBrandsValues) {
-        allCheckedBrandsValues.forEach(brand => {
-            perfectItem.brand = brand;
-        })
-    }
-
-    let dataToDisplay = data.filter(item => {
-        let filter = item;
-        returnValue = Object.keys(perfectItem).forEach(key => {
-            if (item[key] !== perfectItem[key]) {
-                filter = false;
+            if (ev.target.classList.contains('checked')) {
+                ev.target.classList.remove('checked');
+            } else {
+                ev.target.classList.add('checked');
             }
-        })
-        return filter;
-    })
-    displayClothes(dataToDisplay);
+
+            let allCheckedPrices = Array.from(document.querySelectorAll('.checked'));
+            let allCheckedPricesValues = allCheckedPrices.map(label => label.id);
+            siteManager.updatePrices(allCheckedPricesValues);
+
+            // Print on the screen all filtered items
+            displayClothes(siteManager.filteredItems);
+        });
+    });
 }
+
+// On click add to shopping bag
+function moveToBasket() {
+    let wantedProduct = document.querySelectorAll(".add-button");
+
+    wantedProduct.forEach(el => el.addEventListener("click", function (e) {
+        let currentUser = userStorage.getCurrentUser();
+        if (currentUser) {
+            let currentItem = siteManager.allProducts.filter(el => el.id === Number(e.target.value));
+
+            if (currentUser.myDesiredProd.filter(elem => elem.id === currentItem[0].id).length > 0) {
+                userStorage.removeFromDesired(currentItem[0]);
+                e.target.innerHTML = "Добавете";
+                e.target.classList.remove("clicked");
+                counter = currentUser.myDesiredProd.length;
+                desiredCounter.innerHTML = counter;
+                currentUser.myDesiredCounter = counter;
+                updateDesiredCounter();
+            } else {
+                userStorage.addToDesired(currentItem[0]);
+                e.target.innerHTML = "Добавено";
+                e.target.classList.add("clicked");
+                counter = currentUser.myDesiredProd.length;
+                desiredCounter.innerHTML = counter;
+                currentUser.myDesiredCounter = counter;
+                updateDesiredCounter();
+            }
+        }
+    }));
+}
+
+// On click like the item
+function likeItem() {
+    let currentUser = userStorage.getCurrentUser();
+    if (currentUser) {
+        let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
+
+        favouriteIcon.forEach(el => el.addEventListener("click", function (e) {
+            let currentUser = userStorage.getCurrentUser();
+            if (currentUser.isLoggedIn) {
+                let currentItem = siteManager.allProducts.filter(el => el.id === Number(e.target.previousElementSibling.value));
+
+                if (currentUser.myFavourites.filter(elem => elem.id === currentItem[0].id).length > 0) {
+                    userStorage.removeFromFavourite(currentItem[0]);
+                    e.target.classList.remove("liked");
+                    counter = JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true)[0].myFavourites.length;
+                    favoritesCounter.innerHTML = counter;
+                    currentUser.myFavouritesCount = counter;
+                } else {
+                    userStorage.addToFavourite(currentItem[0]);
+                    e.target.classList.add("liked");
+                    counter = JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true)[0].myFavourites.length;
+                    favoritesCounter.innerHTML = counter;
+                    currentUser.myFavouritesCount = counter;
+                }
+
+                // updatefavouriteCounter();
+            }
+        }));
+    }
+}
+
+//Desired items counter
+function updateDesiredCounter() {
+    let currentUser = userStorage.getCurrentUser();
+
+
+    if (currentUser) {
+        let counter = currentUser.myDesiredCounter;
+
+
+        if (counter > 0) {
+            desiredCounter.style.display = "flex";
+            basketIcon.classList.add("full");
+            desiredCounter.innerHTML = counter;
+
+        } else {
+            desiredCounter.style.display = "none";
+            basketIcon.classList.remove("full");
+            desiredCounter.innerHTML = '';
+        }
+    }
+}
+
+//favourite items counter
+function updatefavouriteCounter() {
+    let currentUser = userStorage.getCurrentUser();
+    if (currentUser) {
+        let counter = currentUser.myFavouritesCount;
+
+        if (counter > 0) {
+            favoritesCounter.style.display = "flex";
+            favouritIconMain.classList.add("liked");
+            favoritesCounter.innerHTML = counter;
+
+        } else {
+            favoritesCounter.style.display = "none";
+            favouritIconMain.classList.remove("liked");
+            favoritesCounter.innerHTML = '';
+        }
+    }
+}
+
+// Check if item in favourites and put current styles
+function updateLikes() {
+    let currentUser = userStorage.getCurrentUser();
+    if (currentUser) {
+        let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
+        if (favouriteIcon.length > 0) {
+            favouriteIcon.forEach(el => {
+                if (currentUser.myFavourites.some(item => item.id == el.getAttribute("productId"))) {
+                    el.classList.add("liked");
+                }
+            });
+        }
+        if (location.hash === "#overView") {
+            console.log(111);
+            let favouriteOverView = getById("favIcon");
+            if (currentUser.myFavourites.some(item => item.id == favouriteOverView.getAttribute("productId"))) {
+                favouriteOverView.classList.add("liked");
+            }
+        }
+    }
+}
+
+// Check if item in desired and put current styles
+function updateDesiredProd() {
+    let currentUser = userStorage.getCurrentUser();
+    if (currentUser) {
+        let desiredBtn = document.querySelectorAll(".add-button");
+        desiredBtn.forEach(el => {
+
+            if (currentUser.myDesiredProd.some(item => item.id == el.value)) {
+                el.innerText = "Добавено";
+                el.classList.add("clicked");
+            } else {
+                el.innerText = "Добавете";
+                el.classList.remove("clicked");
+            }
+        });
+        let desiredBtnOverView = getById("siteBtn");
+
+        if (desiredBtnOverView !== null) {
+            if (currentUser.myDesiredProd.some(item => item.id == desiredBtnOverView.value)) {
+                desiredBtnOverView.innerText = "Добавено";
+                desiredBtnOverView.classList.add("clicked");
+            } else {
+                desiredBtnOverView.innerText = "Добавете";
+                desiredBtnOverView.classList.remove("clicked");
+            }
+        }
+
+    } else {
+        let desiredBtn = document.querySelectorAll(".add-button");
+        desiredBtn.forEach(el => {
+            el.innerText = "Добавете";
+            el.classList.remove("clicked");
+        });
+    }
+}
+
+function updateFavourites() {
+    updatefavouriteCounter();
+    updateLikes();
+}
+
+function updateDesires() {
+    updateDesiredCounter();
+    updateDesiredProd();
+}
+
 
 // display clothes
 const displayClothes = function (data) {
@@ -224,7 +376,39 @@ const displayClothes = function (data) {
     let template = Handlebars.compile(source);
     let html = template(data);
     containerClothesDisplay.innerHTML = html;
+
+    if (!data.length) {
+        let div = document.createElement("div");
+        div.classList.add("filterErrorMsg");
+        let img = document.createElement("img");
+        img.src = "./assets/images/error-on-filtering.png";
+        img.alt = "error message";
+        div.append(img);
+        containerClothesDisplay.append(div);
+    }
+
+    // Add event listener
+    moveToBasket();
+    likeItem();
+    updateFavourites();
+    updateDesires();
+
+
+    // Add hover effect
+    let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
+    productImages.forEach(img => changeImgOnHover(img));
+
+    //event for showing the product on overView
+    let buttons = Array.from(document.getElementsByClassName("product-img"));
+    buttons.forEach(function (currentBtn) {
+        currentBtn.addEventListener('click', function (ev) {
+            console.log(111, ev.target.previousElementSibling.value);
+            localStorage.setItem('productId', JSON.stringify(ev.target.previousElementSibling.value));
+            location.hash = '#overView';
+        })
+    });
 }
+
 
 //display filtered products
 const filteredClothesController = function (products) {
@@ -241,6 +425,7 @@ const filteredClothesController = function (products) {
 
 //display favourites products on favourites page
 const favouritesClothesController = function (products) {
+
     let containerClothesDisplay = getById('favouritesListContent');
     let favouritesProd = { 'favouritesProducts': products };
 
@@ -258,4 +443,3 @@ const favouritesClothesController = function (products) {
 
 
 }
-

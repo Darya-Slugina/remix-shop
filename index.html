@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="assets/styles/CeraPro-Medium/style.css">
     <link rel="stylesheet" href="./assets/styles/clothes.css">
     <link rel="stylesheet" href="./assets/styles/favourites.css">
+    <link rel="stylesheet" href="./assets/styles/shopping-bag.css">
+    <link rel="stylesheet" href="./assets/styles/errorPage.css">
     <link rel="icon" href="./assets/images/favicon.jpg">
     <title>RemixShop</title>
 </head>
@@ -160,11 +162,25 @@
                             <li class="afterRegistration shopping-bag-content">
                                 <a href="javascript:;" class="shopping-bag icon-count icon-animation">
                                     <span id="basket-icon" class="basket-icon"></span>
-                                    <span id="basket-product-count" class="basket-product-count count">0</span>
+                                    <span id="basketProductCount" class="basket-product-count count"></span>
                                     <span class="dot-wrapper">
                                         <span class="dot-counter"></span>
                                     </span>
                                 </a>
+                                <div id="shopping-cart-content" class="shopping-bag-dropdown">
+                                    <div class="cart-inner-wrapper">
+                                        <div class="empty-bag" id="emptyBag" style="display: none;">
+                                            <div class="empty-bag-text" id="cart-empty-info">
+                                                <div class="cart-total-wrapper">
+                                                    <span class="empty">Кошницата Ви е празна</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="full-bag" id="fullBag" style="display: none;">
+                                        </div>
+                                    </div>
+                                    <div id="cartTotal" class="cart-total"></div>
+                                </div>
                             </li>
                             <li class="beforeRegistration">
                                 <a href="javascript:;" id="enterButton" class="enter" style="display: block;">Вход</a>
@@ -175,22 +191,22 @@
                     <div class="main-filters">
                         <ul class="filter-item">
                             <li class="main-category">
-                                <a href="#allProducts/women" title="Жени" id="womenBtn">Жени</a>
+                                <a href="#allProducts/women" title="Жени" id="womenBtn" class="navListBtn">Жени</a>
                             </li>
                             <li class="main-category">
-                                <a href="#allProducts/men" title="Мъже" id="menBtn">Мъже</a>
+                                <a href="#allProducts/men" title="Мъже" id="menBtn" class="navListBtn">Мъже</a>
                             </li>
                             <li class="main-category">
-                                <a href="#allProducts/women" title="Чанти">Чанти</a>
+                                <a href="#allProducts/women" title="Чанти" class="navListBtn">Чанти</a>
                             </li>
                             <li class="main-category">
-                                <a href="#allProducts/women" title="Аксесоари">Аксесоари</a>
+                                <a href="#allProducts/women" title="Аксесоари" class="navListBtn">Аксесоари</a>
                             </li>
                             <li class="main-category">
-                                <a href="#allProducts/women" title="Обувки">Обувки</a>
+                                <a href="#allProducts/women" title="Обувки" class="navListBtn">Обувки</a>
                             </li>
                             <li class="main-category">
-                                <a href="#allProducts/women" title="Деца">Деца</a>
+                                <a href="#allProducts/women" title="Деца" class="navListBtn">Деца</a>
                             </li>
                         </ul>
                         <div class="search-box">
@@ -321,7 +337,7 @@
             </section>
         </div>
 
-        <div id="allProducts">
+        <div id="allProductsPage">
             <div class="mainContainer">
                 <div id="bannerSectionAllProducts" class="banner-section"></div>
             </div>
@@ -347,33 +363,45 @@
             </div>
             <div class="container-filters">
                 <ul class="filters">
-                    <li id="brandsFilterWrapper"><a href="#">Марки</a>
-                        <div class="filter-dropdown" id="brandsFilterBox"></div>
+                    <li id="brandsFilterWrapper" class="brandsFilterWrapper">
+                        <a href="javascript:;">Марки
+                            <div class="filter-dropdown" id="brandsFilterBox">
+                                <label for="brandInputSearch">търсете марка</label>
+                                <input type="text" id="brandInputSearch" placeholder="Въведете марка">
+                                <div id="allBrands"></div>
+                            </div>
+                        </a>
                     </li>
-                    <li id="sizeFilterWrapper"><a href="#">Размер</a>
-                        <div class="filter-dropdown" id="sizeFilterBox"></div>
+                    <li id="sizeFilterWrapper" class="sizeFilterWrapper">
+                        <a href="javascript:;">Размер
+                            <div class="filter-dropdown" id="sizeFilterBox"></div>
+                        </a>
                     </li>
-                    <li id="conditionFilterWrapper"><a href="#">Състояние</a>
-                        <div class="filter-dropdown" id="conditionFilterBox"></div>
+                    <li id="conditionFilterWrapper" class="conditionFilterWrapper">
+                        <a href="javascript:;">Състояние
+                            <div class="filter-dropdown" id="conditionFilterBox"></div>
+                        </a>
                     </li>
-                    <li id="priceFilterWrapper"><a href="#">Цена</a>
-                        <div class="filter-dropdown" id="priceFilterBox">
-                            <div><input type="checkbox" id="priceBelow5">
-                            <label for="priceBelow5">До 5лв</label>
+                    <li id="priceFilterWrapper" class="priceFilterWrapper">
+                        <a href="javascript:;">Цена
+                            <div class="filter-dropdown" id="priceFilterBox">
+                                <div><input type="checkbox" id="priceBelow5" class="priceCheckbox">
+                                    <label for="priceBelow5">До 5лв</label>
+                                </div>
+                                <div><input type="checkbox" id="price5To10" class="priceCheckbox">
+                                    <label for="price5To10">От 5лв до 10лв</label>
+                                </div>
+                                <div><input type="checkbox" id="price10To50" class="priceCheckbox">
+                                    <label for="price10To50">От 10 лв до 50 лв</label>
+                                </div>
+                                <div><input type="checkbox" id="price50To100" class="priceCheckbox">
+                                    <label for="price50To100">От 50 лв до 100 лв</label>
+                                </div>
+                                <div><input type="checkbox" id="priceAbove100" class="priceCheckbox">
+                                    <label for="priceAbove100">Над 100 лв</label>
+                                </div>
                             </div>
-                            <div><input type="checkbox" id="price5To10">
-                            <label for="price5To10">От 5лв до 10лв</label>
-                            </div>
-                            <div><input type="checkbox" id="price10To50">
-                            <label for="price10To50">От 10 лв до 50 лв</label>
-                            </div>
-                            <div><input type="checkbox" id="price50To100">
-                            <label for="price50To100">От 50 лв до 100 лв</label>
-                            </div>
-                            <div><input type="checkbox" id="priceAbove100">
-                            <label for="priceAbove100">Над 100 лв</label>
-                            </div>
-                        </div>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -382,11 +410,14 @@
                 <div class="sorter">
                     <div class="sorter-nav">
                         <span>Сортиране по:</span>
-                        <a href="" id="sort"><img src="./assets/images/sort-icon.PNG" alt="sort-icon" id="sorterIcon">
+                        <a href="javascript:;" id="sort"><img src="./assets/images/sort-icon.PNG" alt="sort-icon"
+                                id="sorterIcon">
                             <div id="dropdown-sort">
                                 <ul>
-                                    <li><button id="sortByPriceAscBtn">Цена (възходящ ред)</button></li>
-                                    <li><button id="sortByPriceDescBtn">Цена (низходящ ред)</button></li>
+                                    <li><span id="sortByPriceAscBtn" class="sortByPriceAscBtn">Цена (възходящ
+                                            ред)</span></li>
+                                    <li><span id="sortByPriceDescBtn" class="sortByPriceDescBtn">Цена (низходящ
+                                            ред)</span></li>
                                 </ul>
                             </div>
                         </a>
@@ -395,9 +426,13 @@
                 </div>
             </div>
         </div>
+
         <div id="secondHand">pageSecondHand</div>
+
         <div id="outlet">pageOutlet</div>
+
         <div id="newSeason">pageNewSeason</div>
+
         <div id="overView">
             <div class="wayLinksContainer">
                 <div class="breadcrumb-border col-md-7 col-lg-8 d-none d-lg-block"></div>
@@ -420,6 +455,7 @@
                 </div>
             </div>
         </div>
+
         <div id="favourites">
             <div class="container-fluid">
                 <div class="bannerSection">
@@ -444,6 +480,16 @@
                         цената им и колко харесвания имат, за да прецените кога да ги купите преди всички
                         останали.</span>
                 </ul>
+            </div>
+        </div>
+
+        <div id="errorPage">
+            <div class="error-container">
+                <h3 class="error-title">
+                    Възникна грешка 404
+                </h3>
+                <div class="error-text"> За съжаление не открихме страницата, която търсите. </div>
+                <img src="./assets/images/error-404.png" class="error-img" alt="Error 404">
             </div>
         </div>
 
@@ -642,7 +688,7 @@
                                     {{/unless}}
                                 </div>
                                 <div class="product-button">
-                                    <button class="add-button">Добавете</button>
+                                    <button class="add-button" value="{{this.id}}">Добавете</button>
                                 </div>
                             </li>
                         {{/each}}
@@ -759,7 +805,7 @@
                 {{/unless}}
             </div>
             <div class="product-button">
-                <button class="add-button button-display">Добавете</button>
+                <button class="add-button button-display" value="{{this.id}}">Добавете</button>
             </div>
         </div>
         {{/each}} 
@@ -819,21 +865,20 @@
                     {{/unless}}
                 </div>
                 <div class="product-button">
-                    <button class="add-button button-display">Добавете</button>
+                    <button class="add-button button-display" value="{{this.id}}">Добавете</button>
                 </div>
             </div>
         {{/each}} 
     </script>
 
-
     <script id="overViewNavigationTempl" type="text/x-handlebars-template">
             <li class="back-link"><a href="javascript:;" id="goBack">назад</a></li>
             <li><a href="#home">Начална страница</a></li>
             {{#if this.femail}}
-            <li><a href="/bg/womens-clothes">Дамски дрехи</a></li>
+            <li><a href="#allProducts/women">Дамски дрехи</a></li>
             {{/if}}
             {{# unless this.femail}}
-            <li><a href="/bg/mans-clothes">Мъжки дрехи</a></li>
+            <li><a href="#allProducts/men">Мъжки дрехи</a></li>
             {{/ unless}}
             <li class="active">{{this.name}} {{this.brand}}</li>
     </script>
@@ -850,7 +895,7 @@
                     </div>
                     <span class="favourite">
                         <input type="hidden" value="{{this.id}}" style="display: none;">
-                        <span class="fav-icon"></span>
+                        <span id="favIcon" class="fav-icon" productId="{{this.id}}"></span>
                     </span>
                 </div>
                 <div class="side-img-container">
@@ -887,7 +932,7 @@
                         </li>
                     </ul>
                     <div class="content">
-                        <div class="panel show" id="overview">
+                        <div class="panel show" id="overviewInfo">
                             <h1 class="product-titles"> {{this.name}}
                                 <a href="#" title="Вижте всички продукти на марката">{{this.brand}}</a>
                             </h1>
@@ -963,8 +1008,7 @@
                                     {{this.description}}
                             </div>
                             <div class="product-button">
-                                <a href="javascript:;" class="site-btn" id="product-button-18430789">
-                                    <span class="text">Добавете</span>
+                                <button class="site-btn"  id="siteBtn" value="{{this.id}}" productValue="{{this.id}}">Добавете</button>
                                 </a>
                             </div>
                         </div>
@@ -1071,20 +1115,94 @@
                     {{/unless}}
                 </div>
                 <div class="product-button">
-                    <button class="add-button">Добавете</button>
+                    <button class="add-button" value="{{this.id}}">Добавете</button>
                 </div>
             </li>
         {{/each}}            
+    </script>
+
+    <script id="shoppingBagTempl" type="text/x-handlebars-template">
+        {{#each desiredProducts}}
+            <div class="cart-content-item-list" value="{{this.id}}" >
+                <div class="cart-item-row d-flex product-data">
+                    <div class="img-wrapper">
+                        <a href="javascript:;"class="product-image">
+                            <img id="cart_image_holder" class="cart-image-holder" src="{{this.image_front}}">
+                        </a>
+                    </div>
+                
+                <div class="info-wrapper">
+                    <div class="product-brand">{{this.brand}}</div>
+                    <div class="product-size">Размер {{this.size}}</div>
+                    <div class="product-price price-item d-flex justify-content-between align-items-end">
+                        {{#if this.discount}}
+                        <div class="align-items-end">
+                            <span class="promo">{{this.discount}}</span>
+                        </div>
+                        <div>
+                            <div class="price old-price">
+                                <span>{{this.price}} лв.</span>
+                            </div>
+                            <div class="price new-price"> {{newPrice}}лв.
+                            </div>
+                        </div>
+                        {{/if}}
+                        {{# unless this.discount}}
+                        <div class="align-items-end">
+                            <div class="price">
+                                <span class="realPrice">{{this.price}} лв.</span>
+                            </div>
+                        </div>
+                        {{/unless}}    
+                        <a href="javascript:void(0);" class="delete" title="{{this.id}}">×</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </script>
+
+    <script id="shoppingBagTempl2" type="text/x-handlebars-template">
+        <div class="cart-total-wrapper">
+            <div id="dropped-cart-sum" class="cart-sums ab-price">
+                <div class="cart-discount-list">
+                    <div class="cart-subtotal ">
+                        Цена 
+                        <span>{{amount}}лв.</span>
+                    </div>
+                    <div class="discount-price">
+                        ОТСТЪПКА <span>{{discount}}лв.</span>
+                    </div>
+                    <div class="dropped-cart-total">
+                            Общо <span id="cart-info-total">{{sum}} лв.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cart-button-order">
+            <a href="javascript:;" class="shopping-bag-btn">
+                    Поръчайте
+            </a>
+        </div>         
     </script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
         integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
         crossorigin="anonymous"></script>
-    <script src="assets/js/utils.js"></script>
+
+
+    <!-- Data -->
     <script src="assets/js/ProductsData/male_clothes.js"></script>
     <script src="assets/js/ProductsData/femaleClothes.js"></script>
+
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/constants.js"></script>
+    <!-- Models -->
+    <script src="assets/js/Product.js"></script>
     <script src="assets/js/UserModel.js"></script>
+
+    <!-- Controllers -->
     <script src="assets/js/UserController.js"></script>
     <script src="assets/js/ProductModel.js"></script>
     <script src="assets/js/BannersController.js"></script>
@@ -1093,6 +1211,15 @@
     <script src="assets/js/BlogController.js"></script>
     <script src="assets/js/clothesDisplay.js"></script>
     <script src="assets/js/ProductController.js"></script>
+    <script src="assets/js/ShoppingBagController.js"></script>
+
+    <!-- Pages -->
+    <script src="assets/js/allProductsPage.js"></script>
+    <script src="assets/js/overviewPage.js"></script>
+    <script src="assets/js/favouritesPage.js"></script>
+
+
+
     <script src="assets/js/index.js"></script>
 </body>
 
