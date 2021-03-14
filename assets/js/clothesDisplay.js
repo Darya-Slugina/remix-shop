@@ -73,7 +73,7 @@ function getFilterOptions(data) {
 }
 
 // Size filters
-function createSizeHTML(size, data) {
+function createSizeHTML(size) {
     let sizeBox = document.createElement('button');
     sizeBox.innerText = size;
     sizeBox.id = 'sizeBox' + size;
@@ -100,7 +100,7 @@ function createSizeHTML(size, data) {
 }
 
 // Condition filters
-function createConditionHTML(condition, data) {
+function createConditionHTML(condition) {
     let conditionWrapper = document.createElement('div');
     conditionWrapper.classList.add('conditionFilterBtn');
 
@@ -137,7 +137,7 @@ function createConditionHTML(condition, data) {
 }
 
 // Brands filters
-function createBrandHTML(brand, data) {
+function createBrandHTML(brand) {
     let brandWrapper = document.createElement('div');
     brandWrapper.classList.add('brandFilterBtn');
 
@@ -306,7 +306,7 @@ const displayClothes = function (data) {
         currentBtn.addEventListener('click', function (ev) {
             console.log(111, ev.target.previousElementSibling.value);
             localStorage.setItem('productId', JSON.stringify(ev.target.previousElementSibling.value));
-            location.hash = '#overview';
+            location.hash = '#overView';
         })
     });
 }

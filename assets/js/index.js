@@ -114,7 +114,7 @@
                 showActivePage(overviewPage);
                 selectProduct();
                 showCarousel();
-                // eventsAfterLoading();
+                eventsAfterLoading();
                 break;
 
             default:
@@ -213,8 +213,10 @@
 
     //Search by name
     srchProd.addEventListener("blur", function (event) {
+        // siteManager.updateNames(event.target.value);
         let filtered = siteManager.filterByName(event.target.value);
         showFilteredProducts(filtered);
+        // siteManager.updateNames(filtered);
 
     });
 
@@ -222,6 +224,7 @@
     function showFilteredProducts(products) {
        homePage.style.display = "none";
        allProductsPage.style.display = "block";
+    //    displayClothes(products);
         filteredClothesController(products);
         getById("search-button").addEventListener("click", function () {
             srchProd.value = "";
@@ -345,36 +348,6 @@
     })
 
 
-    // // Show the current tab in overView page
-    // function changeInfo(e) {
-    //     e.preventDefault();
-
-    //     let tab = Array.from(document.getElementsByClassName("nav-link"));
-    //     tab.forEach(el => el.classList.remove("activeTab"));
-
-    //     e.target.parentElement.classList.add("activeTab");
-    //     e.target.classList.add("activeTab");
-
-
-
-    //     if (e.target.innerHTML === "Доставка" || e.target.innerText === "ДОСТАВКА") {
-    //         delivery.classList.add("show");
-    //         reclamation.classList.remove("show");
-    //         info.classList.remove("show");
-    //     } else if (e.target.innerHTML === "Връщане" || e.target.innerText === "ВРЪЩАНЕ") {
-    //         delivery.classList.remove("show");
-    //         reclamation.classList.add("show");
-    //         info.classList.remove("show");
-    //     } else if (e.target.innerHTML === "Детайли" || e.target.innerText === "ДЕТАЙЛИ") {
-    //         delivery.classList.remove("show");
-    //         reclamation.classList.remove("show");
-    //         info.classList.add("show");
-    //     }
-    // }
-
-
-
-
     //favourite items counter
     function updatefavouriteCounter() {
         let currentUser = userStorage.getCurrentUser();
@@ -478,47 +451,6 @@
                 location.hash = '#overview';
             })
         });
-
-        // let nav = Array.from(document.getElementsByClassName("nav-item"));
-        // nav.forEach(function (currentBtn) {
-        //     currentBtn.addEventListener("click", changeInfo);
-        // });
-
-        // let items = Array.from(document.getElementsByClassName("img-fluid"));
-        // items.forEach(function (currentImg) {
-        //     currentImg.addEventListener("click", changeImg);
-        // });
-
-        // // On click show the user subMenu with logout button
-        // let userMenu = getById("user-button");
-        // userMenu.addEventListener("click", function () {
-        //     userLogoutController();
-        //     userMenu.classList.add("clicked");
-        //     let userSubMenu = getById("userSubMenu");
-        //     userSubMenu.style.display = "block";
-        //     setTimeout(function () {
-        //         userSubMenu.style.display = "none";
-        //         userMenu.classList.remove("clicked")
-        //     }, 5000);
-
-        //     let logOutBtn = getById("logOutBtn");
-        //     logOutBtn.addEventListener("click", function () {
-        //         userStorage.logout();
-        //         enterButton.style.display = "block";
-        //         let icons = document.querySelectorAll(".registration>.afterRegistration>a");
-        //         icons.forEach(el => el.style.display = "none");
-        //         userSubMenu.style.display = "none";
-        //         let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
-        //         favouriteIcon.forEach(el => el.classList.remove("liked"));
-        //         updateDesires();
-        //     })
-        // });
-
-        // // On click show the page with favourites products
-        // let showFavouritesBtn = getById("showFavouritesBtn");
-        // showFavouritesBtn.addEventListener("click", function() {
-        //     location.hash = "#favourites";
-        // });
     }
 
         // On click show the user subMenu with logout button

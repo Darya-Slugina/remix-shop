@@ -1,19 +1,18 @@
 // // Select current product
 function selectProduct() {
     let productId = JSON.parse(localStorage.getItem('productId'));
-    console.log(222, productId);
     product = siteManager.allProducts.find(el => el.id === Number(productId));
     productController();
 
-    let items = Array.from(document.getElementsByClassName("img-fluid"));
-    items.forEach(function (currentImg) {
-        currentImg.addEventListener("click", changeImg);
-    });
+    // let items = Array.from(document.getElementsByClassName("img-fluid"));
+    // items.forEach(function (currentImg) {
+    //     currentImg.addEventListener("click", changeImg);
+    // });
 
-    let nav = Array.from(document.getElementsByClassName("nav-item"));
-    nav.forEach(function (currentBtn) {
-        currentBtn.addEventListener("click", changeInfo);
-    });
+    // let nav = Array.from(document.getElementsByClassName("nav-item"));
+    // nav.forEach(function (currentBtn) {
+    //     currentBtn.addEventListener("click", changeInfo);
+    // });
     moveToBasketFromOverView();
     likeItemFromOverView();
     goBack();
@@ -93,22 +92,23 @@ function goBack() {
     })
 }
 
-// function eventsAfterLoading(){
-//     let items = Array.from(document.getElementsByClassName("img-fluid"));
-// console.log("items", items);
-// items.forEach(function (currentImg) {
-//     currentImg.addEventListener("click", changeImg);
-// });
 
-// let nav = Array.from(document.getElementsByClassName("nav-item"));
-// nav.forEach(function (currentBtn) {
-//     currentBtn.addEventListener("click", changeInfo);
-// });
-// }
+function eventsAfterLoading(){
+    let items = Array.from(document.getElementsByClassName("img-fluid"));
+console.log("items", items);
+items.forEach(function (currentImg) {
+    currentImg.addEventListener("click", changeImg);
+});
+
+let nav = Array.from(document.getElementsByClassName("nav-item"));
+nav.forEach(function (currentBtn) {
+    currentBtn.addEventListener("click", changeInfo);
+});
+}
 
 //Change big img on overViewPage on click
 function changeImg(e) {
-    console.log(mainImg)
+    console.log("mainImg", mainImg)
     mainImg.src = e.target.src;
 }
 

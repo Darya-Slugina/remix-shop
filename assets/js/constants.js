@@ -1,49 +1,50 @@
 // Initial DOM elements selectors
-let homePage = getById("home");
-let showBrands = getById("show-more");
-let header = getById("main-header");
-let bannerTop = getById("banner-container");
-let hiddenButton = getById("hidden-text-button");
-let logo = getById("logo");
-let enter = getById("enterButton");
-let loginForm = getById("loginForm");
-let loginCloseIcon = getById("loginCloseIcon");
-let registerLink = getById("registerLink");
-let loginBackBtn = getById("loginBackBtn");
-let loginSlide = getById("loginSlide");
-let registerSlide = getById("registerSlide");
-let loginLink = getById("loginLink");
-let favoritesCounter = getById("favorites_count_top");
-let favouritIconMain = getById("favourit-icon-main");
-let desiredCounter = getById("basketProductCount");
-let basketIcon = getById("basket-icon");
-let loginButton = getById("loginButton");
-let srchProd = getById("srchProd");
-let finalBreadcrumbTarget = getById('final-breadcrumb-target');
-let allBreadcrumbTarget = getById('all-breadcrumb-target');
+const homePage = getById("home");
+const showBrands = getById("show-more");
+const header = getById("main-header");
+const bannerTop = getById("banner-container");
+const hiddenButton = getById("hidden-text-button");
+const logo = getById("logo");
+const enter = getById("enterButton");
+const loginForm = getById("loginForm");
+const loginCloseIcon = getById("loginCloseIcon");
+const registerLink = getById("registerLink");
+const loginBackBtn = getById("loginBackBtn");
+const loginSlide = getById("loginSlide");
+const registerSlide = getById("registerSlide");
+const loginLink = getById("loginLink");
+const favoritesCounter = getById("favorites_count_top");
+const favouritIconMain = getById("favourit-icon-main");
+const desiredCounter = getById("basketProductCount");
+const basketIcon = getById("basket-icon");
+const loginButton = getById("loginButton");
+const srchProd = getById("srchProd");
+const finalBreadcrumbTarget = getById('final-breadcrumb-target');
+const allBreadcrumbTarget = getById('all-breadcrumb-target');
+const mainImg = getById("big-img");
 
 //show sort list on hover
-let sortDropdownWrapper = getById('sort');
-let dropdownSort = getById('dropdown-sort');
-let sortByPriceAscBtn = getById('sortByPriceAscBtn');
-let sortByPriceDescBtn = getById('sortByPriceDescBtn');
+const sortDropdownWrapper = getById('sort');
+const dropdownSort = getById('dropdown-sort');
+const sortByPriceAscBtn = getById('sortByPriceAscBtn');
+const sortByPriceDescBtn = getById('sortByPriceDescBtn');
 
 // show corresponding filter list on hover
 // brands
-let brandsFilterWrapper = getById('brandsFilterWrapper');
-let brandsFilterBox = getById('brandsFilterBox');
+const brandsFilterWrapper = getById('brandsFilterWrapper');
+const brandsFilterBox = getById('brandsFilterBox');
 
 // size
-let sizeFilterWrapper = getById('sizeFilterWrapper');
-let sizeFilterBox = getById('sizeFilterBox');
+const sizeFilterWrapper = getById('sizeFilterWrapper');
+const sizeFilterBox = getById('sizeFilterBox');
 
 // condition
-let conditionFilterWrapper = getById('conditionFilterWrapper');
-let conditionFilterBox = getById('conditionFilterBox');
+const conditionFilterWrapper = getById('conditionFilterWrapper');
+const conditionFilterBox = getById('conditionFilterBox');
 
 // price
-let priceFilterWrapper = getById('priceFilterWrapper');
-let priceFilterBox = getById('priceFilterBox');
+const priceFilterWrapper = getById('priceFilterWrapper');
+const priceFilterBox = getById('priceFilterBox');
 
 const loginError = getById("loginError");
 const enterButton = getById("enterButton");
@@ -58,24 +59,23 @@ const passwordInputReg = getById("passwordInputReg");
 
 // Buttons
 const registrationButton = getById("registrationButton");
-
-
 const womenBtn = getById('womenBtn');
 const menBtn = getById('menBtn');
 
+// overView tabs
+const info = getById("overviewInfo");
+const delivery = getById("delivery");
+const reclamation = getById("reclamation");
+
 // Pages
 
-let favouritesPage = getById('favourites');
-let overviewPage = getById('overView');
-let allProductsPage = getById('allProductsPage');
-let errorPage = getById('errorPage');
+const favouritesPage = getById('favourites');
+const overviewPage = getById('overView');
+const allProductsPage = getById('allProductsPage');
+const errorPage = getById('errorPage');
 
-let info = getById("overview");
-let delivery = getById("delivery");
-let reclamation = getById("reclamation");
+//  Hidden brands
+const hiddenBrands = getById("brands-hidden");
+const hiddenText = getById("hiddenText");
 
-let hiddenBrands = getById("brands-hidden");
-let hiddenText = getById("hiddenText");
-
-let mainImg = getById("big-img");
 
