@@ -1,37 +1,13 @@
 (function () {
-    window.addEventListener("DOMContentLoaded", onHashChange);
+    window.addEventListener("DOMContentLoaded", function () {
+        updateDesires();
+        onHashChange();
+    });
     window.addEventListener("DOMContentLoaded", loadPreviousSession);
-    window.addEventListener("DOMContentLoaded", showCarousel);
+
     window.addEventListener("hashchange", onHashChange);
-    window.addEventListener("hashchange", showCarousel);
+    // window.addEventListener("hashchange", showCarousel);
 
-    //  Site manager
-    let siteManager = new Manager;
-
-
-    // Initial DOM elements selectors
-    let homePage = getById("home");
-    let showBrands = getById("show-more");
-    let header = getById("main-header");
-    let bannerTop = getById("banner-container");
-    let hiddenButton = getById("hidden-text-button");
-    let logo = getById("logo");
-    let enter = getById("enterButton");
-    let loginForm = getById("loginForm");
-    let loginCloseIcon = getById("loginCloseIcon");
-    let registerLink = getById("registerLink");
-    let loginBackBtn = getById("loginBackBtn");
-    let loginSlide = getById("loginSlide");
-    let registerSlide = getById("registerSlide");
-    let loginLink = getById("loginLink");
-    let favoritesCounter = getById("favorites_count_top");
-    let favouritIconMain = getById("favourit-icon-main");
-    let desiredCounter = getById("basketProductCount");
-    let basketIcon = getById("basket-icon");
-    let loginButton = getById("loginButton");
-    let srchProd = getById("srchProd");
-    let finalBreadcrumbTarget = getById('final-breadcrumb-target');
-    let allBreadcrumbTarget = getById('all-breadcrumb-target');
 
 
     //   Adds the initial male products
@@ -46,9 +22,12 @@
         siteManager.addWomanProduct(product);
     });
 
-    // Created the product from array
+
+
+    // Create the product from array
     function createProduct(item) {
         let product = new Product(
+            item.gender,
             item.id,
             item.name,
             item.brand,
@@ -70,6 +49,7 @@
     //created the array with all products
     siteManager.createAllProducts();
 
+
     //Event listeners
     window.addEventListener('scroll', onScroll);
     showBrands.addEventListener("click", showMoreBrands);
@@ -87,115 +67,78 @@
     //Router
     const navListMain = Array.from(document.querySelector('.navigation-list').children);
     const allFilters = Array.from(document.querySelectorAll('.main-category'));
-    const womenBtn = getById('womenBtn');
-    const menBtn = getById('menBtn');
+
     let wholePage;
 
-    function onHashChange() {
-        let page = location.hash.slice(1);
-        let slashLocation = page.indexOf('/') + 1;
-        let extension = location.hash.slice(slashLocation);
+
+    function showActivePage(page) {
         let allPages = document.querySelector('main').children;
 
-        if (slashLocation > 1) {
-            wholePage = location.hash.slice(1, slashLocation);
-        } else {
-            wholePage = page;
+        for (let i = 0; i < allPages.length; i++) {
+            allPages[i].style.display = 'none';
         }
 
-        for (let i = 0; i < allPages.length; i++) {
-            if (allPages[i].id === wholePage) {
-                allPages[i].style.display = 'block';
-            } else if (wholePage === 'home' || wholePage === '') {
-                allPages[i].style.display = 'none';
-                homePage.style.display = 'block';
+        page.style.display = 'block';
+    }
+
+
+    function router() {
+        let path = location.hash.slice(1);
+
+        let firstPage = path.split('/')[0]
+
+        switch (firstPage) {
+            case '':
+                location.hash = '#home';
+                break;
+            case 'home':
                 navListMain.forEach(nav => nav.classList.remove('selectedNav'));
                 allFilters.forEach(el => el.classList.remove("selectedFilter"));
-            } else {
-                allPages[i].style.display = 'none';
-            }
+                showActivePage(homePage);
+                showCarousel();
+                break;
 
-            if (page === 'favourites') {
+            case 'allProducts':
+                showActivePage(allProductsPage);
+                renderAllProducts();
+                break;
+
+            case 'favourites':
+                showActivePage(favouritesPage);
                 showMyFavourites();
-            }
+                updateDesires();
+                updateFavourites();
+                break;
+
+            case 'overView':
+                showActivePage(overviewPage);
+                selectProduct();
+                showCarousel();
+                eventsAfterLoading();
+                break;
+
+            default:
+                showActivePage(errorPage);
+
         }
-        moveToBasket();
+    }
 
-        if (extension === '/women') {
-            womenBtn.classList.add("selectedFilter");
-            menBtn.classList.remove('selectedFilter');
-            displayClothes(siteManager.femaleClothes);
-            getFilterOptions(siteManager.femaleClothes);
-            // event listeners for sort buttons
-            sortByPriceAscBtn.addEventListener('click', function (ev) {
-                ev.preventDefault();
-                siteManager.femaleClothes.sort((a, b) => (a.price - b.price));
-                displayClothes(siteManager.femaleClothes);
-                let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
-                productImages.forEach(img => changeImgOnHover(img));
-            });
-            sortByPriceDescBtn.addEventListener('click', function (ev) {
-                ev.preventDefault();
-                siteManager.femaleClothes.sort((a, b) => (b.price - a.price));
-                displayClothes(siteManager.femaleClothes);
-                let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
-                productImages.forEach(img => changeImgOnHover(img));
-            });
 
-            finalBreadcrumbTarget.innerHTML = 'Дамски дрехи';
-            finalBreadcrumbTarget.href = '#allProducts/women';
-            allBreadcrumbTarget.addEventListener('click', function (ev) {
-                ev.preventDefault();
-                displayClothes(siteManager.femaleClothes);
-                let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
-                productImages.forEach(img => changeImgOnHover(img));
-                // clear checked filters
-            })
+    function onHashChange() {
+        router();
 
-        } else if (extension === '/men') {
-            womenBtn.classList.remove('selectedFilter');
-            menBtn.classList.add("selectedFilter");
-            displayClothes(siteManager.maleClothes);
-            getFilterOptions(siteManager.maleClothes);
-            // event listeners for sort buttons
-            sortByPriceAscBtn.addEventListener('click', function (ev) {
-                ev.preventDefault();
-                siteManager.maleClothes.sort((a, b) => (a.price - b.price));
-                displayClothes(siteManager.maleClothes);
-                let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
-                productImages.forEach(img => changeImgOnHover(img));
-            });
-            sortByPriceDescBtn.addEventListener('click', function (ev) {
-                ev.preventDefault();
-                siteManager.maleClothes.sort((a, b) => (b.price - a.price));
-                displayClothes(siteManager.maleClothes);
-                let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
-                productImages.forEach(img => changeImgOnHover(img));
-            });
 
-            finalBreadcrumbTarget.innerHTML = 'Мъжки дрехи';
-            finalBreadcrumbTarget.href = '#allProducts/men';
-            allBreadcrumbTarget.addEventListener('click', function (ev) {
-                ev.preventDefault();
-                displayClothes(siteManager.maleClothes);
-                let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
-                productImages.forEach(img => changeImgOnHover(img));
-                // clear checked filters
-            })
-        } else {
-            womenBtn.classList.remove('selectedFilter');
-            menBtn.classList.remove('selectedFilter');
-        }
+        // TODO: Check what needs to be done
 
         // change nav style
         navListMain.forEach(el => {
+
             if (el.id === wholePage) {
                 el.classList.add('selectedNav');
             } else {
                 el.classList.remove('selectedNav');
             }
         })
-
     }
 
     // event listeners for brand, size, condition button filters - initialize them here first!
@@ -255,7 +198,8 @@
     }
 
     function loadPreviousSession() {
-        if (JSON.parse(localStorage.getItem("login"))) {
+        let currentUser = userStorage.getCurrentUser();
+        if (currentUser) {
             loginForm.classList.remove("show");
             enterButton.style.display = "none";
             let icons = document.querySelectorAll(".registration>.afterRegistration>a");
@@ -269,15 +213,18 @@
 
     //Search by name
     srchProd.addEventListener("blur", function (event) {
+        // siteManager.updateNames(event.target.value);
         let filtered = siteManager.filterByName(event.target.value);
         showFilteredProducts(filtered);
+        // siteManager.updateNames(filtered);
 
     });
 
     // Show allProducts page with filtered content
     function showFilteredProducts(products) {
-        getById("home").style.display = "none";
-        getById("allProducts").style.display = "block";
+       homePage.style.display = "none";
+       allProductsPage.style.display = "block";
+    //    displayClothes(products);
         filteredClothesController(products);
         getById("search-button").addEventListener("click", function () {
             srchProd.value = "";
@@ -286,6 +233,23 @@
         let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
         productImages.forEach(img => changeImgOnHover(img));
     }
+
+    // Select current product
+    // function selectProduct() {
+
+    //     let productId = localStorage.getItem('productId');
+    //     product = siteManager.allProducts.find(el => el.id === Number(productId));
+    //     productController();
+    //     if (product !== null) {
+    //         updateLikes();
+    //         moveToBasketFromOverView();
+    //         likeItemFromOverView();
+    //     }
+
+    //     goBack();
+    //     loadEvents();
+    //     window.scrollTo(0, 0);
+    // }
 
     // Prepare the list for carousel 
     const shuffledArr = array => array.sort(() => 0.5 - Math.random());
@@ -343,14 +307,13 @@
             dots[slideIndex - 1].className += " active";
 
         }
+
         loadEvents();
-        moveToBasket();
     }
 
     // Show more brands on click
     function showMoreBrands(e) {
         e.preventDefault();
-        let hiddenBrands = getById("brands-hidden");
         hiddenBrands.classList.add("hidden-brands-show");
         showBrands.style.display = "none";
     }
@@ -358,60 +321,20 @@
     // Show more information about us section on click
     function showMoreInfo(e) {
         e.preventDefault();
-        let hiddenText = getById("hiddenText");
         hiddenText.classList.toggle("hidden-text-show");
         hiddenButton.classList.toggle("reverse");
-    }
-
-    // Change img on hover
-    function onMouseOver(e) {
-        let picture = e.target.src;
-        let newImg = siteManager.allProducts.find(el => el.image_front === picture);
-        e.target.src = newImg.image_back;
-    }
-
-    function onMouseOut(e) {
-        let picture = e.target.src;
-        let newImg = siteManager.allProducts.find(el => el.image_back === picture);
-        e.target.src = newImg.image_front;
     }
 
 
     // select female clothes
     womenBtn.addEventListener('click', function () {
-        displayClothes(siteManager.femaleClothes);
         window.location.href = '#allProducts/women';
-
-        let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
-        productImages.forEach(img => changeImgOnHover(img));
-
-        let buttons = Array.from(document.getElementsByClassName("product-photos"));
-        buttons.forEach(function (currentBtn) {
-            currentBtn.addEventListener('click', selectProduct);
-        });
-
-        likeItem();
-        moveToBasket();
-        updateDesires();
     })
 
     // select male clothes
     menBtn.addEventListener('click', function () {
         womenBtn.classList.remove("selectedFilter");
         window.location.href = '#allProducts/men';
-        displayClothes(siteManager.maleClothes)
-
-        let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
-        productImages.forEach(img => changeImgOnHover(img));
-
-        let buttons = Array.from(document.getElementsByClassName("product-photos"));
-        buttons.forEach(function (currentBtn) {
-            currentBtn.addEventListener('click', selectProduct);
-        });
-
-        likeItem();
-        moveToBasket();
-        updateDesires();
     })
 
     // personal filters - dropdown info on hover
@@ -425,145 +348,78 @@
     })
 
 
-    // Select current product
-    function selectProduct(e) {
-        let productId = e.target.parentNode.children[0].value;
-        product = siteManager.allProducts.find(el => el.id === Number(productId));
-
-        productController();
-        goBack();
-
-        loadEvents();
-        window.scrollTo(0, 0);
-    }
-
-    // Show the current tab in overView page
-    function changeInfo(e) {
-        e.preventDefault();
-
-        let tab = Array.from(document.getElementsByClassName("nav-link"));
-        tab.forEach(el => el.classList.remove("activeTab"));
-
-        e.target.parentElement.classList.add("activeTab");
-        e.target.classList.add("activeTab");
-
-        let info = getById("overview");
-        let delivery = getById("delivery");
-        let reclamation = getById("reclamation");
-
-        if (e.target.innerHTML === "Доставка" || e.target.innerText === "ДОСТАВКА") {
-            delivery.classList.add("show");
-            reclamation.classList.remove("show");
-            info.classList.remove("show");
-        } else if (e.target.innerHTML === "Връщане" || e.target.innerText === "ВРЪЩАНЕ") {
-            delivery.classList.remove("show");
-            reclamation.classList.add("show");
-            info.classList.remove("show");
-        } else if (e.target.innerHTML === "Детайли" || e.target.innerText === "ДЕТАЙЛИ") {
-            delivery.classList.remove("show");
-            reclamation.classList.remove("show");
-            info.classList.add("show");
-        }
-    }
-
-    //Change big img on overViewPage on click
-    function changeImg(e) {
-        let mainImg = getById("big-img");
-        mainImg.src = e.target.src;
-    }
-
-    //Go back on the previous page 
-    function goBack() {
-        let backButton = getById("goBack");
-        backButton.addEventListener("click", function (e) {
-            e.preventDefault();
-            history.go(-1);
-        })
-    }
-
     //favourite items counter
     function updatefavouriteCounter() {
-        let counter = userStorage.myFavouritesCount;
+        let currentUser = userStorage.getCurrentUser();
+        if (currentUser) {
+            let counter = currentUser.myFavouritesCount;
 
-        if (counter > 0) {
-            favoritesCounter.style.display = "flex";
-            favouritIconMain.classList.add("liked");
-            favoritesCounter.innerHTML = counter;
+            if (counter > 0) {
+                favoritesCounter.style.display = "flex";
+                favouritIconMain.classList.add("liked");
+                favoritesCounter.innerHTML = counter;
 
-        } else {
-            favoritesCounter.style.display = "none";
-            favouritIconMain.classList.remove("liked");
-            favoritesCounter.innerHTML = '';
-        }
-    }
-
-    //Desired items counter
-    function updateDesiredCounter() {
-        let counter = userStorage.myDesiredCounter;
-        console.log(counter);
-
-        if (counter > 0) {
-            desiredCounter.style.display = "flex";
-            basketIcon.classList.add("full");
-            desiredCounter.innerHTML = counter;
-
-        } else {
-            desiredCounter.style.display = "none";
-            basketIcon.classList.remove("full");
-            desiredCounter.innerHTML = '';
-        }
-    }
-
-    // On click like the item
-    function likeItem() {
-        let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
-        userStorage.init();
-
-        favouriteIcon.forEach(el => el.addEventListener("click", function (e) {
-            if (userStorage.isLogged == true) {
-                let currentItem = siteManager.allProducts.filter(el => el.id === Number(e.target.previousElementSibling.value));
-
-                if (userStorage.myFavourites.filter(function (elem) { return elem.id === currentItem[0].id }).length > 0) {
-                    userStorage.removeFromFavourite(currentItem[0]);
-                    e.target.classList.remove("liked");
-                    counter = userStorage.myFavourites.length;
-                    favoritesCounter.innerHTML = counter;
-                    userStorage.myFavouritesCount = counter;
-                } else {
-                    userStorage.addToFavourite(currentItem[0]);
-                    e.target.classList.add("liked");
-                    counter = userStorage.myFavourites.length;
-                    favoritesCounter.innerHTML = counter;
-                    userStorage.myFavouritesCount = counter;
-                }
-
-                updatefavouriteCounter();
+            } else {
+                favoritesCounter.style.display = "none";
+                favouritIconMain.classList.remove("liked");
+                favoritesCounter.innerHTML = '';
             }
-        }));
+        }
     }
 
     // Check if item in favourites and put current styles
     function updateLikes() {
-        let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
-        favouriteIcon.forEach(el => {
-            if (userStorage.myFavourites.some(item => item.id == el.getAttribute("productId"))) {
-                el.classList.add("liked");
+        let currentUser = userStorage.getCurrentUser();
+        if (currentUser) {
+            let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
+            if (favouriteIcon.length > 0) {
+                favouriteIcon.forEach(el => {
+                    if (currentUser.myFavourites.some(item => item.id == el.getAttribute("productId"))) {
+                        el.classList.add("liked");
+                    }
+                });
             }
-        });
+            let favouriteOverView = getById("favIcon");
+            if (currentUser.myFavourites.some(item => item.id == favouriteOverView.getAttribute("productId"))) {
+                favouriteOverView.classList.add("liked");
+            }
+        }
     }
 
     // Check if item in desired and put current styles
     function updateDesiredProd() {
-        let desiredBtn = document.querySelectorAll(".add-button");
-        desiredBtn.forEach(el => {
-            if (userStorage.myDesiredProd.some(item => item.id == el.value)) {
-                el.innerText = "Добавено";
-                el.classList.add("clicked");
-            } else {
+        let currentUser = userStorage.getCurrentUser();
+        if (currentUser) {
+            let desiredBtn = document.querySelectorAll(".add-button");
+            desiredBtn.forEach(el => {
+
+                if (currentUser.myDesiredProd.some(item => item.id == el.value)) {
+                    el.innerText = "Добавено";
+                    el.classList.add("clicked");
+                } else {
+                    el.innerText = "Добавете";
+                    el.classList.remove("clicked");
+                }
+            });
+            let desiredBtnOverView = getById("siteBtn");
+
+            if (desiredBtnOverView !== null) {
+                if (currentUser.myDesiredProd.some(item => item.id == desiredBtnOverView.value)) {
+                    desiredBtnOverView.innerText = "Добавено";
+                    desiredBtnOverView.classList.add("clicked");
+                } else {
+                    desiredBtnOverView.innerText = "Добавете";
+                    desiredBtnOverView.classList.remove("clicked");
+                }
+            }
+
+        } else {
+            let desiredBtn = document.querySelectorAll(".add-button");
+            desiredBtn.forEach(el => {
                 el.innerText = "Добавете";
                 el.classList.remove("clicked");
-            }
-        });
+            });
+        }
     }
 
     function updateFavourites() {
@@ -576,35 +432,26 @@
         updateDesiredProd();
     }
 
-    function changeImgOnHover(img) {
-        img.addEventListener("mouseover", onMouseOver);
-        img.addEventListener("mouseout", onMouseOut);
-    }
-
     function loadEvents() {
 
-        updatefavouriteCounter();
         likeItem();
+        moveToBasket();
+        updatefavouriteCounter();
         updateDesiredCounter();
         updateDesiredProd();
 
         let productImages = Array.from(document.getElementsByClassName("product-img"));
         productImages.forEach(img => changeImgOnHover(img));
 
-        let buttons = Array.from(document.getElementsByClassName("product-photos"));
+        let buttons = Array.from(document.getElementsByClassName("product-img"));
         buttons.forEach(function (currentBtn) {
-            currentBtn.addEventListener('click', selectProduct)
+            currentBtn.addEventListener('click', function (ev) {
+                console.log(111, ev.target.previousElementSibling.value);
+                localStorage.setItem('productId', JSON.stringify(ev.target.previousElementSibling.value));
+                location.hash = '#overview';
+            })
         });
-
-        let nav = Array.from(document.getElementsByClassName("nav-item"));
-        nav.forEach(function (currentBtn) {
-            currentBtn.addEventListener("click", changeInfo);
-        });
-
-        let items = Array.from(document.getElementsByClassName("img-fluid"));
-        items.forEach(function (currentImg) {
-            currentImg.addEventListener("click", changeImg);
-        });
+    }
 
         // On click show the user subMenu with logout button
         let userMenu = getById("user-button");
@@ -627,83 +474,29 @@
                 userSubMenu.style.display = "none";
                 let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
                 favouriteIcon.forEach(el => el.classList.remove("liked"));
+                updateDesires();
             })
         });
 
+        // On click show the page with favourites products
         let showFavouritesBtn = getById("showFavouritesBtn");
-        showFavouritesBtn.addEventListener("click", showMyFavourites);
-
-        // showMyFavourites();
-    }
-
-    // Update favourites page with favourites products
-    function showMyFavourites() {
-        likeItem();
-        window.scrollTo(0, 0);
-        let user = userStorage.currentUser[0].email;
-        favouritesClothesController(JSON.parse(localStorage.getItem(user)));
-        let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
-        favouriteIcon.forEach(el => {
-            if (userStorage.myFavourites.some(item => item.id == el.getAttribute("productId"))) {
-                el.classList.add("liked");
-            }
+        showFavouritesBtn.addEventListener("click", function() {
+            location.hash = "#favourites";
         });
-
-        let buttons = Array.from(document.getElementsByClassName("product-photos"));
-        buttons.forEach(function (currentBtn) {
-            currentBtn.addEventListener('click', selectProduct)
-        });
-
-        let productImages = Array.from(document.getElementsByClassName("product-img"));
-        productImages.forEach(img => changeImgOnHover(img));
-
-        moveToBasket();
-        updateDesires();
-
-    }
-
-    // On click add to shopping bag
-    function moveToBasket() {
-        let wantedProduct = document.querySelectorAll(".add-button");
-        userStorage.init();
-
-        wantedProduct.forEach(el => el.addEventListener("click", function (e) {
-            if (userStorage.isLogged == true) {
-                let currentItem = siteManager.allProducts.filter(el => el.id === Number(e.target.value));
-
-                if (userStorage.myDesiredProd.filter(function (elem) { return elem.id === currentItem[0].id }).length > 0) {
-                    userStorage.removeFromDesired(currentItem[0]);
-                    e.target.innerHTML = "Добавете";
-                    e.target.classList.remove("clicked");
-                    counter = userStorage.myDesiredProd.length;
-                    desiredCounter.innerHTML = counter;
-                    userStorage.myDesiredCounter = counter;
-                    updateDesiredCounter();
-                } else {
-                    userStorage.addToDesired(currentItem[0]);
-                    e.target.innerHTML = "Добавено";
-                    e.target.classList.add("clicked");
-                    counter = userStorage.myDesiredProd.length;
-                    desiredCounter.innerHTML = counter;
-                    userStorage.myDesiredCounter = counter;
-                    updateDesiredCounter();
-                }
-            }
-        }));
-    }
 
     //On click show the shopping-bag
     function showBasketInfo(e) {
         e.preventDefault();
+        let currentUser = userStorage.getCurrentUser();
         let basket = getById("shopping-cart-content");
         basket.classList.toggle("show");
 
-        if (userStorage.myDesiredCounter <= 0) {
+        if (currentUser.myDesiredCounter <= 0) {
             getById("emptyBag").style.display = "block";
-        } else if (userStorage.myDesiredCounter > 0) {
+        } else if (currentUser.myDesiredCounter > 0) {
             getById("emptyBag").style.display = "none";
             getById("fullBag").style.display = "block";
-            shoppingBagController(userStorage.myDesiredProd);
+            shoppingBagController(currentUser.myDesiredProd);
             addEventForDeleting();
         }
     }
@@ -714,7 +507,7 @@
         deleteBtn.forEach(el => el.addEventListener("click", function (e) {
             updateBasket(Number(e.target.title));
 
-            let products = JSON.parse(localStorage.getItem(userStorage.currentUser[0].email + 1));
+            let products = JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true)[0].myDesiredProd;
             shoppingBagController(products);
             addEventForDeleting();
         }))
@@ -724,5 +517,4 @@
         userStorage.removeFromDesired(num);
         updateDesires();
     }
-
 })();

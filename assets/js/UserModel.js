@@ -1,4 +1,4 @@
-const userStorage = (function () {
+let userStorage = (function () {
 
   class User {
     constructor(name, email, password, gender) {
@@ -6,21 +6,21 @@ const userStorage = (function () {
       this.email = email;
       this.password = password;
       this.gender = gender;
+      this.isLoggedIn = false;
+      this.myFavourites = [];
+      this.myDesiredProd = [];
+      this.myFavouritesCount = 0;
+      this.myDesiredCounter = 0;
     }
   }
 
   class UserStorage {
     constructor() {
-      this.isLogged = false;
-      this.currentUser = [];
-      this.myFavourites = [];
-      this.myDesiredProd = [];
-      this.myFavouritesCount = 0;
-      this.myDesiredCounter = 0;
       this.init();
     }
 
     init() {
+
       if (localStorage.getItem("users")) {
         this.users = JSON.parse(localStorage.getItem("users"));
       } else {
@@ -31,80 +31,72 @@ const userStorage = (function () {
         localStorage.setItem("users", JSON.stringify(this.users));
       }
 
-      if (localStorage.getItem("login")) {
-        this.isLogged = (localStorage.getItem("login") === 'true');
-      }
+      if (localStorage.getItem("users")) {
 
-      if (localStorage.getItem("currentUser")) {
-        this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        if (JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true).length> 0) {
 
-        // check if in local storage we have key = email
-        if (localStorage.getItem(this.currentUser[0].email)) {
+          let localStorageFavorites = JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true)[0].myFavourites;
 
-          // get data by key
-          let localStorageFavorites = JSON.parse(localStorage.getItem(this.currentUser[0].email));
+          let currentUser = this.users.find(user => user.isLoggedIn);
+          currentUser.myFavourites = localStorageFavorites;
+          currentUser.myFavouritesCount = localStorageFavorites.length;
 
-          // check if this data is not empty, and set favorites
-          if (localStorageFavorites !== null) {
-            this.myFavourites = localStorageFavorites;
-            this.myFavouritesCount = this.myFavourites.length;
-          }
-        }
+          let localStorageDesired = JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true)[0].myDesiredProd;
 
-        // check if in local storage we have key = email1
-        if (localStorage.getItem(this.currentUser[0].email + 1)) {
-
-          // get data by key
-          let localStorageDesired = JSON.parse(localStorage.getItem(this.currentUser[0].email + 1));
-
-          // check if this data is not empty, and set favorites
-          if (localStorageDesired !== null) {
-            this.myDesiredProd = localStorageDesired;
-            this.myDesiredCounter = this.myDesiredProd.length;
-          }
+          currentUser = this.users.find(user => user.isLoggedIn);
+          currentUser.myDesiredProd = localStorageDesired;
+          currentUser.myDesiredCounter = localStorageDesired.length;
         }
       }
     }
 
+
     register(name, email, password, gender) {
-      this.users.push(new User(name, email, password, gender));
+      let currentUser = new User(name, email, password, gender);
+      currentUser.isLoggedIn = true;
+      userStorage.init();
+      this.users.push(currentUser);
       localStorage.setItem('users', JSON.stringify(this.users));
 
-      let currentUser = JSON.parse(localStorage.getItem("users")).filter(el => el.email === email);
-      localStorage.setItem("currentUser", JSON.stringify(currentUser));
 
-      this.myFavourites = [];
+      return !!currentUser;
+
+    }
+
+    getCurrentUser() {
+      return this.users.find(user => user.isLoggedIn);
     }
 
     isGoodCredentials(email, password) {
       const isUserLoggedIn = this.users.some(
-        (user) => user.email === email && user.password === password
+        user => user.email === email && user.password === password
       );
-
       return isUserLoggedIn;
     }
 
-    login(userEmail) {
-      this.isLogged = true;
-      localStorage.setItem("login", JSON.stringify(this.isLogged));
+    login(email, password) {
+      let currentUser = this.users.find(user => user.email === email && user.password === password);
 
-      let currentUser = JSON.parse(localStorage.getItem("users")).filter(el => el.email === userEmail);
-      localStorage.setItem("currentUser", JSON.stringify(currentUser));
-      this.currentUser = currentUser;
+      if (currentUser) {
+        this.users.forEach(user => {
+          if (user.email === email && user.password === password) {
+            user.isLoggedIn = true;
+          } else {
+            user.isLoggedIn = false;
+          }
+        });
 
-      this.myFavourites = JSON.parse(localStorage.getItem(userEmail));
-      this.myFavouritesCount = this.myFavourites.length;
+        localStorage.setItem('users', JSON.stringify(this.users));
 
-      this.myFavouritesCount = 0;
-      if (this.myFavourites !== null && this.myFavourites !== undefined) {
-        this.myFavouritesCount = this.myFavourites.length;
       }
+
+      return !!currentUser;
     }
 
     logout() {
-      this.isLogged = false;
-      this.currentUser = [];
-      this.myFavourites = [];
+      let currentUser = userStorage.getCurrentUser();
+      currentUser.isLoggedIn = false;
+      localStorage.setItem('users', JSON.stringify(this.users));
 
       localStorage.removeItem("login");
       localStorage.removeItem("currentUser");
@@ -119,22 +111,27 @@ const userStorage = (function () {
       return false;
     }
 
-    addToFavourite(el) {
-      this.myFavourites.push(el);
-      localStorage.setItem(this.currentUser[0].email, JSON.stringify(this.myFavourites));
+    addToFavourite(item) {
+      let currentUser = userStorage.getCurrentUser();
+      currentUser.myFavourites.push(item);
+      currentUser.myFavouritesCount = currentUser.myFavourites.length;
+      localStorage.setItem('users', JSON.stringify(this.users));
     }
 
     removeFromFavourite(el) {
-      this.myFavourites = this.myFavourites.filter(item => item.id !== el.id);
-      localStorage.setItem(this.currentUser[0].email, JSON.stringify(this.myFavourites));
+      let currentUser = userStorage.getCurrentUser();
+      currentUser.myFavourites = currentUser.myFavourites.filter(item => item.id !== el.id);
+      currentUser.myFavouritesCount = currentUser.myFavourites.length;
+      localStorage.setItem('users', JSON.stringify(this.users));
     }
 
     isInFavourites(el) {
-      if (this.myFavourites === undefined || this.myFavourites === null) {
+      let currentUser = userStorage.getCurrentUser();
+      if (currentUser.myFavourites === undefined || currentUser.myFavourites === null || currentUser.myFavourites === []) {
         return false;
       }
 
-      if (this.myFavourites.filter(element => element.id === el.id).length > 0) {
+      if (currentUser.myFavourites.filter(element => element.id === el.id).length > 0) {
         return true;
       }
 
@@ -142,18 +139,25 @@ const userStorage = (function () {
     }
 
     addToDesired(el) {
-      this.myDesiredProd.push(el);
-      localStorage.setItem(this.currentUser[0].email + 1, JSON.stringify(this.myDesiredProd));
+      let currentUser = userStorage.getCurrentUser();
+      currentUser.myDesiredProd.push(el);
+      currentUser.myDesiredCounter = currentUser.myDesiredProd.length;
+      localStorage.setItem('users', JSON.stringify(this.users));
     }
 
     removeFromDesired(el) {
+      let currentUser = userStorage.getCurrentUser();
+      
       if (typeof el === "number" || typeof el === "string") {
-        this.myDesiredProd = this.myDesiredProd.filter(item => item.id !== el);
-        this.myDesiredCounter = this.myDesiredProd.length;
-        localStorage.setItem(this.currentUser[0].email + 1, JSON.stringify(this.myDesiredProd));
+        currentUser.myDesiredProd = currentUser.myDesiredProd.filter(item => item.id !== el);
+        currentUser.myDesiredCounter = currentUser.myDesiredProd.length;
+        localStorage.setItem('users', JSON.stringify(this.users));
+
       } else {
-        this.myDesiredProd = this.myDesiredProd.filter(item => item.id !== el.id);
-        localStorage.setItem(this.currentUser[0].email + 1, JSON.stringify(this.myDesiredProd));
+
+        currentUser.myDesiredProd = currentUser.myDesiredProd.filter(item => item.id !== el.id);
+        currentUser.myDesiredCounter = currentUser.myDesiredProd.length;
+        localStorage.setItem('users', JSON.stringify(this.users));
       }
     }
   }

@@ -140,6 +140,11 @@
 
 .filter-dropdown{
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 350px;
+    height: 250px;
     display: none;
     z-index: 200;
     left: 0;
@@ -251,8 +256,9 @@
     padding-inline-start: 0;
 }
 
-#sortByPriceAscBtn:hover, #sortByPriceDescBtn:hover{
-    font-weight: bold;
+.sortByPriceAscBtn:hover, .sortByPriceDescBtn:hover, .sortByPriceAscBtn.checked, .sortByPriceDescBtn.checked{
+    color: #447130;
+    font-weight: 600;
 }
 
 #display{
@@ -293,3 +299,113 @@
     border-radius: 4px;
 }
 
+
+.brandsFilterWrapper .filter-dropdown{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 460px;
+    height: 250px;
+    display: none;
+    z-index: 200;
+}
+
+.brandsFilterWrapper  .brandFilterBtn>label{
+    cursor: pointer;
+}
+
+.brandsFilterWrapper  .brandFilterBtn>label:hover, .brandFilterBtn .checkedBrand+label {
+    color: #447130;
+    font-weight: 700;
+}
+
+.sizeFilterWrapper .filter-dropdown{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 200px;
+    height: 50px;
+    display: none;
+    z-index: 200;
+    cursor: pointer;
+}
+
+.sizeFilterWrapper .sizeFilterBtn {
+    width: 30px;
+    height: 30px;
+    margin: 15px auto;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.sizeFilterBtn.checkedSize {
+    background-color: #d4e6d6;
+    color: #447130;
+}
+
+
+.sizeFilterWrapper .sizeFilterBtn:hover {
+    background-color: #d4e6d6;
+    color: #447130;
+}
+
+.conditionFilterWrapper .filter-dropdown {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 220px;
+    height: 100px;
+    display: none;
+    z-index: 200;
+}
+
+.conditionFilterWrapper .conditionFilterBtn {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    background: #f3f3f5;
+    border-radius: 4px;
+    color: #303030;
+}
+
+.conditionFilterBtn .checkedCondition+label{
+    color: #447130;
+    font-weight: 600;
+}
+
+.conditionFilterWrapper .conditionFilterBtn>label:hover {
+    color: #447130;
+    font-weight: 600;
+}
+
+.conditionFilterWrapper .conditionFilterBtn>label {
+    cursor: pointer;
+} 
+
+.priceFilterWrapper .filter-dropdown {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 200px;
+    height: 100px;
+    display: none;
+    z-index: 200;
+}
+
+.priceFilterWrapper label {
+    cursor: pointer;
+} 
+
+.priceFilterWrapper .filter-dropdown .checked+label {
+    color: #447130;
+    font-weight: 600;
+}
+
+.priceFilterWrapper label:hover {
+    color: #447130;
+    font-weight: 600;
+}

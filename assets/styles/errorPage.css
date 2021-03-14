@@ -1,0 +1,28 @@
+.error-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    flex: 0 0 66.66667%;
+    max-width: 66.66667%;
+}
+
+.error-title {
+    font-family: "Cera Pro", sans-serif;
+    font-size: 26px;
+    text-transform: none;
+    margin-left: 30px;
+}
+
+.error-text {
+    font-family: "Cera Pro", sans-serif;
+    margin-left: 30px;
+}
+
+.error-img {
+    position: relative;
+    margin-top: -6%;
+    z-index: -1;
+    vertical-align: middle;
+    border-style: none;
+}

@@ -128,7 +128,6 @@ body {
     right: 0;
     z-index: 997;
     width: 100%;
-    max-width: 1245px;
     background-color: #fff;
 }
 
@@ -730,7 +729,7 @@ body {
     background: url(../images/favorite-icon.png) no-repeat;
     cursor: pointer;
     display: inline-block;
-    z-index: 100;
+    z-index: 10;
 }
 
 .favourite-icon:hover {
@@ -1456,6 +1455,10 @@ footer a {
     background: url(./../images/favorite-icon-big-hover.png) no-repeat;
 }
 
+.fav-icon.liked {
+    background: url(./../images/favorite-icon-big-liked.png) no-repeat;
+}
+
 .side-img-container {
     padding-top: 1.5rem;
     justify-content: center;
@@ -1721,6 +1724,11 @@ footer a {
     cursor: pointer;
     text-decoration: none;
     outline: none;
+}
+
+#overView .product-details .site-btn.clicked {
+    background-color: #d4e6d6;
+    color: #447130;
 }
 
 #overView .product-details .price-title-original {

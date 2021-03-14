@@ -1,5 +1,6 @@
 const femaleClothes = [
     {
+        gender: 'women',
         id: 21,
         name: "ДАМСКА ТЕНИСКА",
         brand: "GUESS",
@@ -16,6 +17,7 @@ const femaleClothes = [
         image_closeup: "https://media.remix.eu/files/23-2020/Damska-teniska-Guess-108251892c.jpg",
     },
     {
+        gender: 'women',
         id: 22,
         name: "ДАМСКО ЯКЕ",
         brand: "PUMA",
@@ -32,6 +34,7 @@ const femaleClothes = [
         image_closeup: "https://media.remix.eu/files/02-2021/Damsko-yake-PUMA-110387235d.jpg",
     },
     {
+        gender: 'women',
         id: 23,
         name: "РОКЛЯ",
         brand: "RALPH LAUREN",
@@ -48,6 +51,7 @@ const femaleClothes = [
         image_closeup: "https://media.remix.eu/files/47-2020/Roklya-Ralph-Lauren-109961441c.jpg",
     },
     {
+        gender: 'women',
         id: 24,
         name: "ДАМСКО ЯКЕ",
         brand: "GERRY WEBER",
@@ -61,9 +65,10 @@ const femaleClothes = [
         description: "Този продукт е без следи от употреба.",
         image_front: "https://media.remix.eu/files/04-2021/Damsko-yake-Gerry-Weber-110475015a.jpg",
         image_back: "https://media.remix.eu/files/04-2021/Damsko-yake-Gerry-Weber-110475015b.jpg",
-        image_closeup:"https://media.remix.eu/files/04-2021/Damsko-yake-Gerry-Weber-110475015d.jpg",
+        image_closeup: "https://media.remix.eu/files/04-2021/Damsko-yake-Gerry-Weber-110475015d.jpg",
     },
     {
+        gender: 'women',
         id: 25,
         name: "ПОЛА",
         brand: "MULTIPLES",
@@ -80,6 +85,7 @@ const femaleClothes = [
         image_closeup: "https://media.remix.eu/files/04-2021/Pola-Multiples-110498848c.jpg",
     },
     {
+        gender: 'women',
         id: 26,
         name: "ДАМСКА РИЗА",
         brand: "MASSIMO DUTTI",
@@ -96,6 +102,7 @@ const femaleClothes = [
         image_closeup: "https://media.remix.eu/files/37-2020/Damska-riza-Massimo-Dutti-109511084d.jpg",
     },
     {
+        gender: 'women',
         id: 27,
         name: "ДАМСКИ ПАНТАЛОН",
         brand: "MAGASIN",
@@ -112,6 +119,7 @@ const femaleClothes = [
         image_closeup: "https://media.remix.eu/files/05-2021/Damski-pantalon-Magasin-110565299c.jpg",
     },
     {
+        gender: 'women',
         id: 28,
         name: "ДАМСКИ ДЪНКИ",
         brand: "AMERICAN EAGLE",
@@ -128,6 +136,7 @@ const femaleClothes = [
         image_closeup: "https://media.remix.eu/files/06-2021/Damski-danki-American-Eagle-110599336c.jpg",
     },
     {
+        gender: 'women',
         id: 29,
         name: "ДАМСКИ ДЪНКИ",
         brand: "TINSELTOWN",
@@ -144,6 +153,7 @@ const femaleClothes = [
         image_closeup: "https://media.remix.eu/files/06-2021/Damski-danki-Tinseltown-110599342c.jpg",
     },
     {
+        gender: 'women',
         id: 30,
         name: "ДАМСКИ ДЪНКИ",
         brand: "MASSIMO DUTTI",
@@ -160,6 +170,7 @@ const femaleClothes = [
         image_closeup: "https://media.remix.eu/files/06-2021/Damski-danki-Massimo-Dutti-110599362c.jpg",
     },
     {
+        gender: 'women',
         id: 31,
         name: "ДАМСКИ ДЪНКИ",
         brand: "STREET ONE",
@@ -176,6 +187,7 @@ const femaleClothes = [
         image_closeup: "https://media.remix.eu/files/06-2021/Damski-danki-Street-One-110595966d.jpg",
     },
     {
+        gender: 'women',
         id: 32,
         name: "ДАМСКИ ПУЛОВЕР",
         brand: "FOREVER 21",
@@ -192,6 +204,7 @@ const femaleClothes = [
         image_closeup: "https://media.remix.eu/files/51-2020/Damski-pulover-Forever-21-110205038c.jpg",
     },
     {
+        gender: 'women',
         id: 33,
         name: "ДАМСКИ ПУЛОВЕР",
         brand: "RESERVED",
@@ -208,6 +221,7 @@ const femaleClothes = [
         image_closeup: "https://media.remix.eu/files/04-2021/Damski-pulover-Reserved-110482154c.jpg",
     },
     {
+        gender: 'women',
         id: 34,
         name: "ДАМСКИ ПУЛОВЕР",
         brand: "CINQUE",
@@ -224,6 +238,7 @@ const femaleClothes = [
         image_closeup: "https://media.remix.eu/files/04-2021/Damski-pulover-Cinque-110483523c.jpg",
     },
     {
+        gender: 'women',
         id: 35,
         name: "ДАМСКИ ПУЛОВЕР",
         brand: "SUSSAN",
@@ -240,6 +255,7 @@ const femaleClothes = [
         image_closeup: "https://media.remix.eu/files/03-2021/Damski-pulover-Sussan-110399086c.jpg",
     },
     {
+        gender: 'women',
         id: 36,
         name: "РОКЛЯ",
         brand: "H&M",
@@ -256,6 +272,7 @@ const femaleClothes = [
         image_closeup: "https://media.remix.eu/files/04-2021/Roklya-H-M-110480355c.jpg",
     },
     {
+        gender: 'women',
         id: 37,
         name: "РОКЛЯ",
         brand: "GLAMOROUS",
@@ -272,6 +289,7 @@ const femaleClothes = [
         image_closeup: "https://media.remix.eu/files/04-2021/Roklya-Glamorous-110491268c.jpg",
     },
     {
+        gender: 'women',
         id: 38,
         name: "РОКЛЯ",
         brand: "LIU JO",
@@ -288,6 +306,7 @@ const femaleClothes = [
         image_closeup: "https://media.remix.eu/files/48-2020/Roklya-Liu-Jo-110023600c.jpg",
     },
     {
+        gender: 'women',
         id: 39,
         name: "РОКЛЯ",
         brand: "H&M",
@@ -304,6 +323,7 @@ const femaleClothes = [
         image_closeup: "https://media.remix.eu/files/04-2021/Roklya-H-M-110492732c.jpg",
     },
     {
+        gender: 'women',
         id: 40,
         name: "ДАМСКИ ГАЩЕРИЗОН",
         brand: "PRETTY LITTLE THING",

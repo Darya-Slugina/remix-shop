@@ -6,8 +6,8 @@ const shoppingBagController = function (products) {
 
     let total = {};
     total.amount = oldSum;
-    total.discount = (newSum - oldSum).toFixed(2);
-    total.sum = newSum;
+    total.discount = Number((newSum - oldSum).toFixed(2));
+    total.sum = Number(newSum);
 
     products.forEach(el => el.newPrice = getNewPrice(el.price, el.discount));
     let desiredProducts = { 'desiredProducts': products };
