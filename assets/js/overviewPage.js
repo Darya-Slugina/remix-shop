@@ -16,7 +16,6 @@ function selectProduct() {
     
     moveToBasketFromOverView();
     likeItemFromOverView();
-    updateDesires();
     updateLikes();
     goBack();
 
@@ -78,8 +77,6 @@ function likeItemFromOverView() {
                     favoritesCounter.innerHTML = counter;
                     currentUser.myFavouritesCount = counter;
                 }
-
-                // updatefavouriteCounter();
             }
         });
     }

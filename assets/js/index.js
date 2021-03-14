@@ -1,10 +1,6 @@
 (function () {
-    window.addEventListener("DOMContentLoaded", function () {
-        updateDesires();
-        onHashChange();
-    });
+    window.addEventListener("DOMContentLoaded", onHashChange);
     window.addEventListener("DOMContentLoaded", loadPreviousSession);
-
     window.addEventListener("hashchange", onHashChange);
 
     //   Adds the initial male products
@@ -57,14 +53,14 @@
     loginLink.addEventListener("click", backTologinForm);
     loginButton.addEventListener("click", updateFavourites);
     loginButton.addEventListener("click", updateDesires);
+    registrationButton.addEventListener("click", updateFavourites);
+    registrationButton.addEventListener("click", updateDesires);
     basketIcon.addEventListener("click", showBasketInfo);
 
 
     //Router
     const navListMain = Array.from(document.querySelector('.navigation-list').children);
     const allFilters = Array.from(document.querySelectorAll('.main-category'));
-
-    let wholePage;
 
 
     function showActivePage(page) {
@@ -126,18 +122,43 @@
 
         // TODO: Check what needs to be done
 
-        // change nav style
-        navListMain.forEach(el => {
+        // // change nav style on click
+        // const navListMain = Array.from(document.querySelector('.navigation-list').children);
+        // navListMain.forEach(function (currentNav) {
+        //     currentNav.addEventListener('click', selectPage);
+        // })
 
-            if (el.id === wholePage) {
-                el.classList.add('selectedNav');
-            } else {
-                el.classList.remove('selectedNav');
-            }
-        })
+        // function selectPage(ev) {
+        //     ev.preventDefault();
+        //     navListMain.forEach(nav => nav.classList.remove('selectedNav'))
+        //     ev.target.parentElement.classList.add('selectedNav')
+        // }
+
+
+        // //change filter style on click
+        // const allFilters = Array.from(document.querySelectorAll('.main-category'));
+        // allFilters.forEach(function (currentFilter) {
+        //     currentFilter.addEventListener('click', selectFilter)
+        // })
+
+        // function selectFilter(ev) {
+        //     ev.preventDefault();
+        //     allFilters.forEach(filter => filter.classList.remove('selectedFilter'));
+        //     ev.target.parentElement.classList.add("selectedFilter");
+        // }
+
+        // change nav style
+
+        // if (el.id === wholePage) {
+        //     el.classList.add('selectedNav');
+        // } else {
+        //     el.classList.remove('selectedNav');
+        // }
     }
 
-    //change filter style on click
+
+
+    // //change filter style on click
     allFilters.forEach(function (currentFilter) {
         currentFilter.addEventListener('click', selectFilter)
     })
@@ -211,7 +232,7 @@
         setTimeout(function () {
             userSubMenu.style.display = "none";
             userMenu.classList.remove("clicked")
-        }, 5000);
+        }, 2000);
 
         let logOutBtn = getById("logOutBtn");
         logOutBtn.addEventListener("click", function () {
@@ -223,6 +244,7 @@
             let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
             favouriteIcon.forEach(el => el.classList.remove("liked"));
             updateDesires();
+            updateLikes();
         })
     });
 
@@ -238,7 +260,7 @@
 
         siteManager.updateSearchFilter(event.target.value);
         const extension = location.hash.split('/')[1];
-        
+
         // Default search by women
         if (!extension) {
             location.hash = '#allProducts/women';

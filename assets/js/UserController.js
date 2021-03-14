@@ -1,63 +1,56 @@
 (function () {
 
-    function loginUser(email, password){
-      userStorage.login(email, password);
-      loginForm.classList.remove("show");
-      enterButton.style.display = "none";
-      let icons = document.querySelectorAll(".registration>.afterRegistration>a");
-      icons.forEach(el => el.style.display="block");
-    }
-  
-    // On login submit
-    loginButton.addEventListener("click", function (ev) {
-      ev.preventDefault();
-      const email = emailInput.value;
-      const password = passwordInput.value;
-  
-      if (userStorage.isGoodCredentials(email, password)) {
-        loginUser(email, password);
-      } else {
-        loginError.style.display = "block";
-      }
-    });
+  function loginUser(email, password) {
+    userStorage.login(email, password);
+    loginForm.classList.remove("show");
+    enterButton.style.display = "none";
+    let icons = document.querySelectorAll(".registration>.afterRegistration>a");
+    icons.forEach(el => el.style.display = "block");
+  }
 
-    let genders = Array.from(document.getElementsByClassName("radio"));
-   
-      let gender;
-      genders.forEach(el => el.addEventListener("click", function(e){
-        gender = e.target.value;
-      }));
-  
-      // On registration submit
-    registrationButton.addEventListener("click", function (ev) {
-      ev.preventDefault();
+  // On login submit
+  loginButton.addEventListener("click", function (ev) {
+    ev.preventDefault();
+    const email = emailInput.value;
+    const password = passwordInput.value;
 
-
-      const name = nameInputReg.value;
-      const email = emailInputReg.value;
-      const password = passwordInputReg.value;
-  
-      userStorage.register(name, email, password, gender);
-      loginForm.classList.remove("show");
-      
-      favoritesCounter.style.display = "none";
-      favouritIconMain.classList.remove("liked");
-      favoritesCounter.innerHTML = '';
-      desiredCounter.style.display = "none";
-      basketIcon.classList.remove("full");
-      desiredCounter.innerHTML = '';
+    if (userStorage.isGoodCredentials(email, password)) {
       loginUser(email, password);
-    });
-  })();
+    } else {
+      loginError.style.display = "block";
+    }
+  });
 
-  // Logout controller
-  const userLogoutController = function () {
-    const source = document.getElementById("userLogoutTempl").innerHTML;
-    const template = Handlebars.compile(source);
+  let genders = Array.from(document.getElementsByClassName("radio"));
 
-    let user = JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true);
-    const html = template(user[0]);
-  
-    let container = document.getElementById("userMenuContainer");
-    container.innerHTML = html;
-  };
+  let gender;
+  genders.forEach(el => el.addEventListener("click", function (e) {
+    gender = e.target.value;
+  }));
+
+  // On registration submit
+  registrationButton.addEventListener("click", function (ev) {
+    ev.preventDefault();
+
+    const name = nameInputReg.value;
+    const email = emailInputReg.value;
+    const password = passwordInputReg.value;
+
+    userStorage.register(name, email, password, gender);
+    loginForm.classList.remove("show");
+
+    loginUser(email, password);
+  });
+})();
+
+// Logout controller
+const userLogoutController = function () {
+  const source = document.getElementById("userLogoutTempl").innerHTML;
+  const template = Handlebars.compile(source);
+
+  let user = JSON.parse(localStorage.getItem("users")).filter(el => el.isLoggedIn === true);
+  const html = template(user[0]);
+
+  let container = document.getElementById("userMenuContainer");
+  container.innerHTML = html;
+};

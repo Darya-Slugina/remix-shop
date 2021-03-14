@@ -61,6 +61,8 @@ const passwordInputReg = getById("passwordInputReg");
 const registrationButton = getById("registrationButton");
 const womenBtn = getById('womenBtn');
 const menBtn = getById('menBtn');
+const allProducts = getById("allProducts");
+
 
 
 // Pages

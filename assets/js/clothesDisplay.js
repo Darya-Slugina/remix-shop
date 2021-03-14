@@ -60,7 +60,6 @@ function getFilterOptions(data) {
 
     function getBrandsOptions(data) {
         let allBrandOptions = data.map(el => el.brand);
-        console.log()
         let uniqueBrandoptions = allBrandOptions.filter(onlyUnique);
         allBrands.innerHTML = '';
         uniqueBrandoptions.forEach(brand => createBrandHTML(brand, data));
@@ -251,7 +250,7 @@ function likeItem() {
                     currentUser.myFavouritesCount = counter;
                 }
 
-                // updatefavouriteCounter();
+                updatefavouriteCounter();
             }
         }));
     }
@@ -311,12 +310,14 @@ function updateLikes() {
             });
         }
         if (location.hash === "#overView") {
-            console.log(111);
             let favouriteOverView = getById("favIcon");
             if (currentUser.myFavourites.some(item => item.id == favouriteOverView.getAttribute("productId"))) {
                 favouriteOverView.classList.add("liked");
             }
         }
+    } else {
+        let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
+        favouriteIcon.forEach(el => el.classList.remove("liked"));
     }
 }
 
@@ -402,7 +403,6 @@ const displayClothes = function (data) {
     let buttons = Array.from(document.getElementsByClassName("product-img"));
     buttons.forEach(function (currentBtn) {
         currentBtn.addEventListener('click', function (ev) {
-            console.log(111, ev.target.previousElementSibling.value);
             localStorage.setItem('productId', JSON.stringify(ev.target.previousElementSibling.value));
             location.hash = '#overView';
         })
