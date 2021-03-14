@@ -186,11 +186,9 @@ function eventOnPriceBox() {
                 ev.target.classList.add('checked');
             }
 
-            // TODO: Get all clicked prices.
             let allCheckedPrices = Array.from(document.querySelectorAll('.checked'));
             let allCheckedPricesValues = allCheckedPrices.map(label => label.id);
             siteManager.updatePrices(allCheckedPricesValues);
-            console.log(allCheckedPricesValues);
 
             // Print on the screen all filtered items
             displayClothes(siteManager.filteredItems);
@@ -281,8 +279,8 @@ function updateDesiredCounter() {
     }
 }
 
-  //favourite items counter
-  function updatefavouriteCounter() {
+//favourite items counter
+function updatefavouriteCounter() {
     let currentUser = userStorage.getCurrentUser();
     if (currentUser) {
         let counter = currentUser.myFavouritesCount;
@@ -379,13 +377,21 @@ const displayClothes = function (data) {
     let html = template(data);
     containerClothesDisplay.innerHTML = html;
 
-    if(!data.length) {
-        // TODO: Error
+    if (!data.length) {
+        let div = document.createElement("div");
+        div.classList.add("filterErrorMsg");
+        let img = document.createElement("img");
+        img.src = "./assets/images/error-on-filtering.png";
+        img.alt = "error message";
+        div.append(img);
+        containerClothesDisplay.append(div);
     }
 
     // Add event listener
     moveToBasket();
     likeItem();
+    updateFavourites();
+    updateDesires();
 
 
     // Add hover effect

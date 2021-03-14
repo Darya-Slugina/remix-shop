@@ -92,13 +92,15 @@
                 allFilters.forEach(el => el.classList.remove("selectedFilter"));
                 showActivePage(homePage);
                 showCarousel();
+                bannersController();
+                brandsController();
+                blogController();
                 break;
 
             case 'allProducts':
                 showActivePage(allProductsPage);
                 renderAllProducts();
-                updateFavourites();
-                updateDesires();
+                bannersController();
                 break;
 
             case 'favourites':
@@ -114,7 +116,6 @@
 
             default:
                 showActivePage(errorPage);
-
         }
     }
 
@@ -232,42 +233,19 @@
         showMyFavourites();
     });
 
-    bannersController();
-    brandsController();
-    blogController();
+    //Search by name from main header
+    srchProd.addEventListener("change", function (event) {
 
-    //Search by name
-    srchProd.addEventListener("blur", function (event) {
-        // siteManager.updateNames(event.target.value);
-        // let filtered = siteManager.filterByName(event.target.value);
-
-        siteManager.updateSearchFilter(event.target.value)
-
+        siteManager.updateSearchFilter(event.target.value);
         const extension = location.hash.split('/')[1];
-        if(!extension) {
-            location.hash = '#allProducts/women'
+        
+        // Default search by women
+        if (!extension) {
+            location.hash = '#allProducts/women';
         } else {
-            location.hash = '#allProducts/' + extension
+            displayClothes(siteManager.filteredItems);
         }
-
-        // showFilteredProducts(filtered);
-        // siteManager.updateNames(filtered);
-
     });
-
-    // Show allProducts page with filtered content
-    function showFilteredProducts(products) {
-        homePage.style.display = "none";
-        allProductsPage.style.display = "block";
-        //    displayClothes(products);
-        filteredClothesController(products);
-        getById("search-button").addEventListener("click", function () {
-            srchProd.value = "";
-        })
-
-        let productImages = Array.from(document.getElementsByClassName("product-img img-display"));
-        productImages.forEach(img => changeImgOnHover(img));
-    }
 
     // Prepare the list for carousel 
     const shuffledArr = array => array.sort(() => 0.5 - Math.random());

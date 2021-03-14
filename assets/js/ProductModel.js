@@ -33,8 +33,10 @@ let siteManager = (function () {
             const type = location.hash.split('/')[1];
 
             // If this filters is empty object
-            // if()
-
+            if(this.filters === null) {
+                return false;
+            }
+       
             let filteredItems = this.allProducts.filter(product => {
                 if (this.searchValue) {
                     let lowerCasedValue = this.searchValue.toLowerCase();
@@ -48,22 +50,16 @@ let siteManager = (function () {
                     return false;
                 }
 
-                if (this.filters.sizes && this.filters.sizes.length > 0) {
-                    if (!this.filters.sizes.includes(product.size)) {
+                if (this.filters.sizes && this.filters.sizes.length > 0 && !this.filters.sizes.includes(product.size)) {
                         return false;
-                    }
                 }
 
-                if (this.filters.brands && this.filters.brands.length > 0) {
-                    if (!this.filters.brands.includes(product.brand)) {
+                if (this.filters.brands && this.filters.brands.length > 0 &&  !this.filters.brands.includes(product.brand)) {
                         return false;
                     }
-                }
 
-                if (this.filters.conditions && this.filters.conditions.length > 0) {
-                    if (!this.filters.conditions.includes(product.condition)) {
+                if (this.filters.conditions && this.filters.conditions.length > 0 && !this.filters.conditions.includes(product.condition)) {
                         return false;
-                    }
                 }
 
                 if (this.filters.prices && this.filters.prices.length > 0) {
@@ -78,17 +74,11 @@ let siteManager = (function () {
                     if (this.filters.prices.includes("price10To50") && product.newPrice > 10 && product.newPrice <= 50) {
                         isPriceInRange = true;
                     }
-                    if (this.filters.prices.includes("price50To100")) {
-                        if (product.newPrice > 50 && product.newPrice <= 100) {
+                    if (this.filters.prices.includes("price50To100") && product.newPrice > 50 && product.newPrice <= 100) {
                             isPriceInRange = true;
-
-                        }
                     }
-                    if (this.filters.prices.includes("priceAbove100")) {
-                        if (product.newPrice > 100) {
+                    if (this.filters.prices.includes("priceAbove100") && product.newPrice > 100) {
                             isPriceInRange = true;
-
-                        }
                     }
 
                     if (!isPriceInRange) {
@@ -125,7 +115,6 @@ let siteManager = (function () {
 
         updatePrices(prices) {
             this.filters.prices = prices;
-            console.log(this.filters.prices);
             this.filterItems();
         }
 
@@ -158,8 +147,6 @@ let siteManager = (function () {
             this.searchValue = searchValue;
             this.filterItems();
         }
-
-
     }
 
     return new Manager();
