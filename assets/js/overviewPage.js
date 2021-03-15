@@ -31,7 +31,6 @@ function moveToBasketFromOverView() {
         let currentUser = userStorage.getCurrentUser();
         if (currentUser) {
             let currentItem = siteManager.allProducts.filter(el => el.id === Number(e.target.value));
-            console.log(currentItem);
 
             if (currentUser.myDesiredProd.filter(elem => elem.id === currentItem[0].id).length > 0) {
                 userStorage.removeFromDesired(currentItem[0]);

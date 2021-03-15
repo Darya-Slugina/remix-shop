@@ -60,7 +60,6 @@ function getFilterOptions(data) {
 
     function getBrandsOptions(data) {
         let allBrandOptions = data.map(el => el.brand);
-        console.log()
         let uniqueBrandoptions = allBrandOptions.filter(onlyUnique);
         allBrands.innerHTML = '';
         uniqueBrandoptions.forEach(brand => createBrandHTML(brand, data));
@@ -114,7 +113,6 @@ function createConditionHTML(condition) {
     conditionWrapper.append(conditionBox, conditionLabel);
     conditionFilterBox.append(conditionWrapper);
 
-    //move to index, so it has access to changeImgOnHover
     conditionBox.addEventListener('change', function (ev) {
         ev.preventDefault();
         let target = ev.target;
@@ -151,7 +149,6 @@ function createBrandHTML(brand) {
     brandWrapper.append(brandBox, brandLabel);
     allBrands.append(brandWrapper);
 
-    //move to index, so it has access to changeImgOnHover
     brandBox.addEventListener('change', function (ev) {
         ev.preventDefault();
         let target = ev.target;
@@ -250,8 +247,6 @@ function likeItem() {
                     favoritesCounter.innerHTML = counter;
                     currentUser.myFavouritesCount = counter;
                 }
-
-                // updatefavouriteCounter();
             }
         }));
     }
@@ -311,7 +306,6 @@ function updateLikes() {
             });
         }
         if (location.hash === "#overView") {
-            console.log(111);
             let favouriteOverView = getById("favIcon");
             if (currentUser.myFavourites.some(item => item.id == favouriteOverView.getAttribute("productId"))) {
                 favouriteOverView.classList.add("liked");
@@ -402,7 +396,6 @@ const displayClothes = function (data) {
     let buttons = Array.from(document.getElementsByClassName("product-img"));
     buttons.forEach(function (currentBtn) {
         currentBtn.addEventListener('click', function (ev) {
-            console.log(111, ev.target.previousElementSibling.value);
             localStorage.setItem('productId', JSON.stringify(ev.target.previousElementSibling.value));
             location.hash = '#overView';
         })
@@ -440,6 +433,4 @@ const favouritesClothesController = function (products) {
         цената им и колко харесвания имат, за да прецените кога да ги купите преди всички
         останали.</span>`;
     }
-
-
 }

@@ -65,7 +65,6 @@ let siteManager = (function () {
                 if (this.filters.prices && this.filters.prices.length > 0) {
                     let isPriceInRange = false;
                     if (this.filters.prices.includes("priceBelow5") && product.newPrice <= 5) {
-                        console.log(this.filters.prices);
                         isPriceInRange = true;
                     }
                     if (this.filters.prices.includes("price5To10") && product.newPrice > 5 && product.newPrice <= 10) {

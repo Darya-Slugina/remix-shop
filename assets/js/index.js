@@ -261,21 +261,6 @@
         }
     }
 
-
-    //Search by name from main header
-    // srchProd.addEventListener("change", function (event) {
-
-    //     siteManager.updateSearchFilter(event.target.value);
-    //     const extension = location.hash.split('/')[1];
-        
-    //     // Default search by women
-    //     if (!extension) {
-    //         location.hash = '#allProducts/women';
-    //     } else {
-    //         displayClothes(siteManager.filteredItems);
-    //     }
-    // });
-
     // Prepare the list for carousel 
     const shuffledArr = array => array.sort(() => 0.5 - Math.random());
 
