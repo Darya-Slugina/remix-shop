@@ -4,8 +4,8 @@
         onHashChange();
     });
     window.addEventListener("DOMContentLoaded", loadPreviousSession);
-
     window.addEventListener("hashchange", onHashChange);
+    window.addEventListener('scroll', onScroll);
 
     //   Adds the initial male products
     maleClothes.forEach(function (item) {
@@ -47,7 +47,6 @@
 
 
     //Event listeners
-    window.addEventListener('scroll', onScroll);
     showBrands.addEventListener("click", showMoreBrands);
     hiddenButton.addEventListener("click", showMoreInfo);
     enter.addEventListener("click", showloginForm);
@@ -233,19 +232,49 @@
         showMyFavourites();
     });
 
-    //Search by name from main header
-    srchProd.addEventListener("change", function (event) {
+     //Search by name from main header
+    srchProd.addEventListener("input", onInput);
 
-        siteManager.updateSearchFilter(event.target.value);
+    function onInput(e) {
+        debouncedInput(e.target.value);
+    }
+
+    let debouncedInput = debounce(clientInput, 500);
+
+    function debounce(func, time) {
+        let timerId;
+        return function (...arg) {
+            clearTimeout(timerId);
+            timerId = setTimeout(func, time, ...arg);
+        };
+    }
+
+    function clientInput(input) {
+        siteManager.updateSearchFilter(input);
         const extension = location.hash.split('/')[1];
-        
+
         // Default search by women
         if (!extension) {
             location.hash = '#allProducts/women';
         } else {
             displayClothes(siteManager.filteredItems);
         }
-    });
+    }
+
+
+    //Search by name from main header
+    // srchProd.addEventListener("change", function (event) {
+
+    //     siteManager.updateSearchFilter(event.target.value);
+    //     const extension = location.hash.split('/')[1];
+        
+    //     // Default search by women
+    //     if (!extension) {
+    //         location.hash = '#allProducts/women';
+    //     } else {
+    //         displayClothes(siteManager.filteredItems);
+    //     }
+    // });
 
     // Prepare the list for carousel 
     const shuffledArr = array => array.sort(() => 0.5 - Math.random());
