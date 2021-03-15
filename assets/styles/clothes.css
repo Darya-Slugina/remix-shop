@@ -159,7 +159,7 @@
     color: #515356;
     font-size: 11px;
     text-transform: uppercase;
-    margin: 20px 0 10px;
+    margin: 10px 0 10px;
     font-weight: 700;
 }
 
@@ -198,6 +198,12 @@
 
 .filter-dropdown *:hover{
     font-weight: bolder;
+}
+
+/* doesn't work */
+.filter-dropdown [type=checkbox]:checked{
+    border-color: #4b7637;
+    background-color: #4b7637;
 }
 
 .container-clothesDisplay{
@@ -256,10 +262,10 @@
     padding-inline-start: 0;
 }
 
-.sortByPriceAscBtn:hover, .sortByPriceDescBtn:hover, .sortByPriceAscBtn.checked, .sortByPriceDescBtn.checked{
+/* .sortByPriceAscBtn:hover, .sortByPriceDescBtn:hover, .sortByPriceAscBtn.checked, .sortByPriceDescBtn.checked{
     color: #447130;
     font-weight: 600;
-}
+} */
 
 #display{
     display: flex;
@@ -301,23 +307,18 @@
 
 
 .brandsFilterWrapper .filter-dropdown{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: 460px;
-    height: 250px;
+    width: 260px;
     display: none;
-    z-index: 200;
+    flex-wrap: nowrap;
 }
 
 .brandsFilterWrapper  .brandFilterBtn>label{
     cursor: pointer;
+    margin-bottom: 8px;
 }
 
-.brandsFilterWrapper  .brandFilterBtn>label:hover, .brandFilterBtn .checkedBrand+label {
-    color: #447130;
-    font-weight: 700;
+.brandFilterBtn>[type=checkbox]{
+    margin-right: 7px;
 }
 
 .sizeFilterWrapper .filter-dropdown{
@@ -341,15 +342,16 @@
 }
 
 .sizeFilterBtn.checkedSize {
-    background-color: #d4e6d6;
-    color: #447130;
+    border-color: #4b7637;
+    background-color: #4b7637;
+    color: white;
 }
 
 
-.sizeFilterWrapper .sizeFilterBtn:hover {
+/* .sizeFilterWrapper .sizeFilterBtn:hover {
     background-color: #d4e6d6;
     color: #447130;
-}
+} */
 
 .conditionFilterWrapper .filter-dropdown {
     position: absolute;
@@ -371,7 +373,8 @@
     color: #303030;
 }
 
-.conditionFilterBtn .checkedCondition+label{
+
+/* .conditionFilterBtn .checkedCondition+label{
     color: #447130;
     font-weight: 600;
 }
@@ -379,7 +382,7 @@
 .conditionFilterWrapper .conditionFilterBtn>label:hover {
     color: #447130;
     font-weight: 600;
-}
+} */
 
 .conditionFilterWrapper .conditionFilterBtn>label {
     cursor: pointer;
@@ -405,7 +408,7 @@
     font-weight: 600;
 }
 
-.priceFilterWrapper label:hover {
+/* .priceFilterWrapper label:hover {
     color: #447130;
     font-weight: 600;
-}
+} */

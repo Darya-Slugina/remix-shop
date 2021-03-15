@@ -113,7 +113,6 @@ function createConditionHTML(condition) {
     conditionWrapper.append(conditionBox, conditionLabel);
     conditionFilterBox.append(conditionWrapper);
 
-    //move to index, so it has access to changeImgOnHover
     conditionBox.addEventListener('change', function (ev) {
         ev.preventDefault();
         let target = ev.target;
@@ -150,7 +149,6 @@ function createBrandHTML(brand) {
     brandWrapper.append(brandBox, brandLabel);
     allBrands.append(brandWrapper);
 
-    //move to index, so it has access to changeImgOnHover
     brandBox.addEventListener('change', function (ev) {
         ev.preventDefault();
         let target = ev.target;

@@ -1,5 +1,6 @@
 function renderAllProducts() {
     let extension = location.hash.split('/')[1];
+    
     if (extension === 'women') {
         womenBtn.classList.add("selectedFilter");
         menBtn.classList.remove('selectedFilter');
@@ -41,9 +42,6 @@ function renderAllProducts() {
             // clear checked filters
         })
     }
-
-    womenBtn.classList.remove('selectedFilter');
-    menBtn.classList.remove('selectedFilter');
 }
 
 // event listeners for sort buttons

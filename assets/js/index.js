@@ -87,6 +87,8 @@
             case 'home':
                 navListMain.forEach(nav => nav.classList.remove('selectedNav'));
                 allFilters.forEach(el => el.classList.remove("selectedFilter"));
+                womenBtn.classList.remove('selectedFilter');
+                menBtn.classList.remove('selectedFilter');
                 showActivePage(homePage);
                 showCarousel();
                 bannersController();
@@ -95,6 +97,7 @@
                 break;
 
             case 'allProducts':
+                allProducts.classList.add('selectedNav')
                 showActivePage(allProductsPage);
                 renderAllProducts();
                 bannersController();
@@ -119,42 +122,31 @@
 
     function onHashChange() {
         router();
+        
+        // change nav style on click
+        const navListMain = Array.from(document.querySelector('.navigation-list').children);
+        navListMain.forEach(function (currentNav) {
+            currentNav.addEventListener('click', selectPage);
+        })
+
+        function selectPage(ev) {
+            navListMain.forEach(nav => nav.classList.remove('selectedNav'))
+            ev.target.parentElement.classList.add('selectedNav')
+        }
 
 
-        // TODO: Check what needs to be done
+        //change filter style on click
+        const allFilters = Array.from(document.querySelectorAll('.main-category'));
+        allFilters.forEach(function (currentFilter) {
+            currentFilter.addEventListener('click', selectFilter)
+        })
 
-        // // change nav style on click
-        // const navListMain = Array.from(document.querySelector('.navigation-list').children);
-        // navListMain.forEach(function (currentNav) {
-        //     currentNav.addEventListener('click', selectPage);
-        // })
-
-        // function selectPage(ev) {
-        //     ev.preventDefault();
-        //     navListMain.forEach(nav => nav.classList.remove('selectedNav'))
-        //     ev.target.parentElement.classList.add('selectedNav')
-        // }
-
-
-        // //change filter style on click
-        // const allFilters = Array.from(document.querySelectorAll('.main-category'));
-        // allFilters.forEach(function (currentFilter) {
-        //     currentFilter.addEventListener('click', selectFilter)
-        // })
-
-        // function selectFilter(ev) {
-        //     ev.preventDefault();
-        //     allFilters.forEach(filter => filter.classList.remove('selectedFilter'));
-        //     ev.target.parentElement.classList.add("selectedFilter");
-        // }
-
-        // change nav style
-
-        // if (el.id === wholePage) {
-        //     el.classList.add('selectedNav');
-        // } else {
-        //     el.classList.remove('selectedNav');
-        // }
+        function selectFilter(ev) {
+            allFilters.forEach(filter => filter.classList.remove('selectedFilter'));
+            womenBtn.classList.remove('selectedFilter');
+            menBtn.classList.remove('selectedFilter');
+            ev.target.parentElement.classList.add("selectedFilter");
+        }
     }
 
 

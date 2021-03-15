@@ -33,6 +33,8 @@ const sortByPriceDescBtn = getById('sortByPriceDescBtn');
 // brands
 const brandsFilterWrapper = getById('brandsFilterWrapper');
 const brandsFilterBox = getById('brandsFilterBox');
+const brandInputSearch = getById('brandInputSearch');
+
 
 // size
 const sizeFilterWrapper = getById('sizeFilterWrapper');
