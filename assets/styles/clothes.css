@@ -200,11 +200,6 @@
     font-weight: bolder;
 }
 
-/* doesn't work */
-.filter-dropdown [type=checkbox]:checked{
-    border-color: #4b7637;
-    background-color: #4b7637;
-}
 
 .container-clothesDisplay{
     box-sizing: border-box;
@@ -262,10 +257,9 @@
     padding-inline-start: 0;
 }
 
-/* .sortByPriceAscBtn:hover, .sortByPriceDescBtn:hover, .sortByPriceAscBtn.checked, .sortByPriceDescBtn.checked{
-    color: #447130;
-    font-weight: 600;
-} */
+#dropdown-sort *:hover{
+    font-weight: bolder;
+}
 
 #display{
     display: flex;
@@ -404,11 +398,9 @@
 } 
 
 .priceFilterWrapper .filter-dropdown .checked+label {
-    color: #447130;
-    font-weight: 600;
+    font-weight: bolder;
 }
 
-/* .priceFilterWrapper label:hover {
-    color: #447130;
-    font-weight: 600;
-} */
+.checked, .checkedCondition~label, .checkedBrand~label {
+    font-weight: bolder;
+}
