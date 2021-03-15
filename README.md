@@ -1,5 +1,8 @@
-# remix-shop
-IT Talents S12 interim project
+# Remix-shop
+
+## *IT Talents S12 interim project*
+
+Creating a copy of the website Remixshop.com using the some basic functionality 
 
 Link to the project: [Remix-shop](https://darya-slugina.github.io/remix-shop/)
 
