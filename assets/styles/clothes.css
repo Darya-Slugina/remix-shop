@@ -153,6 +153,7 @@
     padding: 15px 13px;
     border-radius: 4px;
     min-width: 200px;
+    height: auto;
 }
 
 .filter-dropdown > label{
