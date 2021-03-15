@@ -341,12 +341,6 @@
     color: white;
 }
 
-
-/* .sizeFilterWrapper .sizeFilterBtn:hover {
-    background-color: #d4e6d6;
-    color: #447130;
-} */
-
 .conditionFilterWrapper .filter-dropdown {
     position: absolute;
     display: flex;
@@ -366,17 +360,6 @@
     border-radius: 4px;
     color: #303030;
 }
-
-
-/* .conditionFilterBtn .checkedCondition+label{
-    color: #447130;
-    font-weight: 600;
-}
-
-.conditionFilterWrapper .conditionFilterBtn>label:hover {
-    color: #447130;
-    font-weight: 600;
-} */
 
 .conditionFilterWrapper .conditionFilterBtn>label {
     cursor: pointer;
