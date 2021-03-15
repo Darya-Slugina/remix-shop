@@ -2,7 +2,7 @@
 
 ## *IT Talents S12 interim project*
 
-#### Creating a copy of the website Remixshop.com using the some basic functionality 
+#### Creating a copy of the website Remixshop.com using some of its functionalities
 
 Link to the project: [Remix-shop](https://darya-slugina.github.io/remix-shop/)
 
