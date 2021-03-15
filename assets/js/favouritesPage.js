@@ -9,7 +9,6 @@ function showMyFavourites() {
     let buttons = Array.from(document.getElementsByClassName("product-photos"));
     buttons.forEach(function (currentBtn) {
         currentBtn.addEventListener('click', function (ev) {
-            console.log(111, ev.target.previousElementSibling.value);
             localStorage.setItem('productId', JSON.stringify(ev.target.previousElementSibling.value));
             location.hash = '#overView';
         });

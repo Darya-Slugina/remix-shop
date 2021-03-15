@@ -247,8 +247,6 @@ function likeItem() {
                     favoritesCounter.innerHTML = counter;
                     currentUser.myFavouritesCount = counter;
                 }
-
-                updatefavouriteCounter();
             }
         }));
     }
@@ -438,6 +436,4 @@ const favouritesClothesController = function (products) {
         цената им и колко харесвания имат, за да прецените кога да ги купите преди всички
         останали.</span>`;
     }
-
-
 }

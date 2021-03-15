@@ -76,6 +76,3 @@ const errorPage = getById('errorPage');
 //  Hidden brands
 const hiddenBrands = getById("brands-hidden");
 const hiddenText = getById("hiddenText");
-
-
-
