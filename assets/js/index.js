@@ -53,6 +53,7 @@
     loginLink.addEventListener("click", backTologinForm);
     loginButton.addEventListener("click", updateFavourites);
     loginButton.addEventListener("click", updateDesires);
+    loginButton.addEventListener('click', loadEvents)
     registrationButton.addEventListener("click", updateFavourites);
     registrationButton.addEventListener("click", updateDesires);
     basketIcon.addEventListener("click", showBasketInfo);
