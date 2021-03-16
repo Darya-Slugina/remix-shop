@@ -22,6 +22,7 @@ const srchProd = getById("srchProd");
 const finalBreadcrumbTarget = getById('final-breadcrumb-target');
 const allBreadcrumbTarget = getById('all-breadcrumb-target');
 const mainImg = getById("big-img");
+const numberOfPicturesInCarousel  = 6;
 
 //show sort list on hover
 const sortDropdownWrapper = getById('sort');

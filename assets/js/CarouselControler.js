@@ -1,12 +1,12 @@
-let slides = Array.from(Array(3), () => new Array(6));
+let slides;
 
 function createCarouselList(products, limit) {
-  slides = Array.from(Array(limit), () => new Array(6));
+  slides = Array.from(Array(limit), () => new Array(numberOfPicturesInCarousel));
 
   let currentUser = userStorage.getCurrentUser();
   let counter = 0;
   for (let j = 0; j < limit; j++) {
-    for (let k = 0; k < 6; k++) {
+    for (let k = 0; k < numberOfPicturesInCarousel; k++) {
       slides[j][k] = products[counter];
       slides[j][k].newPrice = getNewPrice(slides[j][k].price, slides[j][k].discount);
       slides[j][k].isOutlet = isOutlet(slides[j][k].type);

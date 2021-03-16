@@ -248,8 +248,9 @@ function likeItem() {
                     currentUser.myFavouritesCount = counter;
                 }
             }
+            updatefavouriteCounter();
         }));
-    }
+    } 
 }
 
 //Desired items counter
@@ -389,6 +390,7 @@ const displayClothes = function (data) {
     likeItem();
     updateFavourites();
     updateDesires();
+    desableToLike();
 
 
     // Add hover effect

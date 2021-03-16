@@ -18,6 +18,7 @@ function selectProduct() {
     likeItemFromOverView();
     updateLikes();
     goBack();
+    desableToLikefromOverView();
 
     window.scrollTo(0, 0);
 }
@@ -48,7 +49,7 @@ function moveToBasketFromOverView() {
                 currentUser.myDesiredCounter = counter;
                 updateDesiredCounter();
             }
-        }
+        } 
     });
 }
 
@@ -78,7 +79,7 @@ function likeItemFromOverView() {
                 }
             }
         });
-    }
+    } 
 }
 
 //Go back on the previous page 

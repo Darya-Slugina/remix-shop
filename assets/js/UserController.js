@@ -16,6 +16,8 @@
 
     if (userStorage.isGoodCredentials(email, password)) {
       loginUser(email, password);
+      updateFavourites();
+      updateDesires();
     } else {
       loginError.style.display = "block";
     }
@@ -37,9 +39,15 @@
     const password = passwordInputReg.value;
 
     userStorage.register(name, email, password, gender);
-    loginForm.classList.remove("show");
-
-    loginUser(email, password);
+    let currentUser = userStorage.getCurrentUser();
+    if (currentUser) {
+      loginForm.classList.remove("show");
+      enterButton.style.display = "none";
+      let icons = document.querySelectorAll(".registration>.afterRegistration>a");
+      icons.forEach(el => el.style.display = "block");
+      updatefavouriteCounter();
+      updateDesiredCounter();
+    }
   });
 })();
 
