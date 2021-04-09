@@ -12,17 +12,16 @@
 - MVC
 
 #### Main functionalities:
-- Login
-- Register
+- Login/Register +validation
 - Logout
 - Search product by name
 - Filter products by price/size/condition/brand 
 - Like/ dislike products
 - Show liked products
-- Product review
+- Single page for each product
 - Add/delete from shopping bag
 - View products by gender
-
+- The data is stored in local storage
 
 Link to the project: [Remix-shop](https://darya-slugina.github.io/remix-shop/)
 
