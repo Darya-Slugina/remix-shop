@@ -50,6 +50,7 @@ const priceFilterWrapper = getById('priceFilterWrapper');
 const priceFilterBox = getById('priceFilterBox');
 
 const loginError = getById("loginError");
+const regError = getById('regError')
 const enterButton = getById("enterButton");
 
 // Inputs

@@ -70,6 +70,8 @@
                                 <input type="email" placeholder="Имейл *" class="login-email" id="emailInputReg">
                                 <input type="password" placeholder="Парола *" class="login-password"
                                     id="passwordInputReg">
+                                <span id="regError" class="login-error" style="display: none;">Грешен имейл или
+                                    парола. Паролата трябва да съдържа поне 6 символа.</span>
                                 <span id="usersGender">
                                     <label class="radio">
                                         <input type="radio" id="Users_gender_0" value="female" name="usersGender"> Жена
@@ -1196,7 +1198,7 @@
 
     <script src="assets/js/utils.js"></script>
     <script src="assets/js/constants.js"></script>
-    
+
     <!-- Models -->
     <script src="assets/js/Product.js"></script>
     <script src="assets/js/UserModel.js"></script>

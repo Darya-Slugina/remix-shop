@@ -36,7 +36,7 @@ userMenu.addEventListener("click", function () {
     setTimeout(function () {
         userSubMenu.style.display = "none";
         userMenu.classList.remove("clicked")
-    }, 2000);
+    }, 3000);
 
     let logOutBtn = getById("logOutBtn");
     logOutBtn.addEventListener("click", function () {

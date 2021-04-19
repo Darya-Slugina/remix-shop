@@ -39,6 +39,13 @@
     const password = passwordInputReg.value;
 
     userStorage.register(name, email, password, gender);
+
+    if(userStorage.register(name, email, password, gender) === false){
+      regError.style.display = "block"
+    } else {
+      regError.style.display = "none"
+    }
+
     let currentUser = userStorage.getCurrentUser();
     if (currentUser) {
       loginForm.classList.remove("show");
