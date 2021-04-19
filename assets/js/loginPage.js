@@ -49,6 +49,7 @@ userMenu.addEventListener("click", function () {
         favouriteIcon.forEach(el => el.classList.remove("liked"));
         updateDesires();
         updateLikes();
+        location.hash = '#home'
     })
 });
 
