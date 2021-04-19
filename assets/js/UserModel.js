@@ -57,14 +57,17 @@ let userStorage = (function () {
 
 
     register(name, email, password, gender) {
-      let currentUser = new User(name, email, password, gender);
-      currentUser.isLoggedIn = true;
-      userStorage.init();
-      this.users.push(currentUser);
-      localStorage.setItem('users', JSON.stringify(this.users));
+      if (this.validate(email, password) && gender.length > 0 && name.length > 3) {
+        let currentUser = new User(name, email, password, gender);
+        currentUser.isLoggedIn = true;
+        userStorage.init();
+        this.users.push(currentUser);
+        localStorage.setItem('users', JSON.stringify(this.users));
 
-
-      return !!currentUser;
+        return !!currentUser;
+      } else {
+        return false
+      }
 
     }
 
@@ -109,7 +112,10 @@ let userStorage = (function () {
     }
 
     validate(email, password) {
-      if (email.trim().length > 3 && password.trim().length > 3) {
+
+      let mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      if (email.trim().match(mailformat) && email.trim().length > 6 && password.trim().length > 6) {
+        // (email.trim().length > 3 && password.trim().length > 3) 
         return true;
       }
 

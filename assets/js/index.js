@@ -51,11 +51,6 @@
     registerLink.addEventListener("click", showRegistrationForm)
     loginBackBtn.addEventListener("click", backTologinForm);
     loginLink.addEventListener("click", backTologinForm);
-    loginButton.addEventListener("click", updateFavourites);
-    loginButton.addEventListener("click", updateDesires);
-    loginButton.addEventListener('click', loadEvents)
-    registrationButton.addEventListener("click", updateFavourites);
-    registrationButton.addEventListener("click", updateDesires);
     basketIcon.addEventListener("click", showBasketInfo);
 
 
@@ -122,7 +117,7 @@
 
     function onHashChange() {
         router();
-        
+
         // change nav style on click
         const navListMain = Array.from(document.querySelector('.navigation-list').children);
         navListMain.forEach(function (currentNav) {
@@ -148,8 +143,6 @@
             ev.target.parentElement.classList.add("selectedFilter");
         }
     }
-
-
 
     // //change filter style on click
     allFilters.forEach(function (currentFilter) {
@@ -177,33 +170,6 @@
         }
     }
 
-    // On click show Login page
-    function showloginForm(e) {
-        e.preventDefault();
-        loginForm.classList.add("show");
-    }
-
-    // On click close Login page
-    function closeLoginForm(e) {
-        e.preventDefault();
-        loginForm.classList.remove("show");
-    }
-
-    //// On click change Login page on Registration page
-    function showRegistrationForm(e) {
-        e.preventDefault();
-        loginSlide.style.display = "none";
-        registerSlide.style.display = "block";
-        loginBackBtn.style.visibility = "visible";
-    }
-
-    // On click back to login page
-    function backTologinForm(e) {
-        e.preventDefault();
-        loginSlide.style.display = "block";
-        registerSlide.style.display = "none";
-        loginBackBtn.style.visibility = "hidden";
-    }
 
     function loadPreviousSession() {
         let currentUser = userStorage.getCurrentUser();
@@ -215,32 +181,6 @@
         }
     }
 
-    // On click show the user subMenu with logout button
-    let userMenu = getById("user-button");
-    userMenu.addEventListener("click", function () {
-        userLogoutController();
-        userMenu.classList.add("clicked");
-        let userSubMenu = getById("userSubMenu");
-        userSubMenu.style.display = "block";
-        setTimeout(function () {
-            userSubMenu.style.display = "none";
-            userMenu.classList.remove("clicked")
-        }, 2000);
-
-        let logOutBtn = getById("logOutBtn");
-        logOutBtn.addEventListener("click", function () {
-            userStorage.logout();
-            enterButton.style.display = "block";
-            let icons = document.querySelectorAll(".registration>.afterRegistration>a");
-            icons.forEach(el => el.style.display = "none");
-            userSubMenu.style.display = "none";
-            let favouriteIcon = Array.from(document.querySelectorAll(".favourite-icon"));
-            favouriteIcon.forEach(el => el.classList.remove("liked"));
-            updateDesires();
-            updateLikes();
-        })
-    });
-
     // On click show the page with favourites products
     let showFavouritesBtn = getById("showFavouritesBtn");
     showFavouritesBtn.addEventListener("click", function () {
@@ -248,7 +188,7 @@
         showMyFavourites();
     });
 
-     //Search by name from main header
+    //Search by name from main header
     srchProd.addEventListener("input", onInput);
 
     function onInput(e) {
@@ -381,6 +321,7 @@
         updatefavouriteCounter();
         updateDesiredCounter();
         updateDesiredProd();
+        desableToLike();
 
         let productImages = Array.from(document.getElementsByClassName("product-img"));
         productImages.forEach(img => changeImgOnHover(img));
