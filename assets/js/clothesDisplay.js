@@ -59,7 +59,7 @@ function getFilterOptions(data) {
     }
 
     function getBrandsOptions(data) {
-        let allBrandOptions = data.map(el => el.brand);
+        let allBrandOptions = data.filter(el => el.brand !== null).map(el => el.brand);
         let uniqueBrandoptions = allBrandOptions.filter(onlyUnique);
         allBrands.innerHTML = '';
         uniqueBrandoptions.forEach(brand => createBrandHTML(brand, data));
